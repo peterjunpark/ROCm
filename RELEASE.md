@@ -2,10 +2,6 @@
 
 These release notes provide a summary of notable changes since the previous ROCm release.
 
-```{caution}
-TODO: Add a note explain why there is no ROCm 6.2.3!
-```
-
 - [Release highlights](release-highlights)
 
 - [Operating system and hardware support changes](operating-system-and-hardware-support-changes)
@@ -24,10 +20,6 @@ The following are notable new features and improvements in ROCm 6.2.4. For chang
 [Detailed component changes](#detailed-component-changes).
 
 ### ROCm Offline Installer Creator changes
-
-```{caution
-Maybe add some 6.2.2 since they were missed last release.
-```
 
 ## Operating system and hardware support changes
 
@@ -131,7 +123,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/hipFFT/en/docs-6.2.4">hipFFT</a></td>
-                <td>1.0.15</td>
+                <td>1.0.15&nbsp;&Rightarrow;&nbsp;<a href="#hipfft-1-0-16">1.0.16</a></td>
                 <td><a href="https://github.com/ROCm/hipFFT/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -143,7 +135,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/hipRAND/en/docs-6.2.4">hipRAND</a></td>
-                <td>2.11.0</td>
+                <td>2.11.0&nbsp;&Rightarrow;&nbsp;<a href="#hiprand-2-11-1">2.11.1</a></td>
                 <td><a href="https://github.com/ROCm/hipRAND/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -167,37 +159,37 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocALUTION/en/docs-6.2.4">rocALUTION</a></td>
-                <td>3.2.0</td>
+                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#rocalution-3-2-1">3.2.1</a></td>
                 <td><a href="https://github.com/ROCm/rocALUTION/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocBLAS/en/docs-6.2.4">rocBLAS</a></td>
-                <td>4.1.2&nbsp;&Rightarrow;&nbsp;<a href="#rocblas-4-2-1">4.2.1</a></td>
+                <td>4.2.1&nbsp;&Rightarrow;&nbsp;<a href="#rocblas-4-2-4">4.2.4</a></td>
                 <td><a href="https://github.com/ROCm/rocBLAS/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocFFT/en/docs-6.2.4">rocFFT</a></td>
-                <td>1.0.28&nbsp;&Rightarrow;&nbsp;<a href="#rocfft-1-0-29">1.0.29</a></td>
+                <td>1.0.29&nbsp;&Rightarrow;&nbsp;<a href="#rocfft-1-0-30">1.0.30</a></td>
                 <td><a href="https://github.com/ROCm/rocFFT/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocRAND/en/docs-6.2.4">rocRAND</a></td>
-                <td>3.1.0</td>
+                <td>3.1.0&nbsp;&Rightarrow;&nbsp;<a href="#rocrand-3-1-1">3.1.1</a></td>
                 <td><a href="https://github.com/ROCm/rocRAND/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocSOLVER/en/docs-6.2.4">rocSOLVER</a></td>
-                <td>3.26.0</td>
+                <td>3.26.0&nbsp;&Rightarrow;&nbsp;<a href="#rocsolver-3-26-2">3.26.2</a></td>
                 <td><a href="https://github.com/ROCm/rocSOLVER/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocSPARSE/en/docs-6.2.4">rocSPARSE</a></td>
-                <td>3.2.0</td>
+                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#rocsparse-3-2-1">3.2.1</a></td>
                 <td><a href="https://github.com/ROCm/rocSPARSE/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -219,7 +211,7 @@ Click the component's updated version to go to a detailed list of its changes. C
                 <th rowspan="4"></th>
                 <th rowspan="4">Primitives</th>
                 <td><a href="https://rocm.docs.amd.com/projects/hipCUB/en/docs-6.2.4">hipCUB</a></td>
-                <td>3.2.0</td>
+                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#hipcub-3-2-1">3.2.1</a></td>
                 <td><a href="https://github.com/ROCm/hipCUB/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -231,13 +223,13 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocPRIM/en/docs-6.2.4">rocPRIM</a></td>
-                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#rocprim-3-2-1">3.2.1</a></td>
+                <td>3.2.1&nbsp;&Rightarrow;&nbsp;<a href="#rocprim-3-2-2">3.2.2</a></td>
                 <td><a href="https://github.com/ROCm/rocPRIM/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocThrust/en/docs-6.2.4">rocThrust</a></td>
-                <td>3.1.0</td>
+                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#rocthrust-3-1-1">3.1.1</a></td>
                 <td><a href="https://github.com/ROCm/rocThrust/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -389,6 +381,28 @@ Click the component's updated version to go to a detailed list of its changes. C
 ## Detailed component changes
 
 The following sections describe key changes to ROCm components.
+
+### **hipCUB** (3.2.1)
+
+### **hipFFT** (1.0.16)
+
+### **hipRAND** (2.11.1)
+
+### **rocALUTION** (3.2.1)
+
+### **rocBLAS** (4.2.4)
+
+### **rocFFT** (1.0.30)
+
+### **rocPRIM** (3.2.2)
+
+### **rocRAND** (3.1.1)
+
+### **rocSOLVER** (3.26.2)
+
+### **rocSPARSE** (3.2.1)
+
+### **rocThrust** (3.1.1)
 
 ## ROCm known issues
 
