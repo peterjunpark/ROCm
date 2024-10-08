@@ -229,7 +229,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocThrust/en/docs-6.2.4">rocThrust</a></td>
-                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#rocthrust-3-1-1">3.1.1</a></td>
+                <td>3.1.0&nbsp;&Rightarrow;&nbsp;<a href="#rocthrust-3-1-1">3.1.1</a></td>
                 <td><a href="https://github.com/ROCm/rocThrust/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
