@@ -25,7 +25,7 @@ The following are notable new features and improvements in ROCm 6.2.4. For chang
 
 ## ROCm components
 
-The following table lists the versions of ROCm components for ROCm 6.2.1, including any version changes from 6.2.0 to 6.2.1. 
+The following table lists the versions of ROCm components for ROCm 6.2.4, including any version changes from 6.2.2 to 6.2.4. 
 
 Click the component's updated version to go to a detailed list of its changes. Click <i class="fab fa-github fa-lg"></i> to go to the component's source code on GitHub.
 
