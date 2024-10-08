@@ -384,25 +384,81 @@ The following sections describe key changes to ROCm components.
 
 ### **hipCUB** (3.2.1)
 
+#### Added
+
+* gfx1151 architecture support.
+
 ### **hipFFT** (1.0.16)
+
+#### Added
+
+* gfx1151 architecture support.
 
 ### **hipRAND** (2.11.1)
 
+#### Added
+
+* gfx1151 architecture support.
+
 ### **rocALUTION** (3.2.1)
+
+#### Added
+
+* gfx1151 architecture support.
 
 ### **rocBLAS** (4.2.4)
 
+#### Added
+
+* gfx1151 architecture support.
+
 ### **rocFFT** (1.0.30)
+
+#### Added
+
+* gfx1151 architecture support.
+
+#### Optimized
+
+* Implemented 1D kernels for factorizable sizes greater than 1024 and less than 2048.
+
+#### Resolved issues
+
+* Fixed plan creation failure on some even-length real-complex transforms that use Bluestein's algorithm.
 
 ### **rocPRIM** (3.2.2)
 
+#### Added
+
+* gfx1151 architecture support.
+
 ### **rocRAND** (3.1.1)
+
+#### Added
+
+* gfx1151 architecture support.
 
 ### **rocSOLVER** (3.26.2)
 
+#### Added
+
+* gfx1151 architecture support.
+
+#### Resolved issues
+
+* Fixed synchronization issue in STEIN.
+
 ### **rocSPARSE** (3.2.1)
 
+#### Added
+
+* gfx1151 architecture support.
+
 ### **rocThrust** (3.1.1)
+
+#### Added
+
+* gfx1151 architecture support.
 
 ## ROCm known issues
 
