@@ -73,7 +73,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocAL/en/docs-6.2.4">rocAL</a></td>
-                <td>1.0.0&nbsp;&Rightarrow;&nbsp;<a href="#rocal-2-0-0">2.0.0</a></td>
+                <td>2.0.0</td>
                 <td><a href="https://github.com/ROCm/rocAL/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -101,7 +101,7 @@ Click the component's updated version to go to a detailed list of its changes. C
                 <th rowspan="1"></th>
                 <th rowspan="1">Communication</th>
                 <td><a href="https://rocm.docs.amd.com/projects/rccl/en/docs-6.2.4">RCCL</a></td>
-                <td>2.20.5&nbsp;&Rightarrow;&nbsp;<a href="#rccl-2-20-5">2.20.5</a></td>
+                <td>2.20.5</td>
                 <td><a href="https://github.com/ROCm/rccl/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -239,7 +239,7 @@ Click the component's updated version to go to a detailed list of its changes. C
                 <th rowspan="6">Tools</th>
                 <th rowspan="6">System management</th>
                 <td><a href="https://rocm.docs.amd.com/projects/amdsmi/en/docs-6.2.4">AMD SMI</a></td>
-                <td>24.6.2&nbsp;&Rightarrow;&nbsp;<a href="#amd-smi-24-6-3">24.6.3</a></td>
+                <td>24.6.3</td>
                 <td><a href="https://github.com/ROCm/amdsmi/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -257,7 +257,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocm_smi_lib/en/docs-6.2.4">ROCm SMI</a></td>
-                <td>7.3.0&nbsp;&Rightarrow;&nbsp;<a href="#rocm-smi-7-3-0">7.3.0</a></td>
+                <td>7.3.0</td>
                 <td><a href="https://github.com/ROCm/rocm_smi_lib/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -279,7 +279,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/omnitrace/en/docs-6.2.4">Omnitrace</a></td>
-                <td>1.11.2&nbsp;&Rightarrow;&nbsp;<a href="#omnitrace-1-11-2">1.11.2</a></td>
+                <td>1.11.2</td>
                 <td><a href="https://github.com/ROCm/omnitrace/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -314,7 +314,7 @@ Click the component's updated version to go to a detailed list of its changes. C
                 <th rowspan="5"></th>
                 <th rowspan="5">Development</th>
                 <td><a href="https://rocm.docs.amd.com/projects/HIPIFY/en/docs-6.2.4/">HIPIFY</a></td>
-                <td>18.0.0&nbsp;&Rightarrow;&nbsp;<a href="#hipify-18-0-0">18.0.0</a></td>
+                <td>18.0.0</td>
                 <td><a href="https://github.com/ROCm/HIPIFY/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -364,7 +364,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             <tr>
                 <th rowspan="2" colspan="2">Runtimes</th>
                 <td><a href="https://rocm.docs.amd.com/projects/HIP/en/docs-6.2.4">HIP</a></td>
-                <td>6.2&nbsp;&Rightarrow;&nbsp;<a href="#hip-6-2-4">6.2.4</a></td>
+                <td>6.2.4</a></td>
                 <td><a href="https://github.com/ROCm/HIP/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
