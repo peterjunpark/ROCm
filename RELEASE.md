@@ -19,8 +19,6 @@ These release notes provide a summary of notable changes since the previous ROCm
 The following are notable new features and improvements in ROCm 6.2.4. For changes to individual components, see
 [Detailed component changes](#detailed-component-changes).
 
-### ROCm Offline Installer Creator changes
-
 ## Operating system and hardware support changes
 
 ## ROCm components
