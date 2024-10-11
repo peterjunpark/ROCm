@@ -2,6 +2,17 @@
 
 These release notes provide a summary of notable changes since the previous ROCm release.
 
+```{note}
+ROCm 6.2.3 is supported on systems using AMD Radeon or Radeon Pro GPUs for
+graphics workloads. If you’re using ROCm for this purpose, see the [Use ROCm on
+Radeon GPUs](https://rocm.docs.amd.com/projects/radeon/en/latest/index.html)
+documentation to verify compatibility and system requirements.
+
+If your ROCm systems are using AMD Instinct accelerators or AMD Radeon GPUs for
+compute workloads (no display information or graphics), don’t upgrade to 6.2.3.
+Instead, upgrade to ROCm 6.2.4. 
+```
+
 - [Release highlights](release-highlights)
 
 - [Operating system and hardware support changes](operating-system-and-hardware-support-changes)
