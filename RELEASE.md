@@ -41,8 +41,7 @@ a wider variety of user needs and use cases.
 
 ## Operating system and hardware support changes
 
-There are no changes to supported hardware or operating systems from ROCm
-6.2.2 to ROCm 6.2.4.
+ROCm 6.2.4 maintains the same operating system and hardware support as ROCm 6.2.2.
 
 ## ROCm components
 
