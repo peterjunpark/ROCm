@@ -121,7 +121,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/hipFFT/en/docs-6.2.4">hipFFT</a></td>
-                <td>1.0.15&nbsp;&Rightarrow;&nbsp;<a href="#hipfft-1-0-16">1.0.16</a></td>
+                <td>1.0.15&nbsp;&Rightarrow;&nbsp;<a href="#hardware-architecture-support-updates">1.0.16</a></td>
                 <td><a href="https://github.com/ROCm/hipFFT/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -133,7 +133,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/hipRAND/en/docs-6.2.4">hipRAND</a></td>
-                <td>2.11.0&nbsp;&Rightarrow;&nbsp;<a href="#hiprand-2-11-1">2.11.1</a></td>
+                <td>2.11.0&nbsp;&Rightarrow;&nbsp;<a href="#hardware-architecture-support-updates">2.11.1</a></td>
                 <td><a href="https://github.com/ROCm/hipRAND/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -157,13 +157,13 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocALUTION/en/docs-6.2.4">rocALUTION</a></td>
-                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#rocalution-3-2-1">3.2.1</a></td>
+                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#hardware-architecture-support-updates">3.2.1</a></td>
                 <td><a href="https://github.com/ROCm/rocALUTION/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocBLAS/en/docs-6.2.4">rocBLAS</a></td>
-                <td>4.2.1&nbsp;&Rightarrow;&nbsp;<a href="#rocblas-4-2-4">4.2.4</a></td>
+                <td>4.2.1&nbsp;&Rightarrow;&nbsp;<a href="#hardware-architecture-support-updates">4.2.4</a></td>
                 <td><a href="https://github.com/ROCm/rocBLAS/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -175,7 +175,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocRAND/en/docs-6.2.4">rocRAND</a></td>
-                <td>3.1.0&nbsp;&Rightarrow;&nbsp;<a href="#rocrand-3-1-1">3.1.1</a></td>
+                <td>3.1.0&nbsp;&Rightarrow;&nbsp;<a href="#hardware-architecture-support-updates">3.1.1</a></td>
                 <td><a href="https://github.com/ROCm/rocRAND/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -187,7 +187,7 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocSPARSE/en/docs-6.2.4">rocSPARSE</a></td>
-                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#rocsparse-3-2-1">3.2.1</a></td>
+                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#hardware-architecture-support-updates">3.2.1</a></td>
                 <td><a href="https://github.com/ROCm/rocSPARSE/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -209,7 +209,7 @@ Click the component's updated version to go to a detailed list of its changes. C
                 <th rowspan="4"></th>
                 <th rowspan="4">Primitives</th>
                 <td><a href="https://rocm.docs.amd.com/projects/hipCUB/en/docs-6.2.4">hipCUB</a></td>
-                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#hipcub-3-2-1">3.2.1</a></td>
+                <td>3.2.0&nbsp;&Rightarrow;&nbsp;<a href="#hardware-architecture-support-updates">3.2.1</a></td>
                 <td><a href="https://github.com/ROCm/hipCUB/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -221,13 +221,13 @@ Click the component's updated version to go to a detailed list of its changes. C
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocPRIM/en/docs-6.2.4">rocPRIM</a></td>
-                <td>3.2.1&nbsp;&Rightarrow;&nbsp;<a href="#rocprim-3-2-2">3.2.2</a></td>
+                <td>3.2.1&nbsp;&Rightarrow;&nbsp;<a href="#hardware-architecture-support-updates">3.2.2</a></td>
                 <td><a href="https://github.com/ROCm/rocPRIM/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocThrust/en/docs-6.2.4">rocThrust</a></td>
-                <td>3.1.0&nbsp;&Rightarrow;&nbsp;<a href="#rocthrust-3-1-1">3.1.1</a></td>
+                <td>3.1.0&nbsp;&Rightarrow;&nbsp;<a href="#hardware-architecture-support-updates">3.1.1</a></td>
                 <td><a href="https://github.com/ROCm/rocThrust/releases/tag/rocm-6.2.4"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -380,41 +380,33 @@ Click the component's updated version to go to a detailed list of its changes. C
 
 The following sections describe key changes to ROCm components.
 
-### **hipCUB** (3.2.1)
+### Hardware architecture support updates
 
-#### Added
+The following math and primitives libraries now include support for the upcoming gfx1151 architecture.
 
-* gfx1151 architecture support.
+* hipCUB (3.2.1)
 
-### **hipFFT** (1.0.16)
+* hipFFT (1.0.16)
 
-#### Added
+* hipRAND (2.11.1)
 
-* gfx1151 architecture support.
+* rocALUTION (3.2.1)
 
-### **hipRAND** (2.11.1)
+* rocBLAS (4.2.4)
 
-#### Added
+* rocPRIM (3.2.2)
 
-* gfx1151 architecture support.
+* rocRAND (3.1.1)
 
-### **rocALUTION** (3.2.1)
+* rocSPARSE (3.2.1)
 
-#### Added
-
-* gfx1151 architecture support.
-
-### **rocBLAS** (4.2.4)
-
-#### Added
-
-* gfx1151 architecture support.
+* rocThrust (3.1.1)
 
 ### **rocFFT** (1.0.30)
 
 #### Added
 
-* gfx1151 architecture support.
+* gfx1151 architecture support
 
 #### Optimized
 
@@ -424,39 +416,15 @@ The following sections describe key changes to ROCm components.
 
 * Fixed plan creation failure on some even-length real-complex transforms that use Bluestein's algorithm.
 
-### **rocPRIM** (3.2.2)
-
-#### Added
-
-* gfx1151 architecture support.
-
-### **rocRAND** (3.1.1)
-
-#### Added
-
-* gfx1151 architecture support.
-
 ### **rocSOLVER** (3.26.2)
 
 #### Added
 
-* gfx1151 architecture support.
+* gfx1151 architecture support
 
 #### Resolved issues
 
 * Fixed synchronization issue in STEIN.
-
-### **rocSPARSE** (3.2.1)
-
-#### Added
-
-* gfx1151 architecture support.
-
-### **rocThrust** (3.1.1)
-
-#### Added
-
-* gfx1151 architecture support.
 
 ## ROCm known issues
 
