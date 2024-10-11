@@ -21,14 +21,17 @@ The following are notable new features and improvements in ROCm 6.2.4. For chang
 
 #### ROCm documentation updates
 
-* Added a new GPU cluster networking topic. For more information, see
+ROCm documentation continues to be improved to provide clearer and more comprehensive guidance for
+a wider variety of user needs and use cases.
+
+* Added a new GPU cluster networking topic. See
   [Cluster network performance validation for AMD Instinct accelerators](https://rocm.docs.amd.com/projects/gpu-cluster-networking/en/docs-6.2.4/index.html).
 
   This documentation provides guidelines on validating network configurations
   in single-node and multi-node environments to attain optimal speed and bandwidth
   in AMD Instinct-powered clusters.
 
-* HIP documentation updates
+* Updated the HIP runtime documentation.
 
   * Added a new topic on how to use [HIP graphs](https://rocm.docs.amd.com/projects/HIP/en/docs-6.2.4/how-to/hipgraph.html).
 
