@@ -19,7 +19,27 @@ These release notes provide a summary of notable changes since the previous ROCm
 The following are notable new features and improvements in ROCm 6.2.4. For changes to individual components, see
 [Detailed component changes](#detailed-component-changes).
 
+#### ROCm documentation updates
+
+* Added a new GPU cluster networking topic. For more information, see
+  [Cluster network performance validation for AMD Instinct accelerators](https://rocm.docs.amd.com/projects/gpu-cluster-networking/en/docs-6.2.4/index.html).
+
+  This documentation provides guidelines on validating network configurations
+  in single-node and multi-node environments to attain optimal speed and bandwidth
+  in AMD Instinct-powered clusters.
+
+* HIP documentation updates
+
+  * Added a new topic on how to use [HIP graphs](https://rocm.docs.amd.com/projects/HIP/en/docs-6.2.4/how-to/hipgraph.html).
+
+  * Added a new topic about the [Stream ordered memory allocator (SOMA)](https://rocm.docs.amd.com/projects/HIP/en/docs-6.2.4/how-to/stream_ordered_allocator.html).
+
+  * Updated the [Porting CUDA driver API](https://rocm.docs.amd.com/projects/HIP/en/docs-6.2.4/how-to/hip_porting_driver_api.html) topic.
+
 ## Operating system and hardware support changes
+
+There are no changes to supported hardware or operating systems from ROCm
+6.2.2 to ROCm 6.2.4.
 
 ## ROCm components
 
@@ -394,19 +414,19 @@ The following math and primitives libraries now include support for the upcoming
 
 * rocBLAS (4.2.4)
 
+* rocFFT (1.0.30)
+
 * rocPRIM (3.2.2)
 
 * rocRAND (3.1.1)
+
+* rocSOLVER (3.26.2)
 
 * rocSPARSE (3.2.1)
 
 * rocThrust (3.1.1)
 
-### **rocFFT** (1.0.30)
-
-#### Added
-
-* gfx1151 architecture support
+### **rocFFT** (1.0.30)[*](#hardware-architecture-support-updates)
 
 #### Optimized
 
@@ -416,11 +436,7 @@ The following math and primitives libraries now include support for the upcoming
 
 * Fixed plan creation failure on some even-length real-complex transforms that use Bluestein's algorithm.
 
-### **rocSOLVER** (3.26.2)
-
-#### Added
-
-* gfx1151 architecture support
+### **rocSOLVER** (3.26.2)[*](#hardware-architecture-support-updates)
 
 #### Resolved issues
 
