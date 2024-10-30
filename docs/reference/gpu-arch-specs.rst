@@ -7,6 +7,8 @@ Accelerator and GPU hardware specifications
 
 The following tables provide an overview of the hardware specifications for AMD Instinct™ accelerators, and AMD Radeon™ PRO and Radeon™ GPUs.
 
+For more information about ROCm hardware compatibility, see the ROCm `Compatibility matrix <https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html>`_.
+
 .. tab-set::
 
   .. tab-item:: AMD Instinct accelerators
@@ -35,11 +37,11 @@ The following tables provide an overview of the hardware specifications for AMD 
           - CDNA3
           - gfx941 or gfx942
           - 192
-          - 304
+          - 304 (38 per XCD)
           - 64
           - 64
           - 256
-          - 32
+          - 32 (4 per XCD)
           - 32
           - 16 per 2 CUs
           - 64 per 2 CUs
@@ -50,11 +52,11 @@ The following tables provide an overview of the hardware specifications for AMD 
           - CDNA3
           - gfx940 or gfx942
           - 128
-          - 228
+          - 228 (38 per XCD)
           - 64
           - 64
           - 256
-          - 24
+          - 24 (4 per XCD)
           - 32
           - 16 per 2 CUs
           - 64 per 2 CUs
@@ -80,7 +82,7 @@ The following tables provide an overview of the hardware specifications for AMD 
           - CDNA2
           - gfx90a
           - 128
-          - 208
+          - 208 (104 per GCD)
           - 64
           - 64
           -
@@ -770,3 +772,7 @@ scalar instructions.
 **GCD**
 
 Graphics Compute Die.
+
+**XCD**
+
+Accelerator Complex Die.
