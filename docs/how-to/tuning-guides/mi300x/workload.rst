@@ -334,6 +334,12 @@ developer blog.
 vLLM performance optimization
 =============================
 
+vLLM is a high-throughput and memory efficient inference and serving engine for large language models, gaining traction for 
+its performance and easy of use in the AI community.
+
+Performance environment variables
+---------------------------------
+
 The following performance tips are not *specific* to vLLM -- they are general
 but relevant in this context. You can tune the following vLLM parameters to
 achieve optimal request latency and throughput performance.
@@ -342,21 +348,44 @@ achieve optimal request latency and throughput performance.
   variable ``HIP_FORCE_DEV_KERNARG`` can improve vLLM performance. Set it to
   ``export HIP_FORCE_DEV_KERNARG=1``.
 
-* vLLM is based on PyTorch. Therefore, the suggestions in the
-  :ref:`TunableOp section <mi300x-tunableop>` are also applicable to vLLM tuning
-  as long as the PyTorch version is 2.3 or later.
-
 * Set the :ref:`RCCL environment variable <mi300x-rccl>` ``NCCL_MIN_NCHANNELS``
   to ``112`` to increase the number of channels on MI300X to potentially improve
   the performance.
 
-The following subsections describe vLLM-specific suggestions for performance.
+* Setting environment variable ``TORCH_BLAS_PREFER_HIPBLASLT=1``  to using hipblaslt improves performance 
+  compared to ``TORCH_BLAS_PREFER_HIPBLASLT=0``. 
+
+Auto-tuning using PyTorch TunableOp
+------------------------------------
+
+Since vLLM is based on PyTorch framework, "PyTorch TunableOp" can be used for auto-tuning. 
+You don't need to modify your code, and you can conveniently run the auto-tuning in two steps:
+
+* Enable TunableOp and tuning. Optionally enable verbose mode:
+
+.. code-block:: shell
+
+   PYTORCH_TUNABLEOP_ENABLED=1 PYTORCH_TUNABLEOP_VERBOSE=1 your_vllm_script.sh
+
+* Enable TunableOp and disable tuning and measure.
+
+.. code-block:: shell
+   PYTORCH_TUNABLEOP_ENABLED=1 PYTORCH_TUNABLEOP_TUNING=0 your_vllm_script.sh
+
+Please check :ref:`_mi300x-tunableop` for details.
+
+
+Performance tuning based on vllm Engine configurations
+-------------------------------------------------------
+
+The following subsections describe vLLM-specific configurations for performance tuning. 
+You can tune the following vLLM parameters to achieve optimal performance.
 
 *  ``tensor_parallel_size``
 
-*  ``max_model_len``
-
 *  ``gpu_memory_utilization``
+
+*  ``dtype``
 
 *  ``enforce_eager``
 
@@ -366,11 +395,19 @@ The following subsections describe vLLM-specific suggestions for performance.
 
 *  ``output_len``
 
+*  ``max_num_seqs``
+
+*  ``num_scheduler_steps``
+
 *  ``enforce_eager``
 
-*  ``batch_size``
+*  ``max_model_len``
 
 *  ``enable_chunked_prefill``
+
+*  ``distributed_executor_backend ``
+
+*  ``max_seq_len_to_capture ``
 
 Refer to `vLLM documentation <https://docs.vllm.ai/en/latest/models/performance.html>`_
 for additional performance tips. :ref:`fine-tuning-llms-vllm` describes vLLM
@@ -381,29 +418,45 @@ of LLM inference with vLLM on the MI300X accelerator. The Docker image includes
 ROCm, vLLM, PyTorch, and tuning files in the CSV format. For more information,
 see :doc:`/how-to/performance-validation/mi300x/vllm-benchmark`.
 
-Maximize throughput
--------------------
 
-The general guideline is to maximize per-node throughput. Specify proper
-GPU memory utilization to run as many instances of vLLM as possible on a
-single GPU. However, too many instances can result in no memory for
+.. _mi300x-vllm-throughput-measurement:
+
+Evaluating Performance by throughput measurement
+-------------------------------------------------
+
+For LLM inference workloads, in this tuning guide, we assess performance by measuring throughput in terms of TPS (tokens per second).
+
+The benchmarking script is benchmarks/benchmark_throughput.py inside vllm repository.
+There are two ways to run throughput benchmarking:
+
+*  Use the real-world data like huggingface dataset ShareGPT_V3_unfiltered_cleaned_split.json
+   The dataset includes real-world conversational data, making it a good representation of typical use cases for language models. It can be downloaded as follows:
+
+   .. code-block:: shell
+
+   wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
+
+
+*  Use synthetic data by setting specific input and output token lengths for standardized benchmarking
+   Fixed lengths synthetic prompts ensure that each benchmark run is consistent, making it easier to compare results across different models or configurations. It can also simplify analysis by using a controlled environment. 
+
+By balancing the above two approaches, you can get a good understanding of model performance.
+
+
+.. _mi300x-vllm-single-node:
+
+Maximizing vllm instances on a single node
+------------------------------------------
+
+The general guideline is to maximize per-node throughput by running as many vLLM instances as possible. However, too many instances can result in no memory for
 KV-cache.
 
-You can run vLLM on MI300X (gfx942), for example, using model weights
-for ``llama2`` (``7b``, ``13b``, ``70b``) and ``llama3`` models (``8b``,
-``70b``). 
+The AMD Instinct™ “MI308X” GPU is equipped with an industry-leading 192GB of HBM3 memory capacity and bandwidth. 
 
-As described in the
-`AMD Instinct MI300X Accelerator <https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-data-sheet.pdf>`__
-data sheet, the GPU memory capacity is 192 GB. This means you can run
-llama2-70b and llama3-70b models on one GPU.
+For models that can be fit in one GPU, to maximize the accumulated throughput, you can run as many as eight instances 
+vLLM simultaneously on one MI308X node (with eight GPUs). To do so, use the GPU isolation environment variable CUDA_VISIBLE_DEVICES.
 
-To maximize the accumulated throughput, you can also run eight instances
-vLLM simultaneously on one MI300X node (with eight GPUs). To do so, use
-the GPU isolation environment variable ``CUDA_VISIBLE_DEVICES``.
-
-For example, this script runs eight instances of vLLM for throughput
-benchmarking at the same time:
+For example, this script runs eight instances of vLLM for throughput benchmarking at the same time with a model that can fit in one GPU:
 
 .. code-block:: shell
 
@@ -412,26 +465,49 @@ benchmarking at the same time:
        CUDA_VISIBLE_DEVICES="$i" python3 /app/vllm/benchmarks/benchmark_throughput.py -tp 1 --dataset "/path/to/dataset/ShareGPT_V3_unfiltered_cleaned_split.json" --model /path/to/model &
    done
 
-Run two instances of ``llama3-8b`` model at the same time on one single GPU
-by specifying ``--gpu-memory-utilization`` to 0.4 (40%), as below (on GPU
-0):
+
+The accumulated throughput of running N instances of vLLM is generally much bigger than that of running one instance of vllm using N GPUs at the same time, 
+i.e., to specify tensor_parallel_size as N (or with -tp N ) where N>1 and N<=8. 
+
+You can run vLLM on MI308X (gfx942), for example, using model weights for llama2 (7b, 13b, 70b), llama3 models (8b, 70b), Qwen2 (7b, 72b) , Mixtral-8x7b, Mixtral-8x22b , etc. Please note that llama2-70b and llama3-70b models can fit on one single GPU, and llama3.1 405b model can fit on one single node with 8 MI308x GPUs.
+
+
+.. _mi300x-vllm-gpu-memory-utilization:
+
+Config gpu-memory-utilization parameter
+------------------------------------------
+
+There are two ways to increase throughput by configuring gpu-memory-utilization  parameter.
+
+1: Increase gpu-memory utilization
+Increase gpu-memory-utilization to improve the throughput for a single instance as long as it does not incur HIP or CUDA Out Of Memory. The default gpu-memory-utilization  is 0.9. You can set it to > 0.9 and < 1.
+
+For example, below benchmarking command set the gpu memory utilization as 0.98, or 98%. 
 
 .. code-block:: shell
 
-   CUDA_VISIBLE_DEVICES=0 python3
-   /vllm-workspace/benchmarks/benchmark_throughput.py --gpu-memory-utilization
-   0.4 --dataset
-   "/path/to/dataset/ShareGPT_V3_unfiltered_cleaned_split.json" --model
-   /path/to/model &
+   /vllm-workspace/benchmarks/benchmark_throughput.py --gpu-memory-utilization 0.98 --input-len 1024 --output-len 128 --model /path/to/model
 
-   CUDA_VISIBLE_DEVICES=0 python3
-   /vllm-workspace/benchmarks/benchmark_throughput.py --gpu-memory-utilization
-   0.4 --dataset
-   "/path/to/dataset/ShareGPT_V3_unfiltered_cleaned_split.json" --model
-   /path/to/model &
 
-Similarly, use the ``CUDA_VISIBLE_DEVICES`` environment variable to specify
-which GPU (0-7) will run those instances.
+2. Decrease gpu-memory utilization to maximize number of vLLM instances on the same GPU.
+Specify proper GPU memory utilization to run as many instances of vLLM as possible on a single GPU. However, too many instances can result in no memory for KV-cache. 
+
+For small models, run multiple instances of vllm on the same GPU by specifying smaller gpu-memory-utilization as long as it would not cause HIP OOM. 
+
+For example:
+
+Run two instances of llama3-8b model at the same time on one single GPU by specifying --gpu-memory-utilization to 0.4 (40%), as below (on GPU 0):
+
+.. code-block:: shell
+
+   CUDA_VISIBLE_DEVICES=0 python3 /vllm-workspace/benchmarks/benchmark_throughput.py --gpu-memory-utilization 0.4 
+   --dataset "/path/to/dataset/ShareGPT_V3_unfiltered_cleaned_split.json" --model /path/to/model &
+ 
+   CUDA_VISIBLE_DEVICES=0 python3 /vllm-workspace/benchmarks/benchmark_throughput.py --gpu-memory-utilization 0.4 
+   --dataset "/path/to/dataset/ShareGPT_V3_unfiltered_cleaned_split.json" --model /path/to/model &
+
+TODODODOD
+
 
 .. _mi300x-vllm-multiple-gpus:
 
@@ -443,7 +519,7 @@ The two main reasons to use multiple GPUs:
 *  The model size is too big to run vLLM using one GPU as it results
    CUDA/HIP Out of Memory.
 
-*  To achieve better latency.
+*  To achieve better latency when using single gpu is not desirable.
 
 To run one vLLM instance on multiple GPUs, use the ``-tp`` or
 ``--tensor-parallel-size`` option to specify multiple GPUs. Optionally, use the
@@ -470,7 +546,12 @@ each server, for example:
    CUDA_VISIBLE_DEVICES=2,3 python -m vllm.entrypoints.api_server --model
    /path/to/model --dtype float16 -tp 2 --port 8001 &
 
-See :ref:`mi300x-vllm-optimize-tp-gemm` for additional optimization suggestions.
+
+
+Config max-num-seqs parameter
+-----------------------------------
+
+Increase max-num-seqs parameter from 256 (default) to 512 (``--max-num-seqs 512``) or bigger can improve throughput.  
 
 Choose different attention backends
 -----------------------------------
@@ -485,16 +566,137 @@ different use cases and performance requirements:
 - **Composable Kernel (CK) Flash Attention** - To use CK Flash Attention, specify
   the environment variable as ``export VLLM_USE_TRITON_FLASH_ATTN=0``.
 
-- **PyTorch naive attention** - To use naive attention (PyTorch SDPA math
-  backend), either build the Docker image without Flash Attention by passing
-  ``--build-arg BUILD_FA="0"`` during Docker build, or
-  ``pip uninstall flash-attn`` inside the container, and export ``VLLM_USE_TRITON_FLASH_ATTN=0`` when running the vLLM instance.
 
 Refer to :ref:`Model acceleration libraries <acceleration-flash-attention>`
 to learn more about Flash Attention with Triton or CK backends.
 
-Use fp8 KV-cache data type
---------------------------
+Use float16 dtype
+------------------
+
+The default data type (``dtype``) is specified in the model’s configuration file. For instance, some models use ``torch.bfloat16`` as their default dtype.
+Use float16 (``--dtype float16``) for better performance.
+
+Multi-Step Scheduling
+----------------------
+
+Set num_scheduler_steps for multi-step scheduling can increase performance. Set it between 10 to 15 (``--num-scheduler-steps 10``). 
+
+Distributed executor backend
+----------------------------
+
+The vllm supports two modes of distributed executor backend: ``ray``  and ``mp`` . When using ROCm vLLM fork, we recommend to use ``mp`` 
+backend (``--distributed_executor_backend mp``)
+
+Cuda graph max_seq_len_to_capture
+----------------------------------
+
+Maximum sequence len covered by CUDA graphs. When a sequence has context length larger than this, 
+vLLM engine falls back to eager mode. The default is 8192.
+
+When working with models that support long context lengths, set the parameter ``--max-seq-len-to-capture`` to 16384.
+Check this `vllm blog <https://blog.vllm.ai/2024/10/23/vllm-serving-amd.html>`__ for details. 
+
+An example of long context length model is Qwen2-7b. 
+
+
+Whether to enable chunked prefill
+---------------------------------
+
+Another vLLM performance tip is to enable chunked prefill to improve
+throughput. Chunked prefill allows large prefills to be chunked into
+smaller chunks and batched together with decode requests.
+
+You can enable the feature by specifying ``--enable-chunked-prefill`` in the
+command line or setting ``enable_chunked_prefill=True`` in the LLM
+constructor. 
+
+As stated in `vLLM's documentation, <https://docs.vllm.ai/en/latest/models/performance.html#chunked-prefill>`__,
+you can tune the performance by changing ``max_num_batched_tokens``. By
+default, it is set to 512 and optimized for ITL (inter-token latency).
+Smaller ``max_num_batched_tokens`` achieves better ITL because there are
+fewer prefills interrupting decodes.
+Higher ``max_num_batched_tokens`` achieves better TTFT (time to the first
+token) as you can put more prefill to the batch.
+
+You might experience noticeable throughput improvements when
+benchmarking on a single GPU or 8 GPUs using the vLLM throughput
+benchmarking script along with the ShareGPT dataset as input.
+
+In the case of fixed ``input-len``/``output-len``, for some configurations,
+enabling chunked prefill increases the throughput. For some other
+configurations, the throughput may be worse and elicit a need to tune
+parameter ``max_num_batched_tokens`` (for example, increasing ``max_num_batched_tokens`` value to 4096 or larger).
+
+Note: in this `vllm blog <https://blog.vllm.ai/2024/10/23/vllm-serving-amd.html>`__, chunked-prefill is not longer recommended.
+
+
+Quantization support
+---------------------
+
+Quantization reduces the precision of the model’s weights and activations, which significantly decreases the memory footprint.
+AWQ and fp8(w8a8) quantization are supported for ROCm.
+
+AWQ quantization
+^^^^^^^^^^^^^^^^
+
+You can quantize your own models by installing AutoAWQ or picking one of the 400+ models on Huggingface. However, 
+please note that AWQ support in vLLM is under-optimized at the moment.
+
+To enable vllm to run on awq quantized models, using --quantization parameter with awq (``--quantization awq``).
+
+Check the steps to quantize the models with awq method:
+
+- Install autoaws
+
+.. code-block:: python
+
+   pip install autoawq
+  
+-  Quantize the model:
+
+.. code-block:: python
+
+   from awq import AutoAWQForCausalLM
+   from transformers import AutoTokenizer
+
+   model_path = 'mistralai/Mistral-7B-Instruct-v0.2'
+   quant_path = 'mistral-instruct-v0.2-awq'
+   quant_config = { "zero_point": True, "q_group_size": 128, "w_bit": 4, "version": "GEMM" }
+
+   # Load model
+   model = AutoAWQForCausalLM.from_pretrained(
+      model_path, **{"low_cpu_mem_usage": True, "use_cache": False}
+   )
+   tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
+
+   # Quantize
+   model.quantize(tokenizer, quant_config=quant_config)
+
+   # Save quantized model
+   model.save_quantized(quant_path)
+   tokenizer.save_pretrained(quant_path)
+
+   print(f'Model is quantized and saved at "{quant_path}"')
+
+- Run the model with vllm:
+
+.. code-block:: python
+
+   python examples/llm_engine_example.py --model [path to awq quantized model] --quantization awq
+
+FP8 Quantization
+^^^^^^^^^^^^^^^^^
+
+vLLM supports FP8 (8-bit floating point) weight and activation quantization using hardware acceleration on AMD MI308x. 
+Quantization of models with FP8 allows for a 2x reduction in model memory requirements and up to a 1.6x improvement 
+in throughput with minimal impact on accuracy.
+
+To enable vLLM to run on fp8 quantized models, using ``--quantization`` parameter with value ``fp8`` (``--quantization fp8``)
+
+For steps to perform fp8 quantization using llmcompressor , check `vLLM documentation <https://docs.vllm.ai/en/latest/quantization/fp8.html>'__.
+
+fp8 kv-cache dtype
+^^^^^^^^^^^^^
 
 Using ``fp8 kv-cache dtype`` can improve performance as it reduces the size
 of ``kv-cache``. As a result, it reduces the cost required for reading and
@@ -529,115 +731,29 @@ for the ``llama2-70b`` model:
    "/vllm-workspace/tests/fp8_kv/llama2-70b-fp8-kv/kv_cache_scales.json"
    --input-len 512 --output-len 256 --num-prompts 500
 
-.. note::
 
-   As of the writing of this document, this feature enhances
-   performance when a single GPU is used (with a tensor-parallel size of
-   1).
+To take advantage of fp8 weight and activation quantization, as well as fp8 kv-cache, 
+you can check below reference steps using quark for fp8 quantization along with fp8 kv-cache :
 
-Enable chunked prefill
-----------------------
-
-Another vLLM performance tip is to enable chunked prefill to improve
-throughput. Chunked prefill allows large prefills to be chunked into
-smaller chunks and batched together with decode requests.
-
-You can enable the feature by specifying ``--enable-chunked-prefill`` in the
-command line or setting ``enable_chunked_prefill=True`` in the LLM
-constructor. 
-
-As stated in `vLLM's documentation, <https://docs.vllm.ai/en/latest/models/performance.html#chunked-prefill>`__,
-you can tune the performance by changing ``max_num_batched_tokens``. By
-default, it is set to 512 and optimized for ITL (inter-token latency).
-Smaller ``max_num_batched_tokens`` achieves better ITL because there are
-fewer prefills interrupting decodes.
-Higher ``max_num_batched_tokens`` achieves better TTFT (time to the first
-token) as you can put more prefill to the batch.
-
-You might experience noticeable throughput improvements when
-benchmarking on a single GPU or 8 GPUs using the vLLM throughput
-benchmarking script along with the ShareGPT dataset as input.
-
-In the case of fixed ``input-len``/``output-len``, for some configurations,
-enabling chunked prefill increases the throughput. For some other
-configurations, the throughput may be worse and elicit a need to tune
-parameter ``max_num_batched_tokens`` (for example, increasing ``max_num_batched_tokens`` value to 4096 or larger).
-
-.. _mi300x-vllm-optimize-tp-gemm:
-
-Optimize tensor parallelism and GEMM performance
-------------------------------------------------
-
-You can use tensor parallelism to improve performance in model inference
-tasks by distributing tensor computations across multiple GPUs.
-The `ROCm vLLM <https://github.com/ROCm/vllm>`__ fork supports two modes
-to run tensor parallelism: ``ray`` and ``torchrun`` which (the default in ROCm
-for performance reasons).
-
-* To use `torchrun <https://pytorch.org/docs/stable/elastic/run.html>`__,
-  use the following command where ``$WORLD_SIZE`` is the number of GPUs or number
-  of workers to use per node. In the case of ``nnodes=1`` (that is, the number of
-  nodes is 1), it's the same as the ``tensor-parallel-size`` or ``-tp``.
-
-  .. code-block:: shell
-
-     torchrun --standalone --nnodes=1 --nproc-per-node=$WORLD_SIZE YOUR_PYTHON_SCRIPT.py (--tensor-parallel-size $WORLD_SIZE .. other_script_args...)
-
-
-* To use ``ray``, specify the ``--worker-use-ray`` flag. The following script
-  example uses ``torchrun`` to run latency benchmarking using ``ray``
-  for ``input-len`` of 512, ``output-len`` of 512, and ``batch-size`` of 1:
-
-  .. code-block:: shell
-
-     tp=$1
-
-     torchrun --standalone --nnodes=1 --nproc-per-node=$tp benchmarks/benchmark_latency.py --worker-use-ray --model $MODEL --batch-size 1 --input-len 512 --output-len 512 --tensor-parallel-size $tp --num-iters 10
-
-  The first parameter of the script ``tp`` specifies the ``tensor-parallel`` size
-  (1 to 8).
-
-GEMM tuning steps
-^^^^^^^^^^^^^^^^^
-
-This section describes the process of optimizing the parameters and
-configurations of GEMM operations to improve their performance on specific
-hardware. This involves finding the optimal settings for memory usage,
-computation, and hardware resources to achieve faster and more efficient
-matrix multiplication.
-
-Follow these steps to perform GEMM tuning with ROCm vLLM:
-
-1. Set various environment variables to specify paths for tuning files and
-   enable debugging options:
+- Get quark, install it. See `details  <https://quark.docs.amd.com/latest/quark_torch_main_gen.html>`__.
+- Quantize your model:
 
    .. code-block:: shell
 
-      export VLLM_UNTUNE_FILE="/tmp/vllm_untuned.csv"
+      python3 quantize_quark.py --model_dir <llama2/3 checkpoint folder> --output_dir output_dir --quant_scheme w_fp8_a_fp8_o_fp8 --num_calib_data 128 --model_export vllm_adopted_safetensors --no_weight_matrix_merge
 
-      export VLLM_TUNE_FILE="$(pwd)/vllm/tuned.csv"
-
-      export HIP_FORCE_DEV_KERNARG=1
-
-      export DEBUG_CLR_GRAPH_PACKET_CAPTURE=1
-
-2. Perform a tuning run:
+- Get the KV scales:
 
    .. code-block:: shell
 
-      VLLM_TUNE_GEMM=1 torchrun --standalone --nnodes=1 --nproc-per-node=8 vllm/benchmarks/benchmark_latency.py --batch-size 1 --input-len 2048 --output-len 128 --model /models/llama-2-70b-chat-hf/ -tp 8
+      python3 examples/fp8/extract_scales.py --quantized_model <output_dir from before> --tp_size 1 --output_dir <use model dir>
 
-      python $PATH_TO_GRADLIB/gemm_tuner.py --input /tmp/vllm_untuned.csv --tuned_file vllm/tuned.csv
-
-   ``$PATH_TO_GRADLIB`` is the installation path of ``gradlib``. To find
-   where ``gradlib`` is, you can run ``pip show gradlib`` and then update the
-   above path to something like ``/opt/conda/envs/py_3.9/lib/python3.9/site-packages/gradlib/gemm_tuner.py``
-
-3. Do a measurement run to verify performance improvements:
+- Run the script
 
    .. code-block:: shell
+      
+      python benchmarks/benchmark_throughput.py --quantization fp8 --quantized-weights-path <output_dir you used before>llama.safetensors --kv-cache-dtype fp8_e4m3 --quantization-param-path <model dir>kv_cache_scales.json --model <model dir> -tp 1
 
-      VLLM_TUNE_GEMM=0 torchrun --standalone --nnodes=1 --nproc-per-node=8 vllm/benchmarks/benchmark_latency.py --batch-size 1 --input-len 2048 --output-len 128 --model /models/llama-2-70b-chat-hf/ -tp 8
 
 .. _mi300x-tunableop:
 
@@ -645,12 +761,18 @@ PyTorch TunableOp
 =================
 
 `TunableOp <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`_
-is a feature used to define and optimize kernels that can have tunable parameters. This is useful in
-optimizing the performance of custom kernels by exploring different parameter configurations to find the most efficient
-setup. See more about PyTorch TunableOp in :ref:`Model acceleration libraries <fine-tuning-llms-pytorch-tunableop>`.
+ is a feature used to obtain the optimal GPU kernel for a key PyTorch operations. At the moment, 
+ TunableOp supports the tuning of dense matrix multiplies (GEMM, batched GEMM, GEMM and bias, and scaled GEMM). 
+ This feature is useful for squeezing out the last bit of performance.  
+ In short, it will try up to thousands of matrix multiply algorithms that are available in rocBLAS and hipBLASLt.  
+ A caveat is that as the math libraries improve over time, there is a less benefit to using TunableOp,
+ and there is also no guarantee that the workload being tuned will be able to outperform the default GEMM algorithm in hipBLASLt.
 
-You can easily manipulate the behavior TunableOp through environment variables, though you could use the C++ interface
-``at::cuda::tunable::getTuningContext()``. A Python interface to the ``TuningContext`` does not yet exist.
+Some additional references for PyTorch TunableOp include `ROCm blog <https://rocm.blogs.amd.com/artificial-intelligence/pytorch-tunableop/README.html>`__, 
+TunableOp `README <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`__, and 
+`llm tuning <https://rocm.docs.amd.com/en/latest/how-to/llm-fine-tuning-optimization/model-acceleration-libraries.html#fine-tuning-llms-pytorch-tunableop>`__.
+
+The three most important environment variables for controlling TunableOp are:
 
 The three most important environment variables are:
 
@@ -665,39 +787,83 @@ The three most important environment variables are:
 ``PYTORCH_TUNABLEOP_VERBOSE``
    Default is ``0``. Set to ``1`` if you want to see TunableOp in action.
 
-Use these environment variables to enable TunableOp for any
-applications or libraries that use PyTorch (2.3 or later). For more
-information, see `<https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`__
-on GitHub.
+The behavior TunableOp is controlled through environment variables with a complete list of environment variable 
+at  TunableOp `README <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`__,.  
+There are also Python APIs to set some of these environment variables, 
+but the preferred way to set the TunableOp tuning parameters is to use the environment variables.  
 
-You can check how TunableOp performs in two steps:
+Workflow
+^^^^^^^^
 
-1. Enable TunableOp and tuning. Optionally enable verbose mode:
+Use these environment variables to enable TunableOp for any applications or libraries that use PyTorch (2.3 or later).
+
+The first step, is the tuning pass:
+
+- Enable TunableOp and tuning. Optionally enable verbose mode: 
 
    .. code-block:: shell
 
       PYTORCH_TUNABLEOP_ENABLED=1 PYTORCH_TUNABLEOP_VERBOSE=1 your_script.sh
 
-2. Enable TunableOp and disable tuning and measure.
+   This pass can be very slow. The output will be tunableop_results.csv file that contains a list of GEMMs encountered 
+   and the optimal GPU kernel that was identified. Mult-gpu tuning is supported and there will be one tunableop_results.csv
+   file per GPU produced. The tuning algorithm will run on each GPU, but each tuning is sandboxed on each GPU. 
+   There is no communication between GPUs during the tuning process. For a data parallel algorithm, where GEMM configurations
+   on different GPUs are likely the same, this leads to redundant work among the GPUs. In this case, it would be sufficient to run 
+   the workload as a single GPU workload instead. However, if the algorithm contains multiple levels of parallelism 
+   (e.g. data parallelism and ML model parallelism) there is a chance that different GPU will have different GEMM parameters. 
+   In this case, it is worth running the workload as a multi-GPU configuration.
+
+In the second step, we re-run the workload with optimal configuration using the tunableop_results.csv  file that were obtained in step 1. 
+
+- Enable TunableOp and disable tuning and measure:
 
    .. code-block:: shell
 
       PYTORCH_TUNABLEOP_ENABLED=1  PYTORCH_TUNABLEOP_TUNING=0 your_script.sh
 
+Compare the wall-clock time from this second step to your reference wall-clock time with TunableOp completely disable (PYTORCH_TUNABLEOP_ENABLED=0).
+
+Offline Tuning 
+^^^^^^^^^^^^^^^
+A forthcoming TunableOp feature is offline tuning. Offline tuning is available in upstream PyTorch now and in PyTorch 2.6 or later. 
+
+So far, the primary mode of tuning is to run the workload and to do in situ tuning, i.e. to tune in place. 
+This is convenient for a one off tuning, but what if you need to be constantly tuning and 
+retuning your workload when a new version of a math library becomes available. 
+In this scenario, it might be inconvenient to re-run the the workload and perform in situ tuning. 
+Another way to perform this tuning is to collect the GEMMs from a workload in a collection pass and 
+then tuning these GEMMs in separate tuning pass without running the original workload. 
+This can have a tremendous amount of savings with respect to compute resources for particular time-consuming workloads. 
+Offline tuning is a new feature and supports single GPU tuning only. The description of the workflow for this feature is available here: 
+Offline Tuning. As of November 2024, there is a PR in progress to support multi-GPU offline tuning. A user-facing AMD blog will also follow.
+
+
 .. _mi300x-torchinductor-tuning:
 
-PyTorch inductor Triton tuning knobs
-====================================
+PyTorch inductor max-autotune tuning knobs
+==========================================
 
 The following are suggestions for optimizing matrix multiplication (GEMM) and
 convolution (``conv``) operations in PyTorch using ``inductor``, a part of the
-PyTorch compilation framework. The goal is to leverage Triton to achieve better
-performance.
+PyTorch compilation framework.
 
 Learn more about TorchInductor environment variables and usage in
 `PyTorch documentation <https://pytorch.org/docs/2.3/torch.compiler_inductor_profiling.html>`_.
 
-To tune Triton kernels with ``gemm`` and convolution ops (``conv``), use the
+.. note::
+   Triton is not used if regular :doc:`MIOpen <miopen:index>` or
+   :doc:`rocBLAS <rocblas:index>` performs faster for a specific operation.
+
+.. note::
+   Experimental: TuneableOp (see Section "PyTorch TuneableOp") can also be used in combination 
+   with TorchInductor's max-autotune mode to boost ATen gemm performance but will further increase tuning time 
+   required. Environment variable TORCHINDUCTOR_AUTOTUNE_MULTI_DEVICE=1 can be useful in single gpu workloads to distribute triton's gemm tuning.
+
+Triton backend
+---------------
+
+The goal is to leverage Triton to achieve better performance. To tune Triton kernels with ``gemm`` and convolution ops (``conv``), use the
 ``torch.compile`` function with the ``max-autotune`` mode. This benchmarks a
 predefined list of Triton configurations and selects the fastest one for each
 shape. See the configurations in PyTorch source code:
@@ -706,9 +872,9 @@ shape. See the configurations in PyTorch source code:
 
 * `matmul configs for max-autotune <https://github.com/pytorch/pytorch/blob/a1d02b423c6b4ccacd25ebe86de43f650463bbc6/torch/_inductor/kernel/mm_common.py#L118>`_
 
-.. note::
-   Triton is not used if regular :doc:`MIOpen <miopen:index>` or
-   :doc:`rocBLAS <rocblas:index>` performs faster for a specific operation.
+This tuning will select the best triton gemm configurations according to tile-size 
+``(BLOCK_M, BLOCK_N, BLOCK_K), num_stages, num_warps`` and ``mfma`` instruction size ( ``matrix_instr_nonkdim`` ) 
+(see "Triton kernel optimization" section for more details).
 
 * Set ``torch._inductor.config.max_autotune = True`` or ``TORCHINDUCTOR_MAX_AUTOTUNE=1``.
 
@@ -725,11 +891,6 @@ shape. See the configurations in PyTorch source code:
      ``TRITON,ATEN``. 
      Limiting this to ``TRITON`` might improve performance by
      enabling more fused ``mm`` kernels instead of going to rocBLAS.
-
-* For further ``mm`` tuning, tuning ``coordinate_descent`` might improve
-  performance.
-
-  ``torch._inductor.config.coordinate_descent_tuning = True`` or ``TORCHINDUCTOR_COORDINATE_DESCENT_TUNING=1``
 
 * Inference can see large improvements on AMD GPUs by utilizing
   ``torch._inductor.config.freezing=True`` or the ``TORCHINDUCTOR_FREEZING=1`` variable, which
@@ -753,6 +914,42 @@ shape. See the configurations in PyTorch source code:
   ``output_code.py`` files corresponding to the FX graphs associated with the model.
   The Triton kernels are defined in these generated codes.
 
+
+Composable Kernel backend
+--------------------------
+
+You can enable CK backend by appending 'CK' to the comma-separated list to use kernels 
+from the Composable Kernel library during auto-tuning.
+
+``torch._inductor.max_autotune_gemm_backends`` or ``TORCHINDUCTOR_MAX_AUTOTUNE_GEMM_BACKENDS``.
+
+The Composable Kernel library python wrapper should be pip-installed with ``pip install git+https://github.com/rocm/composable_kernel@develop``. 
+This wrapper library is responsible for constructing a list of kernel instances available in the Composable Kernel library,
+as well as storing the kernel instance cpp includes in a known location (so clang can look into these paths when compiling the gemm autotune candidates)
+
+
+- Supported ops, at the moment:
+   * ``matmul`` (with float16 and bfloat16 inputs, row-major X, row-major or column-major W)
+   * ``addmm`` (with float16 or bfloat16 X, W and Bias; row-major X, row-major or column-major W; Bias can be broadcasted either along row-major or column-major dimension)
+   * ``scaled_mm`` (float8_e4m3fnuz inputs, bfloat16 output) 
+   * ``conv2d`` (with float32, float16 or bfloat16 inputs, channels-last weight layout)
+
+- For the working examples, please see test/inductor/test_ck_backend.py .
+
+- Compiling or build time can be configured by modifying torch._inductor.config  to reduce the build time to avoid time-out.
+
+   * compile_threads : Number of threads used for compilation. Set it to the number of available CPU cores.
+   * rocm.n_max_profiling_configs : Limiting the number of kernels to speed up compilation.
+
+- Setting environment variable PYTORCH_MIOPEN_SUGGEST_NHWC=1 for convolution operations.
+
+Debugging and trouble shooting performance: 
+
+- Generate a standalone executable runner to debug or assess kernels' performance by setting environment variable
+  ``INDUCTOR_CK_BACKEND_GENERATE_TEST_RUNNER_CODE=1`` to facilitate debugging and profiling . By default, it will not.  
+- Enable debug by passing compilation flags (e.g, is_debug ) to clang when compiling the kernels in ``torch._inductor.config.rocm`` class.
+- The generated source files and other products of clang compilation are located in the torchinductor root directory (default: ``/tmp/torchinductor_root``)
+
 .. _mi300x-rocm-library-tuning:
 
 ROCm library tuning
@@ -769,6 +966,12 @@ improved application performance.
 
 GEMM (general matrix multiplication)
 ------------------------------------
+
+GEMMs (General Matrix Multiplications) are a fundamental building block for many operations in neural networks. 
+GEMM is defined as C = αAB + βC  where A is an MxK matrix input and B is KxN matrix input, 
+and C is MxN matrix input and is overwritten by the output.  α and β are scaler inputs. 
+hipBLASLt is a library that provides general matrix-matrix operations with a flexible API 
+and extends functionalities beyond a traditional BLAS library. 
 
 .. _mi300x-hipblaslt:
 
@@ -813,6 +1016,90 @@ for details.
 
   *  ``HIPBLASLT_EPILOGUE_BGRADB:  "--bias_vector --gradient --bias_source b";``
 
+
+HipBLASLt auto-tuning using hipblaslt-bench
+^^^^^^^^^^^^^^^^^^^^^^
+
+Use the auto-tuning tool in hipBLASLt to get the best solution for a given problem size.
+
+**Prerequisite**
+
+Build hipBLASLt
+
+Please check hipBLASLt `repository <https://github.com/ROCm/hipBLASLt>`__ to see detailed build instructions.
+
+**Quick Start**
+
+Create a working folder for the auto-tuning tool. e.g. tuning
+
+1. Set the problem type/ test config/ tuning parameters... in the yaml. You can modify the template yaml inside ``hipblaslt/utilities``
+
+<Picture Here>
+
+2. Execute the following command to start tuning
+
+  .. code-block:: shell
+
+      # python3 hipblaslt/utilities/find_exact.py <path-to-config-yaml> <path-to-the-root-of-built-hipblaslt> <working-directory>
+      # Assume we're in folder tuning, the default root of the build folder of hipblaslt is hipblaslt/build/release
+      python3 ../hipblaslt/utilities/find_exact.py tuning.yaml hipblaslt/build/release ./
+
+
+**Output**
+
+The tool will create two output folders. The first one is the benchmark results, 
+the second one is the generated equality kernels. If SplitK is used, the solution's GlobalSplitU will 
+also change if the winner is using a different SplitK from the solution. The yaml generated inside the 
+folder 1_LogicYaml are logic yamls. These yamls are just like the yamls generated from TensileLite.
+
+<Figure here>
+
+**A Quick View of the Config Yaml**
+
+The tuning tool is a two-step tool. It first runs the benchmark, then it creates the equality yaml for the user. Note that this config yaml is different from the config yaml used in TensileLite.
+
+* **Bench**
+
+   The first step is to run the benchmark, ``find_exact.py`` will run the benchmark with ``hipblaslt-bench``.
+
+   For the default configurations, you can look at the python file
+
+   .. code-block:: python
+
+      defaultBenchOptions = {"ProblemType": {
+          "TransposeA": 0,
+          "TransposeB": 0,
+          "ComputeInputDataType": "s",
+          "ComputeDataType": "s",
+          "DataTypeC": "s",
+          "DataTypeD": "s",
+          "UseBias": False
+      }, "TestConfig": {
+          "ColdIter": 20,
+          "Iter": 100,
+          "AlgoMethod": "all",
+          "RequestedSolutions": 2, # Only works in AlgoMethod heuristic
+          "SolutionIndex": None, # Only works in AlgoMethod index
+          "ApiMethod": "cpp",
+          "RotatingBuffer": 0,
+      }, "TuningParameters": {
+          "SplitK": [0]
+      }, "ProblemSizes": []}
+      defaultCreateLogicOptions = {}  # Currently unused
+
+* **Test Config**
+   1. ColdIter : This is number the warmup iterations before starting the kernel benchmark.
+   2. Iter : This is the number of iterations in kernel benchmarking
+   3. AlgoMethod : We recommended to keep this unchanged because method "all" returns all the available solutions for the problem type.
+   4. ApiMethod : We have c, mix, and cpp. Doesn't affect the result much.
+   5. RotatingBuffer: This is a size in the unit of MB. Recommended to set the value equal to the size of the cache of the card to avoid the kernel fetching data from the cache.
+   
+* **Tuning Parameters**
+   SplitK: Divide K into N portions. Not every solution supports SplitK. The solution will be skipped if not supported.
+
+* **CreateLogic**
+   Currently no control parameters
+
 hipBLASLt backend assembly generator tuning
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -821,15 +1108,18 @@ hipBLASLt backend assembly generator tuning
 named TensileLite. TensileLite is used to tune the backend assembly generator to
 achieve optimal performance. Here’s how to tune hipBLASLt using TensileLite:
 
-Tune hipBLASLt's backend assembly generator
+HipBLASLt backend assembly generator tuning
 '''''''''''''''''''''''''''''''''''''''''''
+HipBLASLt has a backend assembly generator in hipBLASLt's repo, named tensilelite.
+
+**How to tune hipBLASLt's backend asm generator?**
 
 .. code-block:: shell
 
    cd /hipBLASLt/tensilelite
    ./Tensile/bin/Tensile config.yaml output_path
 
-``config.yaml``
+**``config.yaml``**
    This file contains the parameters and settings for the tuning process. Here’s
    a breakdown of the important sections:
 
@@ -885,7 +1175,73 @@ Tune hipBLASLt's backend assembly generator
    :align: center
    :alt: TensileLite tuning flow
 
-   TensileLite tuning flow
+
+TensileLite tuning flow
+------------------------
+There are 7 steps in the TensileLite tuning flow.  Tensile’s 7 step programmable 
+benchmarking protocol first generates fast kernel candidates in Steps (1)-(6), 
+then benchmarks those kernel candidates against a set of problem sizes in Step (7).
+
+<Figure here>
+
+Step 1: Initial Solution Parameters:
+
+Before Tensile is able to benchmark a kernel parameter in Step 2 of above Figure, 
+such as PrefetchGlobalRead={False, True}, all other kernel parameters not being benchmarked must be specified. 
+Therefore, the first step is to initialize a list of default kernel parameters, then subsequent steps of 
+benchmarking will override a parameter from this default list, with the parameter determined from benchmarking. 
+Tensile is pre-loaded with default parameters for any unspecified during tuning.
+
+
+Step 2: Benchmark Common Parameters:
+
+Benchmarking common parameters determines parameters which are universally preferable to their alternatives 
+regardless of other parameters. To benchmark common parameters:
+(a) User specifies parameters and values to benchmark.
+(b) Tensile benchmarks all parameter combinations for a user-specified problem size.
+(c) Tensile selects the fastest parameter combination which is now labeled determined and will subsequently be used.
+In practice, this parameters isn’t used, since globally prefered parameters are set as defaults in Tensile and don’t need to be re-benchmarked.
+
+Step 3: Fork Parameters:
+
+Rather than continuing to determine globally fastest parameters, which eventually leads 
+to a single fastest kernel, forking creates many different kernels, 
+all of which will be considered for use. All forked
+parameters are considered determined, i.e., they aren't benchmarked to determine 
+which is fastest. The above Figure shows 7 kernels being forked in Step 3.
+
+Step 4: Benchmark Fork Parameters:
+
+Next, tuning continues its refinement by determining fastest parameters for 
+each forked permutation, same as in Step 2.
+
+Step 5: Join Parameters:
+
+After tuning the forked kernels, joining reduces the list of kernels so that fewer kernels 
+will be considered for final use. Each kernel in the resulting list must have different values
+for the listed JoinParameters, for example, employing JoinParameters = MacroTile will result in only a
+few final kernels, each with a different MacroTile. If there are multiple kernels with the same MacroTile, 
+only the fastest is kept. In Figure 2 the 7 forked kernel have been reduced to 3 joined kernels.
+
+Step 6: Benchmark Join Parameters:
+
+Users can further tune parameters of the joined kernels. This steps is same as Steps 4 except
+that it tunes after joing so that there are fewer kernels to be tuned. In practice, 
+this step isn’t used; using Step 4 is preferred so that all parameters are benchmarked before joinning.
+
+Step 7: Benchmark Final Parameters:
+
+At the conclusion of Step 6, all parameters of all kernels have been determined and the
+final set of kernels for consideration has been established. Now all final kernels will be
+benchmarked against all problem sizes specified by the user. Problem sizes can be specified
+as Range sizes and Exact sizes. Range sizes cause benchmarking of a broad range of sizes,
+and Tensile will be able to interpolate which kernel is best even between the specifically
+benchmarked sizes. Exact sizes cause a single problem size to be benchmarked, and the final
+library is guaranteed to choose the fastest kernel for that size. This final benchmarking
+generates the data that is subsequently analyzed for creating the mapping of problem size
+to optimal kernel.
+
+
 
 Update logic YAML files
 '''''''''''''''''''''''
@@ -1314,8 +1670,8 @@ achieve higher throughput and lower latency.
 
 .. _mi300x-autotunable-kernel-config:
 
-Auto-tunable kernel configurations and environment variables
-------------------------------------------------------------
+Auto-tunable kernel configurations
+----------------------------------
 
 Auto-tunable kernel configuration involves adjusting memory access and computational
 resources assigned to each compute unit. It encompasses the usage of
@@ -1341,13 +1697,13 @@ efficiency and throughput of various computational kernels.
    Adjusts the number of pipeline stages for different types of kernels. On AMD accelerators, set ``num_stages``
    according to the following rules:
 
-   * For kernels with a single GEMM, set to ``0``.
+   * For kernels with a single GEMM, set to ``2``.
 
    * For kernels with two GEMMs fused (Flash Attention, or any other kernel
      that fuses 2 GEMMs), set to ``1``.
 
    * For kernels that fuse a single GEMM with another non-GEMM operator
-     (for example ReLU activation), set to ``0``.
+     (for example ReLU activation), set to ``2``.
 
    * For kernels that have no GEMMs, set to ``1``.
 
@@ -1401,28 +1757,6 @@ that it might fit 3 waves per EU.
    For GEMM kernels on an MI300X accelerator, ``mfma_16x16`` typically outperforms ``mfma_32x32``, even for large
    tile/GEMM sizes.
 
-The following is an environment variable used for tuning.
-
-``OPTIMIZE_EPILOGUE``
-   Setting this variable to ``1`` can improve performance by removing the ``convert_layout`` operation in the epilogue.
-   It should be turned on (set to ``1``) in most cases. Setting ``OPTIMIZE_EPILOGUE=1`` stores the MFMA instruction
-   results in the MFMA layout directly; this comes at the cost of reduced global store efficiency, but the impact on
-   kernel execution time is usually minimal.
-
-   By default (``0``), the results of MFMA instruction are converted to blocked layout, which leads to ``global_store``
-   with maximum vector length, that is ``global_store_dwordx4``.
-
-   This is done implicitly with LDS as the intermediate buffer to achieve
-   data exchange between threads. Padding is used in LDS to avoid bank
-   conflicts. This usually leads to extra LDS usage, which might reduce
-   occupancy.
-
-   .. note::
-
-      This variable is not turned on by default because it only
-      works with ``tt.store`` but not ``tt.atomic_add``, which is used in split-k and
-      stream-k GEMM kernels. In the future, it might be enabled with
-      ``tt.atomic_add`` and turned on by default.
 
 .. _mi300x-triton-gpu-utilization:
 
