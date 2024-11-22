@@ -533,7 +533,7 @@ The two main reasons to use multiple GPUs:
 *  The model size is too big to run vLLM using one GPU as it results
    HIP Out of Memory.
 
-*  To achieve better latency when using single gpu is not desirable.
+*  To achieve better latency when using single GPU is not desirable.
 
 To run one vLLM instance on multiple GPUs, use the ``-tp`` or
 ``--tensor-parallel-size`` option to specify multiple GPUs. Optionally, use the
@@ -585,9 +585,9 @@ Refer to :ref:`Model acceleration libraries <acceleration-flash-attention>`
 to learn more about Flash Attention with Triton or CK backends.
 
 Use ``float16`` ``dtype``
----------------------
+------------------------
 
-The default data type (``dtype``) is specified in the model’s configuration file. For instance, some models use ``torch.bfloat16`` as their default dtype.
+The default data type (``dtype``) is specified in the model’s configuration file. For instance, some models use ``torch.bfloat16`` as their default ``dtype``.
 Use float16 (``--dtype float16``) for better performance.
 
 Multi-Step Scheduling
@@ -648,19 +648,19 @@ Quantization support
 ---------------------
 
 Quantization reduces the precision of the model’s weights and activations, which significantly decreases the memory footprint.
-AWQ and fp8(w8a8) quantization are supported for ROCm.
+``AWQ`` and ``fp8(w8a8)`` quantization are supported for ROCm.
 
-AWQ quantization
-^^^^^^^^^^^^^^^^
+``AWQ`` quantization
+^^^^^^^^^^^^^^^^^^^^
 
 You can quantize your own models by installing AutoAWQ or picking one of the 400+ models on HuggingFace. However, 
 please note that AWQ support in vLLM is under-optimized at the moment.
 
-To enable vLLM to run on awq quantized models, using --quantization parameter with awq (``--quantization awq``).
+To enable vLLM to run on ``awq`` quantized models, using --quantization parameter with ``awq`` (``--quantization awq``).
 
-Check the steps to quantize the models with awq method:
+Check the steps to quantize the models with ``awq`` method:
 
-- Install ``autoaws```
+- Install ``autoawq```
 
 .. code-block:: python
 
@@ -824,7 +824,7 @@ The first step, is the tuning pass:
   This pass can be very slow. The output will be ``tunableop_results.csv`` file that contains a list of GEMMs encountered 
   and the optimal GPU kernel that was identified. 
   
-  Mult-gpu tuning is supported and there will be one ``tunableop_results.csv``
+  Mult-GPU tuning is supported and there will be one ``tunableop_results.csv``
   file per GPU produced. The tuning algorithm will run on each GPU, but each tuning is sandboxed on each GPU. 
   There is no communication between GPUs during the tuning process. For a data parallel algorithm, where GEMM configurations
   on different GPUs are likely the same, this leads to redundant work among the GPUs. In this case, it would be sufficient to run 
@@ -879,7 +879,7 @@ Learn more about TorchInductor environment variables and usage in
    Experimental: TuneableOp (see Section :ref:`_mi300x-tunableop`) can also be used in combination 
    with ``TorchInductor`` ``max-autotune`` mode to boost ATen GEMM performance but will further increase tuning time 
    required. Environment variable ``TORCHINDUCTOR_AUTOTUNE_MULTI_DEVICE=1`` can be useful
-   in single gpu workloads to distribute Triton GEMM tuning.
+   in single GPU workloads to distribute Triton GEMM tuning.
 
 Triton backend
 ---------------
@@ -889,11 +889,11 @@ The goal is to leverage Triton to achieve better performance. To tune Triton ker
 predefined list of Triton configurations and selects the fastest one for each
 shape. See the configurations in PyTorch source code:
 
-* `conv configurations for max-autotune <https://github.com/pytorch/pytorch/blob/a1d02b423c6b4ccacd25ebe86de43f650463bbc6/torch/_inductor/kernel/conv.py#L51>`_
+* `conv configurations for "max-autotune" <https://github.com/pytorch/pytorch/blob/a1d02b423c6b4ccacd25ebe86de43f650463bbc6/torch/_inductor/kernel/conv.py#L51>`_
 
-* `matmul configurations for max-autotune <https://github.com/pytorch/pytorch/blob/a1d02b423c6b4ccacd25ebe86de43f650463bbc6/torch/_inductor/kernel/mm_common.py#L118>`_
+* `matmul configurations for "max-autotune" <https://github.com/pytorch/pytorch/blob/a1d02b423c6b4ccacd25ebe86de43f650463bbc6/torch/_inductor/kernel/mm_common.py#L118>`_
 
-This tuning will select the best Triton gemm configurations according to tile-size 
+This tuning will select the best Triton ``gemm`` configurations according to tile-size 
 ``(BLOCK_M, BLOCK_N, BLOCK_K), num_stages, num_warps`` and ``mfma`` instruction size ( ``matrix_instr_nonkdim`` ) 
 (see "Triton kernel optimization" section for more details).
 
@@ -946,13 +946,13 @@ from the Composable Kernel library during auto-tuning.
 
 The Composable Kernel library python wrapper should be pip-installed with ``pip install git+https://github.com/rocm/composable_kernel@develop``. 
 This wrapper library is responsible for constructing a list of kernel instances available in the Composable Kernel library,
-as well as storing the kernel instance cpp includes in a known location (so clang can look into these paths when compiling the gemm autotune candidates)
+as well as storing the kernel instance cpp includes in a known location (so clang can look into these paths when compiling the ``gemm`` auto-tune candidates)
 
 
 * Supported ops, at the moment:
   * ``matmul`` (with ``float16`` and ``bfloat16`` inputs, row-major X, row-major or column-major W)
   * ``addmm`` (with ``float16`` or ``bfloat16`` X, W and Bias; row-major X, row-major or column-major W; Bias can be broadcast either along row-major or column-major dimension)
-  * ``scaled_mm`` (``float8_e4m3fnuz`` inputs, ``bfloat16`` output) 
+  * ``scaled_mm`` (``float8_e4m3fnuz`` inputs, ``bfloat16`` output)
   * ``conv2d`` (with ``float32``, ``float16`` or ``bfloat16`` inputs, channels-last weight layout)
 
 * For the working examples, please see test/inductor/test_ck_backend.py .
@@ -1122,7 +1122,7 @@ The tuning tool is a two-step tool. It first runs the benchmark, then it creates
    ``SplitK``: Divide ``K`` into ``N`` portions. Not every solution supports ``SplitK``. 
    The solution will be skipped if not supported.
 
-* **CreateLogic**
+* **``CreateLogic``**
    Currently no control parameters
 
 hipBLASLt backend assembly generator tuning
@@ -1249,16 +1249,16 @@ Step 6: Benchmark Join Parameters:
 
 Users can further tune parameters of the joined kernels. This steps is same as Steps 4 except
 that it tunes after joining so that there are fewer kernels to be tuned. In practice, 
-this step is not used; using Step 4 is preferred so that all parameters are benchmarked before joining.
+this step is not used; using Step 4 is preferred so that all parameters are measured before joining.
 
 Step 7: Benchmark Final Parameters:
 
 At the conclusion of Step 6, all parameters of all kernels have been determined and the
 final set of kernels for consideration has been established. Now all final kernels will be
-benchmarked against all problem sizes specified by the user. Problem sizes can be specified
+measured against all problem sizes specified by the user. Problem sizes can be specified
 as Range sizes and Exact sizes. Range sizes cause benchmarking of a broad range of sizes,
 and Tensile will be able to interpolate which kernel is best even between the specifically
-benchmarked sizes. Exact sizes cause a single problem size to be benchmarked, and the final
+measured sizes. Exact sizes cause a single problem size to be measured, and the final
 library is guaranteed to choose the fastest kernel for that size. This final benchmarking
 generates the data that is subsequently analyzed for creating the mapping of problem size
 to optimal kernel.
