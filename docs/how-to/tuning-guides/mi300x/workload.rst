@@ -439,7 +439,6 @@ There are two ways to run throughput benchmarking:
 
       wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
 
-
 *  Use synthetic data by setting specific input and output token lengths for standardized benchmarking
    Fixed lengths synthetic prompts ensure that each benchmark run is consistent, making it
    easier to compare results across different models or configurations. It can also simplify analysis by
@@ -460,7 +459,7 @@ KV-cache.
 The AMD Instinct™ “MI308X” GPU is equipped with an industry-leading 192GB of HBM3 memory capacity and bandwidth. 
 
 For models that can be fit in one GPU, to maximize the accumulated throughput, you can run as many as eight instances 
-vLLM simultaneously on one MI308X node (with eight GPUs). To do so, use the GPU isolation environment 
+vLLM simultaneously on one MI300X node (with eight GPUs). To do so, use the GPU isolation environment 
 variable ``CUDA_VISIBLE_DEVICES``.
 
 For example, this script runs eight instances of vLLM for throughput benchmarking at the same time
@@ -478,7 +477,8 @@ The accumulated throughput of running ``N`` instances of vLLM is generally much 
 that of running one instance of vLLM using ``N`` GPUs at the same time, 
 i.e., to specify tensor_parallel_size as ``N`` (or with ``-tp N`` ) where ``N>1`` and ``N<=8``. 
 
-You can run vLLM on MI308X (gfx942), for example, using model weights for llama2 (7b, 13b, 70b), llama3 models (8b, 70b), Qwen2 (7b, 72b) , Mixtral-8x7b, Mixtral-8x22b , etc. Please note that llama2-70b and llama3-70b models can fit on one single GPU, and llama3.1 405b model can fit on one single node with 8 MI308x GPUs.
+You can run vLLM on MI300X (gfx942), for example, using model weights for llama2 (7b, 13b, 70b), llama3 models (8b, 70b), Qwen2 (7b, 72b) , Mixtral-8x7b, Mixtral-8x22b , etc. 
+Please note that llama2-70b and llama3-70b models can fit on one single GPU, and llama3.1 405b model can fit on one single node with 8 MI300x GPUs.
 
 
 .. _mi300x-vllm-gpu-memory-utilization:
@@ -701,7 +701,7 @@ Check the steps to quantize the models with ``awq`` method:
 FP8 Quantization
 ^^^^^^^^^^^^^^^^^
 
-vLLM supports FP8 (8-bit floating point) weight and activation quantization using hardware acceleration on AMD MI308x. 
+vLLM supports FP8 (8-bit floating point) weight and activation quantization using hardware acceleration on AMD MI300x. 
 Quantization of models with FP8 allows for a 2x reduction in model memory requirements and up to a 1.6x improvement 
 in throughput with minimal impact on accuracy.
 
