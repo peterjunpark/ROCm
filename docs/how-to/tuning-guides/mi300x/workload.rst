@@ -373,7 +373,7 @@ You don't need to modify your code, and you can conveniently run the auto-tuning
 
       PYTORCH_TUNABLEOP_ENABLED=1 PYTORCH_TUNABLEOP_TUNING=0 your_vllm_script.sh
 
-Please check :ref:`_mi300x-tunableop` for details.
+Please check :ref:`PyTorch TunableOp <mi300x-tunableop>` for details.
 
 
 Performance tuning based on vLLM Engine configurations
@@ -399,8 +399,6 @@ You can tune the following vLLM parameters to achieve optimal performance.
 *  ``max_num_seqs``
 
 *  ``num_scheduler_steps``
-
-*  ``enforce_eager``
 
 *  ``max_model_len``
 
@@ -431,7 +429,7 @@ in terms of ``TPS`` (Tokens per second).
 The benchmarking script is benchmarks/benchmark_throughput.py inside vLLM repository.
 There are two ways to run throughput benchmarking:
 
-*  Use the real-world data like HuggingFace dataset ``ShareGPT_V3_unfiltered_cleaned_split.json``
+*  Use the real-world data like Huggingface dataset ``ShareGPT_V3_unfiltered_cleaned_split.json``
    The dataset includes real-world conversational data, making it a good representation of typical
    use cases for language models. It can be downloaded as follows:
 
@@ -456,7 +454,7 @@ The general guideline is to maximize per-node throughput by running as many vLLM
 However, too many instances can result in no memory for
 KV-cache.
 
-The AMD Instinct™ “MI308X” GPU is equipped with an industry-leading 192GB of HBM3 memory capacity and bandwidth. 
+The AMD Instinct™ “MI300X” GPU is equipped with an industry-leading 192GB of HBM3 memory capacity and bandwidth. 
 
 For models that can be fit in one GPU, to maximize the accumulated throughput, you can run as many as eight instances 
 vLLM simultaneously on one MI300X node (with eight GPUs). To do so, use the GPU isolation environment 
@@ -483,7 +481,7 @@ Please note that llama2-70b and llama3-70b models can fit on one single GPU, and
 
 .. _mi300x-vllm-gpu-memory-utilization:
 
-Config ``gpu-memory-utilization`` parameter
+Config ``gpu_memory_utilization`` parameter
 --------------------------------------------
 
 There are two ways to increase throughput by configuring ``gpu-memory-utilization`` parameter.
@@ -561,7 +559,6 @@ each server, for example:
    /path/to/model --dtype float16 -tp 2 --port 8001 &
 
 
-
 Config ``max-num-seqs`` parameter
 -----------------------------------
 
@@ -593,7 +590,7 @@ Use float16 (``--dtype float16``) for better performance.
 Multi-Step Scheduling
 ----------------------
 
-Set num_scheduler_steps for multi-step scheduling can increase performance. Set it between 10 to 15 (``--num-scheduler-steps 10``). 
+Set ``num-scheduler-steps`` for multi-step scheduling can increase performance. Set it between 10 to 15 (``--num-scheduler-steps 10``). 
 
 Distributed executor backend
 ----------------------------
@@ -601,7 +598,7 @@ Distributed executor backend
 The vLLM supports two modes of distributed executor backend: ``ray`` and ``mp``. When using ROCm vLLM fork, we recommend to use ``mp`` 
 backend (``--distributed_executor_backend mp``)
 
-Graph mode ``max_seq_len_to_capture``
+Graph mode ``max-seq-len-to-capture``
 -------------------------------------
 
 Maximum sequence length covered by CUDA graphs. In the default mode (where ``enforce_eager`` is ``False``), When a sequence has context length
@@ -648,69 +645,39 @@ Quantization support
 ---------------------
 
 Quantization reduces the precision of the model’s weights and activations, which significantly decreases the memory footprint.
-``AWQ`` and ``fp8(w8a8)`` quantization are supported for ROCm.
+``fp8(w8a8)`` and ``AWQ`` quantization are supported for ROCm.
 
-``AWQ`` quantization
-^^^^^^^^^^^^^^^^^^^^
-
-You can quantize your own models by installing AutoAWQ or picking one of the 400+ models on HuggingFace. However, 
-please note that AWQ support in vLLM is under-optimized at the moment.
-
-To enable vLLM to run on ``awq`` quantized models, using --quantization parameter with ``awq`` (``--quantization awq``).
-
-Check the steps to quantize the models with ``awq`` method:
-
-- Install ``autoawq```
-
-.. code-block:: python
-
-   pip install autoawq
-  
--  Quantize the model:
-
-.. code-block:: python
-
-   from awq import AutoAWQForCausalLM
-   from transformers import AutoTokenizer
-
-   model_path = 'mistralai/Mistral-7B-Instruct-v0.2'
-   quant_path = 'mistral-instruct-v0.2-awq'
-   quant_config = { "zero_point": True, "q_group_size": 128, "w_bit": 4, "version": "GEMM" }
-
-   # Load model
-   model = AutoAWQForCausalLM.from_pretrained(
-      model_path, **{"low_cpu_mem_usage": True, "use_cache": False}
-   )
-   tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
-
-   # Quantize
-   model.quantize(tokenizer, quant_config=quant_config)
-
-   # Save quantized model
-   model.save_quantized(quant_path)
-   tokenizer.save_pretrained(quant_path)
-
-   print(f'Model is quantized and saved at "{quant_path}"')
-
-- Run the model with vLLM:
-
-.. code-block:: python
-
-   python examples/llm_engine_example.py --model [path to awq quantized model] --quantization awq
 
 FP8 Quantization
 ^^^^^^^^^^^^^^^^^
 
-vLLM supports FP8 (8-bit floating point) weight and activation quantization using hardware acceleration on AMD MI300x. 
+ROCm/vLLM supports FP8 (8-bit floating point) weight and activation quantization using hardware acceleration on AMD MI300x. 
 Quantization of models with FP8 allows for a 2x reduction in model memory requirements and up to a 1.6x improvement 
 in throughput with minimal impact on accuracy.
 
-To enable vLLM to run on fp8 quantized models, using ``--quantization`` parameter with value ``fp8`` (``--quantization fp8``)
+AMD has uploaded Quark Quantized OCP FP8 Models on Huggingface. For example:
 
-For steps to perform ``fp8`` quantization using ``llmcompressor``, 
-please check `vLLM documentation <https://docs.vllm.ai/en/latest/quantization/fp8.html/>`__.
+* `Llama-3.1-8B-Instruct-FP8-KV <https://huggingface.co/amd/Llama-3.1-8B-Instruct-FP8-KV>`__
+* `Llama-3.1-70B-Instruct-FP8-KV https://huggingface.co/amd/Llama-3.1-70B-Instruct-FP8-KV>`__
+* `Llama-3.1-405B-Instruct-FP8-KV https://huggingface.co/amd/Llama-3.1-405B-Instruct-FP8-KV>`__
+* `Mixtral-8x7B-Instruct-v0.1-FP8-KV https://huggingface.co/amd/Mixtral-8x7B-Instruct-v0.1-FP8-KV>`__
+* `Mixtral-8x22B-Instruct-v0.1-FP8-KV https://huggingface.co/amd/Mixtral-8x22B-Instruct-v0.1-FP8-KV>`__
 
-fp8 ``kv-cached-type``
+To enable vLLM benchmarking to run on fp8 quantized models, using ``--quantization`` parameter with value ``fp8`` (``--quantization fp8``)
+
+
+``AWQ`` quantization
+^^^^^^^^^^^^^^^^^^^^
+
+You can quantize your own models by installing AutoAWQ or picking one of the 400+ models on Huggingface. However, 
+please note that AWQ support in vLLM is under-optimized at the moment.
+
+To enable vLLM to run on ``awq`` quantized models, using --quantization parameter with ``awq`` (``--quantization awq``).
+
+Details can be found on the `vLLM auto-awq documentation <https://docs.vllm.ai/en/stable/quantization/auto_awq.html>`_.
+
+
+fp8 ``kv-cached-dtype``
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Using ``fp8 kv-cache dtype`` can improve performance as it reduces the size
@@ -740,34 +707,11 @@ for the ``llama2-70b`` model:
 
 .. code-block:: shell
 
-   python3 /vllm-workspace/benchmarks/benchmark_throughput.py --model
-   /path/to/llama2-70b-model --kv-cache-dtype "fp8"
-   --quantization-param-path
-   "/vllm-workspace/tests/fp8_kv/llama2-70b-fp8-kv/kv_cache_scales.json"
+   python3 /vllm-workspace/benchmarks/benchmark_throughput.py --model \
+   /path/to/llama2-70b-model --kv-cache-dtype "fp8" \
+   --quantization-param-path \
+   "/vllm-workspace/tests/fp8_kv/llama2-70b-fp8-kv/kv_cache_scales.json" \
    --input-len 512 --output-len 256 --num-prompts 500
-
-
-To take advantage of fp8 weight and activation quantization, as well as fp8 ``kv-cache-dtype``, 
-you can check below reference steps using quark for fp8 quantization along with fp8 ``kv-cache-dtype`` :
-
-- Get quark, install it. See `details  <https://quark.docs.amd.com/latest/quark_torch_main_gen.html>`__.
-- Quantize your model:
-
-   .. code-block:: shell
-
-      python3 quantize_quark.py --model_dir <llama2/3 checkpoint folder> --output_dir output_dir --quant_scheme w_fp8_a_fp8_o_fp8 --num_calib_data 128 --model_export vllm_adopted_safetensors --no_weight_matrix_merge
-
-- Get the KV scales:
-
-   .. code-block:: shell
-
-      python3 examples/fp8/extract_scales.py --quantized_model <output_dir from before> --tp_size 1 --output_dir <use model dir>
-
-- Run the script
-
-   .. code-block:: shell
-      
-      python benchmarks/benchmark_throughput.py --quantization fp8 --quantized-weights-path <output_dir you used before>llama.safetensors --kv-cache-dtype fp8_e4m3 --quantization-param-path <model dir>kv_cache_scales.json --model <model dir> -tp 1
 
 
 .. _mi300x-tunableop:
@@ -775,8 +719,7 @@ you can check below reference steps using quark for fp8 quantization along with 
 PyTorch TunableOp
 ==================
 
-
-`TunableOp <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`__
+`TunableOp <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`_
  is a feature used to obtain the optimal GPU kernel for a key PyTorch operations. At the moment, 
  TunableOp supports the tuning of dense matrix multiplies (GEMM, batched GEMM, GEMM and bias, and scaled GEMM). 
  This feature is useful for squeezing out the last bit of performance.  
@@ -803,7 +746,7 @@ The three most important environment variables are:
 ``PYTORCH_TUNABLEOP_VERBOSE``
    Default is ``0``. Set to ``1`` if you want to see TunableOp in action.
 
-The behavior TunableOp is controlled through environment variables with a complete list of environment variable 
+The behavior of TunableOp is controlled through environment variables with a complete list of environment variable 
 at  TunableOp `README <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`__,.  
 There are also Python APIs to set some of these environment variables, 
 but the preferred way to set the TunableOp tuning parameters is to use the environment variables.  
@@ -838,7 +781,7 @@ In the second step, we re-run the workload with optimal configuration using the 
 
   .. code-block:: shell
 
-     PYTORCH_TUNABLEOP_ENABLED=1  PYTORCH_TUNABLEOP_TUNING=0 your_script.sh
+     PYTORCH_TUNABLEOP_ENABLED=1 PYTORCH_TUNABLEOP_TUNING=0 your_script.sh
 
 Compare the wall-clock time from this second step to your reference wall-clock time with TunableOp completely disable (PYTORCH_TUNABLEOP_ENABLED=0).
 
@@ -876,7 +819,7 @@ Learn more about TorchInductor environment variables and usage in
    :doc:`rocBLAS <rocblas:index>` performs faster for a specific operation.
 
 .. note::
-   Experimental: TuneableOp (see Section :ref:`_mi300x-tunableop`) can also be used in combination 
+   Experimental: TuneableOp (see Section :ref:`PyTorch TunableOp <mi300x-tunableop>`) can also be used in combination 
    with ``TorchInductor`` ``max-autotune`` mode to boost ATen GEMM performance but will further increase tuning time 
    required. Environment variable ``TORCHINDUCTOR_AUTOTUNE_MULTI_DEVICE=1`` can be useful
    in single GPU workloads to distribute Triton GEMM tuning.
@@ -990,7 +933,7 @@ GEMM (general matrix multiplication)
 
 GEMMs (General Matrix Multiplications) are a fundamental building block for many operations in neural networks. 
 GEMM is defined as ``C = αAB + βC`` where A is an ``MxK`` matrix input and B is ``KxN`` matrix input, 
-and C is ``MxN`` matrix input and is overwritten by the output.  α and β are scalar inputs. 
+and C is ``MxN`` matrix input and is overwritten by the output. α and β are scalar inputs. 
 hipBLASLt is a library that provides general matrix-matrix operations with a flexible API 
 and extends functionalities beyond a traditional BLAS library.
 
@@ -1220,9 +1163,9 @@ Step 2: Benchmark Common Parameters:
 Benchmarking common parameters determines parameters which are universally preferable to their alternatives 
 regardless of other parameters. To benchmark common parameters:
 (a) User specifies parameters and values to benchmark.
-(b) Tensile benchmarks all parameter combinations for a user-specified problem size.
-(c) Tensile selects the fastest parameter combination which is now labeled determined and will subsequently be used.
-In practice, this parameters isn’t used, since globally preferred parameters are set as defaults in Tensile and don’t need to be re-measured.
+(b) Tensile benchmarks all parameter combinations for a user-specified problem size.
+(c) Tensile selects the fastest parameter combination which is now labeled determined and will subsequently be used.
+In practice, this parameters is not used, since globally preferred parameters are set as defaults in Tensile and do not need to be re-measured.
 
 Step 3: Fork Parameters:
 
@@ -1262,7 +1205,6 @@ measured sizes. Exact sizes cause a single problem size to be measured, and the 
 library is guaranteed to choose the fastest kernel for that size. This final benchmarking
 generates the data that is subsequently analyzed for creating the mapping of problem size
 to optimal kernel.
-
 
 Update logic YAML files
 ------------------------

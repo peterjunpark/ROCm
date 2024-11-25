@@ -158,7 +158,7 @@ HWS
 Haswell
 Higgs
 Hyperparameters
-HuggingFace
+Huggingface
 ICV
 IDE
 IDEs
