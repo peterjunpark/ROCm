@@ -655,13 +655,13 @@ ROCm/vLLM supports FP8 (8-bit floating point) weight and activation quantization
 Quantization of models with FP8 allows for a 2x reduction in model memory requirements and up to a 1.6x improvement 
 in throughput with minimal impact on accuracy.
 
-AMD has uploaded Quark Quantized OCP FP8 Models on Huggingface. For example:
+AMD has uploaded a bunch of Quark Quantized OCP FP8 Models on Huggingface. For example:
 
 * `Llama-3.1-8B-Instruct-FP8-KV <https://huggingface.co/amd/Llama-3.1-8B-Instruct-FP8-KV>`__
 * `Llama-3.1-70B-Instruct-FP8-KV https://huggingface.co/amd/Llama-3.1-70B-Instruct-FP8-KV>`__
-* `Llama-3.1-405B-Instruct-FP8-KV https://huggingface.co/amd/Llama-3.1-405B-Instruct-FP8-KV>`__
-* `Mixtral-8x7B-Instruct-v0.1-FP8-KV https://huggingface.co/amd/Mixtral-8x7B-Instruct-v0.1-FP8-KV>`__
-* `Mixtral-8x22B-Instruct-v0.1-FP8-KV https://huggingface.co/amd/Mixtral-8x22B-Instruct-v0.1-FP8-KV>`__
+* `Llama-3.1-405B-Instruct-FP8-KV <https://huggingface.co/amd/Llama-3.1-405B-Instruct-FP8-KV>`__
+* `Mixtral-8x7B-Instruct-v0.1-FP8-KV <https://huggingface.co/amd/Mixtral-8x7B-Instruct-v0.1-FP8-KV>`__
+* `Mixtral-8x22B-Instruct-v0.1-FP8-KV <https://huggingface.co/amd/Mixtral-8x22B-Instruct-v0.1-FP8-KV>`__
 
 To enable vLLM benchmarking to run on fp8 quantized models, using ``--quantization`` parameter with value ``fp8`` (``--quantization fp8``)
 
@@ -1025,7 +1025,7 @@ folder ``1_LogicYaml`` are logic ones. These YAML files are just like those gene
 
 The tuning tool is a two-step tool. It first runs the benchmark, then it creates the equality yaml for the user. Note that this config yaml is different from the config yaml used in TensileLite.
 
-* **Bench**
+* **Benchmarking**
 
    The first step is to run the benchmark, ``find_exact.py`` will run the benchmark with ``hipblaslt-bench``.
 
@@ -1054,18 +1054,18 @@ The tuning tool is a two-step tool. It first runs the benchmark, then it creates
       }, "ProblemSizes": []}
       defaultCreateLogicOptions = {}  # Currently unused
 
-* **Test Config**
+* ``TestConfig``
    1. ``ColdIter``: This is number the warm-up iterations before starting the kernel benchmark.
    2. ``Iter``: This is the number of iterations in kernel benchmarking
    3. ``AlgoMethod``: We recommended to keep this unchanged because method "all" returns all the available solutions for the problem type.
    4. ``ApiMethod``: We have c, mix, and cpp. Doesn't affect the result much.
    5. ``RotatingBuffer``: This is a size in the unit of MB. Recommended to set the value equal to the size of the cache of the card to avoid the kernel fetching data from the cache.
    
-* **Tuning Parameters**
+* ``TuningParameters``
    ``SplitK``: Divide ``K`` into ``N`` portions. Not every solution supports ``SplitK``. 
    The solution will be skipped if not supported.
 
-* **``CreateLogic``**
+* ``CreateLogic``
    Currently no control parameters
 
 hipBLASLt backend assembly generator tuning
@@ -1075,8 +1075,6 @@ hipBLASLt backend assembly generator tuning
 `hipBLASLt's GitHub repository <https://github.com/ROCm/hipBLASLt/tree/develop/tensilelite>`_,
 named TensileLite. TensileLite is used to tune the backend assembly generator to
 achieve optimal performance. Here’s how to tune hipBLASLt using TensileLite:
-
-**How to tune hipBLASLt's backend ``asm`` generator?**
 
 .. code-block:: shell
 
