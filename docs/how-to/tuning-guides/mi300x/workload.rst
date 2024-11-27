@@ -658,7 +658,7 @@ in throughput with minimal impact on accuracy.
 AMD has uploaded a bunch of Quark Quantized OCP FP8 Models on Huggingface. For example:
 
 * `Llama-3.1-8B-Instruct-FP8-KV <https://huggingface.co/amd/Llama-3.1-8B-Instruct-FP8-KV>`__
-* `Llama-3.1-70B-Instruct-FP8-KV https://huggingface.co/amd/Llama-3.1-70B-Instruct-FP8-KV>`__
+* `Llama-3.1-70B-Instruct-FP8-KV <https://huggingface.co/amd/Llama-3.1-70B-Instruct-FP8-KV>`__
 * `Llama-3.1-405B-Instruct-FP8-KV <https://huggingface.co/amd/Llama-3.1-405B-Instruct-FP8-KV>`__
 * `Mixtral-8x7B-Instruct-v0.1-FP8-KV <https://huggingface.co/amd/Mixtral-8x7B-Instruct-v0.1-FP8-KV>`__
 * `Mixtral-8x22B-Instruct-v0.1-FP8-KV <https://huggingface.co/amd/Mixtral-8x22B-Instruct-v0.1-FP8-KV>`__
@@ -672,7 +672,7 @@ To enable vLLM benchmarking to run on fp8 quantized models, using ``--quantizati
 You can quantize your own models by installing AutoAWQ or picking one of the 400+ models on Huggingface. However, 
 please note that AWQ support in vLLM is under-optimized at the moment.
 
-To enable vLLM to run on ``awq`` quantized models, using --quantization parameter with ``awq`` (``--quantization awq``).
+To enable vLLM to run on ``awq`` quantized models, using ``--quantization`` parameter with ``awq`` (``--quantization awq``).
 
 Details can be found on the `vLLM auto-awq documentation <https://docs.vllm.ai/en/stable/quantization/auto_awq.html>`_.
 
@@ -720,20 +720,18 @@ PyTorch TunableOp
 ==================
 
 `TunableOp <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`_
- is a feature used to obtain the optimal GPU kernel for a key PyTorch operations. At the moment, 
- TunableOp supports the tuning of dense matrix multiplies (GEMM, batched GEMM, GEMM and bias, and scaled GEMM). 
- This feature is useful for squeezing out the last bit of performance.  
- In short, it will try up to thousands of matrix multiply algorithms that are available in rocBLAS and hipBLASLt.  
- A caveat is that as the math libraries improve over time, there is a less benefit to using TunableOp,
- and there is also no guarantee that the workload being tuned will be able to outperform the default GEMM algorithm in hipBLASLt.
+is a feature used to obtain the optimal GPU kernel for a key PyTorch operations. At the moment,
+TunableOp supports the tuning of dense matrix multiplies (GEMM, batched GEMM, GEMM and bias, and scaled GEMM).
+This feature is useful for squeezing out the last bit of performance.
+In short, it will try up to thousands of matrix multiply algorithms that are available in rocBLAS and hipBLASLt.
+A caveat is that as the math libraries improve over time, there is a less benefit to using TunableOp,
+and there is also no guarantee that the workload being tuned will be able to outperform the default GEMM algorithm in hipBLASLt.
 
 Some additional references for PyTorch TunableOp include `ROCm blog <https://rocm.blogs.amd.com/artificial-intelligence/pytorch-tunableop/README.html>`__, 
 TunableOp `README <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`__, and 
 `llm tuning <https://rocm.docs.amd.com/en/latest/how-to/llm-fine-tuning-optimization/model-acceleration-libraries.html#fine-tuning-llms-pytorch-tunableop>`__.
 
 The three most important environment variables for controlling TunableOp are:
-
-The three most important environment variables are:
 
 ``PYTORCH_TUNABLEOP_ENABLED``
    Default is ``0``. Set to ``1`` to enable. This is the main on/off switch for
@@ -746,9 +744,9 @@ The three most important environment variables are:
 ``PYTORCH_TUNABLEOP_VERBOSE``
    Default is ``0``. Set to ``1`` if you want to see TunableOp in action.
 
-The behavior of TunableOp is controlled through environment variables with a complete list of environment variable 
-at  TunableOp `README <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`__,.  
-There are also Python APIs to set some of these environment variables, 
+For the complete list of environment variables, please refer to the
+TunableOp `README <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md>`__.
+There are also Python APIs to set some of these environment variables,
 but the preferred way to set the TunableOp tuning parameters is to use the environment variables.  
 
 Workflow
@@ -796,10 +794,9 @@ returning your workload when a new version of a math library becomes available.
 In this scenario, it might be inconvenient to re-run the workload and perform tuning. 
 Another way to perform this tuning is to collect the GEMMs from a workload in a collection pass and 
 then tuning these GEMMs in separate tuning pass without running the original workload. 
-This can have a tremendous amount of savings with respect to compute resources for particular time-consuming workloads. 
-Offline tuning is a new feature and supports single GPU tuning only. The description of the workflow for this feature is available here: 
-Offline Tuning. As of November 2024, there is a PR in progress to support multi-GPU offline tuning.
-A user-facing AMD blog will also follow.
+This can have a tremendous amount of savings with respect to compute resources for particular time-consuming workloads.
+The description of the workflow for this feature is available
+`Offline Tuning <https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/cuda/tunable/README.md#offline-tuning>`__.
 
 
 .. _mi300x-torchinductor-tuning:
