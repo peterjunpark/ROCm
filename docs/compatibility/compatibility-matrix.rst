@@ -1,14 +1,16 @@
 .. meta::
-    :description: ROCm compatibility matrix
-    :keywords: GPU, architecture, hardware, compatibility, system, requirements, components, libraries
+   :description: ROCm compatibility matrix
+   :keywords: GPU, architecture, arch, hardware, hw, system, components, libraries, libs, sdk, software, tools, tooling, version
 
-**************************************************************************************
+********************
 Compatibility matrix
-**************************************************************************************
+********************
 
-Use this matrix to view the ROCm compatibility and system requirements across successive major and minor releases.
+Use this matrix to view ROCm compatibility and system requirements. This mockup uses fake data.
+Styling will be updated.
 
-You can also refer to the :ref:`past versions of ROCm compatibility matrix<past-rocm-compatibility-matrix>`.
+.. raw:: html
+   :file: ./compatibility-matrix.html
 
 Accelerators and GPUs listed in the following table support compute workloads (no display
 information or graphics). If you’re using ROCm with AMD Radeon or Radeon Pro GPUs for graphics

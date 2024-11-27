@@ -13,7 +13,9 @@ shutil.copy2("../RELEASE.md", "./about/release-notes.md")
 shutil.copy2("../CHANGELOG.md", "./release/changelog.md")
 
 os.system("mkdir -p ../_readthedocs/html/downloads")
-os.system("cp compatibility/compatibility-matrix-historical-6.0.csv ../_readthedocs/html/downloads/compatibility-matrix-historical-6.0.csv")
+os.system(
+    "cp compatibility/compatibility-matrix-historical-6.0.csv ../_readthedocs/html/downloads/compatibility-matrix-historical-6.0.csv"
+)
 
 latex_engine = "xelatex"
 latex_elements = {
@@ -112,15 +114,21 @@ if os.environ.get("READTHEDOCS", "") == "True":
     html_context["READTHEDOCS"] = True
 
 html_theme = "rocm_docs_theme"
-html_theme_options = {"flavor": "rocm-docs-home"}
+html_theme_options = {
+    "flavor": "rocm-docs-home",
+    "link_main_doc": False,
+    "secondary_sidebar_items": {
+        "*": ["page-toc"],
+        "compatibility/compatibility-matrix": ["compatibility-matrix-secondary-sidebar"],
+    }
+}
 
-html_static_path = ["sphinx/static/css", "extension/how-to/rocm-for-ai/inference"]
-html_css_files = ["rocm_custom.css", "rocm_rn.css", "vllm-benchmark.css"]
-html_js_files = ["vllm-benchmark.js"]
+html_static_path = ["sphinx/static", "extension/how-to/rocm-for-ai/inference"]
+html_css_files = ["css/rocm_custom.css", "css/rocm_rn.css", "css/compatibility-matrix.css", "vllm-benchmark.css"]
+html_js_files = ["js/compatibility-matrix.js", "vllm-benchmark.js"]
+templates_path = ["compatibility/templates"]
 
 html_title = "ROCm Documentation"
-
-html_theme_options = {"link_main_doc": False}
 
 redirects = {"reference/openmp/openmp": "../../about/compatibility/openmp.html"}
 

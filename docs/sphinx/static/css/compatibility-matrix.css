@@ -1,0 +1,116 @@
+/* ------------------ Compatibility options grid ------------------ */
+div#compat-params-selector.container-fluid {
+  padding: 0 0 1rem 0;
+}
+
+div.compat-param {
+  cursor: pointer;
+}
+
+div.compat-param[data-param-state="selected"] {
+  background-color: skyblue;
+}
+
+div.compat-param[data-param-state="latest-version"] {
+  background-color: skyblue;
+}
+
+div.compat-param[data-param-state="disabled"] {
+  background-color: gainsboro;
+  text-decoration: line-through;
+  cursor: auto;
+}
+
+div.compat-param:not([data-param-state="disabled"]):hover {
+  background-color: cornflowerblue;
+}
+
+.compat-param-head {
+  background-color: rgb(243, 244, 245);
+  padding: 0.15rem 0.15rem 0.15rem 0.67rem;
+  margin: 2px;
+  border-right: solid 2px rgb(23, 109, 232);
+  font-weight: 600;
+}
+
+.compat-param {
+  padding: 2px;
+  margin: 2px;
+  border: solid 1px black;
+}
+
+/* ---------------------- Compatibility table --------------------- */
+table#compat-matrix {
+  overflow-x: auto;
+
+  /* Make the header stick to the top of the viewport. */
+  thead>tr {
+    position: sticky;
+    top: 3rem;
+    z-index: 2;
+  }
+}
+
+/* Compatibility matrix table */
+table#compat-matrix {
+  --compat-primary-color: var(--pst-color-primary);
+  --compat-border-radius: 2px;
+
+  /* Table columns */
+  colgroup {
+    col#compat-matrix-stub-col {
+      width: 19.5%;
+    }
+  }
+
+  /* Table section headings */
+  tbody tr:first-of-type th h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0.5rem 0 0.25rem 0;
+  }
+
+  tbody tr:not(:first-of-type):not([colspan]) th {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* Table section filter row */
+  div.compat-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* Filter button */
+    div.dropdown>button {
+      border-radius: var(--compat-border-radius);
+    }
+
+    /* Filter dropdown menu */
+    div.dropdown>ul.dropdown-menu {
+      border-radius: var(--compat-border-radius);
+    }
+  }
+
+  tbody tr td ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      /* border-bottom: 1.5px solid var(--compat-primary-color); */
+      display: flex;
+      /* align-items: center; */
+      gap: 0.5rem;
+
+      span {
+        font-size: 0.8rem;
+        border-radius: var(--compat-border-radius)
+      }
+    }
+  }
+
+  /* Table section dividers */
+  tbody tr:last-of-type {
+    border-bottom: 2px solid var(--compat-primary-color);
+  }
+}

@@ -1,0 +1,185 @@
+ROCm:
+  Version: 6.3.2
+  Operating systems and kernels:
+    Linux:
+      Ubuntu 24:
+        - 24.04.2:
+            kernel: [6.8 GA, 6.11 HWE]
+            glibc: []
+      Ubuntu 22:
+        - 22.04.5:
+            kernel: [5.15 GA, 6.8 HWE]
+            glibc: []
+      RHEL 9:
+        - 9.5:
+            kernel: [5.14.0]
+            glibc: []
+        - 9.4:
+            kernel: [5.14.0]
+            glibc: []
+      RHEL 8:
+        - 8.10:
+            kernel: [4.18.0]
+            glibc: []
+        - 8.9:
+            kernel: [4.18.0]
+            glibc: []
+      SLES 15:
+        - 15 SP6:
+            kernel: [6.4.0]
+            glibc: []
+        - 15 SP5:
+            kernel: [5.14.21]
+            glibc: []
+      Oracle Linux:
+        - 8.10:
+            kernel: [5.15.0]
+            glibc: []
+      Debian:
+        - 12:
+            kernel: [6.1]
+            glibc: []
+      Azure Linux:
+        - 3.0:
+            kernel: [6.6]
+            glibc: []
+    Windows:
+      - 10: 22H2 (GA)
+      - 11: 22H2 (GA)
+      - Server 2022: 22H2 (GA)
+  GPUs:
+    Instinct:
+      - MI325X:
+          uarch: CDNA3
+          amdgpu: gfx942
+      - MI300X:
+          uarch: CDNA3
+          amdgpu: gfx942
+      - MI300A:
+          uarch: CDNA3
+          amdgpu: gfx942
+      - MI250X:
+          uarch: CDNA2
+          amdgpu: gfx90a
+      - MI250:
+          uarch: CDNA2
+          amdgpu: gfx90a
+      - MI210:
+          uarch: CDNA2
+          amdgpu: gfx90a
+      - MI100:
+          uarch: CDNA
+          amdgpu: gfx908
+    Radeon PRO:
+      - V710:
+          uarch: RDNA3
+          amdgpu: gfx1101
+      - W7900 Dual Slot:
+          uarch: RDNA3
+          amdgpu: gfx1100
+      - W7900:
+          uarch: RDNA3
+          amdgpu: gfx1100
+      - W7800:
+          uarch: RDNA3
+          amdgpu: gfx1100
+      - W6800:
+          uarch: RDNA2
+          amdgpu: gfx1030
+      - V620:
+          uarch: RDNA2
+          amdgpu: gfx1030
+    Radeon:
+      - RX 7900 XTX:
+          uarch: RDNA3
+          amdgpu: gfx1100
+      - RX 7900 XT:
+          uarch: RDNA3
+          amdgpu: gfx1100
+      - RX 7900 GRE:
+          uarch: RDNA3
+          amdgpu: gfx1100
+  Framework support:
+    PyTorch: [2.4, 2.3, 2.2, 2.1, 2.0, 1.13]
+    TensorFlow: [2.16.1, 2.15.1, 2.14.1]
+    JAX: [0.4.26]
+    ONNX Runtime: [1.17.3]
+  Third-party communications:
+    UCC: ">= 1.3.0"
+    UCX: ">= 1.15.0"
+  Third-party algorithms:
+    Thrust: 2.3.2
+    CUB: 2.3.2
+  KFD and user-space:
+    Tested user space versions: [6.3.x, 6.2.x, 6.1.x]
+  ROCm components:
+    Libraries:
+      Machine learning and computer vision:
+        Composable kernel: 1.1.0
+        MIGraphX: 2.11.0
+        MIOpen: 3.3.0
+        MIVisionX: 3.1.0
+        rocAL: 2.1.0
+        rocDecode: 0.8.0
+        rocJPEG: 0.6.0
+        rocPyDecode: 0.2.0
+        RPP: 1.9.1
+      Communication:
+        RCCL: 2.21.5
+      Math:
+        half: 1.12.0
+        hipBLAS: 2.3.0
+        hipBLASLt: 0.10.0
+        hipFFT: 1.0.17
+        hipfort: 0.5.1
+        hipRAND: 2.11.1
+        hipSOLVER: 2.3.0
+        hipSPARSE: 3.1.2
+        hipSPARSELt: 0.2.2
+        rocALUTION: 3.2.1
+        rocBLAS: 4.3.0
+        rocFFT: 1.0.31
+        rocRAND: 3.2.0
+        rocSOLVER: 3.27.0
+        rocSPARSE: 3.3.0
+        rocWMMA: 1.6.0
+        Tensile: 4.42.0
+      Primitives:
+        hipCUB: 3.3.0
+        hipTensor: 1.4.0
+        rocPRIM: 3.3.0
+        rocThrust: 3.3.0
+      Support:
+        hipother: 6.3.42134
+        rocm-core: 6.3.2
+    Tools:
+      System management:
+        AMD SMI: 24.7.1
+        RDC: 0.3.0
+        rocminfo: 1.0.0
+        ROCm SMI: 7.4.0
+        ROCm Validation Suite: 1.1.0
+      Performance:
+        ROCm Bandwidth Test: 1.4.0
+        ROCm Compute Profiler: 3.0.0
+        ROCm Systems Profiler: 0.1.1
+        ROCProfiler: 2.0.60302
+        ROCprofiler-SDK: 0.5.0
+        ROCTracer: 4.1.60302
+      Development:
+        HIPIFY: 18.0.0.25012
+        ROCdbgapi: 0.77.0
+        ROCgdb: 15.2.0
+        ROCm CMake: 0.14.0
+        rocprofiler-register: 0.4.0
+        ROCr Debug Agent: 2.0.3
+    Compilers:
+      hipCC: 1.1.1
+      flang: 18.0.0.25012
+      llvm-project: 18.0.0.25012
+      OpenMP: 18.0.0.25012
+    Runtimes:
+      AMD CLR: 6.3.42134
+      HIP: 6.3.42134
+      OpenCL Runtime: 2.0.0
+      ROCr Runtime: 1.14.0
