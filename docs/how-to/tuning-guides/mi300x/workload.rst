@@ -468,9 +468,8 @@ The accumulated throughput of running ``N`` instances of vLLM is generally much 
 that of running one instance of vLLM using ``N`` GPUs at the same time, 
 i.e., to specify tensor_parallel_size as ``N`` (or with ``-tp N`` ) where ``N>1`` and ``N<=8``. 
 
-You can run vLLM on MI300X (gfx942), for example, using model weights for llama2 (7b, 13b, 70b), llama3 models (8b, 70b), Qwen2 (7b, 72b) , Mixtral-8x7b, Mixtral-8x22b , etc. 
-Please note that llama2-70b and llama3-70b models can fit on one single GPU, and llama3.1 405b model can fit on one single node with 8 MI300x GPUs.
-
+vLLM on MI300X accelerators can run a variety of model weights, including Llama 2 (7b, 13b, 70b), Llama 3 (8b, 70b), Qwen2 (7b, 72b), Mixtral-8x7b, Mixtral-8x22b, and so on.
+Notable configurations include Llama2-70b and Llama3-70b models on a single MI300X GPU, and the Llama3.1 405b model can fit on one single node with 8 MI300X GPUs.
 
 .. _mi300x-vllm-gpu-memory-utilization:
 
@@ -881,8 +880,7 @@ The Composable Kernel library python wrapper should be pip-installed with ``pip 
 This wrapper library is responsible for constructing a list of kernel instances available in the Composable Kernel library,
 as well as storing the kernel instance cpp includes in a known location (so clang can look into these paths when compiling the ``gemm`` auto-tune candidates)
 
-
-* Supported ops, at the moment:
+The following operations are currently supported by the Composable Kernel backend:
   * ``matmul`` (with ``float16`` and ``bfloat16`` inputs, row-major X, row-major or column-major W)
   * ``addmm`` (with ``float16`` or ``bfloat16`` X, W and Bias; row-major X, row-major or column-major W; Bias can be broadcast either along row-major or column-major dimension)
   * ``scaled_mm`` (``float8_e4m3fnuz`` inputs, ``bfloat16`` output)
