@@ -757,7 +757,7 @@ The first step, is the tuning pass:
   This pass can be very slow. The output will be ``tunableop_results.csv`` file that contains a list of GEMMs encountered 
   and the optimal GPU kernel that was identified. 
   
-  Mult-GPU tuning is supported and there will be one ``tunableop_results.csv``
+  Multi-GPU tuning is supported and there will be one ``tunableop_results.csv``
   file per GPU produced. The tuning algorithm will run on each GPU, but each tuning is sandboxed on each GPU. 
   There is no communication between GPUs during the tuning process. For a data parallel algorithm, where GEMM configurations
   on different GPUs are likely the same, this leads to redundant work among the GPUs. In this case, it would be sufficient to run 
