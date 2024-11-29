@@ -334,8 +334,8 @@ developer blog.
 vLLM performance optimization
 =============================
 
-vLLM is a high-throughput and memory efficient inference and serving engine for large language models, gaining traction for 
-its performance and easy of use in the AI community.
+vLLM is a high-throughput and memory efficient inference and serving engine for large language models that has gained traction in the AI community for 
+its performance and ease of use.
 
 Performance environment variables
 ---------------------------------
@@ -358,8 +358,8 @@ achieve optimal request latency and throughput performance.
 Auto-tuning using PyTorch TunableOp
 ------------------------------------
 
-Since vLLM is based on PyTorch framework, "PyTorch TunableOp" can be used for auto-tuning. 
-You don't need to modify your code, and you can conveniently run the auto-tuning in two steps:
+Since vLLM is based on the PyTorch framework, PyTorch TunableOp can be used for auto-tuning. 
+You can run auto-tuning with TunableOp in two simple steps without modifying your code:
 
 * Enable TunableOp and tuning. Optionally enable verbose mode:
 
@@ -373,7 +373,7 @@ You don't need to modify your code, and you can conveniently run the auto-tuning
 
       PYTORCH_TUNABLEOP_ENABLED=1 PYTORCH_TUNABLEOP_TUNING=0 your_vllm_script.sh
 
-Please check :ref:`PyTorch TunableOp <mi300x-tunableop>` for details.
+See :ref:`PyTorch TunableOp <mi300x-tunableop>` for details.
 
 
 Performance tuning based on vLLM Engine configurations
@@ -420,30 +420,24 @@ see :doc:`/how-to/performance-validation/mi300x/vllm-benchmark`.
 
 .. _mi300x-vllm-throughput-measurement:
 
-Evaluating Performance by throughput measurement
+Evaluating performance by throughput measurement
 -------------------------------------------------
 
-For LLM inference workloads, in this tuning guide, we assess performance by measuring throughput
-in terms of ``TPS`` (Tokens per second).
+In this tuning guide, performance for LLM inference workloads is evaluated by measuring throughput in terms of ``TPS`` (tokens per second).
 
-The benchmarking script is benchmarks/benchmark_throughput.py inside vLLM repository.
-There are two ways to run throughput benchmarking:
+The benchmarking script is located at ``benchmarks/benchmark_throughput.py`` in the `vLLM repository <https://github.com/ROCm/vllm/blob/main/benchmarks/benchmark_throughput.py>`_. You can measure throughput using one of the following methods:
 
-*  Use the real-world data like Huggingface dataset ``ShareGPT_V3_unfiltered_cleaned_split.json``
-   The dataset includes real-world conversational data, making it a good representation of typical
-   use cases for language models. It can be downloaded as follows:
+*  For realistic performance evaluation, you can use datasets like Hugging Face's ``ShareGPT_V3_unfiltered_cleaned_split.json``.
+   This dataset includes real-world conversational data, making it a good representation of typical
+   use cases for language models. Download it as follows:
 
    .. code-block:: shell
 
       wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
 
-*  Use synthetic data by setting specific input and output token lengths for standardized benchmarking
-   Fixed lengths synthetic prompts ensure that each benchmark run is consistent, making it
-   easier to compare results across different models or configurations. It can also simplify analysis by
-   using a controlled environment. 
+*  For standardized benchmarking, you can set fixed input and output token lengths. Synthetic prompts provide consistent benchmarking runs, making it easier to compare performance across different models or configurations. Additionally, a controlled environment simplifies analysis.
 
-By balancing the above two approaches, you can get a good understanding of model performance.
-
+By balancing real-world data and synthetic data approaches, you can get a good understanding of model performance in varied scenarios.
 
 .. _mi300x-vllm-single-node:
 
@@ -451,8 +445,7 @@ Maximizing vLLM instances on a single node
 ------------------------------------------
 
 The general guideline is to maximize per-node throughput by running as many vLLM instances as possible.
-However, too many instances can result in no memory for
-KV-cache.
+However, running too many instances might lead to insufficient memory for the KV-cache, which can affect performance.
 
 The AMD Instinct™ “MI300X” GPU is equipped with an industry-leading 192GB of HBM3 memory capacity and bandwidth. 
 
