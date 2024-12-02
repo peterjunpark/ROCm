@@ -878,15 +878,16 @@ from the Composable Kernel library during auto-tuning.
 
 The Composable Kernel library python wrapper should be pip-installed with ``pip install git+https://github.com/rocm/composable_kernel@develop``. 
 This wrapper library is responsible for constructing a list of kernel instances available in the Composable Kernel library,
-as well as storing the kernel instance cpp includes in a known location (so clang can look into these paths when compiling the ``gemm`` auto-tune candidates)
+as well as storing the kernel instance cpp includes in a known location (so clang can look into these paths when compiling the ``gemm`` auto-tune candidates).
 
-The following operations are currently supported by the Composable Kernel backend:
+* The following operations are currently supported by the Composable Kernel backend:
+
   * ``matmul`` (with ``float16`` and ``bfloat16`` inputs, row-major X, row-major or column-major W)
   * ``addmm`` (with ``float16`` or ``bfloat16`` X, W and Bias; row-major X, row-major or column-major W; Bias can be broadcast either along row-major or column-major dimension)
   * ``scaled_mm`` (``float8_e4m3fnuz`` inputs, ``bfloat16`` output)
   * ``conv2d`` (with ``float32``, ``float16`` or ``bfloat16`` inputs, channels-last weight layout)
 
-* For the working examples, please see test/inductor/test_ck_backend.py .
+* For the working examples, please see `test/inductor/test_ck_backend.py <https://github.com/pytorch/pytorch/blob/main/test/inductor/test_ck_backend.py>`__.
 
 * Compiling or build time can be configured by modifying ``torch._inductor.config`` to reduce the build time to avoid time-out.
 
@@ -895,11 +896,12 @@ The following operations are currently supported by the Composable Kernel backen
 
 * Setting environment variable ``PYTORCH_MIOPEN_SUGGEST_NHWC=1`` for convolution operations.
 
-Debugging and trouble shooting performance: 
+Debugging and troubleshooting performance:
 
 * Generate a standalone executable runner to debug or assess kernels' performance by setting environment variable
-  ``INDUCTOR_CK_BACKEND_GENERATE_TEST_RUNNER_CODE=1`` to facilitate debugging and profiling . By default, it will not.  
-* Enable debug by passing compilation flags (e.g, is_debug ) to clang when compiling the kernels in ``torch._inductor.config.rocm`` class.
+  ``INDUCTOR_CK_BACKEND_GENERATE_TEST_RUNNER_CODE=1`` to facilitate debugging and profiling. By default,
+  the CK backend will not build a standalone executable runner.
+* Enable debug by passing compilation flags (e.g, ``is_debug``) to clang when compiling the kernels in ``torch._inductor.config.rocm`` class.
 * The generated source files and other products of clang compilation are located in the torch inductor root directory (default: ``/tmp/torchinductor_root``)
 
 .. _mi300x-rocm-library-tuning:
@@ -986,7 +988,9 @@ Create a working folder for the auto-tuning tool. e.g. tuning
 
 1. Set the problem type/ test config/ tuning parameters... in the yaml. You can modify the template yaml inside ``hipblaslt/utilities``
 
-<Picture Here>
+.. figure:: ../../../data/how-to/tuning-guides/hipblaslt_yaml_template.png
+   :align: center
+   :alt: HipBLASLt auto-tuning yaml file template
 
 2. Execute the following command to start tuning
 
