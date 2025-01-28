@@ -288,6 +288,10 @@ Options
      - Llama 3.1 405B
 
    * -
+     - ``meta-llama/Meta-Llama-3.2-11B-Vision-Instruct``
+     - Llama 3.2 11B Vision
+
+   * -
      - ``meta-llama/Llama-2-7b-chat-hf``
      - Llama 2 7B
 
@@ -297,15 +301,15 @@ Options
 
    * -
      - ``mistralai/Mixtral-8x7B-Instruct-v0.1``
-     - Mixtral 8x7B
+     - Mixtral MoE 8x7B
 
    * -
      - ``mistralai/Mixtral-8x22B-Instruct-v0.1``
-     - Mixtral 8x22B
+     - Mixtral MoE 8x22B
 
    * -
      - ``mistralai/Mistral-7B-Instruct-v0.3``
-     - Mixtral 7B
+     - Mistral 7B
 
    * -
      - ``Qwen/Qwen2-7B-Instruct``
@@ -323,6 +327,22 @@ Options
      - ``core42/jais-30b-chat-v3``
      - JAIS 30B
 
+   * -
+     - ``databricks/dbrx-instruct``
+     - DBRX Instruct
+
+   * -
+     - ``google/gemma-2-27b``
+     - Gemma 2 27B
+
+   * -
+     - ``CohereForAI/c4ai-command-r-plus-08-2024``
+     - C4AI Command R+ 08-2024
+
+   * -
+     - ``deepseek-ai/deepseek-moe-16b-chat``
+     - DeepSeek MoE 16B
+
    * - ``$model_repo``
      - ``amd/Meta-Llama-3.1-8B-Instruct-FP8-KV``
      - Llama 3.1 8B
@@ -337,11 +357,23 @@ Options
 
    * -
      - ``amd/Mixtral-8x7B-Instruct-v0.1-FP8-KV``
-     - Mixtral 8x7B
+     - Mixtral MoE 8x7B
 
    * -
      - ``amd/Mixtral-8x22B-Instruct-v0.1-FP8-KV``
-     - Mixtral 8x22B
+     - Mixtral MoE 8x22B
+
+   * -
+     - ``amd/Mistral-7B-v0.1-FP8-KV``
+     - Mistral 7B
+
+   * -
+     - ``amd/dbrx-instruct-FP8-KV``
+     - DBRX Instruct
+
+   * -
+     - ``amd/c4ai-command-r-plus-FP8-KV``
+     - C4AI Command R+ 08-2024
 
    * - ``$num_gpu``
      - 1 or 8
@@ -430,6 +462,8 @@ Further reading
 - To learn how to fine-tune LLMs, see
   :doc:`Fine-tuning LLMs <../fine-tuning/index>`.
 
-- To compare with the previous version of the ROCm vLLM Docker image for performance validation, refer to
-  `LLM inference performance validation on AMD Instinct MI300X (ROCm 6.2.0) <https://rocm.docs.amd.com/en/docs-6.2.0/how-to/performance-validation/mi300x/vllm-benchmark.html>`_.
+- To compare with the previous version of the ROCm vLLM Docker image for
+  performance validation, refer to `LLM inference performance validation on AMD
+  Instinct MI300X (ROCm 6.3.0 documentation)
+  <https://rocm.docs.amd.com/en/docs-6.3.0/how-to/performance-validation/mi300x/vllm-benchmark.html>`_.
 
