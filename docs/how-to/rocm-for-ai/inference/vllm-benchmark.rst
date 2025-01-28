@@ -15,13 +15,11 @@ a prebuilt, optimized environment designed for validating large language model
 ROCm vLLM Docker image integrates vLLM and PyTorch tailored specifically for the
 MI300X accelerator and includes the following components:
 
-* `ROCm 6.2.1 <https://github.com/ROCm/ROCm>`_
+* `ROCm 6.3.1 <https://github.com/ROCm/ROCm>`_
 
-* `vLLM 0.6.4 <https://docs.vllm.ai/en/latest>`_
+* `vLLM 0.6.7 <https://docs.vllm.ai/en/latest>`_
 
-* `PyTorch 2.5.0 <https://github.com/pytorch/pytorch>`_
-
-* Tuning files (in CSV format)
+* `PyTorch 2.5.7 <https://github.com/pytorch/pytorch>`_
 
 With this Docker image, you can quickly validate the expected inference
 performance numbers on the MI300X accelerator. This topic also provides tips on
@@ -30,29 +28,39 @@ optimizing performance with popular AI models.
 .. hlist::
    :columns: 6
 
-   * Llama 3.1 8B
+   * `Llama 3.1 8B <https://huggingface.co/meta-llama/Llama-3.1-8B>`_
 
-   * Llama 3.1 70B
+   * `Llama 3.1 70B <https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct>`_
 
-   * Llama 3.1 405B
+   * `Llama 3.1 405B <https://huggingface.co/meta-llama/Llama-3.1-405B-Instruct>`_
 
-   * Llama 2 7B
+   * `Llama 3.2 11B Vision <https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct>`_
 
-   * Llama 2 70B
+   * `Llama 2 7B <https://huggingface.co/meta-llama/Llama-2-7b-chat-hf>`_
 
-   * Mixtral 8x7B
+   * `Llama 2 70B <https://huggingface.co/meta-llama/Llama-2-70b-chat-hf>`_
 
-   * Mixtral 8x22B
+   * `Mixtral MoE 8x7B <https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1>`_
 
-   * Mixtral 7B
+   * `Mixtral MoE 8x22B <https://huggingface.co/mistralai/Mixtral-8x22B-Instruct-v0.1>`_
 
-   * Qwen2 7B
+   * `Mixtral 7B <https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3>`_
 
-   * Qwen2 72B
+   * `Qwen2 7B <https://huggingface.co/Qwen/Qwen2-7B-Instruct>`_
 
-   * JAIS 13B
+   * `Qwen2 72B <https://huggingface.co/Qwen/Qwen2-72B-Instruct>`_
 
-   * JAIS 30B
+   * `JAIS 13B <https://huggingface.co/core42/jais-13b-chat>`_
+
+   * `JAIS 30B <https://huggingface.co/core42/jais-30b-chat-v3>`_
+
+   * `DBRX Instruct <https://huggingface.co/databricks/dbrx-instruct>`_
+
+   * `Gemma 2 27B <https://huggingface.co/google/gemma-2-27b>`_
+
+   * `C4AI Command R+ 08-2024 <https://huggingface.co/CohereForAI/c4ai-command-r-plus-08-2024>`_
+
+   * `DeepSeek MoE 16B <https://huggingface.co/deepseek-ai/deepseek-moe-16b-chat>`_
 
 .. _vllm-benchmark-vllm:
 
@@ -91,7 +99,7 @@ MI300X accelerator with the prebuilt vLLM Docker image.
 
    .. code-block:: shell
 
-      docker pull rocm/vllm:rocm6.2_mi300_ubuntu20.04_py3.9_vllm_0.6.4
+      docker pull rocm/vllm-dev:nightly_main_20250123
 
 Once setup is complete, you can choose between two options to reproduce the
 benchmark results:
@@ -136,11 +144,17 @@ Available models
 .. hlist::
    :columns: 3
 
+   * ``pyt_huggingface_gpt2``
+
+   * ``pyt_huggingface_bert``
+
    * ``pyt_vllm_llama-3.1-8b``
 
    * ``pyt_vllm_llama-3.1-70b``
 
    * ``pyt_vllm_llama-3.1-405b``
+
+   * ``pyt_vllm_llama-3.2-11b-vision-instruct``
 
    * ``pyt_vllm_llama-2-7b``
 
@@ -160,6 +174,14 @@ Available models
 
    * ``pyt_vllm_jais-30b``
 
+   * ``pyt_vllm_dbrx-instruct``
+
+   * ``pyt_vllm_gemma-2-27b``
+
+   * ``pyt_vllm_c4ai-command-r-plus-08-2024``
+
+   * ``pyt_vllm_deepseek-moe-16b-chat``
+
    * ``pyt_vllm_llama-3.1-8b_fp8``
 
    * ``pyt_vllm_llama-3.1-70b_fp8``
@@ -169,6 +191,12 @@ Available models
    * ``pyt_vllm_mixtral-8x7b_fp8``
 
    * ``pyt_vllm_mixtral-8x22b_fp8``
+
+   * ``pyt_vllm_mistral-7b_fp8``
+
+   * ``pyt_vllm_dbrx_fp8``
+
+   * ``pyt_vllm_command-r-plus_fp``
 
 .. _vllm-benchmark-standalone:
 
@@ -181,8 +209,8 @@ snippet.
 
 .. code-block::
 
-   docker pull rocm/vllm:rocm6.2_mi300_ubuntu20.04_py3.9_vllm_0.6.4
-   docker run -it --device=/dev/kfd --device=/dev/dri --group-add video --shm-size 128G --security-opt seccomp=unconfined --security-opt apparmor=unconfined --cap-add=SYS_PTRACE -v $(pwd):/workspace --env HUGGINGFACE_HUB_CACHE=/workspace --name vllm_v0.6.4 rocm/vllm:rocm6.2_mi300_ubuntu20.04_py3.9_vllm_0.6.4
+   docker pull rocm/vllm-dev:nightly_main_20250123
+   docker run -it --device=/dev/kfd --device=/dev/dri --group-add video --shm-size 16G --security-opt seccomp=unconfined --security-opt apparmor=unconfined --cap-add=SYS_PTRACE -v $(pwd):/workspace --env HUGGINGFACE_HUB_CACHE=/workspace --name vllm_v0.6.7 rocm/vllm-dev:nightly_main_20250123
 
 In the Docker container, clone the ROCm MAD repository and navigate to the
 benchmark scripts directory at ``~/MAD/scripts/vllm``.
