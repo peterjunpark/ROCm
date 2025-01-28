@@ -26,7 +26,7 @@ performance numbers on the MI300X accelerator. This topic also provides tips on
 optimizing performance with popular AI models.
 
 .. hlist::
-   :columns: 6
+   :columns: 4
 
    * `Llama 3.1 8B <https://huggingface.co/meta-llama/Llama-3.1-8B>`_
 
@@ -142,7 +142,7 @@ Available models
 ----------------
 
 .. hlist::
-   :columns: 3
+   :columns: 2
 
    * ``pyt_huggingface_gpt2``
 
