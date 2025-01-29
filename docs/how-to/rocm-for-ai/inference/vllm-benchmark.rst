@@ -38,8 +38,6 @@ optimizing performance with popular AI models.
 
    * `Llama 2 7B <https://huggingface.co/meta-llama/Llama-2-7b-chat-hf>`_
 
-   * `Llama 2 70B <https://huggingface.co/meta-llama/Llama-2-70b-chat-hf>`_
-
    * `Mixtral MoE 8x7B <https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1>`_
 
    * `Mixtral MoE 8x22B <https://huggingface.co/mistralai/Mixtral-8x22B-Instruct-v0.1>`_
@@ -49,8 +47,6 @@ optimizing performance with popular AI models.
    * `Qwen2 7B <https://huggingface.co/Qwen/Qwen2-7B-Instruct>`_
 
    * `Qwen2 72B <https://huggingface.co/Qwen/Qwen2-72B-Instruct>`_
-
-   * `JAIS 13B <https://huggingface.co/core42/jais-13b-chat>`_
 
    * `JAIS 30B <https://huggingface.co/core42/jais-30b-chat-v3>`_
 
@@ -144,10 +140,6 @@ Available models
 .. hlist::
    :columns: 2
 
-   * ``pyt_huggingface_gpt2``
-
-   * ``pyt_huggingface_bert``
-
    * ``pyt_vllm_llama-3.1-8b``
 
    * ``pyt_vllm_llama-3.1-70b``
@@ -158,8 +150,6 @@ Available models
 
    * ``pyt_vllm_llama-2-7b``
 
-   * ``pyt_vllm_llama-2-70b``
-
    * ``pyt_vllm_mixtral-8x7b``
 
    * ``pyt_vllm_mixtral-8x22b``
@@ -169,8 +159,6 @@ Available models
    * ``pyt_vllm_qwen2-7b``
 
    * ``pyt_vllm_qwen2-72b``
-
-   * ``pyt_vllm_jais-13b``
 
    * ``pyt_vllm_jais-30b``
 
@@ -296,10 +284,6 @@ Options
      - Llama 2 7B
 
    * -
-     - ``meta-llama/Llama-2-70b-chat-hf``
-     - Llama 2 70B
-
-   * -
      - ``mistralai/Mixtral-8x7B-Instruct-v0.1``
      - Mixtral MoE 8x7B
 
@@ -318,10 +302,6 @@ Options
    * -
      - ``Qwen/Qwen2-72B-Instruct``
      - Qwen2 72B
-
-   * -
-     - ``core42/jais-13b-chat``
-     - JAIS 13B
 
    * -
      - ``core42/jais-30b-chat-v3``
