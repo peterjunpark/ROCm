@@ -3,15 +3,13 @@
  * @typedef {"compute" | "graphics"} UseCase
  * @typedef {"instinct" | "radeon-pro" | "radeon"} GPU
  * @typedef {"ubuntu" | "debian" | "rhel" | "sles" | "oracle-linux" | "azure-linux" | "windows" | "wsl-ubuntu"} OS
- * @typedef {"rocm" | "hip-sdk"} Stack
  * @typedef {"6.3.1" | "6.3.0" | "6.2.4" | "6.2.3"} CompareVer
- * @typedef {"useCase" | "gpu" | "os" | "stack" | "compareVer"} ParamKey
+ * @typedef {"useCase" | "gpu" | "os" | "compareVer"} ParamKey
  *
  * @typedef {Object} CompatMatrixParams
  * @property {UseCase[]} useCase - The selected use case(s).
  * @property {GPU[]} gpu - The selected GPU(s).
  * @property {OS[]} os - The selected operating system(s).
- * @property {Stack[]} stack - The selected software stack(s).
  * @property {CompareVer[]} compareVer - The selected ROCm version(s).
  *
  * @typedef {Object} CompatMatrixConfigEntry
@@ -23,7 +21,6 @@
  * @property {CompatMatrixConfigEntry} useCase - Configuration for use cases.
  * @property {CompatMatrixConfigEntry} gpu - Configuration for GPUs.
  * @property {CompatMatrixConfigEntry} os - Configuration for operating systems.
- * @property {CompatMatrixConfigEntry} stack - Configuration for software stacks.
  * @property {CompatMatrixConfigEntry} compareVer - Configuration for ROCm versions.
  */
 
@@ -53,11 +50,6 @@ const CONFIG = {
             "wsl-ubuntu",
         ],
         multi: true,
-    },
-    stack: {
-        key: "stack",
-        valid: ["rocm", "hip-sdk"],
-        multi: false,
     },
     compareVer: {
         key: "compareVer",
@@ -133,10 +125,6 @@ function getSearchParams() {
         os: /** @type {OS[]} */ (scrubParamVals(
             urlParams.getAll("os"),
             CONFIG.os,
-        )),
-        stack: /** @type {Stack[]} */ (scrubParamVals(
-            urlParams.getAll("stack"),
-            CONFIG.stack,
         )),
         compareVer: /** @type {CompareVer[]} */ (scrubParamVals(
             urlParams.getAll("compareVer"),
@@ -223,9 +211,6 @@ function setCompatParamSelector(params, compatParamBtns) {
                     setAttr(DATA_ATTRS.disabled);
                 }
 
-                if (selectorKey === "stack" && selectorVal === "hip-sdk") {
-                    setAttr(DATA_ATTRS.disabled);
-                }
             } else { // not instinct
                 if (
                     selectorKey === "os" &&
@@ -234,12 +219,6 @@ function setCompatParamSelector(params, compatParamBtns) {
                     )
                 ) {
                     setAttr(DATA_ATTRS.disabled);
-                }
-
-                if (os.includes("windows")) {
-                    if (selectorKey === "stack" && selectorVal === "rocm") {
-                        setAttr(DATA_ATTRS.disabled);
-                    }
                 }
             }
         } else if (useCase.includes("graphics")) {
@@ -252,11 +231,6 @@ function setCompatParamSelector(params, compatParamBtns) {
             if (selectorKey === "os" && selectorVal !== "ubuntu") {
                 setAttr(DATA_ATTRS.disabled);
             }
-
-            if (selectorKey === "stack" && selectorVal === "hip-sdk") {
-                setAttr(DATA_ATTRS.disabled);
-            }
-
             if (selectorKey === "compareVer" && selectorVal !== "6.2.3") {
                 setAttr(DATA_ATTRS.disabled);
             }
@@ -310,9 +284,9 @@ function setCompatMatrix(params, compatMatrix, compatMatrixTemplates) {
 
     const compatMatrixCompareVerHeading = compatMatrix
         .querySelector("span#compat-matrix-compare-ver-heading");
-    setStackVerHeadings(
-        params.stack,
+    setStackAndCompareVerHeadings(
         params.compareVer,
+		params.os,
         params.useCase,
         compatMatrixCompareVerHeading,
     );
@@ -333,14 +307,14 @@ function setCompatMatrix(params, compatMatrix, compatMatrixTemplates) {
 /**
  * Sets the appropriate heading in the accelerators/GPUs section of the
  * compatibility matrix and the secondary TOC sidebar.
- * @param {Stack[]} stackParams
  * @param {CompareVer[]} verParams
+ * @param {OS[]} osParams
  * @param {UseCase[]} useCaseParams
  * @param {Array<Element | null>} elements
  */
-function setStackVerHeadings(
-    stackParams,
+function setStackAndCompareVerHeadings(
     verParams,
+	osParams,
     useCaseParams,
     ...elements
 ) {
@@ -348,20 +322,19 @@ function setStackVerHeadings(
         if (!el) return;
 
         //TODO support multi
-        const stackText = stackParams[0];
-        const verText = verParams[0];
+        const os = osParams[0];
+        const compareVer = verParams[0];
         const useCase = useCaseParams[0];
 
         switch (true) {
-            case stackText === "rocm" && useCase === "graphics":
-                el.textContent = `ROCm on Radeon ${verText}`;
-                break;
-            case stackText === "rocm":
-                el.textContent = `ROCm ${verText}`;
-                break;
-            case stackText === "hip-sdk":
-                el.textContent = `HIP SDK ${verText}`;
-                break;
+			case os === "windows":
+				el.textContent = `ROCm on Windows ${compareVer}`
+				break;
+			case useCase === "graphics":
+				el.textContent = `ROCm on Radeon ${compareVer}`;
+				break;
+			default:
+                el.textContent = `ROCm on Linux ${compareVer}`;
         }
     });
 }
@@ -481,12 +454,10 @@ ready(function () {
                 case "graphics":
                     params.gpu = ["radeon-pro"];
                     params.os = ["ubuntu"];
-                    params.stack = ["rocm"];
                     params.compareVer = ["6.2.3"];
                     break;
                 case "instinct":
                     rm(params.os, "windows", "wsl-ubuntu");
-                    params.stack = ["rocm"];
                     break;
                 case "radeon-pro":
                 case "radeon":
@@ -494,7 +465,6 @@ ready(function () {
                     break;
                 case "windows":
                     params.os = ["windows"];
-                    params.stack = ["hip-sdk"];
                     break;
                 case "ubuntu":
                 case "rhel":
@@ -503,7 +473,6 @@ ready(function () {
                 case "debian":
                 case "wsl-ubuntu":
                     rm(params.os, "windows");
-                    params.stack = ["rocm"];
             }
 
             setSearchParams(params);
