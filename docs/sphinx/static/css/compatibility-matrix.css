@@ -1,42 +1,67 @@
 /* ------------------ Compatibility options grid ------------------ */
+html {
+  --compat-border-radius: 2px;
+  --compat-accent-color: var(--pst-color-primary);
+  --compat-bg-color: var(--pst-color-on-background);
+  --compat-fg-color: var(--pst-color-primary-text);
+  --compat-head-color: var(--pst-color-surface);
+  --compat-param-hover-color: var(--pst-color-link-hover);
+  --compat-param-selected-color: var(--pst-color-primary);
+}
+
+html[data-theme="light"] {
+  --compat-border-color: var(--pst-gray-500);
+  --compat-param-disabled-color: var(--pst-gray-300);
+}
+
+html[data-theme="dark"] {
+  --compat-border-color: var(--pst-gray-600);
+  --compat-param-disabled-color: var(--pst-gray-600);
+}
+
 div#compat-params-selector.container-fluid {
   padding: 0 0 1rem 0;
 }
 
 div.compat-param {
+  background-color: var(--compat-bg-color);
   cursor: pointer;
 }
 
 div.compat-param[data-param-state="selected"] {
-  background-color: skyblue;
+  background-color: var(--compat-param-selected-color);
+  color: var(--compat-fg-color);
 }
 
 div.compat-param[data-param-state="latest-version"] {
-  background-color: skyblue;
+  background-color: var(--compat-param-selected-color);
+  color: var(--compat-fg-color);
 }
 
 div.compat-param[data-param-state="disabled"] {
-  background-color: gainsboro;
+  background-color: var(--compat-param-disabled-color);
   text-decoration: line-through;
+  /* text-decoration-color: var(--pst-color-danger); */
   cursor: auto;
 }
 
-div.compat-param:not([data-param-state="disabled"]):hover {
-  background-color: cornflowerblue;
+div.compat-param:not([data-param-state="disabled"]):not([data-param-state="latest-version"]):hover {
+  background-color: var(--compat-param-hover-color);
 }
 
 .compat-param-head {
-  background-color: rgb(243, 244, 245);
+  background-color: var(--compat-head-color);
   padding: 0.15rem 0.15rem 0.15rem 0.67rem;
   margin: 2px;
-  border-right: solid 2px rgb(23, 109, 232);
+  border-right: solid 2px var(--compat-accent-color);
   font-weight: 600;
 }
 
 .compat-param {
   padding: 2px;
   margin: 2px;
-  border: solid 1px black;
+  border: solid 1px var(--compat-border-color);
+  font-weight: 500;
 }
 
 /* ---------------------- Compatibility table --------------------- */
@@ -46,20 +71,19 @@ table#compat-matrix {
   /* Make the header stick to the top of the viewport. */
   thead>tr {
     position: sticky;
-    top: 3rem;
+    top: 2.9rem;
     z-index: 2;
+    background-color: var(--compat-param-disabled-color);
   }
 }
 
 /* Compatibility matrix table */
 table#compat-matrix {
-  --compat-primary-color: var(--pst-color-primary);
-  --compat-border-radius: 2px;
-
+  margin-top: 1.5rem;
   /* Table columns */
   colgroup {
     col#compat-matrix-stub-col {
-      width: 19.5%;
+      width: 25%;
     }
   }
 
@@ -75,29 +99,11 @@ table#compat-matrix {
     font-weight: 600;
   }
 
-  /* Table section filter row */
-  div.compat-filter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    /* Filter button */
-    div.dropdown>button {
-      border-radius: var(--compat-border-radius);
-    }
-
-    /* Filter dropdown menu */
-    div.dropdown>ul.dropdown-menu {
-      border-radius: var(--compat-border-radius);
-    }
-  }
-
   tbody tr td ul {
     list-style-type: none;
     padding: 0;
 
     li {
-      /* border-bottom: 1.5px solid var(--compat-primary-color); */
       display: flex;
       /* align-items: center; */
       gap: 0.5rem;
@@ -111,6 +117,6 @@ table#compat-matrix {
 
   /* Table section dividers */
   tbody tr:last-of-type {
-    border-bottom: 2px solid var(--compat-primary-color);
+    border-bottom: 2px solid var(--compat-accent-color);
   }
 }
