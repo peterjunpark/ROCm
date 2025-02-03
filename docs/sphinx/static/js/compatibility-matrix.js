@@ -300,14 +300,12 @@ function setCompatMatrix(params, compatMatrix, compatMatrixTemplates) {
  * @param {string} latestVer
  * @param {CompareVer[]} verParams
  * @param {OS[]} osParams
- * @param {UseCase[]} useCaseParams
  * @param {Array<Element | null>} elements
  */
 function displayStackAndVerHeadings(
     latestVer,
     verParams,
     osParams,
-    useCaseParams,
     ...elements
 ) {
     elements.forEach((el) => {
@@ -316,21 +314,13 @@ function displayStackAndVerHeadings(
         //TODO support multi
         const os = osParams[0];
         const compareVer = verParams[0];
-        const useCase = useCaseParams[0];
 
         if (el.id === "compat-matrix-latest-ver-heading") {
             el.textContent = latestVer;
         } else if (el.id === "compat-matrix-stack-heading") {
-            switch (true) {
-                case os === "windows":
-                    el.textContent = "ROCm on Windows";
-                    break;
-                case os === "ubuntu":
-                    el.textContent = "ROCm on Linux";
-                    break;
-                default:
-                    el.textContent = "ROCm";
-            }
+            el.textContent = os === "windows"
+                ? "ROCm on Windows"
+                : "ROCm on Linux";
         } else {
             el.textContent = compareVer;
         }
@@ -411,6 +401,9 @@ ready(function () {
     const compatSidebarGPUHeading = document.querySelector(
         "nav.page-toc li.toc-entry a#compat-sidebar-gpu-heading",
     );
+    const compatMatrixStackHeading = compatMatrix.querySelector(
+        "span#compat-matrix-stack-heading",
+    );
 
     // On page load, get the search params from the URL.
     const initialParams = getSearchParams();
@@ -423,9 +416,9 @@ ready(function () {
         latestVerLinux,
         initialParams.compareVer,
         initialParams.os,
-        initialParams.useCase,
         compatMatrixLatestVerHeading,
         compatMatrixCompareVerHeading,
+        compatMatrixStackHeading,
     );
 
     displayGPUHeadings(
@@ -532,7 +525,6 @@ ready(function () {
                 latestVer,
                 params.compareVer,
                 params.os,
-                params.useCase,
                 compatMatrixLatestVerHeading,
                 compatMatrixCompareVerHeading,
                 compatMatrixStackHeading,

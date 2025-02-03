@@ -83,8 +83,12 @@ table#compat-matrix {
   /* Table columns */
   colgroup {
     col#compat-matrix-stub-col {
-      width: 25%;
+      width: 30%;
     }
+  }
+
+  th a.headerlink {
+    font-size: 1.1rem;
   }
 
   /* Table section headings */
