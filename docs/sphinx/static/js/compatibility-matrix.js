@@ -3,7 +3,7 @@
  * @typedef {"compute" | "graphics"} UseCase
  * @typedef {"instinct" | "radeon-pro" | "radeon"} GPU
  * @typedef {"ubuntu" | "debian" | "rhel" | "sles" | "oracle-linux" | "azure-linux" | "windows" | "wsl-ubuntu"} OS
- * @typedef {"6.3.1" | "6.3.0" | "6.2.4" | "6.2.3"} CompareVer
+ * @typedef {string} CompareVer
  * @typedef {"useCase" | "gpu" | "os" | "compareVer"} ParamKey
  *
  * @typedef {Object} CompatMatrixParams
@@ -53,7 +53,7 @@ const CONFIG = {
     },
     compareVer: {
         key: "compareVer",
-        valid: ["6.3.1", "6.3.0", "6.2.4", "6.2.3"],
+        valid: ["6.3.1", "6.3.0", "6.2.4", "6.2.3", "6.2.2", "6.1.2", "6.0.2"],
         multi: false,
     },
 };
@@ -71,7 +71,6 @@ const CONFIG = {
  * @property {"data-templ-v"} templVal - The value for the template attribute.
  * @property {Selected} selected - Indicates the selected state.
  * @property {Disabled} disabled - Indicates the disabled state.
- * @property {null} enabled - Indicates the enabled state.
  */
 
 /** @type {DataAttributes} */
@@ -83,7 +82,6 @@ const DATA_ATTRS = {
     templVal: "data-templ-v",
     selected: "selected",
     disabled: "disabled",
-    enabled: null,
 };
 
 /**
@@ -153,6 +151,8 @@ function setSearchParams(params) {
     );
 }
 
+/** Removes an element of an array in place.
+ * @param {string[]} arr @param {string[]} vals */
 function rm(arr, ...vals) {
     vals.forEach((val) => {
         const idx = arr.indexOf(val);
@@ -177,7 +177,26 @@ function setCompatParamSelector(params, compatParamBtns) {
         }
     });
 
-    let { useCase, gpu, os } = params;
+    const { useCase, gpu, os } = params;
+
+    const compatParamLinuxVers = document.getElementById(
+        "compat-param-rocm-linux",
+    );
+    const compatParamWindowsVers = document.getElementById(
+        "compat-param-rocm-windows",
+    );
+
+    if (!compatParamLinuxVers || !compatParamWindowsVers) {
+        console.log("can't find linux version row and windows version row");
+    } else {
+        if (os[0] === "windows") {
+            compatParamLinuxVers.style.display = "none";
+            compatParamWindowsVers.style.display = "flex";
+        } else {
+            compatParamLinuxVers.style.display = "flex";
+            compatParamWindowsVers.style.display = "none";
+        }
+    }
 
     compatParamBtns.forEach((selector) => {
         const selectorKey = /** @type {ParamKey} */ (selector.getAttribute(
@@ -210,7 +229,6 @@ function setCompatParamSelector(params, compatParamBtns) {
                 ) {
                     setAttr(DATA_ATTRS.disabled);
                 }
-
             } else { // not instinct
                 if (
                     selectorKey === "os" &&
@@ -245,8 +263,7 @@ function setCompatParamSelector(params, compatParamBtns) {
  */
 // TODO:
 function setCompatMatrix(params, compatMatrix, compatMatrixTemplates) {
-    console.log("setting compat matrix");
-    compatMatrix.querySelectorAll("[data-tr-state=clone]").forEach(
+    compatMatrix.querySelectorAll("[data-templ-state=clone]").forEach(
         (child) => {
             child.remove();
         },
@@ -267,54 +284,29 @@ function setCompatMatrix(params, compatMatrix, compatMatrixTemplates) {
                 const clone = templ.content.cloneNode(true);
 
                 if (clone instanceof DocumentFragment) {
-                    const firstChild = clone.firstElementChild;
-
-                    if (firstChild) {
-                        firstChild.setAttribute(
-                            "data-tr-state",
-                            "clone",
-                        );
-                    }
+                    Array.from(clone.children).forEach((child) => {
+                        child.setAttribute("data-templ-state", "clone");
+                    });
                 }
 
                 parent.appendChild(clone);
             }
         });
     });
-
-    const compatMatrixCompareVerHeading = compatMatrix
-        .querySelector("span#compat-matrix-compare-ver-heading");
-    setStackAndCompareVerHeadings(
-        params.compareVer,
-		params.os,
-        params.useCase,
-        compatMatrixCompareVerHeading,
-    );
-
-    const compatMatrixGPUHeading = compatMatrix
-        .querySelector(
-            "span#compat-matrix-gpu-heading",
-        );
-    const compatSidebarGPUHeading = document.querySelector(
-        "nav.page-toc li.toc-entry a#compat-sidebar-gpu-heading",
-    );
-    setGPUHeadings(
-        params.gpu,
-        compatMatrixGPUHeading,
-        compatSidebarGPUHeading,
-    );
 }
 /**
  * Sets the appropriate heading in the accelerators/GPUs section of the
  * compatibility matrix and the secondary TOC sidebar.
+ * @param {string} latestVer
  * @param {CompareVer[]} verParams
  * @param {OS[]} osParams
  * @param {UseCase[]} useCaseParams
  * @param {Array<Element | null>} elements
  */
-function setStackAndCompareVerHeadings(
+function displayStackAndVerHeadings(
+    latestVer,
     verParams,
-	osParams,
+    osParams,
     useCaseParams,
     ...elements
 ) {
@@ -326,15 +318,21 @@ function setStackAndCompareVerHeadings(
         const compareVer = verParams[0];
         const useCase = useCaseParams[0];
 
-        switch (true) {
-			case os === "windows":
-				el.textContent = `ROCm on Windows ${compareVer}`
-				break;
-			case useCase === "graphics":
-				el.textContent = `ROCm on Radeon ${compareVer}`;
-				break;
-			default:
-                el.textContent = `ROCm on Linux ${compareVer}`;
+        if (el.id === "compat-matrix-latest-ver-heading") {
+            el.textContent = latestVer;
+        } else if (el.id === "compat-matrix-stack-heading") {
+            switch (true) {
+                case os === "windows":
+                    el.textContent = "ROCm on Windows";
+                    break;
+                case os === "ubuntu":
+                    el.textContent = "ROCm on Linux";
+                    break;
+                default:
+                    el.textContent = "ROCm";
+            }
+        } else {
+            el.textContent = compareVer;
         }
     });
 }
@@ -345,20 +343,20 @@ function setStackAndCompareVerHeadings(
  * @param {GPU[]} gpuParams
  * @param {Array<Element | null>} elements
  */
-function setGPUHeadings(gpuParams, ...elements) {
+function displayGPUHeadings(gpuParams, ...elements) {
     elements.forEach((el) => {
         if (!el) return;
 
         if (gpuParams.length === 1) {
             switch (gpuParams[0]) {
                 case "instinct":
-                    el.textContent = "Supported Instinct accelerators";
+                    el.textContent = "Supported AMD Instinct™ accelerators";
                     break;
                 case "radeon-pro":
-                    el.textContent = "Supported Radeon PRO GPUs";
+                    el.textContent = "Supported AMD Radeon™ PRO GPUs";
                     break;
                 case "radeon":
-                    el.textContent = "Supported Radeon GPUs";
+                    el.textContent = "Supported AMD Radeon™ GPUs";
                     break;
                 default:
                     el.textContent = "Supported hardware";
@@ -391,11 +389,28 @@ ready(function () {
     const compatParamBtns = compatParamSelector.querySelectorAll(
         "div.compat-param",
     );
-    const compatMatrixTemplates = compatMatrix.querySelectorAll("template");
-    const latestVersion = compatParamSelector.getAttribute("data-latest");
-    if (!latestVersion) {
-        console.error("Compatibility matrix: can't find latest version.");
+    const compatMatrixTemplates = document.querySelectorAll("template");
+    const latestVerLinux = compatParamSelector.getAttribute("data-latest");
+    const latestVerWindows = compatParamSelector.getAttribute(
+        "data-latest-windows",
+    );
+
+    if (!latestVerLinux || !latestVerWindows) {
+        return;
     }
+
+    const compatMatrixCompareVerHeading = compatMatrix
+        .querySelector("span#compat-matrix-compare-ver-heading");
+    const compatMatrixLatestVerHeading = compatMatrix.querySelector(
+        "span#compat-matrix-latest-ver-heading",
+    );
+    const compatMatrixGPUHeading = compatMatrix
+        .querySelector(
+            "span#compat-matrix-gpu-heading",
+        );
+    const compatSidebarGPUHeading = document.querySelector(
+        "nav.page-toc li.toc-entry a#compat-sidebar-gpu-heading",
+    );
 
     // On page load, get the search params from the URL.
     const initialParams = getSearchParams();
@@ -403,6 +418,21 @@ ready(function () {
     // Update the URL with the scrubbed search params.
     setCompatParamSelector(initialParams, compatParamBtns);
     setCompatMatrix(initialParams, compatMatrix, compatMatrixTemplates);
+
+    displayStackAndVerHeadings(
+        latestVerLinux,
+        initialParams.compareVer,
+        initialParams.os,
+        initialParams.useCase,
+        compatMatrixLatestVerHeading,
+        compatMatrixCompareVerHeading,
+    );
+
+    displayGPUHeadings(
+        initialParams.gpu,
+        compatMatrixGPUHeading,
+        compatSidebarGPUHeading,
+    );
 
     // Init selectors.
     compatParamBtns.forEach((btn) => {
@@ -465,6 +495,7 @@ ready(function () {
                     break;
                 case "windows":
                     params.os = ["windows"];
+                    params.compareVer = ["6.0.2"];
                     break;
                 case "ubuntu":
                 case "rhel":
@@ -473,11 +504,52 @@ ready(function () {
                 case "debian":
                 case "wsl-ubuntu":
                     rm(params.os, "windows");
+                    params.compareVer = ["6.3.1"];
             }
+            if (!params.os.length) params.os = ["ubuntu"];
 
             setSearchParams(params);
             setCompatParamSelector(params, compatParamBtns);
             setCompatMatrix(params, compatMatrix, compatMatrixTemplates);
+
+            const compatMatrixCompareVerHeading = compatMatrix
+                .querySelector("span#compat-matrix-compare-ver-heading");
+            const compatMatrixLatestVerHeading = compatMatrix.querySelector(
+                "span#compat-matrix-latest-ver-heading",
+            );
+            const compatMatrixStackHeading = compatMatrix.querySelector(
+                "span#compat-matrix-stack-heading",
+            );
+
+            let latestVer;
+            if (params.os.length === 1 && params.os[0] === "windows") {
+                latestVer = latestVerWindows;
+            } else {
+                latestVer = latestVerLinux;
+            }
+
+            displayStackAndVerHeadings(
+                latestVer,
+                params.compareVer,
+                params.os,
+                params.useCase,
+                compatMatrixLatestVerHeading,
+                compatMatrixCompareVerHeading,
+                compatMatrixStackHeading,
+            );
+
+            const compatMatrixGPUHeading = compatMatrix
+                .querySelector(
+                    "span#compat-matrix-gpu-heading",
+                );
+            const compatSidebarGPUHeading = document.querySelector(
+                "nav.page-toc li.toc-entry a#compat-sidebar-gpu-heading",
+            );
+            displayGPUHeadings(
+                params.gpu,
+                compatMatrixGPUHeading,
+                compatSidebarGPUHeading,
+            );
         });
     });
 });
