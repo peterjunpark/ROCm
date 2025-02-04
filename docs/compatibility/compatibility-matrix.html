@@ -1,4 +1,4 @@
-<div class="container-fluid" data-latest="6.3.2" data-latest-windows="6.1.2" id="compat-params-selector">
+<div class="container-fluid js-content" data-latest="6.3.2" data-latest-windows="6.1.2" id="compat-params-selector">
   <!-- PARAMS SELECTOR -->
   <div class="row gx-2">
     <div class="row gx-0">
@@ -113,7 +113,7 @@
       </div>
     </div>
     <!-- COMPATIBILITY TABLE -->
-    <table class="table" id="compat-matrix">
+    <table class="table js-content" id="compat-matrix">
       <thead>
         <tr>
           <th><span id="compat-matrix-stack-heading"></span></th>
@@ -2322,3 +2322,14 @@
         </tr>
       </tbody>
     </table>
+    <noscript>
+      <div class="admonition warning">
+        <p class="admonition-title">Warning</p>
+        <p>Enable JavaScript in your browser to view the ROCm compatibility matrix.</p>
+      </div>
+      <style>
+        .js-content {
+          display: none;
+        }
+      </style>
+    </noscript>
