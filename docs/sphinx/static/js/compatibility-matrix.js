@@ -190,10 +190,13 @@ function setCompatParamSelector(params, compatParamBtns) {
     const compatParamRadeonVers = document.getElementById(
         "compat-param-rocm-radeon",
     );
+    const compatSidebarRadeonSoftware = document.getElementById(
+        "compat-sidebar-radeon-software",
+    );
 
     if (
         !compatParamLinuxVers || !compatParamWindowsVers ||
-        !compatParamRadeonVers
+        !compatParamRadeonVers || !compatSidebarRadeonSoftware
     ) {
         console.log("can't find linux, windows, radeon version rows");
     } else {
@@ -201,15 +204,18 @@ function setCompatParamSelector(params, compatParamBtns) {
             compatParamLinuxVers.style.display = "none";
             compatParamWindowsVers.style.display = "none";
             compatParamRadeonVers.style.display = "flex";
+            compatSidebarRadeonSoftware.style.display = "block";
         } else {
             if (os[0] === "windows") {
                 compatParamLinuxVers.style.display = "none";
                 compatParamWindowsVers.style.display = "flex";
                 compatParamRadeonVers.style.display = "none";
+                compatSidebarRadeonSoftware.style.display = "none";
             } else {
                 compatParamLinuxVers.style.display = "flex";
                 compatParamWindowsVers.style.display = "none";
                 compatParamRadeonVers.style.display = "none";
+                compatSidebarRadeonSoftware.style.display = "none";
             }
         }
     }
