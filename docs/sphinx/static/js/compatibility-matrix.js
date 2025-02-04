@@ -99,9 +99,13 @@ function scrubParamVals(paramVals, paramConfig) {
     const uniqueVals = [...(new Set(filteredVals))];
     const numVals = uniqueVals.length;
 
-    return numVals
+    const returnv = numVals
         ? uniqueVals
         : /** @type {T[]} */ ([...[paramConfig.valid[0]]]);
+
+    console.log({ uniqueVals });
+    console.log({ returnv });
+    return returnv;
 }
 
 /**
@@ -316,7 +320,9 @@ function displayStackAndVerHeadings(
         const compareVer = verParams[0];
 
         if (el.id === "compat-matrix-latest-ver-heading") {
-            el.textContent = latestVer;
+            el.textContent = os === "windows"
+                ? latestVer
+                : `${latestVer} (latest)`;
         } else if (el.id === "compat-matrix-stack-heading") {
             el.textContent = os === "windows"
                 ? "ROCm on Windows"
@@ -446,10 +452,10 @@ ready(function () {
 
             // Handle multi-select params.
             if (CONFIG[selectorKey].multi) {
-                // Handle deselect.
+                // FIXME: Handle deselect.
                 if (
                     selectorState === DATA_ATTRS.selected &&
-                    paramVals.length > 1
+                    paramVals.length > 0
                 ) {
                     // Remove value from the array.
                     const index = paramVals.indexOf(

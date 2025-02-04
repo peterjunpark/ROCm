@@ -45,7 +45,11 @@ div.compat-param[data-param-state="disabled"] {
   cursor: auto;
 }
 
-div.compat-param:not([data-param-state="disabled"]):not([data-param-state="latest-version"]):hover {
+div.compat-param-multi div.compat-param:not([data-param-state="disabled"]):not([data-param-state="latest-version"]):hover {
+  background-color: var(--compat-param-hover-color);
+}
+
+div.compat-param:not([data-param-state]):hover {
   background-color: var(--compat-param-hover-color);
 }
 
@@ -87,8 +91,13 @@ table#compat-matrix {
     }
   }
 
-  th a.headerlink {
+  tbody tr th a.headerlink {
     font-size: 1.1rem;
+  }
+
+  tbody tr.compat-matrix-entry>th:first-of-type {
+    display: flex;
+    justify-content: space-between;
   }
 
   /* Table section headings */
