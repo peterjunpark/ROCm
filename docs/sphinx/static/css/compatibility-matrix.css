@@ -91,6 +91,10 @@ table#compat-matrix {
     }
   }
 
+  tbody {
+    scroll-margin-top: 1.68rem;
+  }
+
   tbody tr th a.headerlink {
     font-size: 1.1rem;
   }
