@@ -103,8 +103,6 @@ function scrubParamVals(paramVals, paramConfig) {
         ? uniqueVals
         : /** @type {T[]} */ ([...[paramConfig.valid[0]]]);
 
-    console.log({ uniqueVals });
-    console.log({ returnv });
     return returnv;
 }
 
@@ -189,16 +187,30 @@ function setCompatParamSelector(params, compatParamBtns) {
     const compatParamWindowsVers = document.getElementById(
         "compat-param-rocm-windows",
     );
+    const compatParamRadeonVers = document.getElementById(
+        "compat-param-rocm-radeon",
+    );
 
-    if (!compatParamLinuxVers || !compatParamWindowsVers) {
-        console.log("can't find linux version row and windows version row");
+    if (
+        !compatParamLinuxVers || !compatParamWindowsVers ||
+        !compatParamRadeonVers
+    ) {
+        console.log("can't find linux, windows, radeon version rows");
     } else {
-        if (os[0] === "windows") {
+        if (useCase[0] === "graphics") {
             compatParamLinuxVers.style.display = "none";
-            compatParamWindowsVers.style.display = "flex";
-        } else {
-            compatParamLinuxVers.style.display = "flex";
             compatParamWindowsVers.style.display = "none";
+            compatParamRadeonVers.style.display = "flex";
+        } else {
+            if (os[0] === "windows") {
+                compatParamLinuxVers.style.display = "none";
+                compatParamWindowsVers.style.display = "flex";
+                compatParamRadeonVers.style.display = "none";
+            } else {
+                compatParamLinuxVers.style.display = "flex";
+                compatParamWindowsVers.style.display = "none";
+                compatParamRadeonVers.style.display = "none";
+            }
         }
     }
 
@@ -250,7 +262,10 @@ function setCompatParamSelector(params, compatParamBtns) {
                 setAttr(DATA_ATTRS.disabled);
             }
 
-            if (selectorKey === "os" && selectorVal !== "ubuntu") {
+            if (
+                selectorKey === "os" && selectorVal !== "ubuntu" &&
+                selectorVal !== "wsl-ubuntu"
+            ) {
                 setAttr(DATA_ATTRS.disabled);
             }
             if (selectorKey === "compareVer" && selectorVal !== "6.2.3") {
@@ -458,13 +473,7 @@ ready(function () {
                     paramVals.length > 0
                 ) {
                     // Remove value from the array.
-                    const index = paramVals.indexOf(
-                        selectorVal,
-                    ); // FIXME
-                    // If the value exists in the array, remove it
-                    if (index !== -1) {
-                        paramVals.splice(index, 1);
-                    }
+                    rm(paramVals, selectorVal);
                 } else {
                     // Handle select
                     paramVals.push(selectorVal);
@@ -497,11 +506,13 @@ ready(function () {
                     params.compareVer = ["6.0.2"];
                     break;
                 case "ubuntu":
+                case "wsl-ubuntu":
+                    rm(params.os, "windows");
+                    break;
                 case "rhel":
                 case "sles":
                 case "oracle-linux":
                 case "debian":
-                case "wsl-ubuntu":
                     rm(params.os, "windows");
                     params.compareVer = ["6.3.1"];
             }
