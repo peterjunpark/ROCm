@@ -146,14 +146,16 @@
             <th>CDNA 3 (gfx942)</th>
             <td>
               <ul>
-                <li>MI325X</li>
+                <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
+                      class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
                 <li>MI300X</li>
                 <li>MI300A</li>
               </ul>
             </td>
             <td>
               <ul>
-                <li>MI325X</li>
+                <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
+                      class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
                 <li>MI300X</li>
                 <li>MI300A</li>
               </ul>
@@ -352,35 +354,14 @@
             <th>Oracle Linux</th>
             <td>
               <ul>
-                <li>
-                  8.10 (kernel: 5.15.0)
-                </li>
+                <li>8.10 (kernel: 5.15.0)<a class="footnote-reference brackets" href="#compat-foot-oracle-linux"
+                    role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></li>
               </ul>
             </td>
             <td>
               <ul>
-                <li>
-                  8.10 (kernel: 5.15.0)
-                </li>
-              </ul>
-            </td>
-          </tr>
-        </template>
-        <template data-templ-k="os" data-templ-v="azure-linux">
-          <tr>
-            <th>Azure Linux</th>
-            <td>
-              <ul>
-                <li>
-                  3.0 (kernel: 6.6)
-                </li>
-              </ul>
-            </td>
-            <td>
-              <ul>
-                <li>
-                  3.0 (kernel: 6.6)
-                </li>
+                <li>8.10 (kernel: 5.15.0)<a class="footnote-reference brackets" href="#compat-foot-oracle-linux"
+                    role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></li>
               </ul>
             </td>
           </tr>
@@ -390,16 +371,31 @@
             <th>Debian</th>
             <td>
               <ul>
-                <li>
-                  12 (kernel: 6.1)
-                </li>
+                <li>12 (kernel: 6.1)<a class="footnote-reference brackets" href="#compat-foot-debian"
+                    role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></li>
               </ul>
             </td>
             <td>
               <ul>
-                <li>
-                  12 (kernel: 6.1)
-                </li>
+                <li>12 (kernel: 6.1)<a class="footnote-reference brackets" href="#compat-foot-debian"
+                    role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></li>
+              </ul>
+            </td>
+          </tr>
+        </template>
+        <template data-templ-k="os" data-templ-v="azure-linux">
+          <tr>
+            <th>Azure Linux</th>
+            <td>
+              <ul>
+                <li>3.0 (kernel: 6.6)<a class="footnote-reference brackets" href="#compat-foot-azure-linux"
+                    role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>3.0 (kernel: 6.6)<a class="footnote-reference brackets" href="#compat-foot-azure-linux"
+                    role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></li>
               </ul>
             </td>
           </tr>
@@ -2349,6 +2345,32 @@
         </tr>
       </tbody>
     </table>
+    <p id="compat-footnotes" class="rubric">Footnotes</p>
+    <aside class="footnote-list brackets">
+      <aside class="footnote brackets" id="compat-foot-mi325x" role="doc-footnote">
+        <span class="label"><span class="fn-bracket">[</span><a href="#compat-ref-gpu" role="doc-backlink">1</a><span
+            class="fn-bracket">]</span></span>
+        <p>AMD Instinct MI325X is supported only on Ubuntu 22.04.5 (kernel: 5.15 GA).</p>
+      </aside>
+      <aside class="footnote brackets" id="compat-foot-oracle-linux" role="doc-footnote">
+        <span class="label"><span class="fn-bracket">[</span><a href="#compat-ref-os" role="doc-backlink">2</a><span
+            class="fn-bracket">]</span></span>
+        <p>Oracle Linux 8.10 is supported only on AMD Instinct MI300X.
+        </p>
+      </aside>
+      <aside class="footnote brackets" id="compat-foot-debian" role="doc-footnote">
+        <span class="label"><span class="fn-bracket">[</span><a href="#compat-ref-os" role="doc-backlink">3</a><span
+            class="fn-bracket">]</span></span>
+        <p>Debian 12 is supported only on AMD Instinct MI300X.
+        </p>
+      </aside>
+      <aside class="footnote brackets" id="compat-foot-azure-linux" role="doc-footnote">
+        <span class="label"><span class="fn-bracket">[</span><a href="#compat-ref-os" role="doc-backlink">4</a><span
+            class="fn-bracket">]</span></span>
+        <p>Azure Linux 3.0 are supported only on AMD Instinct MI300X.
+        </p>
+      </aside>
+    </aside>
     <noscript>
       <div class="admonition warning">
         <p class="admonition-title">Warning</p>
