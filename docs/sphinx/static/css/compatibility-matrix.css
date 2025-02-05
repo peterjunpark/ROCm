@@ -84,10 +84,14 @@ table#compat-matrix {
 /* Compatibility matrix table */
 table#compat-matrix {
   margin-top: 1.5rem;
+
   /* Table columns */
   colgroup {
     col#compat-matrix-stub-col {
-      width: 30%;
+      width: 32%;
+    }
+    col:not("#compat-matrix-stub-col") {
+      width: 34%;
     }
   }
 
