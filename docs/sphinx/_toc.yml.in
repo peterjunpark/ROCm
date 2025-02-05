@@ -11,11 +11,6 @@ subtrees:
     title: Release notes
   - file: compatibility/compatibility-matrix.rst
     title: Compatibility matrix
-    entries:
-    - url: https://rocm.docs.amd.com/projects/install-on-linux-internal/en/latest/reference/system-requirements.html
-      title: Linux system requirements
-    - url: https://rocm.docs.amd.com/projects/install-on-windows/en/${branch}/reference/system-requirements.html
-      title: Windows system requirements
 
 - caption: Install
   entries:
