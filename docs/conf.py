@@ -106,7 +106,8 @@ html_theme_options = {"flavor": "rocm-docs-home"}
 
 templates_path = ["templates"]
 html_static_path = ["sphinx/static/css", "how-to/rocm-for-ai/inference/js"]
-html_css_files = ["rocm_custom.css", "rocm_rn.css", "vllm-benchmark.js"]
+html_css_files = ["rocm_custom.css", "rocm_rn.css", "vllm-benchmark.css"]
+html_js_files = ["vllm-benchmark.js"]
 
 html_title = "ROCm Documentation"
 
