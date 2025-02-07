@@ -7,6 +7,8 @@
 LLM inference performance validation on AMD Instinct MI300X
 ***********************************************************
 
+.. datatemplate::yaml:
+
 .. _vllm-benchmark-unified-docker:
 
 The `ROCm vLLM Docker <https://hub.docker.com/r/rocm/vllm/tags>`_ image offers
@@ -193,8 +195,8 @@ Standalone benchmarking
 =======================
 
 You can run the vLLM benchmark tool independently by starting the
-`Docker container <https://hub.docker.com/layers/rocm/vllm/rocm6.3.1_mi300_ubuntu22.04_py3.12_vllm_0.6.6/images/sha256-9a12ef62bbbeb5a4c30a01f702c8e025061f575aa129f291a49fbd02d6b4d6c9>`_
-as shown in the following snippet.
+:ref:`Docker container <vllm-benchmark-get-started>` as shown in the following
+snippet.
 
 .. code-block::
 
