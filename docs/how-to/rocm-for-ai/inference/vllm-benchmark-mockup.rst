@@ -30,9 +30,10 @@ LLM inference performance validation on AMD Instinct MI300X
 
    With this Docker image, you can quickly validate the expected inference
    performance numbers for the MI300X accelerator. This topic also provides tips on
-   optimizing performance with popular AI models. For more information, see the lists of
-   :ref:`available models for MAD-integrated benchmarking <vllm-benchmark-mad-models>`
-   and :ref:`standalone benchmarking <vllm-benchmark-standalone-options>`.
+   optimizing performance with popular AI models. 
+
+   Available models
+   ================
 
    .. raw:: html
 
@@ -190,12 +191,9 @@ LLM inference performance validation on AMD Instinct MI300X
                       options and their descriptions.</p>
                     <div class="highlight-shell notranslate">
                       <div class="highlight">
-                        <pre><span></span>./vllm_benchmark_report.sh<span class="w"> </span>-s<span class="w">
-                          </span><span class="nv">$test_option</span><span class="w"> </span>-m<span class="w">
-                          </span><span class="nv">{{model.model_repo}}</span><span class="w"> </span>-g<span class="w">
-                          </span><span class="nv">$num_gpu</span><span class="w"> </span>-d<span class="w"> </span><span
-                            class="nv">$datatype</span>
-                        </pre>
+                          <pre>
+                           <span>./vllm_benchmark_report.sh -s $test_option -m {{model.model_repo}} -g $num_gpu -d {{model.precision}}</span>
+                          </pre>
                       </div>
                     </div>
                     <p>See the <a class="reference internal" href="#vllm-benchmark-run-benchmark"><span
@@ -312,30 +310,11 @@ LLM inference performance validation on AMD Instinct MI300X
                       <h4>Example 1: latency benchmark<a class="headerlink" href="#example-1-latency-benchmark"
                           title="Link to this heading">#</a></h4>
                       <p>Use this command to benchmark the latency of the {{model.model}} model on eight GPUs with the
-                        <code class="docutils literal notranslate"><span class="pre">float16</span></code> and <code
-                          class="docutils literal notranslate"><span class="pre">float8</span></code> data types.</p>
+                        <code class="docutils literal notranslate"><span class="pre">{{model.precision}}</span></code> data type.</p>
                       <div class="highlight-default notranslate">
                         <div class="highlight">
-                          <pre><span></span><span class="o">./</span><span class="n">vllm_benchmark_report</span><span
-                              class="o">.</span><span class="n">sh</span> <span class="o">-</span><span
-                              class="n">s</span> <span class="n">latency</span> <span class="o">-</span><span
-                              class="n">m</span> <span class="n">meta</span><span class="o">-</span><span
-                              class="n">llama</span><span class="o">/</span><span class="n">Llama</span><span
-                              class="o">-</span><span class="mf">3.1</span><span class="o">-</span><span
-                              class="mi">70</span><span class="n">B</span><span class="o">-</span><span
-                              class="n">Instruct</span> <span class="o">-</span><span class="n">g</span> <span
-                              class="mi">8</span> <span class="o">-</span><span class="n">d</span> <span
-                              class="n">float16</span>
-                            <span class="o">./</span><span class="n">vllm_benchmark_report</span><span
-                              class="o">.</span><span class="n">sh</span> <span class="o">-</span><span
-                              class="n">s</span> <span class="n">latency</span> <span class="o">-</span><span
-                              class="n">m</span> <span class="n">amd</span><span class="o">/</span><span
-                              class="n">Llama</span><span class="o">-</span><span class="mf">3.1</span><span
-                              class="o">-</span><span class="mi">70</span><span class="n">B</span><span
-                              class="o">-</span><span class="n">Instruct</span><span class="o">-</span><span
-                              class="n">FP8</span><span class="o">-</span><span class="n">KV</span> <span
-                              class="o">-</span><span class="n">g</span> <span class="mi">8</span> <span
-                              class="o">-</span><span class="n">d</span> <span class="n">float8</span>
+                          <pre>
+                           <span>./vllm_benchmark_report.sh -s latency -m {{model.model_repo}} -g 8 -d {{model.precision}}</span>
                           </pre>
                         </div>
                       </div>
@@ -356,19 +335,12 @@ LLM inference performance validation on AMD Instinct MI300X
                     <section id="example-2-throughput-benchmark">
                       <h4>Example 2: throughput benchmark<a class="headerlink" href="#example-2-throughput-benchmark"
                           title="Link to this heading">#</a></h4>
-                      <p>Use this command to benchmark the throughput of the Llama 3.1 70B model on eight GPUs with the
-                        <code class="docutils literal notranslate"><span class="pre">float16</span></code> and <code
-                          class="docutils literal notranslate"><span class="pre">float8</span></code> data types.</p>
+                      <p>Use this command to benchmark the throughput of the {{model.model}} model on eight GPUs with the
+                        <code class="docutils literal notranslate"><span class="pre">{{model.precision}}</span></code> data type.</p>
                       <div class="highlight-shell notranslate">
                         <div class="highlight">
-                          <pre><span></span>./vllm_benchmark_report.sh<span class="w"> </span>-s<span class="w">
-                            </span>throughput<span class="w"> </span>-m<span class="w">
-                            </span>meta-llama/Llama-3.1-70B-Instruct<span class="w"> </span>-g<span class="w">
-                            </span><span class="m">8</span><span class="w"> </span>-d<span class="w"> </span>float16
-                            ./vllm_benchmark_report.sh<span class="w"> </span>-s<span class="w"> </span>throughput<span
-                              class="w"> </span>-m<span class="w"> </span>amd/Llama-3.1-70B-Instruct-FP8-KV<span
-                              class="w"> </span>-g<span class="w"> </span><span class="m">8</span><span class="w">
-                            </span>-d<span class="w"> </span>float8
+                          <pre>
+                           <span>./vllm_benchmark_report.sh -s throughput -m {{model.model_repo}} -g 8 -d {{model.precision}}</span>
                           </pre>
                         </div>
                       </div>
