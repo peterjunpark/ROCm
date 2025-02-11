@@ -9,12 +9,10 @@ LLM inference performance validation on AMD Instinct MI300X
 
 .. _vllm-benchmark-unified-docker:
 
-.. datatemplate:yaml:: ./vllm-benchmark-models.yaml
+.. datatemplate:yaml:: ./vllm-benchmark-models2.yaml
 
    {% set unified_docker = data.vllm_benchmark.unified_docker.latest %}
-   {% set models_float16 = data.vllm_benchmark.models.float16 %}
-   {% set models_float8 = data.vllm_benchmark.models.float8 %}
-   {% set models = models_float16 + models_float8 %}
+   {% set model_groups = data.vllm_benchmark.model_groups %}
 
    The `ROCm vLLM Docker <{{ unified_docker.docker_hub_url }}>`_ image offers
    a prebuilt, optimized environment for validating large language model (LLM)
@@ -39,18 +37,16 @@ LLM inference performance validation on AMD Instinct MI300X
 
       <div id="vllm-benchmark-ud-params-picker" class="container-fluid">
         <div class="row gx-0">
-   {% for model in models_float16 %}
-          <div class="col-4">
-            <div data-param-k="model" data-param-v="{{ model.mad_tag }}">{{ model.model }}</div>
-          </div>
+   {% for model_group in model_groups %}
+          <div class="col-3" data-param-k="model-group" data-param-v="{{ model_group.tag }}">{{ model_group.group }}</div>
    {% endfor %}
         </div>
 
         <div class="row gx-0">
-   {% for model in models_float8 %}
-          <div class="col-4">
-            <div data-param-k="model" data-param-v="{{ model.mad_tag }}">{{ model.model }}</div>
-          </div>
+   {% for model_group in model_groups %}
+   {% for model in model_group.models %}
+          <div class="col-4" data-param-k="model" data-param-v="{{ model.mad_tag }}" data-param-group="{{ model_group.tag }}">{{ model.model }}</div>
+   {% endfor %}
    {% endfor %}
         </div>
       </div>
@@ -103,7 +99,8 @@ LLM inference performance validation on AMD Instinct MI300X
 
    .. _vllm-benchmark-mad:
 
-   {% for model in models %}
+   {% for model_group in model_groups %}
+   {% for model in model_group.models %}
    .. raw:: html
 
                 <section id="mad-integrated-benchmarking-{{model.mad_tag}}" data-param-k="model" data-param-v="{{model.mad_tag}}">
@@ -360,6 +357,7 @@ LLM inference performance validation on AMD Instinct MI300X
                     </section>
                   </section>
                 </section>
+   {% endfor %}
    {% endfor %}
 
 

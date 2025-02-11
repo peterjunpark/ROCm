@@ -26,7 +26,6 @@ div#vllm-benchmark-ud-params-picker.container-fluid {
 div[data-param-k="model"] {
   background-color: var(--compat-bg-color);
   padding: 2px;
-  margin: 2px;
   border: solid 1px var(--compat-border-color);
   font-weight: 500;
   cursor: pointer;
@@ -50,5 +49,34 @@ div[data-param-k="model"][data-param-state="disabled"] {
 }
 
 div[data-param-k="model"]:not([data-param-state]):hover {
+  background-color: var(--compat-param-hover-color);
+}
+
+div[data-param-k="model-group"] {
+  background-color: var(--compat-bg-color);
+  padding: 2px;
+  border: solid 1px var(--compat-border-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+div[data-param-k="model-group"][data-param-state="selected"] {
+  background-color: var(--compat-param-selected-color);
+  color: var(--compat-fg-color);
+}
+
+div[data-param-k="model-group"][data-param-state="latest-version"] {
+  background-color: var(--compat-param-selected-color);
+  color: var(--compat-fg-color);
+}
+
+div[data-param-k="model-group"][data-param-state="disabled"] {
+  background-color: var(--compat-param-disabled-color);
+  text-decoration: line-through;
+  /* text-decoration-color: var(--pst-color-danger); */
+  cursor: auto;
+}
+
+div[data-param-k="model-group"]:not([data-param-state]):hover {
   background-color: var(--compat-param-hover-color);
 }
