@@ -80,3 +80,19 @@ div[data-param-k="model-group"][data-param-state="disabled"] {
 div[data-param-k="model-group"]:not([data-param-state]):hover {
   background-color: var(--compat-param-hover-color);
 }
+
+.model-param-head {
+  background-color: var(--compat-head-color);
+  padding: 0.15rem 0.15rem 0.15rem 0.67rem;
+  /* margin: 2px; */
+  border-right: solid 2px var(--compat-accent-color);
+  font-weight: 600;
+}
+
+.model-param {
+  /* padding: 2px; */
+  /* margin: 0 2px 0 2px; */
+  /* margin: 2px; */
+  border: solid 1px var(--compat-border-color);
+  font-weight: 500;
+}
