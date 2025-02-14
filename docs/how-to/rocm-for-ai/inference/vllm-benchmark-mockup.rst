@@ -37,7 +37,7 @@ LLM inference performance validation on AMD Instinct MI300X
 
       <div id="vllm-benchmark-ud-params-picker" class="container-fluid">
         <div class="row">
-          <div class="col-2 me-1 model-param-head">Model</div>
+          <div class="col-2 me-2 model-param-head">Model</div>
           <div class="row col-10">
    {% for model_group in model_groups %}
             <div class="col-3 model-param" data-param-k="model-group" data-param-v="{{ model_group.tag }}">{{ model_group.group }}</div>
@@ -46,12 +46,17 @@ LLM inference performance validation on AMD Instinct MI300X
         </div>
 
         <div class="row mt-1">
-          <div class="col-2 me-1 model-param-head">Model variant</div>
+          <div class="col-2 me-2 model-param-head">Model variant</div>
           <div class="row col-10">
    {% for model_group in model_groups %}
-   {% for model in model_group.models %}
+      {% set models = model_group.models %}
+      {% for model in models %}
+         {% if models|length % 3 == 0 %}
             <div class="col-4 model-param" data-param-k="model" data-param-v="{{ model.mad_tag }}" data-param-group="{{ model_group.tag }}">{{ model.model }}</div>
-   {% endfor %}
+         {% else %}
+            <div class="col-6 model-param" data-param-k="model" data-param-v="{{ model.mad_tag }}" data-param-group="{{ model_group.tag }}">{{ model.model }}</div>
+         {% endif %}
+      {% endfor %}
    {% endfor %}
           </div>
         </div>
@@ -106,7 +111,8 @@ LLM inference performance validation on AMD Instinct MI300X
    .. _vllm-benchmark-mad:
 
    {% for model_group in model_groups %}
-   {% for model in model_group.models %}
+      {% for model in model_group.models %}
+
    .. raw:: html
 
                 <section id="mad-integrated-benchmarking-{{model.mad_tag}}" data-param-k="model" data-param-v="{{model.mad_tag}}">
@@ -117,26 +123,19 @@ LLM inference performance validation on AMD Instinct MI300X
                     directory and install the required packages on the host machine.</p>
                   <div class="highlight-shell notranslate">
                     <div class="highlight">
-                      <pre><span></span>git<span class="w"> </span>clone<span class="w">
-                        </span>https://github.com/ROCm/MAD
-                        <span class="nb">cd</span><span class="w"> </span>MAD
-                        pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w">
-                        </span>requirements.txt
-                      </pre>
+                      <pre>git clone https://github.com/ROCm/MAD
+                cd MAD
+                pip install -r requirements.txt</pre>
                     </div>
                   </div>
                   <p>Use this command to run a performance benchmark test of the {{model.model}} model
-                    on one GPU with <code class="docutils literal notranslate"><span class="pre">float16</span></code>
+                    on one GPU with <code class="docutils literal notranslate"><span class="pre">{{model.precision}}</span></code>
                     data type in the host machine.</p>
                   <div class="highlight-shell notranslate">
                     <div class="highlight">
-                      <pre><span></span><span class="nb">export</span><span class="w"> </span><span
-                          class="nv">MAD_SECRETS_HFTOKEN</span><span class="o">=</span><span class="s2">"your personal
-                          Hugging Face token to access gated models"</span>
-                        python3<span class="w"> </span>tools/run_models.py<span class="w"> </span>--tags<span class="w">
-                        </span>{{model.mad_tag}}<span class="w"> </span>--keep-model-dir<span class="w">
-                        </span>--live-output<span class="w"> </span>--timeout<span class="w"> </span><span
-                          class="m">28800</span>
+                      <pre><span class="nb">export</span><span class="w"> </span><span
+                          class="nv">MAD_SECRETS_HFTOKEN</span><span class="o">=</span><span class="s2">"your personal Hugging Face token to access gated models"</span>
+            python3<span class="w"> </span>tools/run_models.py<span class="w"> </span>--tags<span class="w"> </span>{{model.mad_tag}}<span class="w"> </span>--keep-model-dir<span class="w"> </span>--live-output<span class="w"> </span>--timeout<span class="w"> </span><span class="m">28800</span>
                       </pre>
                     </div>
                   </div>
@@ -164,11 +163,10 @@ LLM inference performance validation on AMD Instinct MI300X
                   <div class="highlight-default notranslate">
                     <div class="highlight">
                       <pre><span></span>docker pull rocm/vllm:rocm6.3.1_mi300_ubuntu22.04_py3.12_vllm_0.6.6
-                        docker run -it --device=/dev/kfd --device=/dev/dri --group-add video --shm-size 16G
-                        --security-opt seccomp=unconfined --security-opt apparmor=unconfined --cap-add=SYS_PTRACE -v
-                        $(pwd):/workspace --env HUGGINGFACE_HUB_CACHE=/workspace --name vllm_v0.6.6
-                        rocm/vllm:rocm6.3.1_mi300_ubuntu22.04_py3.12_vllm_0.6.6
-                      </pre>
+                docker run -it --device=/dev/kfd --device=/dev/dri --group-add video --shm-size 16G
+                --security-opt seccomp=unconfined --security-opt apparmor=unconfined --cap-add=SYS_PTRACE -v
+                $(pwd):/workspace --env HUGGINGFACE_HUB_CACHE=/workspace --name vllm_v0.6.6
+                rocm/vllm:rocm6.3.1_mi300_ubuntu22.04_py3.12_vllm_0.6.6</pre>
                     </div>
                   </div>
                   <p>In the Docker container, clone the ROCm MAD repository and navigate to the
@@ -181,7 +179,7 @@ LLM inference performance validation on AMD Instinct MI300X
                           class="n">github</span><span class="o">.</span><span class="n">com</span><span
                           class="o">/</span><span class="n">ROCm</span><span class="o">/</span><span
                           class="n">MAD</span>
-                        <span class="n">cd</span> <span class="n">MAD</span><span class="o">/</span><span
+                <span class="n">cd</span> <span class="n">MAD</span><span class="o">/</span><span
                           class="n">scripts</span><span class="o">/</span><span class="n">vllm</span>
                       </pre>
                     </div>
@@ -195,8 +193,7 @@ LLM inference performance validation on AMD Instinct MI300X
                     <div class="highlight-shell notranslate">
                       <div class="highlight">
                           <pre>
-                           <span>./vllm_benchmark_report.sh -s $test_option -m {{model.model_repo}} -g $num_gpu -d {{model.precision}}</span>
-                          </pre>
+                <span>./vllm_benchmark_report.sh -s $test_option -m {{model.model_repo}} -g $num_gpu -d {{model.precision}}</span></pre>
                       </div>
                     </div>
                     <p>See the <a class="reference internal" href="#vllm-benchmark-run-benchmark"><span
@@ -317,7 +314,7 @@ LLM inference performance validation on AMD Instinct MI300X
                       <div class="highlight-default notranslate">
                         <div class="highlight">
                           <pre>
-                           <span>./vllm_benchmark_report.sh -s latency -m {{model.model_repo}} -g 8 -d {{model.precision}}</span>
+                <span>./vllm_benchmark_report.sh -s latency -m {{model.model_repo}} -g 8 -d {{model.precision}}</span>
                           </pre>
                         </div>
                       </div>
@@ -343,7 +340,7 @@ LLM inference performance validation on AMD Instinct MI300X
                       <div class="highlight-shell notranslate">
                         <div class="highlight">
                           <pre>
-                           <span>./vllm_benchmark_report.sh -s throughput -m {{model.model_repo}} -g 8 -d {{model.precision}}</span>
+                <span>./vllm_benchmark_report.sh -s throughput -m {{model.model_repo}} -g 8 -d {{model.precision}}</span>
                           </pre>
                         </div>
                       </div>
@@ -363,7 +360,7 @@ LLM inference performance validation on AMD Instinct MI300X
                     </section>
                   </section>
                 </section>
-   {% endfor %}
+      {% endfor %}
    {% endfor %}
 
 
