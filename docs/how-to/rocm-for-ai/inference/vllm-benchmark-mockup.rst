@@ -144,7 +144,7 @@ LLM inference performance validation on AMD Instinct MI300X
                         class="pre">container_ci-{{model.mad_tag}}</span></code>. The latency and throughput reports
                     of the
                     model are collected in the following path: <code class="docutils literal notranslate"><span
-                        class="pre">~/MAD/reports_float16/</span></code>.
+                        class="pre">~/MAD/reports_{{model.precision}}/</span></code>.
                   </p>
                   <p>Although the following models are preconfigured to collect latency and
                     throughput performance data, you can also change the benchmarking parameters.
