@@ -20,7 +20,7 @@ ready(function () {
 
     const modelGroups = modelPicker.querySelectorAll('div[data-param-k="model-group"][data-param-v]');
     const modelParams = modelPicker.querySelectorAll('div[data-param-k="model"][data-param-v]');
-    const modelDocs = document.querySelectorAll('section[data-param-k="model"][data-param-v]');
+    const modelDocs = document.querySelectorAll('div.model-doc');
 
     // Get initial model group based on selected/default model
     function getInitialModelGroup(currentModel) {
@@ -95,8 +95,10 @@ ready(function () {
     }
 
     function setModelDocs(selectedModel) {
+		// Convert non-alphanumeric chars to hyphens. Because Sphinx does this to classes.
+		const formatted = selectedModel.replace(/[^a-zA-Z0-9]/g, '-');
         modelDocs.forEach((doc) => {
-            doc.style.display = doc.getAttribute("data-param-v") === selectedModel ? "block" : "none";
+            doc.style.display = doc.classList.contains(formatted) ? "block" : "none";
         });
     }
 
