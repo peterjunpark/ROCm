@@ -28,7 +28,7 @@ LLM inference performance validation on AMD Instinct MI300X
 
    With this Docker image, you can quickly validate the expected inference
    performance numbers for the MI300X accelerator. This topic also provides tips on
-   optimizing performance with popular AI models. 
+   optimizing performance with popular AI models.
 
    Available models
    ================
@@ -121,30 +121,30 @@ LLM inference performance validation on AMD Instinct MI300X
             Clone the ROCm Model Automation and Dashboarding (`<https://github.com/ROCm/MAD>`__) repository to a local
             directory and install the required packages on the host machine.
 
-            .. code-block::
+            .. code-block:: shell
 
                git clone https://github.com/ROCm/MAD
                cd MAD
                pip install -r requirements.txt
 
-            Use this command to run a performance benchmark test of the Llama 3.1 8B model
-            on one GPU with ``float16`` data type in the host machine.
+            Use this command to run a performance benchmark test of the {{model.model}} model
+            on one GPU with ``{{model.precision}}`` data type in the host machine.
 
-            .. code-block::
+            .. code-block:: shell
 
                export MAD_SECRETS_HFTOKEN="your personal Hugging Face token to access gated models"
-               python3 tools/run_models.py --tags pyt_vllm_llama-3.1-8b --keep-model-dir --live-output --timeout 28800
+               python3 tools/run_models.py --tags {{model.mad_tag}} --keep-model-dir --live-output --timeout 28800
 
             ROCm MAD launches a Docker container with the name
-            ``container_ci-pyt_vllm_llama-3.1-8b``. The latency and throughput reports of the
-            model are collected in the following path: ``~/MAD/reports_float16/``.
+            ``container_ci-{{model.mad_tag}}``. The latency and throughput reports of the
+            model are collected in the following path: ``~/MAD/reports_{{model.precision}}/``.
 
             Although the following models are preconfigured to collect latency and
             throughput performance data, you can also change the benchmarking parameters.
 
          .. tab-item:: Standalone benchmarking
 
-            You can run the vLLM benchmark tool independently by starting the
+            Run the vLLM benchmark tool independently by starting the
             `Docker container <https://hub.docker.com/layers/rocm/vllm/rocm6.3.1_mi300_ubuntu22.04_py3.12_vllm_0.6.6/images/sha256-9a12ef62bbbeb5a4c30a01f702c8e025061f575aa129f291a49fbd02d6b4d6c9>`_
             as shown in the following snippet.
 
@@ -165,7 +165,7 @@ LLM inference performance validation on AMD Instinct MI300X
 
             .. code-block::
 
-               ./vllm_benchmark_report.sh -s $test_option -m $model_repo -g $num_gpu -d $datatype
+               ./vllm_benchmark_report.sh -s $test_option -m {{model.model_repo}} -g $num_gpu -d {{model.precision}}
 
             .. list-table::
                :header-rows: 1
@@ -216,33 +216,23 @@ LLM inference performance validation on AMD Instinct MI300X
 
             * Latency benchmark
 
-              Use this command to benchmark the latency of the Llama 3.1 70B model on eight GPUs with the ``float16`` and ``float8`` data types.
+              Use this command to benchmark the latency of the {{model.model}} model on eight GPUs with the ``{{model.precision}}`` data type.
 
               .. code-block::
 
-                 ./vllm_benchmark_report.sh -s latency -m meta-llama/Llama-3.1-70B-Instruct -g 8 -d float16
-                 ./vllm_benchmark_report.sh -s latency -m amd/Llama-3.1-70B-Instruct-FP8-KV -g 8 -d float8
+                 ./vllm_benchmark_report.sh -s latency -m {{model.model_repo}} -g 8 -d {{model.precision}}
 
-              Find the latency reports at:
-
-              - ``./reports_float16/summary/Llama-3.1-70B-Instruct_latency_report.csv``
-
-              - ``./reports_float8/summary/Llama-3.1-70B-Instruct-FP8-KV_latency_report.csv``
+              Find the latency report at ``./reports_{{model.precision}}/summary/{{model.model_repo}}_latency_report.csv``.
 
             * Throughput benchmark
 
-              Use this command to benchmark the throughput of the Llama 3.1 70B model on eight GPUs with the ``float16`` and ``float8`` data types.
+              Use this command to throughput the latency of the {{model.model}} model on eight GPUs with the ``{{model.precision}}`` data type.
 
               .. code-block:: shell
 
-                 ./vllm_benchmark_report.sh -s throughput -m meta-llama/Llama-3.1-70B-Instruct -g 8 -d float16
-                 ./vllm_benchmark_report.sh -s throughput -m amd/Llama-3.1-70B-Instruct-FP8-KV -g 8 -d float8
+                 ./vllm_benchmark_report.sh -s latency -m {{model.model_repo}} -g 8 -d {{model.precision}}
 
-              Find the throughput reports at:
-
-              - ``./reports_float16/summary/Llama-3.1-70B-Instruct_throughput_report.csv``
-
-              - ``./reports_float8/summary/Llama-3.1-70B-Instruct-FP8-KV_throughput_report.csv``
+              Find the throughput report at ``./reports_{{model.precision}}/summary/{{model.model_repo}}_throughput_report.csv``.
 
             .. raw:: html
 
