@@ -239,7 +239,7 @@ LLM inference performance validation on AMD Instinct MI300X
 
                  ./vllm_benchmark_report.sh -s latency -m {{model.model_repo}} -g 8 -d {{model.precision}}
 
-              Find the latency report at ``./reports_{{model.precision}}_vllm_rocm{{unified_docker.rocm_version}}/summary/{{model.model_repo}}_latency_report.csv``.
+              Find the latency report at ``./reports_{{model.precision}}_vllm_rocm{{unified_docker.rocm_version}}/summary/{{model.model_repo.split('/', 1)[1] if '/' in model.model_repo else model.model_repo}}_latency_report.csv``.
 
             * Throughput benchmark
 
@@ -249,7 +249,7 @@ LLM inference performance validation on AMD Instinct MI300X
 
                  ./vllm_benchmark_report.sh -s latency -m {{model.model_repo}} -g 8 -d {{model.precision}}
 
-              Find the throughput report at ``./reports_{{model.precision}}_vllm_rocm{{unified_docker.rocm_version}}/summary/{{model.model_repo}}_throughput_report.csv``.
+              Find the throughput report at ``./reports_{{model.precision}}_vllm_rocm{{unified_docker.rocm_version}}/summary/{{model.model_repo.split('/', 1)[1] if '/' in model.model_repo else model.model_repo}}_throughput_report.csv``.
 
             .. raw:: html
 
