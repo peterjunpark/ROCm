@@ -66,7 +66,7 @@ ready(function () {
         const modelTag = model.getAttribute("data-param-v");
         const groupTag = model.getAttribute("data-param-group");
         availableModels.add(modelTag);
-        
+
         model.addEventListener("click", () => {
             setModelSearchParam(modelTag);
             setModelGroup(groupTag);
@@ -77,7 +77,7 @@ ready(function () {
 
     function setModelGroup(selectedGroup) {
         if (!selectedGroup) return;
-        
+
         modelParams.forEach(model => {
             const group = model.getAttribute("data-param-group");
             model.style.display = group === selectedGroup ? "block" : "none";
@@ -106,7 +106,7 @@ ready(function () {
         const [defaultModel] = availableModels;
         const model = availableModels.has(modelTag) ? modelTag : defaultModel;
         const searchParams = new URLSearchParams({ model });
-        
+
         globalThis.history.replaceState(
             {},
             "",
