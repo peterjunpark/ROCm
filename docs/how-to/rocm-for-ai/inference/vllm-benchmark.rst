@@ -30,6 +30,8 @@ LLM inference performance validation on AMD Instinct MI300X
    performance numbers for the MI300X accelerator. This topic also provides tips on
    optimizing performance with popular AI models.
 
+   .. _vllm-benchmark-available-models:
+
    Available models
    ================
 
@@ -64,6 +66,20 @@ LLM inference performance validation on AMD Instinct MI300X
 
    .. _vllm-benchmark-vllm:
 
+   {% for model_group in model_groups %}
+      {% for model in model_group.models %}
+
+   .. container:: model-doc {{model.mad_tag}}
+
+      .. note::
+
+         See the `{{ model.model }} model card on Hugging Face <{{ model.url }}>`_ to learn more about your selected model.
+         Some models require access authorization prior to use via an external license agreement through a third party.
+
+      {% endfor %}
+   {% endfor %}
+
+
    .. note::
 
       vLLM is a toolkit and library for LLM inference and serving. AMD implements
@@ -93,7 +109,7 @@ LLM inference performance validation on AMD Instinct MI300X
          cat /proc/sys/kernel/numa_balancing
          0
 
-   2. Download the :ref:`ROCm vLLM Docker image <vllm-benchmark-unified-docker>`.
+   2. Download the `ROCm vLLM Docker image <{{ unified_docker.docker_hub_url }}>`_.
 
       Use the following command to pull the Docker image from Docker Hub.
 
@@ -127,7 +143,7 @@ LLM inference performance validation on AMD Instinct MI300X
                cd MAD
                pip install -r requirements.txt
 
-            Use this command to run a performance benchmark test of the {{model.model}} model
+            Use this command to run a performance benchmark test of the `{{model.model}} <{{ model.url }}>`_ model
             on one GPU with ``{{model.precision}}`` data type in the host machine.
 
             .. code-block:: shell
@@ -139,8 +155,9 @@ LLM inference performance validation on AMD Instinct MI300X
             ``container_ci-{{model.mad_tag}}``. The latency and throughput reports of the
             model are collected in the following path: ``~/MAD/reports_{{model.precision}}/``.
 
-            Although the following models are preconfigured to collect latency and
-            throughput performance data, you can also change the benchmarking parameters.
+            Although the :ref:`available models <vllm-benchmark-available-models>` are preconfigured
+            to collect latency and throughput performance data, you can also change the benchmarking
+            parameters.
 
          .. tab-item:: Standalone benchmarking
 
@@ -222,7 +239,7 @@ LLM inference performance validation on AMD Instinct MI300X
 
                  ./vllm_benchmark_report.sh -s latency -m {{model.model_repo}} -g 8 -d {{model.precision}}
 
-              Find the latency report at ``./reports_{{model.precision}}/summary/{{model.model_repo}}_latency_report.csv``.
+              Find the latency report at ``./reports_{{model.precision}}_vllm_rocm{{unified_docker.rocm_version}}/summary/{{model.model_repo}}_latency_report.csv``.
 
             * Throughput benchmark
 
@@ -232,7 +249,7 @@ LLM inference performance validation on AMD Instinct MI300X
 
                  ./vllm_benchmark_report.sh -s latency -m {{model.model_repo}} -g 8 -d {{model.precision}}
 
-              Find the throughput report at ``./reports_{{model.precision}}/summary/{{model.model_repo}}_throughput_report.csv``.
+              Find the throughput report at ``./reports_{{model.precision}}_vllm_rocm{{unified_docker.rocm_version}}/summary/{{model.model_repo}}_throughput_report.csv``.
 
             .. raw:: html
 
