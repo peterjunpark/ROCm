@@ -42,7 +42,7 @@ LLM inference performance validation on AMD Instinct MI300X
           <div class="col-2 me-2 model-param-head">Model</div>
           <div class="row col-10">
    {% for model_group in model_groups %}
-            <div class="col-3 model-param" data-param-k="model-group" data-param-v="{{ model_group.tag }}">{{ model_group.group }}</div>
+            <div class="col-3 model-param" data-param-k="model-group" data-param-v="{{ model_group.tag }}" tabindex="0">{{ model_group.group }}</div>
    {% endfor %}
           </div>
         </div>
@@ -54,9 +54,9 @@ LLM inference performance validation on AMD Instinct MI300X
       {% set models = model_group.models %}
       {% for model in models %}
          {% if models|length % 3 == 0 %}
-            <div class="col-4 model-param" data-param-k="model" data-param-v="{{ model.mad_tag }}" data-param-group="{{ model_group.tag }}">{{ model.model }}</div>
+            <div class="col-4 model-param" data-param-k="model" data-param-v="{{ model.mad_tag }}" data-param-group="{{ model_group.tag }}" tabindex="0">{{ model.model }}</div>
          {% else %}
-            <div class="col-6 model-param" data-param-k="model" data-param-v="{{ model.mad_tag }}" data-param-group="{{ model_group.tag }}">{{ model.model }}</div>
+            <div class="col-6 model-param" data-param-k="model" data-param-v="{{ model.mad_tag }}" data-param-group="{{ model_group.tag }}" tabindex="0">{{ model.model }}</div>
          {% endif %}
       {% endfor %}
    {% endfor %}

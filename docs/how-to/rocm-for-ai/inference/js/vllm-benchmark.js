@@ -1,126 +1,200 @@
-const availableModels = new Set();
-
-function getModelSearchParam() {
-  const searchParams = new URLSearchParams(globalThis.location.search);
-  return searchParams.get("model");
-}
-
 function ready(proc) {
   if (document.readyState !== "loading") {
     proc();
-    return;
+  } else {
+    document.addEventListener("DOMContentLoaded", proc);
   }
-  document.addEventListener("DOMContentLoaded", proc);
 }
 
-// Entry point
-ready(function () {
-  const modelPicker = document.getElementById("vllm-benchmark-ud-params-picker");
-  if (!modelPicker) return;
+ready(() => {
+  const ModelPicker = {
+    SELECTORS: {
+      CONTAINER: "#vllm-benchmark-ud-params-picker",
+      MODEL_GROUP_BTN: 'div[data-param-k="model-group"][data-param-v]',
+      MODEL_PARAM_BTN: 'div[data-param-k="model"][data-param-v]',
+      MODEL_DOC: "div.model-doc",
+    },
+    CSS_CLASSES: {
+      HIDDEN: "hidden",
+    },
+    ATTRIBUTES: {
+      PARAM_KEY: "data-param-k",
+      PARAM_VALUE: "data-param-v",
+      PARAM_GROUP: "data-param-group",
+      PARAM_STATE: "data-param-state",
+    },
 
-  const modelGroups = modelPicker.querySelectorAll(
-    'div[data-param-k="model-group"][data-param-v]'
-  );
-  const modelParams = modelPicker.querySelectorAll(
-    'div[data-param-k="model"][data-param-v]'
-  );
-  const modelDocs = document.querySelectorAll("div.model-doc");
+    // Cache DOM elements
+    elements: {
+      container: null,
+      modelGroups: null,
+      modelParams: null,
+      modelDocs: null,
+    },
 
-  const modelsByGroup = new Map();
-  const modelMap = new Map();
-  
-  modelParams.forEach((model) => {
-    const modelTag = model.getAttribute("data-param-v");
-    const groupTag = model.getAttribute("data-param-group");
+    data: {
+      availableModels: new Set(),
+      modelsByGroup: new Map(),
+      modelToGroupMap: new Map(),
+      formattedModelClassMap: new Map(),
+    },
 
-    availableModels.add(modelTag);
-    modelMap.set(modelTag, model);
+    init() {
+      this.elements.container = document.querySelector(
+        this.SELECTORS.CONTAINER,
+      );
+      if (!this.elements.container) return;
 
-    if (!modelsByGroup.has(groupTag)) {
-      modelsByGroup.set(groupTag, []);
-    }
-    modelsByGroup.get(groupTag).push(modelTag);
+      this.cacheDOMElements();
+      if (!this.validateElements()) return;
 
-    model.addEventListener("click", () => {
-      updateUI(modelTag, groupTag);
-    });
-  });
+      this.buildModelData();
+      this.bindEvents();
+      this.initializeState();
+    },
 
-  modelGroups.forEach((group) => {
-    const modelGroupTag = group.getAttribute("data-param-v");
-    group.addEventListener("click", () => {
-      const firstModelInGroup = modelsByGroup.get(modelGroupTag)?.[0];
-      if (firstModelInGroup) {
-        updateUI(firstModelInGroup, modelGroupTag);
+    cacheDOMElements() {
+      const { CONTAINER, MODEL_GROUP_BTN, MODEL_PARAM_BTN, MODEL_DOC } =
+        this.SELECTORS;
+      this.elements = {
+        container: document.querySelector(CONTAINER),
+        modelGroups: document.querySelectorAll(MODEL_GROUP_BTN),
+        modelParams: document.querySelectorAll(MODEL_PARAM_BTN),
+        modelDocs: document.querySelectorAll(MODEL_DOC),
+      };
+    },
+
+    validateElements() {
+      const { modelGroups, modelParams } = this.elements;
+      if (!modelGroups.length || !modelParams.length) {
+        console.warn("Model picker is missing required elements");
+        return false;
       }
-    });
-  });
+      return true;
+    },
 
-  function updateUI(modelTag, groupTag) {
-    setModelSearchParam(modelTag);
-    setModelGroup(groupTag);
-    setModelPicker(modelTag);
-    setModelDocs(modelTag);
+    buildModelData() {
+      const { PARAM_VALUE, PARAM_GROUP } = this.ATTRIBUTES;
 
-    // Update group selection UI
-    modelGroups.forEach((g) => {
-      g.setAttribute(
-        "data-param-state",
-        g.getAttribute("data-param-v") === groupTag ? "selected" : ""
+      this.elements.modelParams.forEach((model) => {
+        const modelTag = model.getAttribute(PARAM_VALUE);
+        const groupTag = model.getAttribute(PARAM_GROUP);
+
+        if (!modelTag || !groupTag) return;
+
+        this.data.availableModels.add(modelTag);
+        this.data.modelToGroupMap.set(modelTag, groupTag);
+
+        this.data.formattedModelClassMap.set(
+          modelTag,
+          modelTag.replace(/[^a-zA-Z0-9]/g, "-"),
+        );
+
+        if (!this.data.modelsByGroup.has(groupTag)) {
+          this.data.modelsByGroup.set(groupTag, []);
+        }
+        this.data.modelsByGroup.get(groupTag).push(modelTag);
+      });
+    },
+
+    bindEvents() {
+      const handleInteraction = (event) => {
+        const target = event.target.closest(`[${this.ATTRIBUTES.PARAM_KEY}]`);
+        if (!target) return;
+
+        const paramType = target.getAttribute(this.ATTRIBUTES.PARAM_KEY);
+        const paramValue = target.getAttribute(this.ATTRIBUTES.PARAM_VALUE);
+
+        if (paramType === "model") {
+          const groupTag = target.getAttribute(this.ATTRIBUTES.PARAM_GROUP);
+          if (groupTag) this.updateUI(paramValue, groupTag);
+        } else if (paramType === "model-group") {
+          const firstModelInGroup = this.data.modelsByGroup.get(paramValue)
+            ?.[0];
+          if (firstModelInGroup) this.updateUI(firstModelInGroup, paramValue);
+        }
+      };
+
+      this.elements.container.addEventListener("click", handleInteraction);
+      this.elements.container.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          handleInteraction(event);
+        }
+      });
+    },
+
+    updateUI(modelTag, groupTag) {
+      const validModel = this.setModelSearchParam(modelTag);
+
+      this.elements.modelGroups.forEach((group) => {
+        const isSelected =
+          group.getAttribute(this.ATTRIBUTES.PARAM_VALUE) === groupTag;
+        group.setAttribute(
+          this.ATTRIBUTES.PARAM_STATE,
+          isSelected ? "selected" : "",
+        );
+        group.setAttribute("aria-selected", isSelected.toString());
+      });
+
+      this.elements.modelParams.forEach((model) => {
+        const isInSelectedGroup =
+          model.getAttribute(this.ATTRIBUTES.PARAM_GROUP) === groupTag;
+        const isSelectedModel =
+          model.getAttribute(this.ATTRIBUTES.PARAM_VALUE) === validModel;
+
+        model.classList.toggle(this.CSS_CLASSES.HIDDEN, !isInSelectedGroup);
+        model.setAttribute(
+          this.ATTRIBUTES.PARAM_STATE,
+          isSelectedModel ? "selected" : "",
+        );
+        model.setAttribute("aria-selected", isSelectedModel.toString());
+      });
+
+      const formattedClass = this.data.formattedModelClassMap.get(validModel);
+      if (formattedClass) {
+        this.elements.modelDocs.forEach((doc) => {
+          doc.classList.toggle(
+            this.CSS_CLASSES.HIDDEN,
+            !doc.classList.contains(formattedClass),
+          );
+        });
+      }
+    },
+
+    getModelSearchParam() {
+      return new URLSearchParams(location.search).get("model");
+    },
+
+    setModelSearchParam(modelTag) {
+      const defaultModel = [...this.data.availableModels][0];
+      const model = this.data.availableModels.has(modelTag)
+        ? modelTag
+        : defaultModel;
+
+      const searchParams = new URLSearchParams(location.search);
+      searchParams.set("model", model);
+
+      history.replaceState(
+        {},
+        "",
+        `${location.pathname}?${searchParams.toString()}`,
       );
-    });
-  }
+      return model;
+    },
 
-  function getInitialModelGroup(currentModel) {
-    if (!currentModel) return null;
-    return modelMap.get(currentModel)?.getAttribute("data-param-group") || null;
-  }
+    initializeState() {
+      const currentModel = this.getModelSearchParam();
+      const validModel = this.setModelSearchParam(currentModel);
 
-  function setModelGroup(selectedGroup) {
-    if (!selectedGroup) return;
-    modelParams.forEach((model) => {
-      model.style.display =
-        model.getAttribute("data-param-group") === selectedGroup
-          ? "block"
-          : "none";
-    });
-  }
+      const initialGroup = this.data.modelToGroupMap.get(validModel) ??
+        [...this.data.modelsByGroup.keys()][0];
 
-  function setModelPicker(selectedModel) {
-    modelParams.forEach((model) => {
-      model.setAttribute(
-        "data-param-state",
-        model.getAttribute("data-param-v") === selectedModel ? "selected" : ""
-      );
-    });
-  }
+      if (initialGroup) {
+        this.updateUI(validModel, initialGroup);
+      }
+    },
+  };
 
-  function setModelDocs(selectedModel) {
-    // Convert non-alphanumeric chars to hyphens. Because Sphinx does this to classes.
-    const formatted = selectedModel.replace(/[^a-zA-Z0-9]/g, "-");
-    modelDocs.forEach((doc) => {
-      doc.style.display = doc.classList.contains(formatted) ? "block" : "none";
-    });
-  }
-
-  function setModelSearchParam(modelTag) {
-    const [defaultModel] = availableModels;
-    const model = availableModels.has(modelTag) ? modelTag : defaultModel;
-    const searchParams = new URLSearchParams({ model });
-
-    globalThis.history.replaceState(
-      {},
-      "",
-      `${globalThis.location.pathname}?${searchParams.toString()}`
-    );
-    return model;
-  }
-
-  // Initialize state
-  let currentModel = getModelSearchParam();
-  currentModel = setModelSearchParam(currentModel);
-  const initialGroup = getInitialModelGroup(currentModel);
-  
-  // Initialize UI
-  updateUI(currentModel, initialGroup);
+  ModelPicker.init();
 });

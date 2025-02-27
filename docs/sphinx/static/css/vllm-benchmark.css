@@ -96,3 +96,7 @@ div[data-param-k="model-group"]:not([data-param-state]):hover {
   border: solid 1px var(--compat-border-color);
   font-weight: 500;
 }
+
+.hidden {
+  display: none !important;
+}
