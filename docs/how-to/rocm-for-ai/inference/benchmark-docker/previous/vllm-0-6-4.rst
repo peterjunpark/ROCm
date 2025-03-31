@@ -1,11 +1,20 @@
+:orphan:
+
 .. meta::
    :description: Learn how to validate LLM inference performance on MI300X accelerators using AMD MAD and the unified
                  ROCm Docker image.
    :keywords: model, MAD, automation, dashboarding, validate
 
-***********************************************************
-LLM inference performance validation on AMD Instinct MI300X
-***********************************************************
+************************
+vLLM performance testing
+************************
+
+.. attention::
+
+   This version of the documentation does not reflect the latest version of the
+   ROCm vLLM Docker or its supported models. For the latest version,
+   see
+   `vLLM inference performance testing <https://rocm.docs.amd.com/en/latest/how-to/rocm-for-ai/inference/benchmark-docker/vllm.html>`_.
 
 .. _vllm-benchmark-unified-docker:
 
