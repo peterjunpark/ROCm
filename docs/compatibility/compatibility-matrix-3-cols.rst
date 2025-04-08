@@ -6,6 +6,8 @@
 Compatibility matrix
 ********************
 
+This version of the compatibility matrix has 3 columns.
+
 Use this matrix to view ROCm compatibility and system requirements. This mockup uses fake data.
 Styling will be updated.
 
