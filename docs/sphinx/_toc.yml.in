@@ -11,8 +11,6 @@ subtrees:
     title: Release notes
   - file: compatibility/compatibility-matrix.rst
     title: Compatibility matrix
-  - file: compatibility/compatibility-matrix-3-cols.rst
-    title: Compatibility matrix (3 cols)
 
 - caption: Install
   entries:

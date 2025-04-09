@@ -9,5 +9,7 @@ Compatibility matrix
 Use this matrix to view ROCm compatibility and system requirements. This mockup uses fake data.
 Styling will be updated.
 
-.. datatemplate:yaml:: compatibility-matrix-config.yaml
-   :template: compatibility-matrix.html
+.. datatemplate:nodata::
+   .. :template: compatibility-matrix.html
+
+   {{ config.html_context.compatibility_matrix }}

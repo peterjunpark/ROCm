@@ -94,6 +94,17 @@ article_pages = [
     {"file": "how-to/gpu-enabled-mpi", "os": ["linux"]},
 ]
 
+compatibility_matrix_config = {
+    "versions": [
+        {"rocm_version": release, "data_file": "rocm-60400-compute-compatibility.yaml"},
+        {"rocm_version": "6.3.3", "data_file": "rocm-60303-compute-compatibility.yaml"},
+        {"rocm_version": "6.3.2", "data_file": "rocm-60302-compute-compatibility.yaml"},
+        {"rocm_version": "6.3.1", "data_file": "rocm-60301-compute-compatibility.yaml"},
+        {"rocm_version": "6.3.0", "data_file": "rocm-60300-compute-compatibility.yaml"},
+        {"rocm_version": "6.2.4", "data_file": "rocm-60204-compute-compatibility.yaml"},
+    ]
+}
+
 external_toc_path = "./sphinx/_toc.yml"
 
 # Add the _extensions directory to Python's search path
@@ -142,4 +153,5 @@ html_context = {
     "memory_type" : [('Device DRAM', 'device-dram'), ('Migratable Host DRAM', 'migratable-host-dram'), ('Pinned Host DRAM', 'pinned-host-dram')],
     "granularity_type" : [('Coarse-grained', 'coarse-grained'), ('Fine-grained', 'fine-grained')],
     "scope_type" : [('Device', 'device'), ('System', 'system')]
+    "compatibility_matrix": compatibility_matrix_config,
 }
