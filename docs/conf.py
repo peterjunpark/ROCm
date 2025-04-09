@@ -51,16 +51,13 @@ article_pages = [
     {"file": "compatibility/ml-compatibility/tensorflow-compatibility", "os": ["linux"]},
     {"file": "compatibility/ml-compatibility/jax-compatibility", "os": ["linux"]},
     {"file": "how-to/deep-learning-rocm", "os": ["linux"]},
-
     {"file": "how-to/rocm-for-ai/index", "os": ["linux"]},
-
     {"file": "how-to/rocm-for-ai/training/index", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/training/train-a-model", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/training/prerequisite-system-validation", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/training/benchmark-docker/megatron-lm", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/training/benchmark-docker/pytorch-training", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/training/scale-model-training", "os": ["linux"]},
-
     {"file": "how-to/rocm-for-ai/fine-tuning/index", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/fine-tuning/overview", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/fine-tuning/fine-tuning-and-inference", "os": ["linux"]},
@@ -73,7 +70,6 @@ article_pages = [
     {"file": "how-to/rocm-for-ai/inference/llm-inference-frameworks", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/inference/vllm-benchmark", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/inference/deploy-your-model", "os": ["linux"]},
-
     {"file": "how-to/rocm-for-ai/inference-optimization/index", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/inference-optimization/model-quantization", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/inference-optimization/model-acceleration-libraries", "os": ["linux"]},
@@ -81,7 +77,6 @@ article_pages = [
     {"file": "how-to/rocm-for-ai/inference-optimization/optimizing-triton-kernel", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/inference-optimization/profiling-and-debugging", "os": ["linux"]},
     {"file": "how-to/rocm-for-ai/inference-optimization/workload", "os": ["linux"]},
-
     {"file": "how-to/system-optimization/index", "os": ["linux"]},
     {"file": "how-to/system-optimization/mi300x", "os": ["linux"]},
     {"file": "how-to/system-optimization/mi200", "os": ["linux"]},
@@ -104,6 +99,7 @@ compatibility_matrix_config = {
         {"rocm_version": "6.2.4", "data_file": "rocm-60204-compute-compatibility.yaml"},
     ]
 }
+
 
 external_toc_path = "./sphinx/_toc.yml"
 
@@ -152,6 +148,6 @@ html_context = {
     "pcie_type" : [('No PCIe atomics', 'nopcie'), ('PCIe atomics', 'pcie')],
     "memory_type" : [('Device DRAM', 'device-dram'), ('Migratable Host DRAM', 'migratable-host-dram'), ('Pinned Host DRAM', 'pinned-host-dram')],
     "granularity_type" : [('Coarse-grained', 'coarse-grained'), ('Fine-grained', 'fine-grained')],
-    "scope_type" : [('Device', 'device'), ('System', 'system')]
+    "scope_type" : [('Device', 'device'), ('System', 'system')],
     "compatibility_matrix": compatibility_matrix_config,
 }

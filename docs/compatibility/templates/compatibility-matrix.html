@@ -7,8 +7,7 @@
 
 .. raw:: html
 
-   {% block compatibility_matrix_selector %}{% endblock %}
-   <div class="container-fluid js-content" data-latest="{{ data[0].ROCm.Version }}" data-latest-windows="6.1.2"
+   <div class="container-fluid js-content" data-latest="{{ latest["ROCm"]["Version"] }}" data-latest-windows="6.1.2"
      id="compat-params-selector">
      <!-- PARAMS SELECTOR -->
      <div class="row gx-2">
@@ -92,13 +91,13 @@
            <div id="compat-param-rocm-linux" class="row gx-0">
              <div class="col-2">
                <div class="compat-param" data-param-state="latest-version">
-                 {{ data.compatibility_matrix.versions[0].rocm_version }}
+                 {{ latest["ROCm"]["Version"] }}
                  (latest)</div>
              </div>
            {% for v in data[1:] %}
              <div class="col-2">
-               <div class="compat-param" data-param-k="compareVer" data-param-v="{{ v.ROCm.Version }}">
-                 {{ v.ROCm.Version }}
+               <div class="compat-param" data-param-k="compareVer" data-param-v="{{ v["ROCm"]["Version"] }}">
+                 {{ v["ROCm"]["Version"] }}
                </div>
              </div>
            {% endfor %}
@@ -598,13 +597,13 @@
                <a href="https://github.com/ROCm/composable_kernel" target="_blank"><i class="fab fa-github"></i></a>
              </th>
              <td>
-               {{ latest.ROCm.Components["Machine learning and computer vision libraries"].composable_kernel.version }}
+               {{ latest["ROCm"]["Components"]["Machine learning and computer vision libraries"]["composable_kernel"]["version"] }}
              </td>
 
            {% for v in data[1:] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v.ROCm.Version}}">
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
-                 {{ v.ROCm.Components["Machine learning and computer vision libraries"].composable_kernel.version }}
+                 {{ v["ROCm"]["Components"]["Machine learning and computer vision libraries"]["composable_kernel"]["version"] }}
                </td>
              </template>
            {% endfor %}

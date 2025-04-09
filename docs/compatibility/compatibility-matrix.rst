@@ -10,6 +10,4 @@ Use this matrix to view ROCm compatibility and system requirements. This mockup 
 Styling will be updated.
 
 .. datatemplate:nodata::
-   .. :template: compatibility-matrix.html
-
-   {{ config.html_context.compatibility_matrix }}
+   :template: compatibility-matrix.html
