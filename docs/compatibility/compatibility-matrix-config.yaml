@@ -1,0 +1,28 @@
+compatibility_matrix:
+  versions:
+      - rocm_version: "6.4.0"
+        file: rocm-60400-compatibility.yaml
+        linux: true
+        windows: true
+        radeon: false
+      - rocm_version: "6.3.3"
+        file: rocm-60303-compatibility.yaml
+        linux: true
+        windows: true
+        radeon: false
+      - rocm_version: "6.3.2"
+        file: rocm-60302-compatibility.yaml
+        linux: true
+        windows: true
+        radeon: false
+      - rocm_version: "6.3.1"
+        file: rocm-60301-compatibility.yaml
+        linux: true
+        windows: true
+        radeon: false
+      - rocm_version: "6.3.0"
+        file: rocm-60300-compatibility.yaml
+        linux: true
+        windows: true
+        radeon: false
+  template_config:
