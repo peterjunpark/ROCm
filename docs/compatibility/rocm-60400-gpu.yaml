@@ -1,0 +1,52 @@
+GPUs:
+  Instinct:
+    - MI325X:
+        uarch: CDNA3
+        amdgpu: gfx942
+    - MI300X:
+        uarch: CDNA3
+        amdgpu: gfx942
+    - MI300A:
+        uarch: CDNA3
+        amdgpu: gfx942
+    - MI250X:
+        uarch: CDNA2
+        amdgpu: gfx90a
+    - MI250:
+        uarch: CDNA2
+        amdgpu: gfx90a
+    - MI210:
+        uarch: CDNA2
+        amdgpu: gfx90a
+    - MI100:
+        uarch: CDNA
+        amdgpu: gfx908
+  Radeon PRO:
+    - V710:
+        uarch: RDNA3
+        amdgpu: gfx1101
+    - W7900 Dual Slot:
+        uarch: RDNA3
+        amdgpu: gfx1100
+    - W7900:
+        uarch: RDNA3
+        amdgpu: gfx1100
+    - W7800:
+        uarch: RDNA3
+        amdgpu: gfx1100
+    - W6800:
+        uarch: RDNA2
+        amdgpu: gfx1030
+    - V620:
+        uarch: RDNA2
+        amdgpu: gfx1030
+  Radeon:
+    - RX 7900 XTX:
+        uarch: RDNA3
+        amdgpu: gfx1100
+    - RX 7900 XT:
+        uarch: RDNA3
+        amdgpu: gfx1100
+    - RX 7900 GRE:
+        uarch: RDNA3
+        amdgpu: gfx1100

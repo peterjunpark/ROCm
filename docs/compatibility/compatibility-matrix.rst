@@ -9,6 +9,14 @@ Compatibility matrix
 Use this matrix to view ROCm compatibility and system requirements. This mockup uses fake data.
 Styling will be updated.
 
+.. datacontainer:: class1 class2
+   :name: test-id
+   :data: os=ubuntu gpu=radeon-pro
+
+   .. note::
+
+      This is a test!
+
 .. datatemplate:yaml:: ./rocm-60400-compatibility.yaml
 
    {{ data }}
