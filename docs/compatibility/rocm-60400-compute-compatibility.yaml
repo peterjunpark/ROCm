@@ -1,0 +1,297 @@
+ROCm:
+    Version: 6.4.0
+    Components:
+        Machine learning and computer vision libraries:
+            composable_kernel:
+                alt_name: Composable Kernel
+                version: 1.1.0
+            AMDMIGraphX:
+                alt_name: MIGraphX
+                version: 2.12.0
+            MIOpen:
+                version: 3.4.0
+            MIVisionX:
+                version: 3.2.0
+            rocAL:
+                version: 2.2.0
+            rocDecode:
+                version: 0.10.0
+            rocJPEG:
+                version: 0.8.0
+            rocPyDecode:
+                version: 0.3.1
+            RPP:
+                alt_name: ROCm Performance Primitives (RPP)
+                version: 1.9.10
+        Communication libraries:
+            RCCL:
+                version: 2.22.3
+        Math libraries:
+            half:
+                version: 1.12.0
+            hipBLAS:
+                version: 2.4.0
+            hipBLASLt:
+                version: 0.12.0
+            hipFFT:
+                version: 1.0.18
+            hipfort:
+                version: 0.6.0
+            hipRAND:
+                version: 2.12.0
+            hipSOLVER:
+                version: 2.4.0
+            hipSPARSE:
+                version: 3.2.0
+            hipSPARSELt:
+                version: 0.2.3
+            rocALUTION:
+                version: 3.2.2
+            rocBLAS:
+                version: 4.4.0
+            rocFFT:
+                version: 1.0.32
+            rocRAND:
+                version: 3.3.0
+            rocSOLVER:
+                version: 3.28.0
+            rocSPARSE:
+                version: 3.4.0
+            rocWMMA:
+                version: 1.7.0
+            Tensile:
+                version: 4.43.0
+        Primitives libraries:
+            hipCUB:
+                version: 3.4.0
+            hipTensor:
+                version: 1.5.0
+            rocPRIM:
+                version: 3.4.0
+            rocThrust:
+                version: 3.3.0
+        Support libraries:
+            hipother:
+                version: 6.4.43482
+            rocm-core:
+                version: 6.4.0
+        System management tools:
+            amdsmi:
+                alt_name: AMD SMI
+                version: 25.3.0
+            RDC:
+                alt_name: ROCm Data Center Tool (RDC)
+                version: 0.3.0
+            rocminfo:
+                version: 1.0.0
+            rocm_smi_lib:
+                alt_name: ROCm SMI
+                version: 7.5.0
+            ROCmValidationSuite:
+                alt_name: ROCm Validation Suite (RVS)
+                version: 1.1.0
+        Performance tools:
+            rocm_bandwidth_test:
+                alt_name: ROCm Bandwidth Test (RBT)
+                version: 1.4.0
+            rocprofiler-compute:
+                alt_name: ROCm Compute Profiler
+                version: 3.1.0
+            rocprofiler-systems:
+                alt_name: ROCm Systems Profiler
+                version: 1.0.0
+            ROCProfiler:
+                version: 2.0.60400
+            rocprofiler-register:
+                version: 0.4.0
+            ROCprofiler-SDK:
+                version: 0.6.0
+            ROCTracer:
+                version: 4.1.60400
+        Development tools:
+            HIPIFY:
+                version: 19.0.0.25104
+            ROCdbgapi:
+                alt_name: AMD Debugger API (ROCdbgapi)
+                version: 0.77.0
+            ROCgdb:
+                alt_name: ROCm Debugger
+                version: 15.2.0
+            rocm-cmake:
+                alt_name: ROCm CMake
+                version: 0.14.0
+            rocr_debug_agent:
+                alt_name: ROCr Debug Agent
+                version: 2.0.4
+        Compilers:
+            hipCC:
+                version: 1.1.1
+            flang:
+                version: 19.0.0.25104
+            llvm-project:
+                version: 19.0.0.25104
+            OpenMP:
+                version: 19.0.0.25104
+        Runtimes:
+            clr:
+                alt_name: AMD Compute Language Runtimes (CLR)
+                version: 6.4.43482
+            HIP:
+                version: 6.4.43482
+            opencl:
+                alt_name: OpenCL Runtime
+                version: 2.0.0
+            ROCr-Runtime:
+                alt_name: ROCr Runtime
+                version: 1.15.0
+    KFD and user-space:
+        Tested user space versions: [6.3.x, 6.2.x, 6.1.x]
+    Virtualization support:
+        MI325X:
+            - hypervisor: KVM
+              virtualization_technology: SR-IOV
+              host_os: Ubuntu 22.04
+              guest_os: Ubuntu 22.04
+        MI300X: 
+            - hypervisor: Hyper-V
+              virtualization_technology: SR-IOV
+              host_os: Azure Host 2021
+              guest_os: Ubuntu 22.04
+            - hypervisor: KVM
+              virtualization_technology: SR-IOV
+              host_os: Ubuntu 22.04
+              guest_os: Ubuntu 22.04
+            - hypervisor: KVM
+              virtualization_technology: Passthrough
+              host_os: Ubuntu 22.04
+              guest_os: Ubuntu 22.04
+        MI250:
+            - hypervisor: Hyper-V
+              virtualization_technology: DDA
+              host_os: Azure Host 2021
+              guest_os: Ubuntu 22.04
+        MI210:
+            - hypervisor: KVM
+              virtualization_technology: SR-IOV
+              host_os: RHEL 9.4
+              guest_os: [Ubuntu 22.04, RHEL 9.4]
+    Framework support:
+        PyTorch: [2.4, 2.3, 2.2, 1.13]
+        TensorFlow: [2.17.0, 2.16.2, 2.15.1]
+        JAX: [0.4.31]
+        ONNX Runtime: [1.17.3]
+    Third-party communications:
+        UCC: ">= 1.3.0"
+        UCX: ">= 1.15.0"
+    Third-party algorithms:
+        Thrust: 2.3.2
+        CUB: 2.3.2
+    GPUs:
+        Instinct:
+            MI325X:
+                architecture: CDNA3
+                llvm_target: gfx942
+                support: yes
+            MI300X:
+                architecture: CDNA3
+                llvm_target: gfx942
+                support: yes
+            MI300A:
+                architecture: CDNA3
+                llvm_target: gfx942
+                support: yes
+            MI250X:
+                architecture: CDNA2
+                llvm_target: gfx90a
+                support: yes
+            MI250:
+                architecture: CDNA2
+                llvm_target: gfx90a
+                support: yes
+            MI210:
+                architecture: CDNA2
+                llvm_target: gfx90a
+                support: yes
+            MI100:
+                architecture: CDNA
+                llvm_target: gfx908
+                support: yes
+        Radeon PRO:
+            V710:
+                architecture: RDNA3
+                llvm_target: gfx1101
+            W7900 Dual Slot:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            W7900:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            W7800 48GB:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            W7800:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            W6800:
+                architecture: RDNA2
+                llvm_target: gfx1030
+            V620:
+                architecture: RDNA2
+                llvm_target: gfx1030
+        Radeon:
+            RX 7900 XTX:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            RX 7900 XT:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            RX 7900 GRE:
+                architecture: RDNA3
+                llvm_target: gfx1100
+    Operating systems:
+        Linux:
+            Ubuntu 24:
+              - 24.04.2:
+                  kernel: [6.8 GA, 6.11 HWE]
+                  glibc: [2.39]
+            Ubuntu 22:
+              - 22.04.5:
+                  kernel: [5.15 GA, 6.8 HWE]
+                  glibc: [2.35]
+            RHEL 9:
+              - 9.5:
+                  kernel: [5.14+]
+                  glibc: [2.34]
+              - 9.4:
+                  kernel: [5.14+]
+                  glibc: [2.34]
+            RHEL 8:
+              - 8.10:
+                  kernel: [4.18.0+]
+                  glibc: [2.28]
+            SLES 15:
+              - 15 SP6:
+                  kernel: [6.5.0+, 6.4.0]
+                  glibc: [2.38]
+            Oracle Linux:
+              - 9:
+                  kernel: [5.15.0 UEK]
+                  glibc: [2.35]
+              - 8:
+                  kernel: [5.15.0 UEK]
+                  glibc: [2.28]
+            Debian:
+              - 12:
+                  kernel: [6.1]
+                  glibc: [2.36]
+            Azure Linux:
+              - 3.0:
+                  kernel: [6.6.60]
+                  glibc: [2.38]
+            Windows:
+              - 10: 22H2 (GA)
+              - 11: 22H2 (GA)
+              - Server 2022: 22H2 (GA)
+    rules:
+        - when: os != debian
+          then:

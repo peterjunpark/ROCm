@@ -1,14 +1,20 @@
 {# data == compatibility-matrix-config.yaml #}
-{% set compatibility_matrix_versions = data.compatibility_matrix.versions %}
 {% set versions_data = [] %}
-{% for version in compatibility_matrix_versions %}
-    {% set file_content = load(version.file, data_format = "yaml") | default({}) %}
-    {% set _ = versions_data.append(file_content) %}
+{% for version in data.compatibility_matrix.versions %}
+  {% set file_content = load(version.file, data_format = "yaml") | default({}) %}
+  {% set _ = versions_data.append(file_content) %}
 {% endfor %}
+{% set latest = versions_data[0] %}
+{% set components
+{% for v in versions_data %}
+{#
+Create a set union of all the components.
+#}
 
 .. raw:: html
 
-   <div class="container-fluid js-content" data-latest="{{ versions_data[0].rocm.version }}" data-latest-windows="6.1.2" id="compat-params-selector">
+   <div class="container-fluid js-content" data-latest="{{ versions_data[0].ROCm.Version }}" data-latest-windows="6.1.2"
+     id="compat-params-selector">
      <!-- PARAMS SELECTOR -->
      <div class="row gx-2">
        <div class="row gx-0">
@@ -91,24 +97,16 @@
            <div id="compat-param-rocm-linux" class="row gx-0">
              <div class="col-2">
                <div class="compat-param" data-param-state="latest-version">
-                 6.3.2
+                 {{ data.compatibility_matrix.versions[0].rocm_version }}
                  (latest)</div>
              </div>
+           {% for v in versions_data[1:] %}
              <div class="col-2">
-               <div class="compat-param" data-param-k="compareVer" data-param-v="6.3.1">6.3.1</div>
+               <div class="compat-param" data-param-k="compareVer" data-param-v="{{ v.ROCm.Version }}">
+                 {{ v.ROCm.Version }}
+               </div>
              </div>
-             <div class="col-2">
-               <div class="compat-param" data-param-k="compareVer" data-param-v="6.3.0">6.3.0</div>
-             </div>
-             <div class="col-2">
-               <div class="compat-param" data-param-k="compareVer" data-param-v="6.2.4">6.2.4</div>
-             </div>
-             <div class="col-2">
-               <div class="compat-param" data-param-k="compareVer" data-param-v="6.2.3">6.2.3</div>
-             </div>
-             <div class="col-2">
-               <div class="compat-param" data-param-k="compareVer" data-param-v="6.2.2">6.2.2</div>
-             </div>
+           {% endfor %}
            </div>
            <div id="compat-param-rocm-windows" class="row gx-0" style="display: none;">
              <div class="col-6">
@@ -141,453 +139,453 @@
              <col span="2" />
            </colgroup>
          </thead>
-         <tbody id="compat-ref-gpu">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 <span id="compat-matrix-gpu-heading"></span>
-                 <a class="headerlink" href="#compat-ref-gpu" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-           <tr></tr>
-           <template data-templ-k="gpu" data-templ-v="instinct">
-             <tr>
-               <th>CDNA 3 (gfx942)</th>
-               <td>
-                 <ul>
-                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
-                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
-                   <li>MI300X</li>
-                   <li>MI300A</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
-                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
-                   <li>MI300X</li>
-                   <li>MI300A</li>
-                 </ul>
-               </td>
-             </tr>
-             <tr>
-               <th>CDNA 2 (gfx90a)</th>
-               <td>
-                 <ul>
-                   <li>MI250X</li>
-                   <li>MI250</li>
-                   <li>MI210</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>MI250X</li>
-                   <li>MI250</li>
-                   <li>MI210</li>
-                 </ul>
-               </td>
-             </tr>
-             <tr>
-               <th>CDNA (gfx908)</th>
-               <td>
-                 <ul>
-                   <li>MI100</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>MI100</li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="gpu" data-templ-v="radeon-pro">
-             <tr>
-               <th>RDNA 3 (gfx1101)</th>
-               <td>
-                 <ul>
-                   <li>V710</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>V710</li>
-                 </ul>
-               </td>
-             </tr>
-             <tr>
-               <th>RDNA 3 (gfx1100)</th>
-               <td>
-                 <ul>
-                   <li>W7900 Dual Slot</li>
-                   <li>W7900</li>
-                   <li>W7800</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>W7900 Dual Slot</li>
-                   <li>W7900</li>
-                   <li>W7800</li>
-                 </ul>
-               </td>
-             </tr>
-             <tr>
-               <th>RDNA 2 (gfx1030)</th>
-               <td>
-                 <ul>
-                   <li>W6800</li>
-                   <li>V620</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>W6800</li>
-                   <li>V620</li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="gpu" data-templ-v="radeon">
-             <tr>
-               <th>RDNA 3 (gfx1100)</th>
-               <td>
-                 <ul>
-                   <li>RX 7900 XTX</li>
-                   <li>RX 7900 XT</li>
-                   <li>RX 7900 GRE</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>RX 7900 XTX</li>
-                   <li>RX 7900 XT</li>
-                   <li>RX 7900 GRE</li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-         </tbody>
-         <tbody id="compat-ref-os">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 Supported OS and kernel versions
-                 <a class="headerlink" href="#compat-ref-os" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-           <template data-templ-k="os" data-templ-v="ubuntu">
-             <tr>
-               <th>Ubuntu</th>
-               <td>
-                 <ul>
-                   <li>
-                     24.04.2 (kernel: 6.8 GA, 6.11 HWE)
-                   </li>
-                   <li>
-                     22.04.5 (kernel: 5.15 GA, 6.8 HWE)
-                   </li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>
-                     24.04.2 (kernel: 6.8 GA, 6.11 HWE)
-                   </li>
-                   <li>
-                     22.04.5 (kernel: 5.15 GA, 6.8 HWE)
-                   </li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="os" data-templ-v="rhel">
-             <tr>
-               <th>RHEL</th>
-               <td>
-                 <ul>
-                   <li>
-                     9.5 (kernel: 5.14.0)
-                   </li>
-                   <li>
-                     9.4 (kernel: 5.14.0)
-                   </li>
-                   <li>
-                     8.10 (kernel: 4.18.0)
-                   </li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>
-                     9.5 (kernel: 5.14.0)
-                   </li>
-                   <li>
-                     9.4 (kernel: 5.14.0)
-                   </li>
-                   <li>
-                     8.10 (kernel: 4.18.0)
-                   </li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="os" data-templ-v="sles">
-             <tr>
-               <th>SLES</th>
-               <td>
-                 <ul>
-                   <li>
-                     15 SP6 (kernel: 6.4.0)
-                   </li>
-                   <li>
-                     15 SP5 (kernel: 5.14.21)
-                   </li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>
-                     15 SP6 (kernel: 6.4.0)
-                   </li>
-                   <li>
-                     15 SP5 (kernel: 5.14.21)
-                   </li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="os" data-templ-v="oracle-linux">
-             <tr>
-               <th>Oracle Linux</th>
-               <td>
-                 <ul>
-                   <li>8.10 (kernel: 5.15.0)<a class="footnote-reference brackets" href="#compat-foot-oracle-linux"
-                       role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>8.10 (kernel: 5.15.0)<a class="footnote-reference brackets" href="#compat-foot-oracle-linux"
-                       role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="os" data-templ-v="debian">
-             <tr>
-               <th>Debian</th>
-               <td>
-                 <ul>
-                   <li>12 (kernel: 6.1)<a class="footnote-reference brackets" href="#compat-foot-debian"
-                       role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>12 (kernel: 6.1)<a class="footnote-reference brackets" href="#compat-foot-debian"
-                       role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="os" data-templ-v="azure-linux">
-             <tr>
-               <th>Azure Linux</th>
-               <td>
-                 <ul>
-                   <li>3.0 (kernel: 6.6)<a class="footnote-reference brackets" href="#compat-foot-azure-linux"
-                       role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>3.0 (kernel: 6.6)<a class="footnote-reference brackets" href="#compat-foot-azure-linux"
-                       role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="os" data-templ-v="windows">
-             <tr>
-               <th>Windows</th>
-               <td>
-                 <ul>
-                   <li>Windows 11</li>
-                   <li>Windows 10</li>
-                   <li>Windows Server 2022</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>Windows 11</li>
-                   <li>Windows 10</li>
-                   <li>Windows Server 2022</li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="os" data-templ-v="wsl-ubuntu">
-             <tr>
-               <th>WSL (Ubuntu)</th>
-               <td>
-                 <ul>
-                   <li>
-                     24.04.1 Desktop (kernel: 6.8.0-40-generic)
-                   </li>
-                   <li>
-                     22.04.5 Desktop (kernel: 6.8.0-40-generic)
-                   </li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>
-                     24.04.1 Desktop (kernel: 6.8.0-40-generic)
-                   </li>
-                   <li>
-                     22.04.5 Desktop (kernel: 6.8.0-40-generic)
-                   </li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-         </tbody>
-         <tbody id="compat-ref-radeon-software">
-           <tr>
-             <template data-templ-k="useCase" data-templ-v="graphics">
-               <th colspan="4">
-                 <h2>
-                   Supported Radeon Software versions
-                   <a class="headerlink" href="#compat-ref-radeon-software" title="Link to this heading">#</a>
-                 </h2>
-               </th>
-             </template>
-           </tr>
-           <tr></tr>
-           <template data-templ-k="useCase" data-templ-v="graphics">
-             <tr>
-               <th>Radeon Software for Linux</th>
-               <td>24.04, 22.04</td>
-               <td>24.04, 22.04</td>
-             </tr>
-           </template>
-         </tbody>
-         <tbody id="compat-ref-ml-frameworks">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 Supported deep learning frameworks
-                 <a class="headerlink" href="#compat-ref-ml-frameworks" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-           <tr id="deep-learning-frameworks-pytorch">
-             <th><a href="https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/pytorch-compatibility.html"
-                 target="_blank">PyTorch</a></th>
-             <td>2.4, 2.3, 2.2, 1.13</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>2.2.0</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr id="deep-learning-frameworks-tensorflow">
-             <th><a href="https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/tensorflow-compatibility.html"
-                 target="_blank">TensorFlow</a></th>
-             <td>2.17.0, 2.16.2, 2.15.1</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>2.16.1</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr id="operating-systems-and-kernels-jax">
-             <th><a href="https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/jax-compatibility.html"
-                 target="_blank">JAX</a></th>
-             <td>0.4.31</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td></td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr id="operating-systems-and-kernels-onnx-runtime">
-             <th>ONNX Runtime</th>
-             <td>1.17.3</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>1.18</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-         </tbody>
+         <!-- <tbody id="compat-ref-gpu"> -->
+         <!--   <tr> -->
+         <!--     <th colspan="4"> -->
+         <!--       <h2> -->
+         <!--         <span id="compat-matrix-gpu-heading"></span> -->
+         <!--         <a class="headerlink" href="#compat-ref-gpu" title="Link to this heading">#</a> -->
+         <!--       </h2> -->
+         <!--     </th> -->
+         <!--   </tr> -->
+         <!--   <tr></tr> -->
+         <!--   <template data-templ-k="gpu" data-templ-v="instinct"> -->
+         <!--     <tr> -->
+         <!--       <th>CDNA 3 (gfx942)</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span -->
+         <!--                 class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li> -->
+         <!--           <li>MI300X</li> -->
+         <!--           <li>MI300A</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span -->
+         <!--                 class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li> -->
+         <!--           <li>MI300X</li> -->
+         <!--           <li>MI300A</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--     <tr> -->
+         <!--       <th>CDNA 2 (gfx90a)</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>MI250X</li> -->
+         <!--           <li>MI250</li> -->
+         <!--           <li>MI210</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>MI250X</li> -->
+         <!--           <li>MI250</li> -->
+         <!--           <li>MI210</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--     <tr> -->
+         <!--       <th>CDNA (gfx908)</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>MI100</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>MI100</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!--   <template data-templ-k="gpu" data-templ-v="radeon-pro"> -->
+         <!--     <tr> -->
+         <!--       <th>RDNA 3 (gfx1101)</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>V710</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>V710</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--     <tr> -->
+         <!--       <th>RDNA 3 (gfx1100)</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>W7900 Dual Slot</li> -->
+         <!--           <li>W7900</li> -->
+         <!--           <li>W7800</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>W7900 Dual Slot</li> -->
+         <!--           <li>W7900</li> -->
+         <!--           <li>W7800</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--     <tr> -->
+         <!--       <th>RDNA 2 (gfx1030)</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>W6800</li> -->
+         <!--           <li>V620</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>W6800</li> -->
+         <!--           <li>V620</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!--   <template data-templ-k="gpu" data-templ-v="radeon"> -->
+         <!--     <tr> -->
+         <!--       <th>RDNA 3 (gfx1100)</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>RX 7900 XTX</li> -->
+         <!--           <li>RX 7900 XT</li> -->
+         <!--           <li>RX 7900 GRE</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>RX 7900 XTX</li> -->
+         <!--           <li>RX 7900 XT</li> -->
+         <!--           <li>RX 7900 GRE</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!-- </tbody> -->
+         <!-- <tbody id="compat-ref-os"> -->
+         <!--   <tr> -->
+         <!--     <th colspan="4"> -->
+         <!--       <h2> -->
+         <!--         Supported OS and kernel versions -->
+         <!--         <a class="headerlink" href="#compat-ref-os" title="Link to this heading">#</a> -->
+         <!--       </h2> -->
+         <!--     </th> -->
+         <!--   </tr> -->
+         <!--   <template data-templ-k="os" data-templ-v="ubuntu"> -->
+         <!--     <tr> -->
+         <!--       <th>Ubuntu</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li> -->
+         <!--             24.04.2 (kernel: 6.8 GA, 6.11 HWE) -->
+         <!--           </li> -->
+         <!--           <li> -->
+         <!--             22.04.5 (kernel: 5.15 GA, 6.8 HWE) -->
+         <!--           </li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li> -->
+         <!--             24.04.2 (kernel: 6.8 GA, 6.11 HWE) -->
+         <!--           </li> -->
+         <!--           <li> -->
+         <!--             22.04.5 (kernel: 5.15 GA, 6.8 HWE) -->
+         <!--           </li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!--   <template data-templ-k="os" data-templ-v="rhel"> -->
+         <!--     <tr> -->
+         <!--       <th>RHEL</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li> -->
+         <!--             9.5 (kernel: 5.14.0) -->
+         <!--           </li> -->
+         <!--           <li> -->
+         <!--             9.4 (kernel: 5.14.0) -->
+         <!--           </li> -->
+         <!--           <li> -->
+         <!--             8.10 (kernel: 4.18.0) -->
+         <!--           </li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li> -->
+         <!--             9.5 (kernel: 5.14.0) -->
+         <!--           </li> -->
+         <!--           <li> -->
+         <!--             9.4 (kernel: 5.14.0) -->
+         <!--           </li> -->
+         <!--           <li> -->
+         <!--             8.10 (kernel: 4.18.0) -->
+         <!--           </li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!--   <template data-templ-k="os" data-templ-v="sles"> -->
+         <!--     <tr> -->
+         <!--       <th>SLES</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li> -->
+         <!--             15 SP6 (kernel: 6.4.0) -->
+         <!--           </li> -->
+         <!--           <li> -->
+         <!--             15 SP5 (kernel: 5.14.21) -->
+         <!--           </li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li> -->
+         <!--             15 SP6 (kernel: 6.4.0) -->
+         <!--           </li> -->
+         <!--           <li> -->
+         <!--             15 SP5 (kernel: 5.14.21) -->
+         <!--           </li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!--   <template data-templ-k="os" data-templ-v="oracle-linux"> -->
+         <!--     <tr> -->
+         <!--       <th>Oracle Linux</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>8.10 (kernel: 5.15.0)<a class="footnote-reference brackets" href="#compat-foot-oracle-linux" -->
+         <!--               role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>8.10 (kernel: 5.15.0)<a class="footnote-reference brackets" href="#compat-foot-oracle-linux" -->
+         <!--               role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!--   <template data-templ-k="os" data-templ-v="debian"> -->
+         <!--     <tr> -->
+         <!--       <th>Debian</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>12 (kernel: 6.1)<a class="footnote-reference brackets" href="#compat-foot-debian" -->
+         <!--               role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>12 (kernel: 6.1)<a class="footnote-reference brackets" href="#compat-foot-debian" -->
+         <!--               role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!--   <template data-templ-k="os" data-templ-v="azure-linux"> -->
+         <!--     <tr> -->
+         <!--       <th>Azure Linux</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>3.0 (kernel: 6.6)<a class="footnote-reference brackets" href="#compat-foot-azure-linux" -->
+         <!--               role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>3.0 (kernel: 6.6)<a class="footnote-reference brackets" href="#compat-foot-azure-linux" -->
+         <!--               role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!--   <template data-templ-k="os" data-templ-v="windows"> -->
+         <!--     <tr> -->
+         <!--       <th>Windows</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>Windows 11</li> -->
+         <!--           <li>Windows 10</li> -->
+         <!--           <li>Windows Server 2022</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li>Windows 11</li> -->
+         <!--           <li>Windows 10</li> -->
+         <!--           <li>Windows Server 2022</li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!--   <template data-templ-k="os" data-templ-v="wsl-ubuntu"> -->
+         <!--     <tr> -->
+         <!--       <th>WSL (Ubuntu)</th> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li> -->
+         <!--             24.04.1 Desktop (kernel: 6.8.0-40-generic) -->
+         <!--           </li> -->
+         <!--           <li> -->
+         <!--             22.04.5 Desktop (kernel: 6.8.0-40-generic) -->
+         <!--           </li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--       <td> -->
+         <!--         <ul> -->
+         <!--           <li> -->
+         <!--             24.04.1 Desktop (kernel: 6.8.0-40-generic) -->
+         <!--           </li> -->
+         <!--           <li> -->
+         <!--             22.04.5 Desktop (kernel: 6.8.0-40-generic) -->
+         <!--           </li> -->
+         <!--         </ul> -->
+         <!--       </td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!-- </tbody> -->
+         <!-- <tbody id="compat-ref-radeon-software"> -->
+         <!--   <tr> -->
+         <!--     <template data-templ-k="useCase" data-templ-v="graphics"> -->
+         <!--       <th colspan="4"> -->
+         <!--         <h2> -->
+         <!--           Supported Radeon Software versions -->
+         <!--           <a class="headerlink" href="#compat-ref-radeon-software" title="Link to this heading">#</a> -->
+         <!--         </h2> -->
+         <!--       </th> -->
+         <!--     </template> -->
+         <!--   </tr> -->
+         <!--   <tr></tr> -->
+         <!--   <template data-templ-k="useCase" data-templ-v="graphics"> -->
+         <!--     <tr> -->
+         <!--       <th>Radeon Software for Linux</th> -->
+         <!--       <td>24.04, 22.04</td> -->
+         <!--       <td>24.04, 22.04</td> -->
+         <!--     </tr> -->
+         <!--   </template> -->
+         <!-- </tbody> -->
+         <!-- <tbody id="compat-ref-ml-frameworks"> -->
+         <!--   <tr> -->
+         <!--     <th colspan="4"> -->
+         <!--       <h2> -->
+         <!--         Supported deep learning frameworks -->
+         <!--         <a class="headerlink" href="#compat-ref-ml-frameworks" title="Link to this heading">#</a> -->
+         <!--       </h2> -->
+         <!--     </th> -->
+         <!--   </tr> -->
+         <!--   <tr id="deep-learning-frameworks-pytorch"> -->
+         <!--     <th><a href="https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/pytorch-compatibility.html" -->
+         <!--         target="_blank">PyTorch</a></th> -->
+         <!--     <td>2.4, 2.3, 2.2, 1.13</td> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.1"> -->
+         <!--       <td>2.2.0</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.0"> -->
+         <!--       <td>6.3.0 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.4"> -->
+         <!--       <td>6.2.4 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.3"> -->
+         <!--       <td>6.2.3 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.2"> -->
+         <!--       <td>linux ver</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.1.2"> -->
+         <!--       <td>windows ver</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.0.2"> -->
+         <!--       <td>windows ver</td> -->
+         <!--     </template> -->
+         <!--   </tr> -->
+         <!--   <tr id="deep-learning-frameworks-tensorflow"> -->
+         <!--     <th><a href="https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/tensorflow-compatibility.html" -->
+         <!--         target="_blank">TensorFlow</a></th> -->
+         <!--     <td>2.17.0, 2.16.2, 2.15.1</td> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.1"> -->
+         <!--       <td>2.16.1</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.0"> -->
+         <!--       <td>6.3.0 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.4"> -->
+         <!--       <td>6.2.4 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.3"> -->
+         <!--       <td>6.2.3 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.2"> -->
+         <!--       <td>linux ver</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.1.2"> -->
+         <!--       <td>windows ver</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.0.2"> -->
+         <!--       <td>windows ver</td> -->
+         <!--     </template> -->
+         <!--   </tr> -->
+         <!--   <tr id="operating-systems-and-kernels-jax"> -->
+         <!--     <th><a href="https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/jax-compatibility.html" -->
+         <!--         target="_blank">JAX</a></th> -->
+         <!--     <td>0.4.31</td> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.1"> -->
+         <!--       <td></td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.0"> -->
+         <!--       <td>6.3.0 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.4"> -->
+         <!--       <td>6.2.4 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.3"> -->
+         <!--       <td>6.2.3 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.2"> -->
+         <!--       <td>linux ver</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.1.2"> -->
+         <!--       <td>windows ver</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.0.2"> -->
+         <!--       <td>windows ver</td> -->
+         <!--     </template> -->
+         <!--   </tr> -->
+         <!--   <tr id="operating-systems-and-kernels-onnx-runtime"> -->
+         <!--     <th>ONNX Runtime</th> -->
+         <!--     <td>1.17.3</td> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.1"> -->
+         <!--       <td>1.18</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.0"> -->
+         <!--       <td>6.3.0 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.4"> -->
+         <!--       <td>6.2.4 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.3"> -->
+         <!--       <td>6.2.3 (demo)</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.2"> -->
+         <!--       <td>linux ver</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.1.2"> -->
+         <!--       <td>windows ver</td> -->
+         <!--     </template> -->
+         <!--     <template data-templ-k="compareVer" data-templ-v="6.0.2"> -->
+         <!--       <td>windows ver</td> -->
+         <!--     </template> -->
+         <!--   </tr> -->
+         <!-- </tbody> -->
          <tbody id="compat-ref-ml-cv-libs">
            <tr>
              <th colspan="4">
@@ -598,31 +596,22 @@
              </th>
            </tr>
            <tr class="compat-matrix-entry">
-             <th><a href="https://rocm.docs.amd.com/projects/composable_kernel/en/latest" target="_blank">Composable
-                 Kernel</a><a href="https://github.com/ROCm/composable_kernel" target="_blank"><i
-                   class="fab fa-github"></i></a></th>
-             <td>1.1.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/composable_kernel/en/latest" target="_blank">
+                 Composable Kernel
+               </a>
+               <a href="https://github.com/ROCm/composable_kernel" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+               {{ latest.ROCm.Components["Machine learning and computer vision libraries"].composable_kernel.version }}
+             </td>
+           {% for v in versions_data[1:] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v.ROCm.Version}}">
+               <td>
+                 {{ v.ROCm.Components["Machine learning and computer vision libraries"].composable_kernel.version }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+           {% endfor %}
            </tr>
            <tr>
              <th>MIGraphX</th>
