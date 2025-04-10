@@ -145,16 +145,78 @@ RoR:
             ROCr-Runtime:
                 alt_name: ROCr Runtime
                 version: 1.14.0
-    Framework support:
-        PyTorch: [2.4, 2.3, 2.2, 1.13]
-        TensorFlow: [2.17.0, 2.16.2, 2.15.1]
-        JAX: [0.4.31]
-        ONNX Runtime: [1.17.3]
-    Third-party communications:
+    Deep learning frameworks:
+        PyTorch:
+            version: 2.6, 2.5, 2.4, 2.3
+            doc_url: https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/pytorch-compatibility.html
+        TensorFlow:
+            version: 2.17.0, 2.16.2, 2.15.1
+            doc_url: https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/tensorflow-compatibility.html
+        JAX:
+            version: 0.4.31
+            doc_url: https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/jax-compatibility.html
+        ONNX Runtime:
+            version: 1.20
+    Third-party communication libraries:
         UCC: ">= 1.3.0"
         UCX: ">= 1.15.0"
-    Third-party algorithms:
+    Third-party algorithm libraries:
         Thrust: 2.3.2
         CUB: 2.3.2
-    KFD and user-space:
-        Tested user space versions: [6.3.x, 6.2.x, 6.1.x]
+    KFD and user space:
+        Tested user space versions: 6.3.x, 6.2.x, 6.1.x
+    GPUs:
+        Instinct:
+            MI325X:
+                architecture: CDNA3
+                llvm_target: gfx942
+            MI300X:
+                architecture: CDNA3
+                llvm_target: gfx942
+            MI300A:
+                architecture: CDNA3
+                llvm_target: gfx942
+            MI250X:
+                architecture: CDNA2
+                llvm_target: gfx90a
+            MI250:
+                architecture: CDNA2
+                llvm_target: gfx90a
+            MI210:
+                architecture: CDNA2
+                llvm_target: gfx90a
+            MI100:
+                architecture: CDNA
+                llvm_target: gfx908
+        Radeon PRO:
+            V710:
+                architecture: RDNA3
+                llvm_target: gfx1101
+            W7900 Dual Slot:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            W7900:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            W7800 48GB:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            W7800:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            W6800:
+                architecture: RDNA2
+                llvm_target: gfx1030
+            V620:
+                architecture: RDNA2
+                llvm_target: gfx1030
+        Radeon:
+            RX 7900 XTX:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            RX 7900 XT:
+                architecture: RDNA3
+                llvm_target: gfx1100
+            RX 7900 GRE:
+                architecture: RDNA3
+                llvm_target: gfx1100

@@ -133,134 +133,190 @@
              <col span="2" />
            </colgroup>
          </thead>
-         <!-- <tbody id="compat-ref-gpu"> -->
-         <!--   <tr> -->
-         <!--     <th colspan="4"> -->
-         <!--       <h2> -->
-         <!--         <span id="compat-matrix-gpu-heading"></span> -->
-         <!--         <a class="headerlink" href="#compat-ref-gpu" title="Link to this heading">#</a> -->
-         <!--       </h2> -->
-         <!--     </th> -->
-         <!--   </tr> -->
-         <!--   <tr></tr> -->
-         <!--   <template data-templ-k="gpu" data-templ-v="instinct"> -->
-         <!--     <tr> -->
-         <!--       <th>CDNA 3 (gfx942)</th> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span -->
-         <!--                 class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li> -->
-         <!--           <li>MI300X</li> -->
-         <!--           <li>MI300A</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span -->
-         <!--                 class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li> -->
-         <!--           <li>MI300X</li> -->
-         <!--           <li>MI300A</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--     </tr> -->
-         <!--     <tr> -->
-         <!--       <th>CDNA 2 (gfx90a)</th> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>MI250X</li> -->
-         <!--           <li>MI250</li> -->
-         <!--           <li>MI210</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>MI250X</li> -->
-         <!--           <li>MI250</li> -->
-         <!--           <li>MI210</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--     </tr> -->
-         <!--     <tr> -->
-         <!--       <th>CDNA (gfx908)</th> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>MI100</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>MI100</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--     </tr> -->
-         <!--   </template> -->
-         <!--   <template data-templ-k="gpu" data-templ-v="radeon-pro"> -->
-         <!--     <tr> -->
-         <!--       <th>RDNA 3 (gfx1101)</th> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>V710</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>V710</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--     </tr> -->
-         <!--     <tr> -->
-         <!--       <th>RDNA 3 (gfx1100)</th> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>W7900 Dual Slot</li> -->
-         <!--           <li>W7900</li> -->
-         <!--           <li>W7800</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>W7900 Dual Slot</li> -->
-         <!--           <li>W7900</li> -->
-         <!--           <li>W7800</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--     </tr> -->
-         <!--     <tr> -->
-         <!--       <th>RDNA 2 (gfx1030)</th> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>W6800</li> -->
-         <!--           <li>V620</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>W6800</li> -->
-         <!--           <li>V620</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--     </tr> -->
-         <!--   </template> -->
-         <!--   <template data-templ-k="gpu" data-templ-v="radeon"> -->
-         <!--     <tr> -->
-         <!--       <th>RDNA 3 (gfx1100)</th> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>RX 7900 XTX</li> -->
-         <!--           <li>RX 7900 XT</li> -->
-         <!--           <li>RX 7900 GRE</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--       <td> -->
-         <!--         <ul> -->
-         <!--           <li>RX 7900 XTX</li> -->
-         <!--           <li>RX 7900 XT</li> -->
-         <!--           <li>RX 7900 GRE</li> -->
-         <!--         </ul> -->
-         <!--       </td> -->
-         <!--     </tr> -->
-         <!--   </template> -->
-         <!-- </tbody> -->
+
+{% set category = "GPUs" %}
+         <tbody id="compat-ref-gpu">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 <span id="compat-matrix-gpu-heading"></span>
+                 <a class="headerlink" href="#compat-ref-gpu" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+           <tr></tr>
+           <template data-templ-k="gpu" data-templ-v="{{ gpu_name | trim | replace(" ", "-") | lower }}">
+             <tr>
+               <th>CDNA 3 (gfx942)</th>
+               <td>
+                 <ul>
+                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
+                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
+                   <li>MI300X</li>
+                   <li>MI300A</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
+                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
+                   <li>MI300X</li>
+                   <li>MI300A</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>CDNA 2 (gfx90a)</th>
+               <td>
+                 <ul>
+                   <li>MI250X</li>
+                   <li>MI250</li>
+                   <li>MI210</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI250X</li>
+                   <li>MI250</li>
+                   <li>MI210</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>CDNA (gfx908)</th>
+               <td>
+                 <ul>
+                   <li>MI100</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI100</li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="gpu" data-templ-v="instinct">
+             <tr>
+               <th>CDNA 3 (gfx942)</th>
+               <td>
+                 <ul>
+                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
+                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
+                   <li>MI300X</li>
+                   <li>MI300A</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
+                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
+                   <li>MI300X</li>
+                   <li>MI300A</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>CDNA 2 (gfx90a)</th>
+               <td>
+                 <ul>
+                   <li>MI250X</li>
+                   <li>MI250</li>
+                   <li>MI210</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI250X</li>
+                   <li>MI250</li>
+                   <li>MI210</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>CDNA (gfx908)</th>
+               <td>
+                 <ul>
+                   <li>MI100</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI100</li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="gpu" data-templ-v="radeon-pro">
+             <tr>
+               <th>RDNA 3 (gfx1101)</th>
+               <td>
+                 <ul>
+                   <li>V710</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>V710</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>RDNA 3 (gfx1100)</th>
+               <td>
+                 <ul>
+                   <li>W7900 Dual Slot</li>
+                   <li>W7900</li>
+                   <li>W7800 48GB</li>
+                   <li>W7800</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>W7900 Dual Slot</li>
+                   <li>W7900</li>
+                   <li>W7800 48GB</li>
+                   <li>W7800</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>RDNA 2 (gfx1030)</th>
+               <td>
+                 <ul>
+                   <li>W6800</li>
+                   <li>V620</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>W6800</li>
+                   <li>V620</li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="gpu" data-templ-v="radeon">
+             <tr>
+               <th>RDNA 3 (gfx1100)</th>
+               <td>
+                 <ul>
+                   <li>RX 7900 XTX</li>
+                   <li>RX 7900 XT</li>
+                   <li>RX 7900 GRE</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>RX 7900 XTX</li>
+                   <li>RX 7900 XT</li>
+                   <li>RX 7900 GRE</li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+         </tbody>
+
          <!-- <tbody id="compat-ref-os"> -->
          <!--   <tr> -->
          <!--     <th colspan="4"> -->
@@ -467,1809 +523,402 @@
          <!--     </tr> -->
          <!--   </template> -->
          <!-- </tbody> -->
-         <!-- <tbody id="compat-ref-ml-frameworks"> -->
-         <!--   <tr> -->
-         <!--     <th colspan="4"> -->
-         <!--       <h2> -->
-         <!--         Supported deep learning frameworks -->
-         <!--         <a class="headerlink" href="#compat-ref-ml-frameworks" title="Link to this heading">#</a> -->
-         <!--       </h2> -->
-         <!--     </th> -->
-         <!--   </tr> -->
-         <!--   <tr id="deep-learning-frameworks-pytorch"> -->
-         <!--     <th><a href="https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/pytorch-compatibility.html" -->
-         <!--         target="_blank">PyTorch</a></th> -->
-         <!--     <td>2.4, 2.3, 2.2, 1.13</td> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.1"> -->
-         <!--       <td>2.2.0</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.0"> -->
-         <!--       <td>6.3.0 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.4"> -->
-         <!--       <td>6.2.4 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.3"> -->
-         <!--       <td>6.2.3 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.2"> -->
-         <!--       <td>linux ver</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.1.2"> -->
-         <!--       <td>windows ver</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.0.2"> -->
-         <!--       <td>windows ver</td> -->
-         <!--     </template> -->
-         <!--   </tr> -->
-         <!--   <tr id="deep-learning-frameworks-tensorflow"> -->
-         <!--     <th><a href="https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/tensorflow-compatibility.html" -->
-         <!--         target="_blank">TensorFlow</a></th> -->
-         <!--     <td>2.17.0, 2.16.2, 2.15.1</td> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.1"> -->
-         <!--       <td>2.16.1</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.0"> -->
-         <!--       <td>6.3.0 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.4"> -->
-         <!--       <td>6.2.4 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.3"> -->
-         <!--       <td>6.2.3 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.2"> -->
-         <!--       <td>linux ver</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.1.2"> -->
-         <!--       <td>windows ver</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.0.2"> -->
-         <!--       <td>windows ver</td> -->
-         <!--     </template> -->
-         <!--   </tr> -->
-         <!--   <tr id="operating-systems-and-kernels-jax"> -->
-         <!--     <th><a href="https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/jax-compatibility.html" -->
-         <!--         target="_blank">JAX</a></th> -->
-         <!--     <td>0.4.31</td> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.1"> -->
-         <!--       <td></td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.0"> -->
-         <!--       <td>6.3.0 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.4"> -->
-         <!--       <td>6.2.4 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.3"> -->
-         <!--       <td>6.2.3 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.2"> -->
-         <!--       <td>linux ver</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.1.2"> -->
-         <!--       <td>windows ver</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.0.2"> -->
-         <!--       <td>windows ver</td> -->
-         <!--     </template> -->
-         <!--   </tr> -->
-         <!--   <tr id="operating-systems-and-kernels-onnx-runtime"> -->
-         <!--     <th>ONNX Runtime</th> -->
-         <!--     <td>1.17.3</td> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.1"> -->
-         <!--       <td>1.18</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.3.0"> -->
-         <!--       <td>6.3.0 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.4"> -->
-         <!--       <td>6.2.4 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.3"> -->
-         <!--       <td>6.2.3 (demo)</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.2.2"> -->
-         <!--       <td>linux ver</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.1.2"> -->
-         <!--       <td>windows ver</td> -->
-         <!--     </template> -->
-         <!--     <template data-templ-k="compareVer" data-templ-v="6.0.2"> -->
-         <!--       <td>windows ver</td> -->
-         <!--     </template> -->
-         <!--   </tr> -->
-         <!-- </tbody> -->
+{% set component_category = "Machine learning and computer vision libraries" %}
          <tbody id="compat-ref-ml-cv-libs">
            <tr>
              <th colspan="4">
                <h2>
-                 Machine learning and computer vision libraries
+                 {{ component_category }}
                  <a class="headerlink" href="#compat-ref-rocm-libs" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
            <tr class="compat-matrix-entry">
              <th>
-               <a href="https://rocm.docs.amd.com/projects/composable_kernel/en/latest" target="_blank">
-                 Composable Kernel
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
                </a>
-               <a href="https://github.com/ROCm/composable_kernel" target="_blank"><i class="fab fa-github"></i></a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
              </th>
              <td>
-               {{ latest["ROCm"]["Components"]["Machine learning and computer vision libraries"]["composable_kernel"]["version"] }}
+              {{ lib.version }}
              </td>
-
-           {% for v in data[1:] %}
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
-                 {{ v["ROCm"]["Components"]["Machine learning and computer vision libraries"]["composable_kernel"]["version"] }}
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
                </td>
              </template>
-           {% endfor %}
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
 
-           </tr>
-           <tr>
-             <th>MIGraphX</th>
-             <td>2.11.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>MIOpen</th>
-             <td>3.3.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>MIVisionX</th>
-             <td>3.1.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocAL</th>
-             <td>2.1.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocDecode</th>
-             <td>0.8.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocJPEG</th>
-             <td>0.6.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocPyDecode</th>
-             <td>0.2.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>RPP</th>
-             <td>1.9.1</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-         </tbody>
-         <tbody id="compat-ref-communication-libs">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 Communication libraries
-                 <a class="headerlink" href="#compat-ref-communication-libs" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-           <tr>
-             <th>RCCL</th>
-             <td>2.21.5</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-         </tbody>
+{% set component_category = "Math libraries" %}
          <tbody id="compat-ref-math-libs">
            <tr>
              <th colspan="4">
                <h2>
-                 Math libraries
+                 {{ component_category }}
                  <a class="headerlink" href="#compat-ref-math-libs" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>half</th>
-             <td>1.12.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
-           <tr>
-             <th>hipBLAS</th>
-             <td>2.3.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>hipBLASLt</th>
-             <td>0.10.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>hipFFT</th>
-             <td>1.0.17</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>hipfort</th>
-             <td>0.5.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>hipRAND</th>
-             <td>2.11.1</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>hipSOLVER</th>
-             <td>2.3.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>hipSPARSE</th>
-             <td>3.1.2</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>hipSPARSELt</th>
-             <td>0.2.2</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocALUTION</th>
-             <td>3.2.1</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocBLAS</th>
-             <td>4.3.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocFFT</th>
-             <td>1.0.31</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocRAND</th>
-             <td>3.2.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocSOLVER</th>
-             <td>3.27.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocSPARSE</th>
-             <td>3.3.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocWMMA</th>
-             <td>1.6.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>Tensile</th>
-             <td>4.42.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
+{% endfor %}
          </tbody>
+
+{% set component_category = "Primitives libraries" %}
          <tbody id="compat-ref-primitives-libs">
            <tr>
              <th colspan="4">
                <h2>
-                 Primitives libraries
+                 {{ component_category }}
                  <a class="headerlink" href="#compat-ref-primitives-libs" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>hipCUB</th>
-             <td>3.3.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
-           <tr>
-             <th>hipTensor</th>
-             <td>1.4.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocPRIM</th>
-             <td>3.3.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocThrust</th>
-             <td>3.3.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
+{% endfor %}
          </tbody>
+
+{% set component_category = "System management tools" %}
          <tbody id="compat-ref-sys-tools">
            <tr>
              <th colspan="4">
                <h2>
-                 System management tools
+                 {{ component_category }}
                  <a class="headerlink" href="#compat-ref-sys-tools" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>AMD SMI</th>
-             <td>24.7.1</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
-           <tr>
-             <th>ROCm Data Center Tool (rdc)</th>
-             <td>0.3.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocminfo</th>
-             <td>1.0.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCm SMI</th>
-             <td>7.4.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCm Validation Suite</th>
-             <td>1.1.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
+{% endfor %}
          </tbody>
+
+{% set component_category = "Performance tools" %}
          <tbody id="compat-ref-perf-tools">
            <tr>
              <th colspan="4">
                <h2>
-                 Performance tools
+                 {{ component_category }}
                  <a class="headerlink" href="#compat-ref-perf-tools" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>ROCm Bandwidth Test</th>
-             <td>1.4.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
-           <tr>
-             <th>ROCm Compute Profiler</th>
-             <td>3.0.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCm Systems Profiler</th>
-             <td>0.1.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCProfiler</th>
-             <td>2.0.60301</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCprofiler-SDK</th>
-             <td>0.5.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCTracer</th>
-             <td>4.1.60301</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
+{% endfor %}
          </tbody>
+
+{% set component_category = "Development tools" %}
          <tbody id="compat-ref-dev-tools">
            <tr>
              <th colspan="4">
                <h2>
-                 Development tools
+                 {{ component_category }}
                  <a class="headerlink" href="#compat-ref-dev-tools" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>HIPIFY</th>
-             <td>18.0.0.24491</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
-           <tr>
-             <th>ROCm CMake</th>
-             <td>0.14.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCdbgapi</th>
-             <td>0.77.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCm Debugger (ROCgdb)</th>
-             <td>15.2.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>rocprofiler-register</th>
-             <td>0.4.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCr Debug Agent</th>
-             <td>2.0.3</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
+{% endfor %}
          </tbody>
+
+{% set component_category = "Compilers" %}
          <tbody id="compat-ref-compilers">
            <tr>
              <th colspan="4">
                <h2>
-                 Compilers
+                 {{ component_category }}
                  <a class="headerlink" href="#compat-ref-compilers" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>hipCC</th>
-             <td>1.1.1</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
-           <tr>
-             <th>flang</th>
-             <td>18.0.0.24491</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>llvm-project</th>
-             <td>18.0.0.24491</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>OpenMP</th>
-             <td>18.0.0.24491</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
+{% endfor %}
          </tbody>
+
+{% set component_category = "Runtimes" %}
          <tbody id="compat-ref-runtimes">
            <tr>
              <th colspan="4">
                <h2>
-                 Runtimes
+                 {{ component_category }}
                  <a class="headerlink" href="#compat-ref-runtimes" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>AMD CLR</th>
-             <td>6.3.42133</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
-           <tr>
-             <th>HIP</th>
-             <td>6.3.42133</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>OpenCL Runtime</th>
-             <td>2.0.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCr Runtime</th>
-             <td>1.14.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
+{% endfor %}
          </tbody>
+
+{% set component_category = "Support libraries" %}
          <tbody id="compat-ref-support-libs">
            <tr>
              <th colspan="4">
                <h2>
-                 Support libraries
+                 {{ component_category }}
                  <a class="headerlink" href="#compat-ref-support-libs" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>hipother</th>
-             <td>6.3.42133</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+                {{ lib.alt_name | default(name) }}
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
-           <tr>
-             <th>rocm-core</th>
-             <td>6.3.1</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
-           <tr>
-             <th>ROCt Thunk Interface</th>
-             <td>N/A</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
+{% endfor %}
          </tbody>
+
+{% set category = "Deep learning frameworks" %}
+         <tbody id="compat-ref-ml-frameworks">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ category }}
+                 <a class="headerlink" href="#compat-ref-ml-frameworks" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for fw_name, fw in latest["ROCm"][category].items() %}
+           <tr id="deep-learning-frameworks-{{ fw_name | lower }}">
+             <th>
+  {% if fw.doc_url %}
+               <a href="{{ fw.doc_url }}" target="_blank">{{ fw_name }}</a>
+  {% else %}
+               {{ fw_name }}
+  {% endif %}
+             </th>
+             <td>{{ fw.version }}</td>
+  {% for v in data %}
+      {% if v["ROCm"][category][fw_name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{ v["ROCm"]["Version"] }}">
+               <td>{{ v["ROCm"][category][fw_name]["version"] }}</td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set category = "Third-party communication libraries" %}
          <tbody id="compat-ref-3p-communication-libs">
            <tr>
              <th colspan="4">
                <h2>
-                 Third-party communication libraries
+                 {{ category }}
                  <a class="headerlink" href="#compat-ref-3p-communication-libs" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>UCC</th>
-             <td>&gt;=1.3.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for lib_name, lib_ver in latest["ROCm"][category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+                {{ lib_name }}
+             </th>
+             <td>
+              {{ lib_ver }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"][category][lib_name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"][category][lib_name] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
-           <tr>
-             <th>UCX</th>
-             <td>&gt;=1.15.0</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
+{% endfor %}
          </tbody>
+
+{% set category = "Third-party algorithm libraries" %}
          <tbody id="compat-ref-3p-algorithm-libs">
            <tr>
              <th colspan="4">
                <h2>
-                 Third-party algorithm libraries
+                 {{ category }}
                  <a class="headerlink" href="#compat-ref-3p-algorithm-libs" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>Thrust</th>
-             <td>2.3.2</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for lib_name, lib_ver in latest["ROCm"][category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+                {{ lib_name }}
+             </th>
+             <td>
+              {{ lib_ver }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"][category][lib_name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"][category][lib_name] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
-           <tr>
-             <th>CUB</th>
-             <td>2.3.2</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
-           </tr>
+{% endfor %}
          </tbody>
+
          <tbody id="#compat-ref-virtualization">
            <tr>
              <th colspan="4">
@@ -2304,40 +953,36 @@
                generation AMD Zen CPU and Intel™ Haswell support PCIe atomics.</td>
            </tr>
          </tbody>
+
+{% set category = "KFD and user space" %}
          <tbody id="compat-ref-kfd-user-space">
            <tr>
              <th colspan="4">
                <h2>
-                 KFD and user space
+                 {{ category }}
                  <a class="headerlink" href="#compat-ref-kfd-user-space" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-           <tr>
-             <th>Tested user space versions</th>
-             <td>6.3.x, 6.2.x, 6.1.x</td>
-             <template data-templ-k="compareVer" data-templ-v="6.3.1">
-               <td>6.3.1 (demo)</td>
+{% for child_name, child in latest["ROCm"][category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+                {{ child_name }}
+             </th>
+             <td>
+              {{ child }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"][category][child_name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"][category][child_name] }}
+               </td>
              </template>
-             <template data-templ-k="compareVer" data-templ-v="6.3.0">
-               <td>6.3.0 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.4">
-               <td>6.2.4 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.3">
-               <td>6.2.3 (demo)</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.2.2">
-               <td>linux ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.1.2">
-               <td>windows ver</td>
-             </template>
-             <template data-templ-k="compareVer" data-templ-v="6.0.2">
-               <td>windows ver</td>
-             </template>
+      {% endif %}
+  {% endfor %}
            </tr>
+{% endfor %}
          </tbody>
        </table>
        <p id="compat-footnotes" class="rubric">Footnotes</p>
