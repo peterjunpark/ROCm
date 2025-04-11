@@ -1,0 +1,18 @@
+
+  {#
+    {% for gpu_class, gpus in latest["ROCm"]["GPUs"].items() %}
+      {% set gpu_archs = {} %}
+      {% for gpu_name, gpu in gpus.items() %}
+          {% set gpu_arch_formatted = gpu.architecture ~ " (" ~ gpu.llvm_target ~ ")" %}
+          {% if gpu_arch_formatted not in gpu_archs %}
+            {# Create new list with this GPU #}
+            {% set _ = gpu_archs.update({gpu_arch_formatted: [gpu_name]}) %}
+          {% endif %}
+          {# Append to existing list #}
+          {% set _ = gpu_archs[gpu_arch_formatted].append(gpu_name) %}
+      {% endfor %}
+
+      {{ gpu_archs }}
+    {% endfor %}
+  #}
+
