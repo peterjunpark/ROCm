@@ -1,0 +1,1025 @@
+{% set data = [] %}
+{% for v in config.html_context.compatibility_matrix.versions %}
+  {% set file_content = load(v.data_file, data_format = "yaml") %}
+  {% set _ = data.append(file_content) %}
+{% endfor %}
+{% set latest = data[0] %}
+
+.. raw:: html
+
+   <div class="container-fluid js-content" data-latest="{{ latest["ROCm"]["Version"] }}" data-latest-windows="6.1.2"
+     id="compat-params-selector">
+     <!-- PARAMS SELECTOR -->
+     <div class="row gx-2">
+       <div class="row gx-0">
+         <div class="col-3">
+           <div class="compat-param-head">Use case</div>
+         </div>
+         <div class="col-9">
+           <div class="row gx-0">
+             <div class="col-6">
+               <div class="compat-param" data-bs-title="No display information or graphics." data-bs-toggle="tooltip"
+                 data-param-k="useCase" data-param-v="compute">
+                 Compute</div>
+             </div>
+             <div class="col-6">
+               <div class="compat-param" data-bs-title="With display information and a monitor connected."
+                 data-bs-toggle="tooltip" data-param-k="useCase" data-param-v="graphics">Graphics</div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="row gx-0">
+         <div class="col-3">
+           <div class="compat-param-head">GPU class</div>
+         </div>
+         <div class="col-9">
+           <div class="row gx-0">
+             <div class="col-4">
+               <div class="compat-param" data-param-k="gpu" data-param-v="instinct">AMD
+                 Instinct</div>
+             </div>
+             <div class="col-4">
+               <div class="compat-param" data-param-k="gpu" data-param-v="radeon-pro">AMD Radeon PRO</div>
+             </div>
+             <div class="col-4">
+               <div class="compat-param" data-param-k="gpu" data-param-v="radeon">AMD Radeon</div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="row gx-0 compat-param-multi">
+         <div class="col-3">
+           <div class="compat-param-head" style="height: 68px">Your OS</div>
+         </div>
+         <div class="col-9">
+           <div class="row gx-0">
+             <div class="col-3">
+               <div class="compat-param" data-param-k="os" data-param-v="ubuntu">Ubuntu</div>
+             </div>
+             <div class="col-3">
+               <div class="compat-param" data-param-k="os" data-param-v="rhel">
+                 RHEL</div>
+             </div>
+             <div class="col-3">
+               <div class="compat-param" data-param-k="os" data-param-v="sles">
+                 SLES</div>
+             </div>
+             <div class="col-3">
+               <div class="compat-param" data-param-k="os" data-param-v="oracle-linux">Oracle Linux</div>
+             </div>
+             <div class="col-3">
+               <div class="compat-param" data-param-k="os" data-param-v="debian">Debian</div>
+             </div>
+             <div class="col-3">
+               <div class="compat-param" data-param-k="os" data-param-v="azure-linux">Azure Linux</div>
+             </div>
+             <div class="col-3">
+               <div class="compat-param" data-param-k="os" data-param-v="windows">Windows</div>
+             </div>
+             <div class="col-3">
+               <div class="compat-param" data-param-k="os" data-param-v="wsl-ubuntu">WSL (Ubuntu)</div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="row gx-0">
+         <div class="col-3">
+           <div class="compat-param-head">ROCm version</div>
+         </div>
+         <div class="col-9">
+           <div id="compat-param-rocm-linux" class="row gx-0">
+             <div class="col-2">
+               <div class="compat-param" data-param-state="latest-version">
+                 {{ latest["ROCm"]["Version"] }}
+                 (latest)</div>
+             </div>
+           {% for v in data[1:] %}
+             <div class="col-2">
+               <div class="compat-param" data-param-k="compareVer" data-param-v="{{ v["ROCm"]["Version"] }}">
+                 {{ v["ROCm"]["Version"] }}
+               </div>
+             </div>
+           {% endfor %}
+           </div>
+           <div id="compat-param-rocm-windows" class="row gx-0" style="display: none;">
+             <div class="col-6">
+               <div class="compat-param" data-param-state="latest-version">6.1.2</div>
+             </div>
+             <div class="col-6">
+               <div class="compat-param" data-param-k="compareVer" data-param-v="6.0.2">6.0.2</div>
+             </div>
+           </div>
+           <div id="compat-param-rocm-radeon" class="row gx-0" style="display: none;">
+             <div class="col-6">
+               <div class="compat-param" data-param-state="latest-version">6.3.2</div>
+             </div>
+             <div class="col-6">
+               <div class="compat-param" data-param-k="compareVer" data-param-v="6.2.3">6.2.3</div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <!-- COMPATIBILITY TABLE -->
+       <table class="table js-content" id="compat-matrix">
+         <thead>
+           <tr>
+             <th><span id="compat-matrix-stack-heading"></span></th>
+             <th><span id="compat-matrix-latest-ver-heading"></span></th>
+             <th><span id="compat-matrix-compare-ver-heading"></span></th>
+           </tr>
+           <colgroup>
+             <col id="compat-matrix-stub-col" span="1" />
+             <col span="2" />
+           </colgroup>
+         </thead>
+
+{% set category = "GPUs" %}
+         <tbody id="compat-ref-gpu">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 <span id="compat-matrix-gpu-heading"></span>
+                 <a class="headerlink" href="#compat-ref-gpu" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+           <tr></tr>
+           <template data-templ-k="gpu" data-templ-v="{{ gpu_name | trim | replace(" ", "-") | lower }}">
+             <tr>
+               <th>CDNA 3 (gfx942)</th>
+               <td>
+                 <ul>
+                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
+                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
+                   <li>MI300X</li>
+                   <li>MI300A</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
+                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
+                   <li>MI300X</li>
+                   <li>MI300A</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>CDNA 2 (gfx90a)</th>
+               <td>
+                 <ul>
+                   <li>MI250X</li>
+                   <li>MI250</li>
+                   <li>MI210</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI250X</li>
+                   <li>MI250</li>
+                   <li>MI210</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>CDNA (gfx908)</th>
+               <td>
+                 <ul>
+                   <li>MI100</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI100</li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="gpu" data-templ-v="instinct">
+             <tr>
+               <th>CDNA 3 (gfx942)</th>
+               <td>
+                 <ul>
+                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
+                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
+                   <li>MI300X</li>
+                   <li>MI300A</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
+                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
+                   <li>MI300X</li>
+                   <li>MI300A</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>CDNA 2 (gfx90a)</th>
+               <td>
+                 <ul>
+                   <li>MI250X</li>
+                   <li>MI250</li>
+                   <li>MI210</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI250X</li>
+                   <li>MI250</li>
+                   <li>MI210</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>CDNA (gfx908)</th>
+               <td>
+                 <ul>
+                   <li>MI100</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>MI100</li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="gpu" data-templ-v="radeon-pro">
+             <tr>
+               <th>RDNA 3 (gfx1101)</th>
+               <td>
+                 <ul>
+                   <li>V710</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>V710</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>RDNA 3 (gfx1100)</th>
+               <td>
+                 <ul>
+                   <li>W7900 Dual Slot</li>
+                   <li>W7900</li>
+                   <li>W7800 48GB</li>
+                   <li>W7800</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>W7900 Dual Slot</li>
+                   <li>W7900</li>
+                   <li>W7800 48GB</li>
+                   <li>W7800</li>
+                 </ul>
+               </td>
+             </tr>
+             <tr>
+               <th>RDNA 2 (gfx1030)</th>
+               <td>
+                 <ul>
+                   <li>W6800</li>
+                   <li>V620</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>W6800</li>
+                   <li>V620</li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="gpu" data-templ-v="radeon">
+             <tr>
+               <th>RDNA 3 (gfx1100)</th>
+               <td>
+                 <ul>
+                   <li>RX 7900 XTX</li>
+                   <li>RX 7900 XT</li>
+                   <li>RX 7900 GRE</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>RX 7900 XTX</li>
+                   <li>RX 7900 XT</li>
+                   <li>RX 7900 GRE</li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+         </tbody>
+
+         <tbody id="compat-ref-os">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 Supported OS and kernel versions
+                 <a class="headerlink" href="#compat-ref-os" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+           <template data-templ-k="os" data-templ-v="ubuntu">
+             <tr>
+               <th>Ubuntu</th>
+               <td>
+                 <ul>
+                   <li>
+                     24.04.2 (kernel: 6.8 GA, 6.11 HWE)
+                   </li>
+                   <li>
+                     22.04.5 (kernel: 5.15 GA, 6.8 HWE)
+                   </li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>
+                     24.04.2 (kernel: 6.8 GA, 6.11 HWE)
+                   </li>
+                   <li>
+                     22.04.5 (kernel: 5.15 GA, 6.8 HWE)
+                   </li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="os" data-templ-v="rhel">
+             <tr>
+               <th>RHEL</th>
+               <td>
+                 <ul>
+                   <li>
+                     9.5 (kernel: 5.14.0)
+                   </li>
+                   <li>
+                     9.4 (kernel: 5.14.0)
+                   </li>
+                   <li>
+                     8.10 (kernel: 4.18.0)
+                   </li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>
+                     9.5 (kernel: 5.14.0)
+                   </li>
+                   <li>
+                     9.4 (kernel: 5.14.0)
+                   </li>
+                   <li>
+                     8.10 (kernel: 4.18.0)
+                   </li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="os" data-templ-v="sles">
+             <tr>
+               <th>SLES</th>
+               <td>
+                 <ul>
+                   <li>
+                     15 SP6 (kernel: 6.4.0)
+                   </li>
+                   <li>
+                     15 SP5 (kernel: 5.14.21)
+                   </li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>
+                     15 SP6 (kernel: 6.4.0)
+                   </li>
+                   <li>
+                     15 SP5 (kernel: 5.14.21)
+                   </li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="os" data-templ-v="oracle-linux">
+             <tr>
+               <th>Oracle Linux</th>
+               <td>
+                 <ul>
+                   <li>8.10 (kernel: 5.15.0)<a class="footnote-reference brackets" href="#compat-foot-oracle-linux"
+                       role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>8.10 (kernel: 5.15.0)<a class="footnote-reference brackets" href="#compat-foot-oracle-linux"
+                       role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="os" data-templ-v="debian">
+             <tr>
+               <th>Debian</th>
+               <td>
+                 <ul>
+                   <li>12 (kernel: 6.1)<a class="footnote-reference brackets" href="#compat-foot-debian"
+                       role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>12 (kernel: 6.1)<a class="footnote-reference brackets" href="#compat-foot-debian"
+                       role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="os" data-templ-v="azure-linux">
+             <tr>
+               <th>Azure Linux</th>
+               <td>
+                 <ul>
+                   <li>3.0 (kernel: 6.6)<a class="footnote-reference brackets" href="#compat-foot-azure-linux"
+                       role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>3.0 (kernel: 6.6)<a class="footnote-reference brackets" href="#compat-foot-azure-linux"
+                       role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="os" data-templ-v="windows">
+             <tr>
+               <th>Windows</th>
+               <td>
+                 <ul>
+                   <li>Windows 11</li>
+                   <li>Windows 10</li>
+                   <li>Windows Server 2022</li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>Windows 11</li>
+                   <li>Windows 10</li>
+                   <li>Windows Server 2022</li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+           <template data-templ-k="os" data-templ-v="wsl-ubuntu">
+             <tr>
+               <th>WSL (Ubuntu)</th>
+               <td>
+                 <ul>
+                   <li>
+                     24.04.1 Desktop (kernel: 6.8.0-40-generic)
+                   </li>
+                   <li>
+                     22.04.5 Desktop (kernel: 6.8.0-40-generic)
+                   </li>
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+                   <li>
+                     24.04.1 Desktop (kernel: 6.8.0-40-generic)
+                   </li>
+                   <li>
+                     22.04.5 Desktop (kernel: 6.8.0-40-generic)
+                   </li>
+                 </ul>
+               </td>
+             </tr>
+           </template>
+         </tbody>
+         <tbody id="compat-ref-radeon-software">
+           <tr>
+             <template data-templ-k="useCase" data-templ-v="graphics">
+               <th colspan="4">
+                 <h2>
+                   Supported Radeon Software versions
+                   <a class="headerlink" href="#compat-ref-radeon-software" title="Link to this heading">#</a>
+                 </h2>
+               </th>
+             </template>
+           </tr>
+           <tr></tr>
+           <template data-templ-k="useCase" data-templ-v="graphics">
+             <tr>
+               <th>Radeon Software for Linux</th>
+               <td>24.04, 22.04</td>
+               <td>24.04, 22.04</td>
+             </tr>
+           </template>
+         </tbody>
+{% set component_category = "Machine learning and computer vision libraries" %}
+         <tbody id="compat-ref-ml-cv-libs">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ component_category }}
+                 <a class="headerlink" href="#compat-ref-rocm-libs" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set component_category = "Math libraries" %}
+         <tbody id="compat-ref-math-libs">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ component_category }}
+                 <a class="headerlink" href="#compat-ref-math-libs" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set component_category = "Primitives libraries" %}
+         <tbody id="compat-ref-primitives-libs">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ component_category }}
+                 <a class="headerlink" href="#compat-ref-primitives-libs" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set component_category = "System management tools" %}
+         <tbody id="compat-ref-sys-tools">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ component_category }}
+                 <a class="headerlink" href="#compat-ref-sys-tools" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set component_category = "Performance tools" %}
+         <tbody id="compat-ref-perf-tools">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ component_category }}
+                 <a class="headerlink" href="#compat-ref-perf-tools" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set component_category = "Development tools" %}
+         <tbody id="compat-ref-dev-tools">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ component_category }}
+                 <a class="headerlink" href="#compat-ref-dev-tools" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set component_category = "Compilers" %}
+         <tbody id="compat-ref-compilers">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ component_category }}
+                 <a class="headerlink" href="#compat-ref-compilers" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set component_category = "Runtimes" %}
+         <tbody id="compat-ref-runtimes">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ component_category }}
+                 <a class="headerlink" href="#compat-ref-runtimes" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
+                {{ lib.alt_name | default(name) }}
+               </a>
+               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set component_category = "Support libraries" %}
+         <tbody id="compat-ref-support-libs">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ component_category }}
+                 <a class="headerlink" href="#compat-ref-support-libs" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+                {{ lib.alt_name | default(name) }}
+             </th>
+             <td>
+              {{ lib.version }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"]["Components"][component_category][name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set category = "Deep learning frameworks" %}
+         <tbody id="compat-ref-ml-frameworks">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ category }}
+                 <a class="headerlink" href="#compat-ref-ml-frameworks" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for fw_name, fw in latest["ROCm"][category].items() %}
+           <tr id="deep-learning-frameworks-{{ fw_name | lower }}">
+             <th>
+  {% if fw.doc_url %}
+               <a href="{{ fw.doc_url }}" target="_blank">{{ fw_name }}</a>
+  {% else %}
+               {{ fw_name }}
+  {% endif %}
+             </th>
+             <td>{{ fw.version }}</td>
+  {% for v in data %}
+      {% if v["ROCm"][category][fw_name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{ v["ROCm"]["Version"] }}">
+               <td>{{ v["ROCm"][category][fw_name]["version"] }}</td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set category = "Third-party communication libraries" %}
+         <tbody id="compat-ref-3p-communication-libs">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ category }}
+                 <a class="headerlink" href="#compat-ref-3p-communication-libs" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for lib_name, lib_ver in latest["ROCm"][category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+                {{ lib_name }}
+             </th>
+             <td>
+              {{ lib_ver }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"][category][lib_name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"][category][lib_name] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set category = "Third-party algorithm libraries" %}
+         <tbody id="compat-ref-3p-algorithm-libs">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ category }}
+                 <a class="headerlink" href="#compat-ref-3p-algorithm-libs" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for lib_name, lib_ver in latest["ROCm"][category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+                {{ lib_name }}
+             </th>
+             <td>
+              {{ lib_ver }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"][category][lib_name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"][category][lib_name] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+
+{% set category = "Third-party communication libraries" %}
+         <tbody id="#compat-ref-virtualization">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 Virtualization support
+                 <a class="headerlink" href="#compat-ref-virtualization" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+           <tr>
+             <th>Hypervisor</th>
+             <td>VMWare</td>
+             <td>dummy info</td>
+           </tr>
+           <tr>
+             <th>Version</th>
+             <td>ESXi 8.0.3</td>
+             <td>dummy data</td>
+           </tr>
+         </tbody>
+         <tbody id="compat-ref-cpu">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 CPU support
+                 <a class="headerlink" href="#compat-ref-virtualization" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+           <tr>
+             <td colspan="3">ROCm requires CPUs that support PCIe™ atomics. Modern CPUs after the release of 1st
+               generation AMD Zen CPU and Intel™ Haswell support PCIe atomics.</td>
+           </tr>
+         </tbody>
+
+{% set category = "KFD and user space" %}
+         <tbody id="compat-ref-kfd-user-space">
+           <tr>
+             <th colspan="4">
+               <h2>
+                 {{ category }}
+                 <a class="headerlink" href="#compat-ref-kfd-user-space" title="Link to this heading">#</a>
+               </h2>
+             </th>
+           </tr>
+{% for child_name, child in latest["ROCm"][category].items() %}
+           <tr class="compat-matrix-entry">
+             <th>
+                {{ child_name }}
+             </th>
+             <td>
+              {{ child }}
+             </td>
+  {% for v in data %}
+      {% if v["ROCm"][category][child_name] %}
+             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+               <td>
+                 {{ v["ROCm"][category][child_name] }}
+               </td>
+             </template>
+      {% endif %}
+  {% endfor %}
+           </tr>
+{% endfor %}
+         </tbody>
+       </table>
+       <p id="compat-footnotes" class="rubric">Footnotes</p>
+       <aside class="footnote-list brackets">
+         <aside class="footnote brackets" id="compat-foot-mi325x" role="doc-footnote">
+           <span class="label"><span class="fn-bracket">[</span><a href="#compat-ref-gpu" role="doc-backlink">1</a><span
+               class="fn-bracket">]</span></span>
+           <p>AMD Instinct MI325X is supported only on Ubuntu 22.04.5 (kernel: 5.15 GA).</p>
+         </aside>
+         <aside class="footnote brackets" id="compat-foot-oracle-linux" role="doc-footnote">
+           <span class="label"><span class="fn-bracket">[</span><a href="#compat-ref-os" role="doc-backlink">2</a><span
+               class="fn-bracket">]</span></span>
+           <p>Oracle Linux 8.10 is supported only on AMD Instinct MI300X.
+           </p>
+         </aside>
+         <aside class="footnote brackets" id="compat-foot-debian" role="doc-footnote">
+           <span class="label"><span class="fn-bracket">[</span><a href="#compat-ref-os" role="doc-backlink">3</a><span
+               class="fn-bracket">]</span></span>
+           <p>Debian 12 is supported only on AMD Instinct MI300X.
+           </p>
+         </aside>
+         <aside class="footnote brackets" id="compat-foot-azure-linux" role="doc-footnote">
+           <span class="label"><span class="fn-bracket">[</span><a href="#compat-ref-os" role="doc-backlink">4</a><span
+               class="fn-bracket">]</span></span>
+           <p>Azure Linux 3.0 are supported only on AMD Instinct MI300X.
+           </p>
+         </aside>
+       </aside>
+       <noscript>
+         <div class="admonition warning">
+           <p class="admonition-title">Warning</p>
+           <p>Enable JavaScript in your browser to view the ROCm compatibility matrix.</p>
+         </div>
+         <style>
+           .js-content {
+             display: none;
+           }
+         </style>
+       </noscript>
