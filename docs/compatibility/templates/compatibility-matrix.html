@@ -1,13 +1,15 @@
-{% set data = [] %}
-{% for v in config.html_context.compatibility_matrix.versions %}
-  {% set file_content = load(v.data_file, data_format = "yaml") %}
-  {% set _ = data.append(file_content) %}
+{% set all_data = [] %}
+{% for compat_version in config.html_context.compatibility_matrix.versions %}
+  {% set file_content = load(compat_version.data_file, data_format = "yaml") %}
+  {% set _ = all_data.append(file_content) %}
 {% endfor %}
-{% set latest = data[0] %}
+{% set latest = all_data[0] %}
+{% set previous = all_data[1] %}
+{% set others = all_data[2:5] %}
 
 .. raw:: html
 
-   <div class="container-fluid js-content" data-latest="{{ latest["ROCm"]["Version"] }}" data-latest-windows="6.1.2"
+   <div class="container-fluid js-content" data-latest="{{ latest["ROCm"]["Version"] }}" data-previous="{{ previous["ROCm"]["Version"] }}" data-latest-windows="6.1.2"
      id="compat-params-selector">
      <!-- PARAMS SELECTOR -->
      <div class="row gx-2">
@@ -89,12 +91,17 @@
          </div>
          <div class="col-9">
            <div id="compat-param-rocm-linux" class="row gx-0">
-             <div class="col-2">
+             <div class="col-3">
                <div class="compat-param" data-param-state="latest-version">
                  {{ latest["ROCm"]["Version"] }}
                  (latest)</div>
              </div>
-           {% for v in data[1:] %}
+             <div class="col-3">
+               <div class="compat-param" data-param-state="latest-version">
+                 {{ previous["ROCm"]["Version"] }}
+                 (previous)</div>
+             </div>
+           {% for v in others %}
              <div class="col-2">
                <div class="compat-param" data-param-k="compareVer" data-param-v="{{ v["ROCm"]["Version"] }}">
                  {{ v["ROCm"]["Version"] }}
@@ -126,6 +133,7 @@
            <tr>
              <th><span id="compat-matrix-stack-heading"></span></th>
              <th><span id="compat-matrix-latest-ver-heading"></span></th>
+             <th><span id="compat-matrix-previous-ver-heading"></span></th>
              <th><span id="compat-matrix-compare-ver-heading"></span></th>
            </tr>
            <colgroup>
@@ -544,7 +552,12 @@
              <td>
               {{ lib.version }}
              </td>
-  {% for v in data %}
+  {% if previous["ROCm"]["Components"][component_category][name] %}
+             <td>
+              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
+             </td>
+  {% endif %}
+  {% for v in others %}
       {% if v["ROCm"]["Components"][component_category][name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -578,7 +591,12 @@
              <td>
               {{ lib.version }}
              </td>
-  {% for v in data %}
+  {% if previous["ROCm"]["Components"][component_category][name] %}
+             <td>
+              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
+             </td>
+  {% endif %}
+  {% for v in others %}
       {% if v["ROCm"]["Components"][component_category][name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -612,7 +630,12 @@
              <td>
               {{ lib.version }}
              </td>
-  {% for v in data %}
+  {% if previous["ROCm"]["Components"][component_category][name] %}
+             <td>
+              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
+             </td>
+  {% endif %}
+  {% for v in others %}
       {% if v["ROCm"]["Components"][component_category][name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -646,7 +669,12 @@
              <td>
               {{ lib.version }}
              </td>
-  {% for v in data %}
+  {% if previous["ROCm"]["Components"][component_category][name] %}
+             <td>
+              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
+             </td>
+  {% endif %}
+  {% for v in others %}
       {% if v["ROCm"]["Components"][component_category][name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -680,7 +708,12 @@
              <td>
               {{ lib.version }}
              </td>
-  {% for v in data %}
+  {% if previous["ROCm"]["Components"][component_category][name] %}
+             <td>
+              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
+             </td>
+  {% endif %}
+  {% for v in others %}
       {% if v["ROCm"]["Components"][component_category][name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -714,7 +747,12 @@
              <td>
               {{ lib.version }}
              </td>
-  {% for v in data %}
+  {% if previous["ROCm"]["Components"][component_category][name] %}
+             <td>
+              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
+             </td>
+  {% endif %}
+  {% for v in others %}
       {% if v["ROCm"]["Components"][component_category][name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -748,7 +786,12 @@
              <td>
               {{ lib.version }}
              </td>
-  {% for v in data %}
+  {% if previous["ROCm"]["Components"][component_category][name] %}
+             <td>
+              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
+             </td>
+  {% endif %}
+  {% for v in others %}
       {% if v["ROCm"]["Components"][component_category][name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -779,10 +822,12 @@
                </a>
                <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
              </th>
+  {% if previous["ROCm"]["Components"][component_category][name] %}
              <td>
-              {{ lib.version }}
+              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
              </td>
-  {% for v in data %}
+  {% endif %}
+  {% for v in others %}
       {% if v["ROCm"]["Components"][component_category][name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -813,7 +858,12 @@
              <td>
               {{ lib.version }}
              </td>
-  {% for v in data %}
+  {% if previous["ROCm"]["Components"][component_category][name] %}
+             <td>
+              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
+             </td>
+  {% endif %}
+  {% for v in others %}
       {% if v["ROCm"]["Components"][component_category][name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -846,7 +896,7 @@
   {% endif %}
              </th>
              <td>{{ fw.version }}</td>
-  {% for v in data %}
+  {% for v in all_data %}
       {% if v["ROCm"][category][fw_name] %}
              <template data-templ-k="compareVer" data-templ-v="{{ v["ROCm"]["Version"] }}">
                <td>{{ v["ROCm"][category][fw_name]["version"] }}</td>
@@ -875,7 +925,7 @@
              <td>
               {{ lib_ver }}
              </td>
-  {% for v in data %}
+  {% for v in all_data %}
       {% if v["ROCm"][category][lib_name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -906,7 +956,7 @@
              <td>
               {{ lib_ver }}
              </td>
-  {% for v in data %}
+  {% for v in all_data %}
       {% if v["ROCm"][category][lib_name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
@@ -973,7 +1023,7 @@
              <td>
               {{ child }}
              </td>
-  {% for v in data %}
+  {% for v in all_data %}
       {% if v["ROCm"][category][child_name] %}
              <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
                <td>
