@@ -5,6 +5,35 @@
   {% set _ = all_data.append(file_content) %}
 {% endfor %}
 
+{# Initialize the GPU map by architecture #}
+{% set gpu_arch_map = {} %}
+{% for data in all_data %}
+  {% if data.ROCm and data.ROCm.GPUs %}
+    {% for family, gpus in data.ROCm.GPUs.items() %}
+      {# Initialize family if not exists #}
+      {% if family not in gpu_arch_map %}
+        {% set gpu_arch_map = gpu_arch_map.update({family: {}}) or gpu_arch_map %}
+      {% endif %}
+      
+      {# Process each GPU in this family #}
+      {% for gpu_name, gpu_data in gpus.items() %}
+        {# Create architecture key with llvm_target in parentheses #}
+        {% set arch_key = gpu_data.architecture + " (" + gpu_data.llvm_target + ")" %}
+        
+        {# Initialize architecture entry if not exists #}
+        {% if arch_key not in gpu_arch_map[family] %}
+          {% set gpu_arch_map = gpu_arch_map[family].update({arch_key: []}) or gpu_arch_map %}
+        {% endif %}
+        
+        {# Add GPU to the architecture list if not already present #}
+        {% if gpu_name not in gpu_arch_map[family][arch_key] %}
+          {% set _ = gpu_arch_map[family][arch_key].append(gpu_name) %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
 {# Collect all unique component categories #}
 {% set all_component_categories = [] %}
 {% for data in all_data %}
@@ -36,7 +65,7 @@
           {% if category in seen_components and component_name not in seen_components[category] %}
             {# Add to the seen list #}
             {% set _ = seen_components[category].append(component_name) %}
-            
+
             {# Add to the component map #}
             {% set alt_name = component_data.alt_name|default(component_name) %}
             {% set _ = component_map[category].append((component_name, alt_name)) %}
@@ -62,6 +91,8 @@
 {% set latest = all_data[0] %}
 {% set previous = all_data[1] if all_data|length > 1 else {} %}
 {% set others = all_data[2:5] if all_data|length > 2 else [] %}
+
+{# Collect all unique Instinct accelerators #}
 
 .. raw:: html
 
@@ -148,20 +179,14 @@
          <div class="col-9">
            <div id="compat-param-rocm-linux" class="row gx-0">
              <div class="col-3">
-               <div class="compat-param" data-param-state="latest-version">
-                 {{ latest["ROCm"]["Version"] }}
-                 (latest)</div>
+               <div class="compat-param" data-param-state="latest-version">{{ latest.ROCm.Version }} (latest)</div>
              </div>
              <div class="col-3">
-               <div class="compat-param" data-param-state="latest-version">
-                 {{ previous["ROCm"]["Version"] }}
-                 (previous)</div>
+               <div class="compat-param" data-param-state="latest-version">{{ previous.ROCm.Version }} (previous)</div>
              </div>
            {% for v in others %}
              <div class="col-2">
-               <div class="compat-param" data-param-k="compareVer" data-param-v="{{ v["ROCm"]["Version"] }}">
-                 {{ v["ROCm"]["Version"] }}
-               </div>
+               <div class="compat-param" data-param-k="compareVer" data-param-v="{{ v.ROCm.Version }}">{{ v.ROCm.Version }}</div>
              </div>
            {% endfor %}
            </div>
@@ -209,176 +234,37 @@
              </th>
            </tr>
            <tr></tr>
-           <template data-templ-k="gpu" data-templ-v="{{ gpu_name | trim | replace(" ", "-") | lower }}">
+{% for name, gpu_family in gpu_arch_map.items() %}
+  {% set gpu_key = name | lower | replace(" ", "-") %}
+           <template data-templ-k="gpu" data-templ-v="{{ gpu_key }}">
+  {% for arch_name, skus in gpu_family.items() %}
              <tr>
-               <th>CDNA 3 (gfx942)</th>
+               <th>{{ arch_name }}</th>
                <td>
                  <ul>
-                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
-                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
-                   <li>MI300X</li>
-                   <li>MI300A</li>
+          {% for sku in skus %}
+                   <li>{{ gpu }}</li>
+          {% endfor %}
                  </ul>
                </td>
                <td>
                  <ul>
-                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
-                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
-                   <li>MI300X</li>
-                   <li>MI300A</li>
+          {% for sku in skus %}
+                   <li>{{ gpu }}</li>
+          {% endfor %}
+                 </ul>
+               </td>
+               <td>
+                 <ul>
+          {% for sku in skus %}
+                   <li>{{ gpu }}</li>
+          {% endfor %}
                  </ul>
                </td>
              </tr>
-             <tr>
-               <th>CDNA 2 (gfx90a)</th>
-               <td>
-                 <ul>
-                   <li>MI250X</li>
-                   <li>MI250</li>
-                   <li>MI210</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>MI250X</li>
-                   <li>MI250</li>
-                   <li>MI210</li>
-                 </ul>
-               </td>
-             </tr>
-             <tr>
-               <th>CDNA (gfx908)</th>
-               <td>
-                 <ul>
-                   <li>MI100</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>MI100</li>
-                 </ul>
-               </td>
-             </tr>
+  {% endfor %}
            </template>
-           <template data-templ-k="gpu" data-templ-v="instinct">
-             <tr>
-               <th>CDNA 3 (gfx942)</th>
-               <td>
-                 <ul>
-                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
-                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
-                   <li>MI300X</li>
-                   <li>MI300A</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>MI325X<a class="footnote-reference brackets" href="#compat-foot-mi325x" role="doc-noteref"><span
-                         class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></li>
-                   <li>MI300X</li>
-                   <li>MI300A</li>
-                 </ul>
-               </td>
-             </tr>
-             <tr>
-               <th>CDNA 2 (gfx90a)</th>
-               <td>
-                 <ul>
-                   <li>MI250X</li>
-                   <li>MI250</li>
-                   <li>MI210</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>MI250X</li>
-                   <li>MI250</li>
-                   <li>MI210</li>
-                 </ul>
-               </td>
-             </tr>
-             <tr>
-               <th>CDNA (gfx908)</th>
-               <td>
-                 <ul>
-                   <li>MI100</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>MI100</li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="gpu" data-templ-v="radeon-pro">
-             <tr>
-               <th>RDNA 3 (gfx1101)</th>
-               <td>
-                 <ul>
-                   <li>V710</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>V710</li>
-                 </ul>
-               </td>
-             </tr>
-             <tr>
-               <th>RDNA 3 (gfx1100)</th>
-               <td>
-                 <ul>
-                   <li>W7900 Dual Slot</li>
-                   <li>W7900</li>
-                   <li>W7800 48GB</li>
-                   <li>W7800</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>W7900 Dual Slot</li>
-                   <li>W7900</li>
-                   <li>W7800 48GB</li>
-                   <li>W7800</li>
-                 </ul>
-               </td>
-             </tr>
-             <tr>
-               <th>RDNA 2 (gfx1030)</th>
-               <td>
-                 <ul>
-                   <li>W6800</li>
-                   <li>V620</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>W6800</li>
-                   <li>V620</li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="gpu" data-templ-v="radeon">
-             <tr>
-               <th>RDNA 3 (gfx1100)</th>
-               <td>
-                 <ul>
-                   <li>RX 7900 XTX</li>
-                   <li>RX 7900 XT</li>
-                   <li>RX 7900 GRE</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>RX 7900 XTX</li>
-                   <li>RX 7900 XT</li>
-                   <li>RX 7900 GRE</li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
+{% endfor %}
          </tbody>
 
          <tbody id="compat-ref-os">
@@ -612,13 +498,13 @@
     {% if latest_component_data %}
              <td>{{ latest_component_data.version }}</td>
     {% else %}
-             <td></td>
+             <td>N/A</td>
     {% endif %}
     {% set previous_component_data = previous["ROCm"]["Components"][component_category][name] %}
     {% if previous_component_data %}
              <td>{{ previous_component_data.version }}</td>
     {% else %}
-             <td></td>
+             <td>N/A</td>
     {% endif %}
     {% for v in others %}
              <template data-templ-k="compareVer" data-templ-v="{{v.ROCm.Version}}">
@@ -626,7 +512,7 @@
       {% if component_data %}
                <td>{{ component_data.version }}</td>
       {% else %}
-               <td></td>
+               <td>N/A</td>
       {% endif %}
              </template>
     {% endfor %}
@@ -833,6 +719,9 @@
          </style>
        </noscript>
 
+Debug output
+============
+
 All unique categories
 
 {{ all_component_categories }}
@@ -844,3 +733,7 @@ All unique components
 All unique frameworks
 
 {{ all_frameworks }}
+
+All GPUs by arch
+
+{{ gpu_arch_map }}
