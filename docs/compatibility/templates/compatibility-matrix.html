@@ -7,13 +7,14 @@
 
 {% set latest = all_data[0] %}
 {% set previous = all_data[1] if all_data|length > 1 else {} %}
-{% set others = all_data[2:5] if all_data|length > 2 else [] %}
+{% set others = all_data[2:] if all_data|length > 2 else [] %}
+{% set footnotes = [] %}
 
 {# Collect all unique Instinct accelerators #}
 
 .. raw:: html
 
-   <div class="container-fluid js-content" data-latest="{{ latest["ROCm"]["Version"] }}" data-previous="{{ previous["ROCm"]["Version"] }}" data-latest-windows="6.1.2"
+   <div class="container-fluid js-content" data-latest="{{ latest.ROCm.Version }}" data-previous="{{ previous.ROCm.Version }}" data-latest-windows="6.1.2"
      id="compat-params-selector">
      <!-- PARAMS SELECTOR -->
      <div class="row gx-2">
@@ -149,17 +150,17 @@
       {% if family not in gpu_arch_map %}
         {% set gpu_arch_map = gpu_arch_map.update({family: {}}) or gpu_arch_map %}
       {% endif %}
-      
+
       {# Process each GPU in this family #}
       {% for gpu_name, gpu_data in gpus.items() %}
         {# Create architecture key with llvm_target in parentheses #}
         {% set arch_key = gpu_data.architecture + " (" + gpu_data.llvm_target + ")" %}
-        
+
         {# Initialize architecture entry if not exists #}
         {% if arch_key not in gpu_arch_map[family] %}
           {% set gpu_arch_map = gpu_arch_map[family].update({arch_key: []}) or gpu_arch_map %}
         {% endif %}
-        
+
         {# Add GPU to the architecture list if not already present #}
         {% if gpu_name not in gpu_arch_map[family][arch_key] %}
           {% set _ = gpu_arch_map[family][arch_key].append(gpu_name) %}
@@ -558,69 +559,7 @@
 {% endfor %}
          </tbody>
 
-{% set category = "Third-party communication libraries" %}
-         <tbody id="compat-ref-3p-communication-libs">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 {{ category }}
-                 <a class="headerlink" href="#compat-ref-3p-communication-libs" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-{% for lib_name, lib_ver in latest["ROCm"][category].items() %}
-           <tr class="compat-matrix-entry">
-             <th>
-                {{ lib_name }}
-             </th>
-             <td>
-              {{ lib_ver }}
-             </td>
-  {% for v in all_data %}
-      {% if v["ROCm"][category][lib_name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
-               <td>
-                 {{ v["ROCm"][category][lib_name] }}
-               </td>
-             </template>
-      {% endif %}
-  {% endfor %}
-           </tr>
-{% endfor %}
-         </tbody>
-
-{% set category = "Third-party algorithm libraries" %}
-         <tbody id="compat-ref-3p-algorithm-libs">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 {{ category }}
-                 <a class="headerlink" href="#compat-ref-3p-algorithm-libs" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-{% for lib_name, lib_ver in latest["ROCm"][category].items() %}
-           <tr class="compat-matrix-entry">
-             <th>
-                {{ lib_name }}
-             </th>
-             <td>
-              {{ lib_ver }}
-             </td>
-  {% for v in all_data %}
-      {% if v["ROCm"][category][lib_name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
-               <td>
-                 {{ v["ROCm"][category][lib_name] }}
-               </td>
-             </template>
-      {% endif %}
-  {% endfor %}
-           </tr>
-{% endfor %}
-         </tbody>
-
-{% set category = "Third-party communication libraries" %}
+{% set category = "Virtualization support" %}
          <tbody id="#compat-ref-virtualization">
            <tr>
              <th colspan="4">
