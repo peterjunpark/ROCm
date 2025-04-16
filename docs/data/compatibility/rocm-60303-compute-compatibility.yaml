@@ -162,8 +162,8 @@ ROCm:
   Third-party algorithm libraries:
     Thrust: 2.3.2
     CUB: 2.3.2
-  KFD and user space:
-    Tested user space versions: 6.3.x, 6.2.x, 6.1.x
+  Kernel-mode driver and user space:
+    KMD versions: 6.3.x, 6.2.x, 6.1.x
   GPUs:
     Instinct:
       MI325X:

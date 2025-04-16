@@ -144,8 +144,8 @@ ROCm:
       ROCr-Runtime:
         alt_name: ROCr Runtime
         version: 1.15.0
-  KFD and user space:
-    Tested user space versions: 6.4.x, 6.3.x, 6.2.x, 6.1.x
+  Kernel-mode driver and user space:
+    KMD versions: 6.4.x, 6.3.x, 6.2.x, 6.1.x
   Virtualization support:
     MI325X:
       - hypervisor: KVM
