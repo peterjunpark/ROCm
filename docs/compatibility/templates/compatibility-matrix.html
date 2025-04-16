@@ -1,12 +1,68 @@
+{# Load all compatibility data files #}
 {% set all_data = [] %}
 {% for compat_version in config.html_context.compatibility_matrix.versions %}
   {% set file_content = load(compat_version.data_file, data_format = "yaml") %}
   {% set _ = all_data.append(file_content) %}
 {% endfor %}
+
+{# Collect all unique component categories #}
+{% set all_component_categories = [] %}
+{% for data in all_data %}
+  {% if data.ROCm and data.ROCm.Components %}
+    {% for category in data.ROCm.Components.keys() %}
+      {% if category not in all_component_categories %}
+        {% set _ = all_component_categories.append(category) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{# Collect all unique components #}
+{% set component_map = {} %}
+{% for category in all_component_categories %}
+  {% set component_map = component_map.update({category: []}) or component_map %}
+{% endfor %}
+{% for data in all_data %}
+  {% if data.ROCm and data.ROCm.Components %}
+    {% for category, components in data.ROCm.Components.items() %}
+      {% if components %}
+        {% for component_name in components.keys() %}
+          {% if component_name not in component_map[category] %}
+            {% set _ = component_map[category].append(component_name) %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{# Collect all unique deep learning frameworks #}
+{% set all_frameworks = [] %}
+{% for data in all_data %}
+  {% if data.ROCm and data.ROCm["Deep learning frameworks"] %}
+    {% for framework in data.ROCm["Deep learning frameworks"].keys() %}
+      {% if framework not in all_frameworks %}
+        {% set _ = all_frameworks.append(framework) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
 {% set latest = all_data[0] %}
-{% set previous = all_data[1] %}
-{% set others = all_data[2:5] %}
-{% set component_categories = [] %}
+{% set previous = all_data[1] if all_data|length > 1 else {} %}
+{% set others = all_data[2:5] if all_data|length > 2 else [] %}
+
+All unique categories
+
+{{ all_component_categories }}
+
+All unique components
+
+{{ component_map }}
+
+All unique frameworks
+
+{{ all_frameworks }}
 
 .. raw:: html
 
@@ -542,30 +598,41 @@
                </h2>
              </th>
            </tr>
-{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
+{% for name in component_map[component_category] %}
            <tr class="compat-matrix-entry">
              <th>
                <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
-                {{ lib.alt_name | default(name) }}
+                {{ name }}
                </a>
                <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
              </th>
+  {% set latest_component_data = latest["ROCm"]["Components"][component_category][name] %}
+  {% if latest_component_data %}
              <td>
-              {{ lib.version }}
+              {{ latest_component_data.version }}
              </td>
-  {% if previous["ROCm"]["Components"][component_category][name] %}
+  {% else %}
+      <td></td>
+  {% endif %}
+  {% set previous_component_data = previous["ROCm"]["Components"][component_category][name] %}
+  {% if previous_component_data %}
              <td>
-              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
+              {{ previous_component_data.version }}
              </td>
+  {% else %}
+      <td></td>
   {% endif %}
   {% for v in others %}
-      {% if v["ROCm"]["Components"][component_category][name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
+             <template data-templ-k="compareVer" data-templ-v="{{v.ROCm.Version}}">
+      {% set component_data = v["ROCm"]["Components"][component_category][name] %}
+      {% if component_data %}
                <td>
-                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
+                 {{ component_data.version }}
                </td>
-             </template>
+      {% else %}
+               <td></td>
       {% endif %}
+             </template>
   {% endfor %}
            </tr>
 {% endfor %}
