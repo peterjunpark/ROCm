@@ -52,18 +52,6 @@
 {% set previous = all_data[1] if all_data|length > 1 else {} %}
 {% set others = all_data[2:5] if all_data|length > 2 else [] %}
 
-All unique categories
-
-{{ all_component_categories }}
-
-All unique components
-
-{{ component_map }}
-
-All unique frameworks
-
-{{ all_frameworks }}
-
 .. raw:: html
 
    <div class="container-fluid js-content" data-latest="{{ latest["ROCm"]["Version"] }}" data-previous="{{ previous["ROCm"]["Version"] }}" data-latest-windows="6.1.2"
@@ -588,17 +576,18 @@ All unique frameworks
              </tr>
            </template>
          </tbody>
-{% set component_category = "Machine learning and computer vision libraries" %}
-         <tbody id="compat-ref-ml-cv-libs">
+{% for component_category in all_component_categories %}
+  {% set html_id = component_category | replace(" ", "-") | lower %}
+          <tbody id="{{ html_id }}">
            <tr>
              <th colspan="4">
                <h2>
                  {{ component_category }}
-                 <a class="headerlink" href="#compat-ref-rocm-libs" title="Link to this heading">#</a>
+                 <a class="headerlink" href="#{{ html_id }}" title="Link to this heading">#</a>
                </h2>
              </th>
            </tr>
-{% for name in component_map[component_category] %}
+  {% for name in component_map[component_category] %}
            <tr class="compat-matrix-entry">
              <th>
                <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
@@ -606,23 +595,23 @@ All unique frameworks
                </a>
                <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
              </th>
-  {% set latest_component_data = latest["ROCm"]["Components"][component_category][name] %}
-  {% if latest_component_data %}
+    {% set latest_component_data = latest["ROCm"]["Components"][component_category][name] %}
+    {% if latest_component_data %}
              <td>
               {{ latest_component_data.version }}
              </td>
-  {% else %}
+    {% else %}
       <td></td>
-  {% endif %}
-  {% set previous_component_data = previous["ROCm"]["Components"][component_category][name] %}
-  {% if previous_component_data %}
+    {% endif %}
+    {% set previous_component_data = previous["ROCm"]["Components"][component_category][name] %}
+    {% if previous_component_data %}
              <td>
               {{ previous_component_data.version }}
              </td>
-  {% else %}
+    {% else %}
       <td></td>
-  {% endif %}
-  {% for v in others %}
+    {% endif %}
+    {% for v in others %}
              <template data-templ-k="compareVer" data-templ-v="{{v.ROCm.Version}}">
       {% set component_data = v["ROCm"]["Components"][component_category][name] %}
       {% if component_data %}
@@ -633,316 +622,11 @@ All unique frameworks
                <td></td>
       {% endif %}
              </template>
+    {% endfor %}
+           </tr>
   {% endfor %}
-           </tr>
-{% endfor %}
          </tbody>
-
-{% set component_category = "Math libraries" %}
-         <tbody id="compat-ref-math-libs">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 {{ component_category }}
-                 <a class="headerlink" href="#compat-ref-math-libs" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
-           <tr class="compat-matrix-entry">
-             <th>
-               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
-                {{ lib.alt_name | default(name) }}
-               </a>
-               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
-             </th>
-             <td>
-              {{ lib.version }}
-             </td>
-  {% if previous["ROCm"]["Components"][component_category][name] %}
-             <td>
-              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
-             </td>
-  {% endif %}
-  {% for v in others %}
-      {% if v["ROCm"]["Components"][component_category][name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
-               <td>
-                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
-               </td>
-             </template>
-      {% endif %}
-  {% endfor %}
-           </tr>
 {% endfor %}
-         </tbody>
-
-{% set component_category = "Primitives libraries" %}
-         <tbody id="compat-ref-primitives-libs">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 {{ component_category }}
-                 <a class="headerlink" href="#compat-ref-primitives-libs" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
-           <tr class="compat-matrix-entry">
-             <th>
-               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
-                {{ lib.alt_name | default(name) }}
-               </a>
-               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
-             </th>
-             <td>
-              {{ lib.version }}
-             </td>
-  {% if previous["ROCm"]["Components"][component_category][name] %}
-             <td>
-              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
-             </td>
-  {% endif %}
-  {% for v in others %}
-      {% if v["ROCm"]["Components"][component_category][name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
-               <td>
-                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
-               </td>
-             </template>
-      {% endif %}
-  {% endfor %}
-           </tr>
-{% endfor %}
-         </tbody>
-
-{% set component_category = "System management tools" %}
-         <tbody id="compat-ref-sys-tools">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 {{ component_category }}
-                 <a class="headerlink" href="#compat-ref-sys-tools" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
-           <tr class="compat-matrix-entry">
-             <th>
-               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
-                {{ lib.alt_name | default(name) }}
-               </a>
-               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
-             </th>
-             <td>
-              {{ lib.version }}
-             </td>
-  {% if previous["ROCm"]["Components"][component_category][name] %}
-             <td>
-              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
-             </td>
-  {% endif %}
-  {% for v in others %}
-      {% if v["ROCm"]["Components"][component_category][name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
-               <td>
-                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
-               </td>
-             </template>
-      {% endif %}
-  {% endfor %}
-           </tr>
-{% endfor %}
-         </tbody>
-
-{% set component_category = "Performance tools" %}
-         <tbody id="compat-ref-perf-tools">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 {{ component_category }}
-                 <a class="headerlink" href="#compat-ref-perf-tools" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
-           <tr class="compat-matrix-entry">
-             <th>
-               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
-                {{ lib.alt_name | default(name) }}
-               </a>
-               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
-             </th>
-             <td>
-              {{ lib.version }}
-             </td>
-  {% if previous["ROCm"]["Components"][component_category][name] %}
-             <td>
-              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
-             </td>
-  {% endif %}
-  {% for v in others %}
-      {% if v["ROCm"]["Components"][component_category][name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
-               <td>
-                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
-               </td>
-             </template>
-      {% endif %}
-  {% endfor %}
-           </tr>
-{% endfor %}
-         </tbody>
-
-{% set component_category = "Development tools" %}
-         <tbody id="compat-ref-dev-tools">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 {{ component_category }}
-                 <a class="headerlink" href="#compat-ref-dev-tools" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
-           <tr class="compat-matrix-entry">
-             <th>
-               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
-                {{ lib.alt_name | default(name) }}
-               </a>
-               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
-             </th>
-             <td>
-              {{ lib.version }}
-             </td>
-  {% if previous["ROCm"]["Components"][component_category][name] %}
-             <td>
-              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
-             </td>
-  {% endif %}
-  {% for v in others %}
-      {% if v["ROCm"]["Components"][component_category][name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
-               <td>
-                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
-               </td>
-             </template>
-      {% endif %}
-  {% endfor %}
-           </tr>
-{% endfor %}
-         </tbody>
-
-{% set component_category = "Compilers" %}
-         <tbody id="compat-ref-compilers">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 {{ component_category }}
-                 <a class="headerlink" href="#compat-ref-compilers" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
-           <tr class="compat-matrix-entry">
-             <th>
-               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
-                {{ lib.alt_name | default(name) }}
-               </a>
-               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
-             </th>
-             <td>
-              {{ lib.version }}
-             </td>
-  {% if previous["ROCm"]["Components"][component_category][name] %}
-             <td>
-              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
-             </td>
-  {% endif %}
-  {% for v in others %}
-      {% if v["ROCm"]["Components"][component_category][name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
-               <td>
-                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
-               </td>
-             </template>
-      {% endif %}
-  {% endfor %}
-           </tr>
-{% endfor %}
-         </tbody>
-
-{% set component_category = "Runtimes" %}
-         <tbody id="compat-ref-runtimes">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 {{ component_category }}
-                 <a class="headerlink" href="#compat-ref-runtimes" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
-           <tr class="compat-matrix-entry">
-             <th>
-               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
-                {{ lib.alt_name | default(name) }}
-               </a>
-               <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
-             </th>
-  {% if previous["ROCm"]["Components"][component_category][name] %}
-             <td>
-              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
-             </td>
-  {% endif %}
-  {% for v in others %}
-      {% if v["ROCm"]["Components"][component_category][name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
-               <td>
-                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
-               </td>
-             </template>
-      {% endif %}
-  {% endfor %}
-           </tr>
-{% endfor %}
-         </tbody>
-
-{% set component_category = "Support libraries" %}
-         <tbody id="compat-ref-support-libs">
-           <tr>
-             <th colspan="4">
-               <h2>
-                 {{ component_category }}
-                 <a class="headerlink" href="#compat-ref-support-libs" title="Link to this heading">#</a>
-               </h2>
-             </th>
-           </tr>
-{% for name, lib in latest["ROCm"]["Components"][component_category].items() %}
-           <tr class="compat-matrix-entry">
-             <th>
-                {{ lib.alt_name | default(name) }}
-             </th>
-             <td>
-              {{ lib.version }}
-             </td>
-  {% if previous["ROCm"]["Components"][component_category][name] %}
-             <td>
-              {{ previous["ROCm"]["Components"][component_category][name]["version"] }}
-             </td>
-  {% endif %}
-  {% for v in others %}
-      {% if v["ROCm"]["Components"][component_category][name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{v["ROCm"]["Version"]}}">
-               <td>
-                 {{ v["ROCm"]["Components"][component_category][name]["version"] }}
-               </td>
-             </template>
-      {% endif %}
-  {% endfor %}
-           </tr>
-{% endfor %}
-         </tbody>
 
 {% set category = "Deep learning frameworks" %}
          <tbody id="compat-ref-ml-frameworks">
@@ -1141,3 +825,15 @@ All unique frameworks
            }
          </style>
        </noscript>
+
+All unique categories
+
+{{ all_component_categories }}
+
+All unique components
+
+{{ component_map }}
+
+All unique frameworks
+
+{{ all_frameworks }}
