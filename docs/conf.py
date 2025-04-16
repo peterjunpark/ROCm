@@ -89,12 +89,12 @@ article_pages = [
 
 compatibility_matrix_config = {
     "versions": [
-        {"rocm_version": release, "data_file": "/compatibility/rocm-60400-compute-compatibility.yaml"},
-        {"rocm_version": "6.3.3", "data_file": "/compatibility/rocm-60303-compute-compatibility.yaml"},
-        {"rocm_version": "6.3.2", "data_file": "/compatibility/rocm-60302-compute-compatibility.yaml"},
-        {"rocm_version": "6.3.1", "data_file": "/compatibility/rocm-60301-compute-compatibility.yaml"},
-        {"rocm_version": "6.3.0", "data_file": "/compatibility/rocm-60300-compute-compatibility.yaml"},
-        {"rocm_version": "6.2.4", "data_file": "/compatibility/rocm-60204-compute-compatibility.yaml"},
+        {"rocm_version": release, "data_file": "/data/compatibility/rocm-60400-compute-compatibility.yaml"},
+        {"rocm_version": "6.3.3", "data_file": "/data/compatibility/rocm-60303-compute-compatibility.yaml"},
+        {"rocm_version": "6.3.2", "data_file": "/data/compatibility/rocm-60302-compute-compatibility.yaml"},
+        {"rocm_version": "6.3.1", "data_file": "/data/compatibility/rocm-60301-compute-compatibility.yaml"},
+        {"rocm_version": "6.3.0", "data_file": "/data/compatibility/rocm-60300-compute-compatibility.yaml"},
+        {"rocm_version": "6.2.4", "data_file": "/data/compatibility/rocm-60204-compute-compatibility.yaml"},
     ]
 }
 

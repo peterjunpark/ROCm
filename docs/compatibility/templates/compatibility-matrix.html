@@ -6,6 +6,7 @@
 {% set latest = all_data[0] %}
 {% set previous = all_data[1] %}
 {% set others = all_data[2:5] %}
+{% set component_categories = [] %}
 
 .. raw:: html
 
@@ -1000,7 +1001,7 @@
              </th>
            </tr>
            <tr>
-             <td colspan="3">ROCm requires CPUs that support PCIe™ atomics. Modern CPUs after the release of 1st
+             <td colspan="4">ROCm requires CPUs that support PCIe™ atomics. Modern CPUs after the release of 1st
                generation AMD Zen CPU and Intel™ Haswell support PCIe atomics.</td>
            </tr>
          </tbody>
