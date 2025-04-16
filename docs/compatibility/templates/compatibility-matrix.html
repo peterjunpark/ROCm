@@ -5,89 +5,6 @@
   {% set _ = all_data.append(file_content) %}
 {% endfor %}
 
-{# Initialize the GPU map by architecture #}
-{% set gpu_arch_map = {} %}
-{% for data in all_data %}
-  {% if data.ROCm and data.ROCm.GPUs %}
-    {% for family, gpus in data.ROCm.GPUs.items() %}
-      {# Initialize family if not exists #}
-      {% if family not in gpu_arch_map %}
-        {% set gpu_arch_map = gpu_arch_map.update({family: {}}) or gpu_arch_map %}
-      {% endif %}
-      
-      {# Process each GPU in this family #}
-      {% for gpu_name, gpu_data in gpus.items() %}
-        {# Create architecture key with llvm_target in parentheses #}
-        {% set arch_key = gpu_data.architecture + " (" + gpu_data.llvm_target + ")" %}
-        
-        {# Initialize architecture entry if not exists #}
-        {% if arch_key not in gpu_arch_map[family] %}
-          {% set gpu_arch_map = gpu_arch_map[family].update({arch_key: []}) or gpu_arch_map %}
-        {% endif %}
-        
-        {# Add GPU to the architecture list if not already present #}
-        {% if gpu_name not in gpu_arch_map[family][arch_key] %}
-          {% set _ = gpu_arch_map[family][arch_key].append(gpu_name) %}
-        {% endif %}
-      {% endfor %}
-    {% endfor %}
-  {% endif %}
-{% endfor %}
-
-{# Collect all unique component categories #}
-{% set all_component_categories = [] %}
-{% for data in all_data %}
-  {% if data.ROCm and data.ROCm.Components %}
-    {% for category in data.ROCm.Components.keys() %}
-      {% if category not in all_component_categories %}
-        {% set _ = all_component_categories.append(category) %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-{% endfor %}
-
-{# Collect all unique components #}
-{% set component_map = {} %}
-{% for category in all_component_categories %}
-  {% set component_map = component_map.update({category: []}) or component_map %}
-{% endfor %}
-{# Track which components we've already added with a separate dictionary #}
-{% set seen_components = {} %}
-{% for category in all_component_categories %}
-  {% set seen_components = seen_components.update({category: []}) or seen_components %}
-{% endfor %}
-{% for data in all_data %}
-  {% if data.ROCm and data.ROCm.Components %}
-    {% for category, components in data.ROCm.Components.items() %}
-      {% if components %}
-        {% for component_name, component_data in components.items() %}
-          {# Check if we've already processed this component in this category #}
-          {% if category in seen_components and component_name not in seen_components[category] %}
-            {# Add to the seen list #}
-            {% set _ = seen_components[category].append(component_name) %}
-
-            {# Add to the component map #}
-            {% set alt_name = component_data.alt_name|default(component_name) %}
-            {% set _ = component_map[category].append((component_name, alt_name)) %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-{% endfor %}
-
-{# Collect all unique deep learning frameworks #}
-{% set all_frameworks = [] %}
-{% for data in all_data %}
-  {% if data.ROCm and data.ROCm["Deep learning frameworks"] %}
-    {% for framework in data.ROCm["Deep learning frameworks"].keys() %}
-      {% if framework not in all_frameworks %}
-        {% set _ = all_frameworks.append(framework) %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-{% endfor %}
-
 {% set latest = all_data[0] %}
 {% set previous = all_data[1] if all_data|length > 1 else {} %}
 {% set others = all_data[2:5] if all_data|length > 2 else [] %}
@@ -223,6 +140,34 @@
            </colgroup>
          </thead>
 
+{# Initialize the GPU map by architecture #}
+{% set gpu_arch_map = {} %}
+{% for data in all_data %}
+  {% if data.ROCm and data.ROCm.GPUs %}
+    {% for family, gpus in data.ROCm.GPUs.items() %}
+      {# Initialize family if not exists #}
+      {% if family not in gpu_arch_map %}
+        {% set gpu_arch_map = gpu_arch_map.update({family: {}}) or gpu_arch_map %}
+      {% endif %}
+      
+      {# Process each GPU in this family #}
+      {% for gpu_name, gpu_data in gpus.items() %}
+        {# Create architecture key with llvm_target in parentheses #}
+        {% set arch_key = gpu_data.architecture + " (" + gpu_data.llvm_target + ")" %}
+        
+        {# Initialize architecture entry if not exists #}
+        {% if arch_key not in gpu_arch_map[family] %}
+          {% set gpu_arch_map = gpu_arch_map[family].update({arch_key: []}) or gpu_arch_map %}
+        {% endif %}
+        
+        {# Add GPU to the architecture list if not already present #}
+        {% if gpu_name not in gpu_arch_map[family][arch_key] %}
+          {% set _ = gpu_arch_map[family][arch_key].append(gpu_name) %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
 {% set category = "GPUs" %}
          <tbody id="compat-ref-gpu">
            <tr>
@@ -243,21 +188,21 @@
                <td>
                  <ul>
           {% for sku in skus %}
-                   <li>{{ gpu }}</li>
+                   <li>{{ sku }}</li>
           {% endfor %}
                  </ul>
                </td>
                <td>
                  <ul>
           {% for sku in skus %}
-                   <li>{{ gpu }}</li>
+                   <li>{{ sku }}</li>
           {% endfor %}
                  </ul>
                </td>
                <td>
                  <ul>
           {% for sku in skus %}
-                   <li>{{ gpu }}</li>
+                   <li>{{ sku }}</li>
           {% endfor %}
                  </ul>
                </td>
@@ -473,6 +418,49 @@
              </tr>
            </template>
          </tbody>
+
+{# Collect all unique component categories #}
+{% set all_component_categories = [] %}
+{% for data in all_data %}
+  {% if data.ROCm and data.ROCm.Components %}
+    {% for category in data.ROCm.Components.keys() %}
+      {% if category not in all_component_categories %}
+        {% set _ = all_component_categories.append(category) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{# Collect all unique components #}
+{% set component_map = {} %}
+{% for category in all_component_categories %}
+  {% set component_map = component_map.update({category: []}) or component_map %}
+{% endfor %}
+{# Track which components we've already added with a separate dictionary #}
+{% set seen_components = {} %}
+{% for category in all_component_categories %}
+  {% set seen_components = seen_components.update({category: []}) or seen_components %}
+{% endfor %}
+{% for data in all_data %}
+  {% if data.ROCm and data.ROCm.Components %}
+    {% for category, components in data.ROCm.Components.items() %}
+      {% if components %}
+        {% for component_name, component_data in components.items() %}
+          {# Check if we've already processed this component in this category #}
+          {% if category in seen_components and component_name not in seen_components[category] %}
+            {# Add to the seen list #}
+            {% set _ = seen_components[category].append(component_name) %}
+
+            {# Add to the component map #}
+            {% set alt_name = component_data.alt_name|default(component_name) %}
+            {% set _ = component_map[category].append((component_name, alt_name)) %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
 {% for component_category in all_component_categories %}
   {% set html_id = component_category | replace(" ", "-") | lower %}
           <tbody id="{{ html_id }}">
@@ -521,6 +509,18 @@
          </tbody>
 {% endfor %}
 
+{# Collect all unique deep learning frameworks #}
+{% set all_frameworks = [] %}
+{% for data in all_data %}
+  {% if data.ROCm and data.ROCm["Deep learning frameworks"] %}
+    {% for framework in data.ROCm["Deep learning frameworks"].keys() %}
+      {% if framework not in all_frameworks %}
+        {% set _ = all_frameworks.append(framework) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
 {% set category = "Deep learning frameworks" %}
          <tbody id="compat-ref-ml-frameworks">
            <tr>
@@ -531,22 +531,28 @@
                </h2>
              </th>
            </tr>
-{% for fw_name, fw in latest["ROCm"][category].items() %}
-           <tr id="deep-learning-frameworks-{{ fw_name | lower }}">
-             <th>
-  {% if fw.doc_url %}
-               <a href="{{ fw.doc_url }}" target="_blank">{{ fw_name }}</a>
+{% for name in all_frameworks %}
+           <tr id="deep-learning-frameworks-{{ name | lower }}">
+             <th>{{ name }}</th>
+  {% set latest_framework_data = latest["ROCm"][category][name] %}
+  {% if latest_framework_data %}
+             <td>{{ latest_framework_data.version }}</td>
   {% else %}
-               {{ fw_name }}
+             <td>N/A</td>
   {% endif %}
-             </th>
-             <td>{{ fw.version }}</td>
-  {% for v in all_data %}
-      {% if v["ROCm"][category][fw_name] %}
-             <template data-templ-k="compareVer" data-templ-v="{{ v["ROCm"]["Version"] }}">
-               <td>{{ v["ROCm"][category][fw_name]["version"] }}</td>
+  {% set previous_framework_data = previous["ROCm"][category][name] %}
+  {% if previous_framework_data %}
+             <td>{{ previous_framework_data.version }}</td>
+  {% else %}
+             <td>N/A</td>
+  {% endif %}
+  {% for v in others %}
+             <template data-templ-k="compareVer" data-templ-v="{{ v.ROCm.Version }}">
+    {% set framework_data = v["ROCm"][category][name] %}
+    {% if framework_data %}
+               <td>{{ framework_data.version }}</td>
+    {% endif %}
              </template>
-      {% endif %}
   {% endfor %}
            </tr>
 {% endfor %}

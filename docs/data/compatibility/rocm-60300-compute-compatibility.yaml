@@ -20,7 +20,7 @@ ROCm:
                 version: 0.6.0
             rocPyDecode:
                 version: 0.2.0
-            RPP:
+            rpp:
                 alt_name: ROCm Performance Primitives (RPP)
                 version: 1.9.1
         Communication libraries:
