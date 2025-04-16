@@ -588,36 +588,30 @@
              </th>
            </tr>
   {% for name in component_map[component_category] %}
-           <tr class="compat-matrix-entry">
-             <th>
-               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">
-                {{ name }}
-               </a>
+    {% set component_links %}
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">{{ name }}</a>
                <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
-             </th>
+    {% endset %}
+
+           <tr class="compat-matrix-entry">
+             <th>{{ component_links | trim }}</th>
     {% set latest_component_data = latest["ROCm"]["Components"][component_category][name] %}
     {% if latest_component_data %}
-             <td>
-              {{ latest_component_data.version }}
-             </td>
+             <td>{{ latest_component_data.version }}</td>
     {% else %}
-      <td></td>
+             <td></td>
     {% endif %}
     {% set previous_component_data = previous["ROCm"]["Components"][component_category][name] %}
     {% if previous_component_data %}
-             <td>
-              {{ previous_component_data.version }}
-             </td>
+             <td>{{ previous_component_data.version }}</td>
     {% else %}
-      <td></td>
+             <td></td>
     {% endif %}
     {% for v in others %}
              <template data-templ-k="compareVer" data-templ-v="{{v.ROCm.Version}}">
       {% set component_data = v["ROCm"]["Components"][component_category][name] %}
       {% if component_data %}
-               <td>
-                 {{ component_data.version }}
-               </td>
+               <td>{{ component_data.version }}</td>
       {% else %}
                <td></td>
       {% endif %}
