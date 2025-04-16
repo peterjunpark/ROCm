@@ -22,13 +22,24 @@
 {% for category in all_component_categories %}
   {% set component_map = component_map.update({category: []}) or component_map %}
 {% endfor %}
+{# Track which components we've already added with a separate dictionary #}
+{% set seen_components = {} %}
+{% for category in all_component_categories %}
+  {% set seen_components = seen_components.update({category: []}) or seen_components %}
+{% endfor %}
 {% for data in all_data %}
   {% if data.ROCm and data.ROCm.Components %}
     {% for category, components in data.ROCm.Components.items() %}
       {% if components %}
-        {% for component_name in components.keys() %}
-          {% if component_name not in component_map[category] %}
-            {% set _ = component_map[category].append(component_name) %}
+        {% for component_name, component_data in components.items() %}
+          {# Check if we've already processed this component in this category #}
+          {% if category in seen_components and component_name not in seen_components[category] %}
+            {# Add to the seen list #}
+            {% set _ = seen_components[category].append(component_name) %}
+            
+            {# Add to the component map #}
+            {% set alt_name = component_data.alt_name|default(component_name) %}
+            {% set _ = component_map[category].append((component_name, alt_name)) %}
           {% endif %}
         {% endfor %}
       {% endif %}
@@ -587,9 +598,11 @@
                </h2>
              </th>
            </tr>
-  {% for name in component_map[component_category] %}
+  {% for component_names in component_map[component_category] %}
+    {% set name = component_names[0] %}
+    {% set pretty_name = component_names[1] %}
     {% set component_links %}
-               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">{{ name }}</a>
+               <a href="https://rocm.docs.amd.com/projects/{{ name }}/en/latest" target="_blank">{{ pretty_name }}</a>
                <a href="https://github.com/ROCm/{{ name }}" target="_blank"><i class="fab fa-github"></i></a>
     {% endset %}
 
