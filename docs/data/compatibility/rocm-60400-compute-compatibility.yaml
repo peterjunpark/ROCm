@@ -20,7 +20,7 @@ ROCm:
         version: 0.8.0
       rocPyDecode:
         version: 0.3.1
-      RPP:
+      rpp:
         alt_name: ROCm Performance Primitives (RPP)
         version: 1.9.10
     Communication libraries:
@@ -183,8 +183,7 @@ ROCm:
     JAX:
       version: 0.4.31
     ONNX Runtime:
-      ROCm execution provider: 1.20
-      HIP execution provider: 1.20
+      version: 1.20 (ROCm EP), 1.20 (MIGraphX EP)
   Third-party communication libraries:
     UCC: ">= 1.3.0"
     UCX: ">= 1.15.0"

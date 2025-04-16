@@ -18,7 +18,7 @@ ROCm:
                 version: 0.6.0
             rocPyDecode:
                 version: 0.1.0
-            RPP:
+            rpp:
                 alt_name: ROCm Performance Primitives (RPP)
                 version: 1.8.0
         Communication libraries:
@@ -91,15 +91,15 @@ ROCm:
                 alt_name: ROCm Validation Suite (RVS)
                 version: 1.0.60202
         Performance tools:
-            omniperf:
-                alt_name: Omniperf
-                version: 2.0.1
-            omnitrace:
-                alt_name: Omnitrace
-                version: 1.11.2
             rocm_bandwidth_test:
                 alt_name: ROCm Bandwidth Test (RBT)
                 version: 1.4.0
+            rocprofiler-compute:
+                alt_name: Omniperf
+                version: Omniperf 2.0.1
+            rocprofiler-systems:
+                alt_name: Omnitrace
+                version: Omnitrace 1.11.2
             ROCProfiler:
                 version: 2.0.60202
             rocprofiler-register:
