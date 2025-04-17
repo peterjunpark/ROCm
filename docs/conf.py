@@ -94,7 +94,6 @@ compatibility_matrix_config = {
         {"rocm_version": "6.3.2", "data_file": "/data/compatibility/rocm-60302-compute-compatibility.yaml"},
         {"rocm_version": "6.3.1", "data_file": "/data/compatibility/rocm-60301-compute-compatibility.yaml"},
         {"rocm_version": "6.3.0", "data_file": "/data/compatibility/rocm-60300-compute-compatibility.yaml"},
-        {"rocm_version": "6.2.4", "data_file": "/data/compatibility/rocm-60204-compute-compatibility.yaml"},
     ]
 }
 
