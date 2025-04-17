@@ -87,11 +87,8 @@ table#compat-matrix {
 
   /* Table columns */
   colgroup {
-    col#compat-matrix-stub-col {
-      width: 32%;
-    }
-    col:not("#compat-matrix-stub-col") {
-      width: 34%;
+    col {
+      width: 25%;
     }
   }
 
