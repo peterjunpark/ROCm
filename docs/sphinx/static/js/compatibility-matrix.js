@@ -323,6 +323,7 @@ function setCompatMatrix(params, compatMatrix, compatMatrixTemplates) {
  * Sets the appropriate heading in the accelerators/GPUs section of the
  * compatibility matrix and the secondary TOC sidebar.
  * @param {string} latestVer
+ * @param {string} previousVer
  * @param {CompareVer[]} verParams
  * @param {OS[]} osParams
  * @param {UseCase[]} useCaseParams
@@ -330,6 +331,7 @@ function setCompatMatrix(params, compatMatrix, compatMatrixTemplates) {
  */
 function displayStackAndVerHeadings(
     latestVer,
+	previousVer,
     verParams,
     osParams,
     useCaseParams,
@@ -347,7 +349,11 @@ function displayStackAndVerHeadings(
             el.textContent = os === "windows"
                 ? latestVer
                 : `${latestVer} (latest)`;
-        } else if (el.id === "compat-matrix-stack-heading") {
+        } else if (el.id === "compat-matrix-previous-ver-heading") {
+            el.textContent = os === "windows"
+                ? previousVer
+                : `${previousVer} (previous)`;
+		} else if (el.id === "compat-matrix-stack-heading") {
             el.textContent = useCase === "graphics"
                 ? "ROCm on Radeon"
                 : os === "windows"
@@ -413,11 +419,12 @@ ready(function () {
     );
     const compatMatrixTemplates = document.querySelectorAll("template");
     const latestVerLinux = compatParamSelector.getAttribute("data-latest");
+    const previousVerLinux = compatParamSelector.getAttribute("data-previous");
     const latestVerWindows = compatParamSelector.getAttribute(
         "data-latest-windows",
     );
 
-    if (!latestVerLinux || !latestVerWindows) {
+    if (!latestVerLinux || !latestVerWindows || !previousVerLinux ) {
         return;
     }
 
@@ -425,6 +432,9 @@ ready(function () {
         .querySelector("span#compat-matrix-compare-ver-heading");
     const compatMatrixLatestVerHeading = compatMatrix.querySelector(
         "span#compat-matrix-latest-ver-heading",
+    );
+    const compatMatrixPreviousVerHeading = compatMatrix.querySelector(
+        "span#compat-matrix-previous-ver-heading",
     );
     const compatMatrixGPUHeading = compatMatrix
         .querySelector(
@@ -446,10 +456,12 @@ ready(function () {
 
     displayStackAndVerHeadings(
         latestVerLinux,
+		previousVerLinux,
         initialParams.compareVer,
         initialParams.os,
         initialParams.useCase,
         compatMatrixLatestVerHeading,
+		compatMatrixPreviousVerHeading,
         compatMatrixCompareVerHeading,
         compatMatrixStackHeading,
     );
@@ -523,7 +535,7 @@ ready(function () {
                     break;
                 case "rhel":
                 case "sles":
-                case "oracle-linux":
+				case "oracle-linux":
                 case "debian":
                     rm(params.os, "windows");
                     params.compareVer = ["6.3.1"];
@@ -539,6 +551,9 @@ ready(function () {
             const compatMatrixLatestVerHeading = compatMatrix.querySelector(
                 "span#compat-matrix-latest-ver-heading",
             );
+            const compatMatrixPreviousVerHeading = compatMatrix.querySelector(
+                "span#compat-matrix-previous-ver-heading",
+            );
             const compatMatrixStackHeading = compatMatrix.querySelector(
                 "span#compat-matrix-stack-heading",
             );
@@ -552,10 +567,12 @@ ready(function () {
 
             displayStackAndVerHeadings(
                 latestVer,
+				previousVerLinux,
                 params.compareVer,
                 params.os,
                 params.useCase,
                 compatMatrixLatestVerHeading,
+				compatMatrixPreviousVerHeading,
                 compatMatrixCompareVerHeading,
                 compatMatrixStackHeading,
             );
