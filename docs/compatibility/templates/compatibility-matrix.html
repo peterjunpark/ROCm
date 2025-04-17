@@ -10,8 +10,6 @@
 {% set others = all_data[2:] if all_data|length > 2 else [] %}
 {% set footnotes = [] %}
 
-{# Collect all unique Instinct accelerators #}
-
 .. raw:: html
 
    <div class="container-fluid js-content" data-latest="{{ latest.ROCm.Version }}" data-previous="{{ previous.ROCm.Version }}" data-latest-windows="6.1.2"
@@ -126,6 +124,7 @@
            </div>
          </div>
        </div>
+
        <!-- COMPATIBILITY TABLE -->
        <table class="table js-content" id="compat-matrix">
          <thead>
@@ -595,7 +594,7 @@
            </tr>
          </tbody>
 
-{% set category = "KFD and user space" %}
+{% set category = "Kernel-mode driver and user space" %}
          <tbody id="compat-ref-kfd-user-space">
            <tr>
              <th colspan="4">
