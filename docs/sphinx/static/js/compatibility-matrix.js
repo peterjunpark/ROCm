@@ -496,6 +496,7 @@ ready(function () {
             switch (selectorVal) {
                 case "compute":
                     params.gpu = ["instinct"];
+                    params.compareVer = ["6.3.2"];
                     break;
                 case "graphics":
                     params.gpu = ["radeon-pro"];
@@ -521,7 +522,7 @@ ready(function () {
 				case "oracle-linux":
                 case "debian":
                     rm(params.os, "windows");
-                    params.compareVer = ["6.3.1"];
+                    params.compareVer = ["6.3.2"];
             }
             if (!params.os.length) params.os = ["ubuntu"];
 
