@@ -195,28 +195,19 @@ function setCompatParamSelector(params, compatParamBtns) {
     );
 
     if (
-        !compatParamLinuxVers || !compatParamWindowsVers ||
+        !compatParamLinuxVers || 
         !compatParamRadeonVers || !compatSidebarRadeonSoftware
     ) {
         console.log("can't find linux, windows, radeon version rows");
     } else {
         if (useCase[0] === "graphics") {
             compatParamLinuxVers.style.display = "none";
-            compatParamWindowsVers.style.display = "none";
             compatParamRadeonVers.style.display = "flex";
             compatSidebarRadeonSoftware.style.display = "block";
         } else {
-            if (os[0] === "windows") {
-                compatParamLinuxVers.style.display = "none";
-                compatParamWindowsVers.style.display = "flex";
-                compatParamRadeonVers.style.display = "none";
-                compatSidebarRadeonSoftware.style.display = "none";
-            } else {
-                compatParamLinuxVers.style.display = "flex";
-                compatParamWindowsVers.style.display = "none";
-                compatParamRadeonVers.style.display = "none";
-                compatSidebarRadeonSoftware.style.display = "none";
-            }
+			compatParamLinuxVers.style.display = "flex";
+			compatParamRadeonVers.style.display = "none";
+			compatSidebarRadeonSoftware.style.display = "none";
         }
     }
 
@@ -346,13 +337,9 @@ function displayStackAndVerHeadings(
         const useCase = useCaseParams[0];
 
         if (el.id === "compat-matrix-latest-ver-heading") {
-            el.textContent = os === "windows"
-                ? latestVer
-                : `${latestVer} (latest)`;
+            el.textContent = `${latestVer} (latest)`;
         } else if (el.id === "compat-matrix-previous-ver-heading") {
-            el.textContent = os === "windows"
-                ? previousVer
-                : `${previousVer} (previous)`;
+            el.textContent = `${previousVer} (previous)`;
 		} else if (el.id === "compat-matrix-stack-heading") {
             el.textContent = useCase === "graphics"
                 ? "ROCm on Radeon"
@@ -420,11 +407,8 @@ ready(function () {
     const compatMatrixTemplates = document.querySelectorAll("template");
     const latestVerLinux = compatParamSelector.getAttribute("data-latest");
     const previousVerLinux = compatParamSelector.getAttribute("data-previous");
-    const latestVerWindows = compatParamSelector.getAttribute(
-        "data-latest-windows",
-    );
 
-    if (!latestVerLinux || !latestVerWindows || !previousVerLinux ) {
+    if (!latestVerLinux || !previousVerLinux ) {
         return;
     }
 
@@ -527,7 +511,6 @@ ready(function () {
                     break;
                 case "windows":
                     params.os = ["windows"];
-                    params.compareVer = ["6.0.2"];
                     break;
                 case "ubuntu":
                 case "wsl-ubuntu":
@@ -558,12 +541,7 @@ ready(function () {
                 "span#compat-matrix-stack-heading",
             );
 
-            let latestVer;
-            if (params.os.length === 1 && params.os[0] === "windows") {
-                latestVer = latestVerWindows;
-            } else {
-                latestVer = latestVerLinux;
-            }
+            let latestVer = latestVerLinux
 
             displayStackAndVerHeadings(
                 latestVer,
