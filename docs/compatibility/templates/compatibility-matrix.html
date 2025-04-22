@@ -12,8 +12,7 @@
 
 .. raw:: html
 
-   <div class="container-fluid js-content" data-latest="{{ latest.ROCm.Version }}" data-previous="{{ previous.ROCm.Version }}" data-latest-radeon="lrad" data-previous-radeon="prad"
-     id="compat-params-selector">
+   <div class="container-fluid js-content" data-latest="{{ latest.ROCm.Version }}" data-previous="{{ previous.ROCm.Version }}" data-latest-radeon="lrad" data-previous-radeon="prad" id="compat-params-selector">
      <!-- PARAMS SELECTOR -->
      <div class="row gx-2">
        <div class="row gx-0">
@@ -59,31 +58,23 @@
          </div>
          <div class="col-9">
            <div class="row gx-0">
-             <div class="col-3">
+             <div class="col-4">
                <div class="compat-param" data-param-k="os" data-param-v="ubuntu">Ubuntu</div>
              </div>
-             <div class="col-3">
-               <div class="compat-param" data-param-k="os" data-param-v="rhel">
-                 RHEL</div>
+             <div class="col-4">
+               <div class="compat-param" data-param-k="os" data-param-v="rhel">RHEL</div>
              </div>
-             <div class="col-3">
-               <div class="compat-param" data-param-k="os" data-param-v="sles">
-                 SLES</div>
+             <div class="col-4">
+               <div class="compat-param" data-param-k="os" data-param-v="sles">SLES</div>
              </div>
-             <div class="col-3">
+             <div class="col-4">
                <div class="compat-param" data-param-k="os" data-param-v="oracle-linux">Oracle Linux</div>
              </div>
-             <div class="col-3">
+             <div class="col-4">
                <div class="compat-param" data-param-k="os" data-param-v="debian">Debian</div>
              </div>
-             <div class="col-3">
+             <div class="col-4">
                <div class="compat-param" data-param-k="os" data-param-v="azure-linux">Azure Linux</div>
-             </div>
-             <div class="col-3">
-               <div class="compat-param" data-param-k="os" data-param-v="windows">Windows</div>
-             </div>
-             <div class="col-3">
-               <div class="compat-param" data-param-k="os" data-param-v="wsl-ubuntu">WSL (Ubuntu)</div>
              </div>
            </div>
          </div>
@@ -386,50 +377,6 @@
                  <ul>
                    <li>3.0 (kernel: 6.6)<a class="footnote-reference brackets" href="#compat-foot-azure-linux"
                        role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="os" data-templ-v="windows">
-             <tr>
-               <th>Windows</th>
-               <td>
-                 <ul>
-                   <li>Windows 11</li>
-                   <li>Windows 10</li>
-                   <li>Windows Server 2022</li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>Windows 11</li>
-                   <li>Windows 10</li>
-                   <li>Windows Server 2022</li>
-                 </ul>
-               </td>
-             </tr>
-           </template>
-           <template data-templ-k="os" data-templ-v="wsl-ubuntu">
-             <tr>
-               <th>WSL (Ubuntu)</th>
-               <td>
-                 <ul>
-                   <li>
-                     24.04.1 Desktop (kernel: 6.8.0-40-generic)
-                   </li>
-                   <li>
-                     22.04.5 Desktop (kernel: 6.8.0-40-generic)
-                   </li>
-                 </ul>
-               </td>
-               <td>
-                 <ul>
-                   <li>
-                     24.04.1 Desktop (kernel: 6.8.0-40-generic)
-                   </li>
-                   <li>
-                     22.04.5 Desktop (kernel: 6.8.0-40-generic)
-                   </li>
                  </ul>
                </td>
              </tr>
