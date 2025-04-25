@@ -1,0 +1,81 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<manifest>
+<remote name="gerritgit" fetch="ssh://gerritgit/" review="gerrit-git.amd.com"/>
+<remote name="lightning-ghemu" fetch="ssh://github-emu/AMD-Lightning-Internal"/>
+<remote name="rocm" fetch="https://github.com/ROCm"/>
+<remote name="rocm-ghemu" fetch="ssh://github-emu/AMD-ROCm-Internal"/>
+<default remote="gerritgit" revision="release/rocm-rel-6.4" sync-j="4" sync-c="true"/>
+<project name="AMDMIGraphX" remote="rocm" revision="695506a8c0ff7c833e04db68075dd1166af5ee16" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="DevTools/ec/rocr_debug_agent" path="rocr_debug_agent" revision="5c49ec91fd0181c71f8553120ee4b01bec2a6bfd" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="MIOpen" remote="rocm" revision="a583315f3e05a77bec9bf98f412add1ce77890bd" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="MIVisionX" remote="rocm" revision="a2b69e5b30f2dbdf66055ec99a2b5559b572f7af" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="ROCR-Runtime" remote="rocm-ghemu" revision="4264d016ecadc84213c9604c28fb5203c8405edf" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="ROCmValidationSuite" remote="rocm" revision="fb251886ed1bb74db2baa952efbb74dc977c00e6" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="Tensile" remote="rocm" revision="be49885fce2a61b600ae4593f1c2d00c8b4fa11e" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="TransferBench" remote="rocm" revision="3ea2f226ec818158ba97e4ee0ec0b589f13f4641" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="amdsmi" remote="rocm-ghemu" revision="ede62f253474a225877ccdce9621b19fcb2a2017" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="aqlprofile" remote="rocm-ghemu" revision="7fae75ec6bf7b1a631707ae859542d733f8a1f43" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="composable_kernel" remote="rocm" revision="a8c5bd9b9ad950c3e742877e01cb784da91664e3" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="compute/ec/OpenCL-CLHPP" path="OpenCL-CLHPP" revision="b4dcb17ae1766c6ed644f10a6f0b6350bebad5ff" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="compute/ec/OpenCL-Headers" path="OpenCL-Headers" revision="662bef520ffd382f57cf837d3792fe8d71d30e3e" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="compute/ec/aomp" path="openmp-extras/aomp" revision="1cd9ec1017102379ba52f75f9121cd7ff031ebef" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
+<project name="compute/ec/aomp-extras" path="openmp-extras/aomp-extras" revision="97567952aeffbbe2af05ee3cc83992e6310e5097" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
+<project name="compute/ec/build-infra" path="ROCm" revision="b214cb17161190c55590114b60a02acd299ed79b" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="infra"/>
+<project name="compute/ec/clr" path="clr" revision="0f2d6024245abde73eaff463cdc1f10f193395b1" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="compute/ec/flang" path="openmp-extras/flang" revision="4cc7cdc76beb9199bce1a3eb26e60e99cf483337" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
+<project name="compute/ec/hip" path="HIP" revision="a0a2dd7fc8731f849482f7ca1d4f5be165b12360" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="compute/ec/hip-examples" path="HIP-Examples" revision="41b0cff8077a25390c2bbda827eb9f6f37ec1ef3" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="compute/ec/hip-examples-private" path="hip-examples-private" revision="dc69edb405804987753735a369478503d82ce9c2" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="compute/ec/hip-tests" path="hip-tests" revision="3573bde0c29113ea53c72df986ffdd97763f37ed" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="compute/ec/hipify" path="HIPIFY" revision="b803a5270bd9a63da25407181ca0346d472415e1" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
+<project name="compute/ec/hipother" path="hipother" revision="49b1588f834dbe1a4db1bddb3647a91b15f618b8" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="compute/ec/jenkins-utils" path="jenkins-utils" revision="271856d8dc7615e665c40382217be8956dbeaad3" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="infra,stage1"/>
+<project name="compute/ec/ml-framework-ci" path="ml-framework-ci" revision="83440e22ebf1e9443b6df737224c1e5e2b91e0c4" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="infra,framework"/>
+<project name="compute/ec/packaging/meta" path="meta" revision="c7cffa2e4199da1fd68b8b3568282dd59d49a4df" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="infra,stage1"/>
+<project name="compute/ec/prototype" path="build" revision="d71a2766e11e057e5c698caea8fc4ebc0f72cb3e" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="infra,stage1"/>
+<project name="compute/ec/rocm-core" path="rocm-core" revision="73dae9c82ace4fb8e1e4028f86ff0365f21c9f51" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="infra,stage1"/>
+<project name="compute/ec/rocm-dbgapi" path="ROCdbgapi" revision="59be7ff0aaafe82feb78f30990c8fdf62838cc98" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="compute/ec/rocm-gdb" path="ROCgdb" revision="401bb21f2f3c72bbb90ccce12dc3ef481f9a1d8a" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="compute/ec/rocm_bandwidth_test" path="rocm_bandwidth_test" revision="84b8ddd2686be9bd3e438126b44e6bb10d94d522" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="half" remote="rocm" revision="1ddada225144cac0de8f6b5c0dd9acffd99a2e68" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipBLAS" remote="rocm" revision="0a335435e9c8a833d7106e4ae5057eb58cea2fef" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipBLAS-common" remote="rocm" revision="7c1566ba4628e777b91511242899b6df48555d04" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipBLASLt" remote="rocm" revision="5051e24def137fb02672e20bb8248305ae0cf784" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipCUB" remote="rocm" revision="a6005943c5804535990429925318e7900eb6e801" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipFFT" remote="rocm" revision="396169c84a2bb3c7ed7245caefe66002138e7c6c" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipRAND" remote="rocm" revision="d2516cc199690fd91abfdc5908ecfd88e3553067" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipSOLVER" remote="rocm" revision="ca0de3c9c95df4345b76cd8a56e72c84b7d5fc79" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipSPARSE" remote="rocm" revision="a6c62e48eb8a2326475f7bbb4705c5b926a5edc8" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipSPARSELt" remote="rocm" revision="f3f4f590a49ae9f9c9ce1451c42db4c2bfd00eed" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipTensor" remote="rocm" revision="53071d9968787eeb7872275d4ebc89493e37f7ad" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipfort" remote="rocm" revision="f3d6aa3e8657d665a43fa2815ca2e49ce39a464a" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="lightning/ec/spirv-llvm-translator" path="llvm-project/llvm/projects/SPIRV-LLVM-Translator" revision="8ed662a93b160247e5e7f17949d134940b08307a" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
+<project name="llvm-project" remote="lightning-ghemu" revision="c7fe45cf4b819c5991fe208aaa96edf142730f1d" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
+<project name="rccl" remote="rocm" revision="7b86f83d8468a577ed59d9b2a34a8d7639d36072" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rdc" remote="rocm-ghemu" revision="be34d624f6d49ca29573fdbe1b457eb2275230ad" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocAL" remote="rocm" revision="373ef865aca43528559e7a9134f09e49a9e9b7c6" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocALUTION" remote="rocm" revision="9713084af8d6b38e018a2048cdcdb6bf802d9596" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocBLAS" remote="rocm" revision="80e5394d6a68901ce48b03da47b33b1e69d58be7" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocDecode" remote="rocm" revision="a2a7b63cad8f90a94e21232b44460a8fb2d52304" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocFFT" remote="rocm" revision="058ba87fdcfdae334dbc8dbe048955b248e9328a" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocJPEG" remote="rocm" revision="73d36d35d90137ffbfcec276bdf973823ef0c0b9" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocPRIM" remote="rocm" revision="d8771ec18ad45c4d697800c22fb21241f22a915f" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocPyDecode" remote="rocm" revision="848e49d29d4d6173fb4b57a9223ce68c049baa28" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocRAND" remote="rocm" revision="b328dc132ba0014c473116b4cd1bf36d1fbafe78" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocSHMEM" remote="rocm" revision="7702b3c0f3f41baf6a80aa6b22fa90dec1a6801e" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocSOLVER" remote="rocm" revision="db754e3f55daab54abb86f17cd6b4066c504e163" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocSPARSE" remote="rocm" revision="4953add0aee37ad26700e8bcd6defbfa6b3a4d08" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocThrust" remote="rocm" revision="c806fb59c05ac7a4a14b85c8f5ba5f31cc6084b7" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocWMMA" remote="rocm" revision="1c029a0a4c9494bb72b698fda940fa1361929b94" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocm-cmake" remote="rocm" revision="ecc716b97c2239cff00422ed7a43cd52a0839a0e" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rocm-examples" remote="rocm" revision="152682d1634e6809c47f145454db8a54dc49e48b" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="rocm_smi_lib" remote="rocm-ghemu" revision="03a4530b68b770f3d782a82f6138f6bd6c6a645f" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="rocminfo" remote="rocm-ghemu" revision="6ea2ba38c8e1ab2899acf66878148b1192fd0bee" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="rocprofiler" remote="rocm-ghemu" revision="40da7312a06f8052f5c148a4709cab64686f881d" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="rocprofiler-compute" remote="rocm" revision="62bf58cfd342bd00e13608b6fa0a083a8650e324" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="rocprofiler-register-internal" path="rocprofiler-register" remote="rocm-ghemu" revision="7c6cd44f637d400b50b803b0b351be302ad6827d" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="rocprofiler-sdk-internal" path="rocprofiler-sdk" remote="rocm-ghemu" revision="e8e49fe76971000a42a5a177d9a727d16dd0ebcf" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="rocprofiler-systems" remote="rocm" revision="c4cec593b6021f2b84294838f2ffe388ed8e911a" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="roctracer" remote="rocm-ghemu" revision="f55a6943816641c081aa167c8a45904ddae2ba5e" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="rpp" remote="rocm" revision="5fb204ca7018b87889e061b720c5b06f6b9bce9b" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+</manifest>
