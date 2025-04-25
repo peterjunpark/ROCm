@@ -5,7 +5,7 @@ This XML file does not appear to have any style information associated with it. 
 <remote name="rocm" fetch="https://github.com/ROCm"/>
 <remote name="rocm-ghemu" fetch="ssh://github-emu/AMD-ROCm-Internal"/>
 <default remote="gerritgit" revision="release/rocm-rel-6.4" sync-j="4" sync-c="true"/>
-<project name="AMDMIGraphX" remote="rocm" revision="e8b735f65e2ff4461b682027acb9bd19a73346ab" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="AMDMIGraphX" remote="rocm" revision="14d5ac4f349fdf1741ff717863546e6d331e8259" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="MIOpen" remote="rocm" revision="a583315f3e05a77bec9bf98f412add1ce77890bd" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="MIVisionX" remote="rocm" revision="a2b69e5b30f2dbdf66055ec99a2b5559b572f7af" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="OpenCL-CLHPP" remote="rocm-ghemu" revision="6f7e82dee83aea7f277a4b874da309902ea51f6e" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
@@ -16,12 +16,12 @@ This XML file does not appear to have any style information associated with it. 
 <project name="ROCmValidationSuite" remote="rocm" revision="fb251886ed1bb74db2baa952efbb74dc977c00e6" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="Tensile" remote="rocm" revision="be49885fce2a61b600ae4593f1c2d00c8b4fa11e" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="TransferBench" remote="rocm" revision="3ea2f226ec818158ba97e4ee0ec0b589f13f4641" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
-<project name="amdsmi" remote="rocm-ghemu" revision="d17a9247810623a44a3c3792fff75f1ff9eeda51" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="amdsmi" remote="rocm-ghemu" revision="d3702440658a71805928d4a8317f74576d1beb53" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
 <project name="aomp" path="openmp-extras/aomp" remote="lightning-ghemu" revision="d90e779702e334a1d429d328d7cdf58da0ca7758" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
 <project name="aomp-extras" path="openmp-extras/aomp-extras" remote="lightning-ghemu" revision="6f8038ada9dec082ea091d30c98c0834669d12a1" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
 <project name="aqlprofile" remote="rocm-ghemu" revision="7fae75ec6bf7b1a631707ae859542d733f8a1f43" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
 <project name="build-infra" path="ROCm" remote="rocm-ghemu" revision="811ec9cc6d1588bf66619365b9b4db96ac6acf68" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="infra"/>
-<project name="clr" remote="rocm-ghemu" revision="e0d58c1079b2a896e2a24ecab82882cc7ae61a62" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="clr" remote="rocm-ghemu" revision="0a1b7e9da5daa0f84130f86b1611e6e05b5275c0" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
 <project name="composable_kernel" remote="rocm" revision="a8c5bd9b9ad950c3e742877e01cb784da91664e3" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="compute/ec/hip-examples" path="HIP-Examples" revision="41b0cff8077a25390c2bbda827eb9f6f37ec1ef3" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
 <project name="compute/ec/hip-examples-private" path="hip-examples-private" revision="dc69edb405804987753735a369478503d82ce9c2" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
@@ -36,7 +36,7 @@ This XML file does not appear to have any style information associated with it. 
 <project name="hip-tests" remote="rocm-ghemu" revision="dc28111737706aad93e38c2f746ccbc13dbf1b80" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
 <project name="hipBLAS" remote="rocm" revision="0a335435e9c8a833d7106e4ae5057eb58cea2fef" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="hipBLAS-common" remote="rocm" revision="7c1566ba4628e777b91511242899b6df48555d04" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
-<project name="hipBLASLt" remote="rocm" revision="5e9ef3857d8daa0f7ada09fd73c7b4ae1e731039" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="hipBLASLt" remote="rocm" revision="0b9acfee51d0fda576c42b8d31ec0748e095dd87" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="hipCUB" remote="rocm" revision="a6005943c5804535990429925318e7900eb6e801" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="hipFFT" remote="rocm" revision="396169c84a2bb3c7ed7245caefe66002138e7c6c" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="hipRAND" remote="rocm" revision="d2516cc199690fd91abfdc5908ecfd88e3553067" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
@@ -47,9 +47,9 @@ This XML file does not appear to have any style information associated with it. 
 <project name="hipfort" remote="rocm" revision="f3d6aa3e8657d665a43fa2815ca2e49ce39a464a" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="hipify" path="HIPIFY" remote="lightning-ghemu" revision="ed0de49132211c6ddbd40f5cd89b5841e832ac3d" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
 <project name="hipother" remote="rocm-ghemu" revision="49b1588f834dbe1a4db1bddb3647a91b15f618b8" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
-<project name="llvm-project" remote="lightning-ghemu" revision="fb412006092bf1880dfb46f889739851a8731c98" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
-<project name="rccl" remote="rocm" revision="7b86f83d8468a577ed59d9b2a34a8d7639d36072" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
-<project name="rdc" remote="rocm-ghemu" revision="5b9d2d79b93a92f04efc2d0786252747f0902574" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="llvm-project" remote="lightning-ghemu" revision="db3d0777ed32450950c842c093e4aa9ac5c49d79" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="llvmdeps,stage1"/>
+<project name="rccl" remote="rocm" revision="0f1950c8103553ab64e7f196555d64563b4daeef" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
+<project name="rdc" remote="rocm-ghemu" revision="b83d1ebbd488dc8e6646b177722f84012f0eaabc" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="rocAL" remote="rocm" revision="373ef865aca43528559e7a9134f09e49a9e9b7c6" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="rocALUTION" remote="rocm" revision="9713084af8d6b38e018a2048cdcdb6bf802d9596" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="rocBLAS" remote="rocm" revision="80e5394d6a68901ce48b03da47b33b1e69d58be7" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
@@ -66,8 +66,8 @@ This XML file does not appear to have any style information associated with it. 
 <project name="rocWMMA" remote="rocm" revision="1a5b6231663fcf3e00abf790aeae843278f16a65" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="rocm-cmake" remote="rocm" revision="ecc716b97c2239cff00422ed7a43cd52a0839a0e" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="mathlibs"/>
 <project name="rocm-core" remote="rocm-ghemu" revision="73dae9c82ace4fb8e1e4028f86ff0365f21c9f51" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="infra,stage1"/>
-<project name="rocm-examples" remote="rocm" revision="31f6eea4d6eb674493fa3c1a99958f7c32f4f0d3" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
-<project name="rocm_smi_lib" remote="rocm-ghemu" revision="28d2409674ae5c2a77af1384e38049e928eba240" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="rocm-examples" remote="rocm" revision="3bbd2987a3b46cfd2c8348c2317042f3ad604e38" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
+<project name="rocm_smi_lib" remote="rocm-ghemu" revision="1f242d314916336d6ce5c731f486edfaa8f0b987" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
 <project name="rocminfo" remote="rocm-ghemu" revision="6ea2ba38c8e1ab2899acf66878148b1192fd0bee" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
 <project name="rocprofiler" remote="rocm-ghemu" revision="40da7312a06f8052f5c148a4709cab64686f881d" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
 <project name="rocprofiler-compute" remote="rocm" revision="a11d700e100b11ad65f9a9a5b7c2d542db568f4c" upstream="release/rocm-rel-6.4" dest-branch="release/rocm-rel-6.4" groups="stage1"/>
