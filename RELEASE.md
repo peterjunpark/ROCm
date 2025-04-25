@@ -382,6 +382,12 @@ The following sections describe key changes to ROCm components.
 For a historical overview of ROCm component updates, see the {doc}`ROCm consolidated changelog </release/changelog>`.
 ```
 
+### HIP 6.4.1 for ROCm 6.4.1
+
+#### Resolved issues
+
+* Stale state during the graph capture. The return error was fixed, HIP runtime now always uses the latest dependent nodes during `hipEventRecord` capture.
+
 ### **hipBLASLt** (0.12.1)
 
 #### Resolved issues
