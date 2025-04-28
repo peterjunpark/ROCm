@@ -420,6 +420,10 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 * MSCCL++ is now disabled by default. To enable it, set `RCCL_MSCCLPP_ENABLE=1`.
 
+#### Resolved issues
+
+* Fixed an issue where early termination, in rare circumstances, could cause the application to stop responding by adding synchronization before destroying a proxy thread.
+
 ### **ROCr Runtime** (1.15.0)
 
 #### Resolved issues
@@ -442,11 +446,6 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 ROCm known issues are noted on {fab}`github` [GitHub](https://github.com/ROCm/ROCm/labels/Verified%20Issue). For known
 issues related to individual components, review the [Detailed component changes](#detailed-component-changes).
-
-## ROCm resolved issues
-
-The following are previously known issues resolved in this release. For resolved issues related to
-individual components, review the [Detailed component changes](#detailed-component-changes).
 
 ## ROCm upcoming changes
 
