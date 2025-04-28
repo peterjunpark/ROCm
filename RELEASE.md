@@ -371,7 +371,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/ROCR-Runtime/en/docs-6.4.0/index.html">ROCr Runtime</a></td>
-                <td>1.15.0</td>
+                <td>1.15.0&nbsp;&Rightarrow;&nbsp;<a href="#rocr-runtime-1-15-0">1.15.0</td>
                 <td><a href="https://github.com/ROCm/ROCR-Runtime/"><i class="fab fa-github fa-lg"></i></a></td>
             </tr>
         </tbody>
@@ -406,7 +406,7 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 #### Resolved issues
 
-* Stale state during the graph capture. The return error was fixed, HIP runtime now always uses the latest dependent nodes during `hipEventRecord` capture.
+* Stale state during the graph capture. The return error was fixed, and HIP runtime now always uses the latest dependent nodes during `hipEventRecord` capture.
 
 ### **hipBLASLt** (0.12.1)
 
@@ -419,6 +419,12 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 #### Changed
 
 * MSCCL++ is now disabled by default. To enable it, set `RCCL_MSCCLPP_ENABLE=1`.
+
+### **ROCr Runtime** (1.15.0)
+
+#### Resolved issues
+
+* Fixed a rare occurrence issue on AMD Instinct MI25, MI50, and MI100 GPUs, where the `SDMA` copies might start before the dependent Kernel finishes and could cause memory corruption.
 
 ### **ROCm Compute Profiler** (3.1.1)
 
