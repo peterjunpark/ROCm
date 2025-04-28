@@ -42,9 +42,29 @@ The following are notable new features and improvements in ROCm 6.4.1. For chang
  
 AMD Instinct MI300X now supports DPX partition mode under NPS2 memory mode. For more portioning information, see the [Deep dive into the MI300 compute and memory partition modes](https://rocm.blogs.amd.com/software-tools-optimization/compute-memory-modes/README.html) blog and [AMD Instinct MI300X system optimization](https://instinct.docs.amd.com/projects/amdgpu-docs/en/latest/system-optimization/mi300x.html#change-gpu-partition-modes).
 
+### ROCm Offline Installer Creator updates
+
+The ROCm Offline Installer Creator 6.4.1 adds support for Debian 12 and enables the use of the *Spacebar* or *Enter* keys for menu item selection in the GUI.
+It also fixes an issue for “full” mode RHEL offline installer creation where GDM packages were uninstalled during offline installation. See [ROCm Offline Installer Creator](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-offline-installer.html#post-install-options-menu) for more information.
+
+### ROCm Runfile Installer updates
+
+The ROCm Runfile Installer 6.4.1 adds the following improvements:
+- Relaxed version checks for installation on different distributions. Provided the dependencies are not installed by the Runfile Installer, you can target installation for a different path from the host system running the installer. For example, the installer can run on a system using Ubuntu 22.04 and install to a partition/system that is using Ubuntu 24.04.
+- Performance improvements for detecting a previous ROCm install. 
+- Removal of the extra `opt` directory created for the target during the ROCm installation.  For example, installing to `target=/home/amd` now installs ROCm to `/home/amd/rocm-6.4.1` and not `/home/amd/opt/rocm-6.4.1`. For installs using `target=/`, the installation will continue to use `/opt/`.
+- The Runfile Installer can be used to uninstall any Runfile-based installation of the driver.
+- In the CLI interface, The `postrocm` argument can now be run separately from the `rocm` argument.  In cases where `postrocm` was missed from the initial ROCm install, `postrocm` can now be run on the same target folder. For example, if you install ROCm 6.4.1 using: `install.run target=/myrocm rocm` you can run the post-installation separately using the command `install.run target=/myrocm/rocm-6.4.1 postrocm`.
+
+For more information, see [ROCm Runfile Installer](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-runfile-installer.html).
+
 ### ROCm documentation updates
 
 ROCm documentation continues to be updated to provide clearer and more comprehensive guidance for a wider variety of user needs and use cases.
+
+* [Tutorials for AI developers](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/) have been expanded with five new tutorials. These tutorials are Jupyter notebook-based, easy-to-follow documents. They are ideal for AI developers who want to learn about specific topics, including inference, fine-tuning, and training.
+* The [Data types and precision support](https://rocm.docs.amd.com/en/latest/reference/precision-support.html) topic has been updated with new information in the library's precision support list.
+* The deep learning frameworks compatibility pages have been updated with new information and are reorganized, making them easier to review. For more information, see [PyTorch compatibility](https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/pytorch-compatibility.html), [TensorFlow compatibility](https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/tensorflow-compatibility.html), and [JAX compatibility](https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/jax-compatibility.html).
 
 ## Operating system and hardware support changes
 
