@@ -246,7 +246,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
                 <th rowspan="7">Tools</th>
                 <th rowspan="7">System management</th>
                 <td><a href="https://rocm.docs.amd.com/projects/amdsmi/en/docs-6.4.0/index.html">AMD SMI</a></td>
-                <td>25.3.0</td>
+                <td>25.3.0&nbsp;&Rightarrow;&nbsp;<a href="#amd-smi-25-3-0">25.3.0</a></td>
                 <td><a href="https://github.com/ROCm/amdsmi"><i class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
@@ -384,6 +384,22 @@ The following sections describe key changes to ROCm components.
 
 ```{note}
 For a historical overview of ROCm component updates, see the {doc}`ROCm consolidated changelog </release/changelog>`.
+```
+
+### **AMD SMI** (25.3.0)
+
+#### Added
+
+* Dumping CPER entries from RAS tool `amdsmi_get_gpu_cper_entries()` to Python & C APIs.
+  - Dumping CPER entries consist of `amdsmi_cper_hdr_t`.
+  - Dumping CPER entires is also enabled in the CLI interface through `sudo amd-smi ras --cper`.
+
+#### Resolved
+
+* Fixed partition enumeration in `amd-smi list -e`, `amdsmi_get_gpu_enumeration_info()`, `amdsmi_enumeration_info_t`, `drm_card`, and `drm_render` fields.
+
+```{note}
+See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/rocm-rel-6.4/CHANGELOG.md) for details, examples, and in-depth descriptions.
 ```
 
 ### **HIP** (6.4.1)
