@@ -62,7 +62,8 @@ For more information, see [ROCm Runfile Installer](https://rocm.docs.amd.com/pro
 
 ROCm documentation continues to be updated to provide clearer and more comprehensive guidance for a wider variety of user needs and use cases.
 
-* [Tutorials for AI developers](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/) have been expanded with five new tutorials. These tutorials are Jupyter notebook-based, easy-to-follow documents. They are ideal for AI developers who want to learn about specific topics, including inference, fine-tuning, and training.
+* [Tutorials for AI developers](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/) have been expanded with five
+ new tutorials. These tutorials are Jupyter notebook-based, easy-to-follow documents. They are ideal for AI developers who want to learn about specific topics, including inference, fine-tuning, and training.
 * The [Data types and precision support](https://rocm.docs.amd.com/en/latest/reference/precision-support.html) topic has been updated with new information in the library's precision support list.
 * The deep learning frameworks compatibility pages have been updated with new information and are reorganized, making them easier to review. For more information, see [PyTorch compatibility](https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/pytorch-compatibility.html), [TensorFlow compatibility](https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/tensorflow-compatibility.html), and [JAX compatibility](https://rocm.docs.amd.com/en/latest/compatibility/ml-compatibility/jax-compatibility.html).
 
