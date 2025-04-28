@@ -105,7 +105,7 @@ compatibility and system requirements.
       ,,,
       SUPPORT LIBS,,,
       `hipother <https://github.com/ROCm/hipother>`_,6.4.43483,6.4.43482,6.3.42131
-      `rocm-core <https://github.com/ROCm/rocm-core>`_,6.4.0,6.4.0,6.3.0
+      `rocm-core <https://github.com/ROCm/rocm-core>`_,6.4.1,6.4.0,6.3.0
       `ROCT-Thunk-Interface <https://github.com/ROCm/ROCT-Thunk-Interface>`_,N/A [#ROCT-rocr]_,N/A [#ROCT-rocr]_,N/A [#ROCT-rocr]_
       ,,,
       SYSTEM MGMT TOOLS,.. _tools-support-compatibility-matrix:,,
