@@ -390,7 +390,7 @@ For a historical overview of ROCm component updates, see the {doc}`ROCm consolid
 
 #### Added
 
-* Dumping CPER entries from RAS tool `amdsmi_get_gpu_cper_entries()` to Python & C APIs.
+* Dumping CPER entries from RAS tool `amdsmi_get_gpu_cper_entries()` to Python and C APIs.
   - Dumping CPER entries consist of `amdsmi_cper_hdr_t`.
   - Dumping CPER entires is also enabled in the CLI interface through `sudo amd-smi ras --cper`.
 
