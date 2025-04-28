@@ -38,6 +38,10 @@ documentation to verify compatibility and system requirements.
 The following are notable new features and improvements in ROCm 6.4.1. For changes to individual components, see
 [Detailed component changes](#detailed-component-changes).
 
+### Addition of DPX partition mode under NPS2 memory mode
+ 
+AMD Instinct MI300X now supports DPX partition mode under NPS2 memory mode. For more portioning information, see the [Deep dive into the MI300 compute and memory partition modes](https://rocm.blogs.amd.com/software-tools-optimization/compute-memory-modes/README.html) blog and [AMD Instinct MI300X system optimization](https://instinct.docs.amd.com/projects/amdgpu-docs/en/latest/system-optimization/mi300x.html#change-gpu-partition-modes).
+
 ### ROCm documentation updates
 
 ROCm documentation continues to be updated to provide clearer and more comprehensive guidance for a wider variety of user needs and use cases.
@@ -362,7 +366,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
             <tr>
                 <th rowspan="2" colspan="2">Runtimes</th>
                 <td><a href="https://rocm.docs.amd.com/projects/HIP/en/docs-6.4.0/index.html">HIP</a></td>
-                <td>6.4.0</td>
+                <td>6.4.0&nbsp;&Rightarrow;&nbsp;<a href="#hip-6-4-1">6.4.1</td>
                 <td><a href="https://github.com/ROCm/HIP/"><i class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
@@ -382,7 +386,7 @@ The following sections describe key changes to ROCm components.
 For a historical overview of ROCm component updates, see the {doc}`ROCm consolidated changelog </release/changelog>`.
 ```
 
-### HIP 6.4.1 for ROCm 6.4.1
+### **HIP** (6.4.1)
 
 #### Resolved issues
 
@@ -410,7 +414,7 @@ For a historical overview of ROCm component updates, see the {doc}`ROCm consolid
 
 #### Added 
 
-- "How-to" document for network performance profiling for standard Network Interface Cards (NICs).
+* "How-to" document for network performance profiling for standard Network Interface Cards (NICs).
 
 ## ROCm known issues
 
@@ -491,4 +495,4 @@ There are a number of upcoming changes planned for HIP runtime API in an upcomin
 that are not backward compatible with prior releases. Most of these changes increase 
 alignment between HIP and CUDA APIs or behavior. Some of the upcoming changes are to 
 clean up header files, remove namespace collision, and have a clear separation between 
-`hipRTC` and HIP runtime. For more information refer to [HIP Upcoming changes](#hip-6-4-0).
+`hipRTC` and HIP runtime. For more information refer to [HIP Upcoming changes](#https://rocm.docs.amd.com/en/latest/about/release-notes.html#id15).
