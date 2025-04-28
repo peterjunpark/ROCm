@@ -440,7 +440,7 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 #### Added 
 
-* "How-to" document for network performance profiling for standard Network Interface Cards (NICs).
+* How-to document for network performance profiling for standard Network Interface Cards (NICs).
 
 ## ROCm known issues
 
