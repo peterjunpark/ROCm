@@ -272,7 +272,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
                 <th rowspan="7">Tools</th>
                 <th rowspan="7">System management</th>
                 <td><a href="https://rocm.docs.amd.com/projects/amdsmi/en/docs-6.4.0/index.html">AMD SMI</a></td>
-                <td>25.3.0&nbsp;&Rightarrow;&nbsp;<a href="#amd-smi-25-3-0">25.3.0</a></td>
+                <td>25.3.0&nbsp;&Rightarrow;&nbsp;<a href="#amd-smi-25-4-0">25.4.0</a></td>
                 <td><a href="https://github.com/ROCm/amdsmi"><i class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
@@ -412,7 +412,7 @@ The following sections describe key changes to ROCm components.
 For a historical overview of ROCm component updates, see the {doc}`ROCm consolidated changelog </release/changelog>`.
 ```
 
-### **AMD SMI** (25.3.0)
+### **AMD SMI** (25.4.0)
 
 #### Added
 
