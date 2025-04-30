@@ -147,11 +147,16 @@ Click {fab}`github` to go to the component's source code on GitHub.
         </tbody>
         <tbody class="rocm-components-libs rocm-components-communication tbody-reverse-zebra">
             <tr>
-                <th rowspan="1"></th>
-                <th rowspan="1">Communication</th>
+                <th rowspan="2"></th>
+                <th rowspan="2">Communication</th>
                 <td><a href="https://rocm.docs.amd.com/projects/rccl/en/docs-6.4.0/index.html">RCCL</a></td>
                 <td>2.22.3&nbsp;&Rightarrow;&nbsp;<a href="#rccl-2-23-4">2.23.4</a></td>
                 <td><a href="https://github.com/ROCm/rccl"><i class="fab fa-github fa-lg"></i></a></td>
+            </tr>
+            <tr>
+            <td><a href="https://github.com/ROCm/rocSHMEM">rocSHMEM</a></td>
+                <td>2.0.0</td>
+                <td><a href="https://github.com/ROCm/rocSHMEM"><i class="fab fa-github fa-lg"></i></a></td>
             </tr>
         </tbody>
         <tbody class="rocm-components-libs rocm-components-math">

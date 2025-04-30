@@ -77,6 +77,7 @@ compatibility and system requirements.
       ,,,
       COMMUNICATION,.. _commlibs-support-compatibility-matrix:,,
       :doc:`RCCL <rccl:index>`,2.22.3,2.22.3,2.21.5
+      `rocSHMEM <https://github.com/ROCm/rocSHMEM>`_ ,2.0.0,2.0.0,N/A
       ,,,
       MATH LIBS,.. _mathlibs-support-compatibility-matrix:,,
       `half <https://github.com/ROCm/half>`_ ,1.12.0,1.12.0,1.12.0
@@ -117,7 +118,7 @@ compatibility and system requirements.
       ,,,
       PERFORMANCE TOOLS,,,
       :doc:`ROCm Bandwidth Test <rocm_bandwidth_test:index>`,1.4.0,1.4.0,1.4.0
-      :doc:`ROCm Compute Profiler <rocprofiler-compute:index>`,3.1.1,3.1.0,3.0.0
+      :doc:`ROCm Compute Profiler <rocprofiler-compute:index>`,3.1.0,3.1.0,3.0.0
       :doc:`ROCm Systems Profiler <rocprofiler-systems:index>`,1.0.0,1.0.0,0.1.0
       :doc:`ROCProfiler <rocprofiler:index>`,2.0.60401,2.0.60400,2.0.60300
       :doc:`ROCprofiler-SDK <rocprofiler-sdk:index>`,0.6.0,0.6.0,0.5.0
