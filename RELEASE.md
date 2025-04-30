@@ -453,7 +453,7 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 #### Resolved issues
 
-* Fixed an issue where the `HIP_PATH` environment variable was being ignored when compiling on Windows.
+* Fixed an issue where the `HIP_PATH` environment variable was being ignored when compiling on Microsoft Windows.
 
 ### **ROCr Runtime** (1.15.0)
 
