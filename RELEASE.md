@@ -308,7 +308,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocprofiler-compute/en/docs-6.4.0/index.html">ROCm Compute Profiler</a></td>
-                <td>3.1.0&nbsp;&Rightarrow;&nbsp;<a href="#rocm-compute-profiler-3-1-1">3.1.1</td>
+                <td>3.1.0</td>
                 <td><a href="https://github.com/ROCm/rocprofiler-compute"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -464,6 +464,16 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 * Fixed an issue where early termination, in rare circumstances, could cause the application to stop responding by adding synchronization before destroying a proxy thread.
 * Fixed the accuracy issue for MSCCLPP `allreduc7` kernel in graph mode.
 
+### **rocALUTION** (3.2.3)
+
+#### Added
+
+* The `-a` option has been added to the `rmake.py` build script. This option provides a way to select specific architectures when building on Microsoft Windows.
+
+#### Resolved issues
+
+* Fixed an issue where the `HIP_PATH` environment variable was being ignored when compiling on Microsoft Windows.
+
 ### **ROCm Data Center Tool** (0.3.0)
 
 #### Added
@@ -479,33 +489,17 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 - Fixed [rocprofiler](https://rocm.docs.amd.com/projects/rocprofiler/en/docs-6.4.0/index.html) eval metrics and memory leaks.
 
-### **rocALUTION** (3.2.3)
-
-#### Added
-
-* The `-a` option has been added to the `rmake.py` build script. This option provides a way to select specific architectures when building on Microsoft Windows.
-
-#### Resolved issues
-
-* Fixed an issue where the `HIP_PATH` environment variable was being ignored when compiling on Microsoft Windows.
-
 ### **ROCr Runtime** (1.15.0)
 
 #### Resolved issues
 
 * Fixed a rare occurrence issue on AMD Instinct MI25, MI50, and MI100 GPUs, where the `SDMA` copies might start before the dependent Kernel finishes and could cause memory corruption.
 
-### **ROCm Compute Profiler** (3.1.1)
-
-#### Added
-
-* Roofline support for Alibaba Cloud Linux 3.
-
 ### **ROCm Systems Profiler** (1.0.0)
 
 #### Added 
 
-* How-to document for network performance profiling for standard Network Interface Cards (NICs).
+* How-to document for [network performance profiling](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/amd-staging/how-to/nic-profiling.html) for standard Network Interface Cards (NICs).
 
 ## ROCm known issues
 
