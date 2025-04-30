@@ -199,7 +199,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocALUTION/en/docs-6.4.0/index.html">rocALUTION</a></td>
-                <td>3.2.2</td>
+                <td>3.2.2&nbsp;&Rightarrow;&nbsp;<a href="#rocalution-3-2-3">3.2.3</td></td>
                 <td><a href="https://github.com/ROCm/rocALUTION"><i class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
@@ -473,6 +473,16 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 #### Resolved issues
 
 - Fixed [rocprofiler](https://rocm.docs.amd.com/projects/rocprofiler/en/docs-6.4.0/index.html) eval metrics and memory leaks.
+
+### **rocALUTION** (3.2.3)
+
+#### Added
+
+* The `-a` option has been added to the `rmake.py` build script. This option provides a way to select specific architectures when building on Microsoft Windows.
+
+#### Resolved issues
+
+* Fixed an issue where the `HIP_PATH` environment variable was being ignored when compiling on Microsoft Windows.
 
 ### **ROCr Runtime** (1.15.0)
 
