@@ -44,7 +44,7 @@ AMD Instinct MI300X now supports DPX partition mode under NPS2 memory mode. For 
 
 ### ROCm Offline Installer Creator updates
 
-The ROCm Offline Installer Creator 6.4.1 adds support for Debian 12 and enables the use of the *Spacebar* or *Enter* keys for menu item selection in the GUI.
+The ROCm Offline Installer Creator 6.4.1 adds support for Debian 12 and enables the use of the SPACEBAR or ENTER keys for menu item selection in the GUI.
 It also fixes an issue for “full” mode RHEL offline installer creation where GDM packages were uninstalled during offline installation. See [ROCm Offline Installer Creator](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-offline-installer.html#post-install-options-menu) for more information.
 
 ### ROCm Runfile Installer updates
@@ -272,7 +272,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rdc/en/docs-6.4.0/index.html">ROCm Data Center Tool</a></td>
-                <td>0.3.0</td>
+                <td>0.3.0&nbsp;&Rightarrow;&nbsp;<a href="#rocm-data-center-tool-0-3-0">0.3.0</td>
                 <td><a href="https://github.com/ROCm/rdc"><i class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
@@ -425,9 +425,22 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 ### **HIP** (6.4.1)
 
+#### Added
+
+* New debug mask, to print precise code object information for logging.
+
+### Changed
+
+* The way of calling the code object. HIP runtime now uses device bitcode before SPIRV.
+
+### Optimized
+
+* Improved kernel logging using the demangling shader names.
+
 #### Resolved issues
 
 * Stale state during the graph capture. The return error was fixed, and HIP runtime now always uses the latest dependent nodes during `hipEventRecord` capture.
+* Issue of `hipEventRecords` failing to call the `hip::getStream` runtime function.
 
 ### **hipBLASLt** (0.12.1)
 
@@ -444,6 +457,22 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 #### Resolved issues
 
 * Fixed an issue where early termination, in rare circumstances, could cause the application to stop responding by adding synchronization before destroying a proxy thread.
+* Fixed the accuracy issue for MSCCLPP `allreduc7` kernel in graph mode.
+
+### **ROCm Data Center Tool** (0.3.0)
+
+#### Added
+
+- Support for GPU partitions.
+- `RDC_FI_GPU_BUSY_PERCENT` metric.
+
+#### Changed
+
+- Updated `rdc_field` to align with `rdc_bootstrap` for current metrics.
+
+#### Resolved issues
+
+- Fixed [rocprofiler](https://rocm.docs.amd.com/projects/rocprofiler/en/docs-6.4.0/index.html) eval metrics and memory leaks.
 
 ### **ROCr Runtime** (1.15.0)
 
