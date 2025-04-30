@@ -96,7 +96,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
             <col span="1">
             <col span="1">
         </colgroup>
-        <tbody class="rocm-components-libs rocm-components-ml">
+        <tbody class="rocm-components-libs rocm-components-ml tbody-reverse-zebra">
             <tr>
                 <th rowspan="9">Libraries</th>
                 <th rowspan="9">Machine learning and computer vision</th>
