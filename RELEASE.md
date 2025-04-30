@@ -449,7 +449,7 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 #### Added
 
-* The `-a` option has been added to the `rmake.py` build script. This option provides a way to select specific architectures when building on Windows.
+* The `-a` option has been added to the `rmake.py` build script. This option provides a way to select specific architectures when building on Microsoft Windows.
 
 #### Resolved issues
 
