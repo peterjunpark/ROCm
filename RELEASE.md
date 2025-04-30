@@ -40,7 +40,7 @@ The following are notable new features and improvements in ROCm 6.4.1. For chang
 
 ### Addition of DPX partition mode under NPS2 memory mode
  
-AMD Instinct MI300X now supports DPX partition mode under NPS2 memory mode. For more portioning information, see the [Deep dive into the MI300 compute and memory partition modes](https://rocm.blogs.amd.com/software-tools-optimization/compute-memory-modes/README.html) blog and [AMD Instinct MI300X system optimization](https://instinct.docs.amd.com/projects/amdgpu-docs/en/latest/system-optimization/mi300x.html#change-gpu-partition-modes).
+AMD Instinct MI300X now supports DPX partition mode under NPS2 memory mode. For more partitioning information, see the [Deep dive into the MI300 compute and memory partition modes](https://rocm.blogs.amd.com/software-tools-optimization/compute-memory-modes/README.html) blog and [AMD Instinct MI300X system optimization](https://instinct.docs.amd.com/projects/amdgpu-docs/en/latest/system-optimization/mi300x.html#change-gpu-partition-modes).
 
 ### ROCm Offline Installer Creator updates
 
