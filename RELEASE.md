@@ -434,11 +434,11 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 * New debug mask, to print precise code object information for logging.
 
-### Changed
+#### Changed
 
 * The way of calling the code object. HIP runtime now uses device bitcode before SPIRV.
 
-### Optimized
+#### Optimized
 
 * Improved kernel logging using the demangling shader names.
 
