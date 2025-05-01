@@ -287,7 +287,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocm_smi_lib/en/docs-6.4.0/index.html">ROCm SMI</a></td>
-                <td>7.5.0</td>
+                <td>7.5.0&nbsp;&Rightarrow;&nbsp;<a href="#rocm-smi-7-6-0">7.6.0</a></td>
                 <td><a href="https://github.com/ROCm/rocm_smi_lib"><i class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
@@ -488,6 +488,16 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 #### Resolved issues
 
 - Fixed [rocprofiler](https://rocm.docs.amd.com/projects/rocprofiler/en/docs-6.4.0/index.html) eval metrics and memory leaks.
+
+### **ROCm SMI** (7.6.0)
+
+#### Resolved issues
+
+- Fixed partition enumeration. It now refers to the correct DRM Render and Card paths.
+
+```{note}
+See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/rocm-rel-6.4/CHANGELOG.md) for details, examples, and in-depth descriptions.
+```
 
 ### **ROCm Systems Profiler** (1.0.0)
 

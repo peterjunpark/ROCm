@@ -86,6 +86,16 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 - Fixed [rocprofiler](https://rocm.docs.amd.com/projects/rocprofiler/en/docs-6.4.0/index.html) eval metrics and memory leaks.
 
+### **ROCm SMI** (7.6.0)
+
+#### Resolved issues
+
+- Fixed partition enumeration. It now refers to the correct DRM Render and Card paths.
+
+```{note}
+See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/rocm-rel-6.4/CHANGELOG.md) for details, examples, and in-depth descriptions.
+```
+
 ### **ROCm Systems Profiler** (1.0.0)
 
 #### Added 
