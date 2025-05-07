@@ -9,7 +9,7 @@ PyTorch inference performance testing
 
 .. _pytorch-inference-benchmark-docker:
 
-.. datatemplate:yaml:: /data/how-to/rocm-for-ai/inference/pytorch-inference-benchmark-models.yaml
+.. datatemplate:yaml:: /data/how-to/rocm-for-ai/inference/pytorch-inference/latest.yaml
 
    {% set unified_docker = data.pytorch_inference_benchmark.unified_docker.latest %}
    {% set model_groups = data.pytorch_inference_benchmark.model_groups %}
