@@ -155,6 +155,6 @@ vllm_benchmark:
       models:
       - model: Phi-4
         mad_tag: pyt_vllm_phi-4
-        model_repo: deepseek-ai/deepseek-moe-16b-chat
+        model_repo: microsoft/phi-4
         url: https://huggingface.co/microsoft/phi-4
         precision: float16
