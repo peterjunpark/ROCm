@@ -209,6 +209,8 @@ vLLM inference performance testing
 
          .. tab-item:: Standalone benchmarking
 
+            .. rubric:: Download the Docker image and required scripts
+
             Run the vLLM benchmark tool independently by starting the
             `Docker container <{{ unified_docker.docker_hub_url }}>`_
             as shown in the following snippet.
@@ -276,6 +278,8 @@ vLLM inference performance testing
 
                   # pass your HF_TOKEN
                   export HF_TOKEN=$your_personal_hf_token
+
+            .. rubric:: Benchmarking examples                  
 
             Here are some examples of running the benchmark with various options.
 
