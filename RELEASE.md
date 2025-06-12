@@ -50,22 +50,6 @@ ROCm Compute Profiler now uses [AMD SMI](https://rocm.docs.amd.com/projects/amds
 
 ROCm Compute Profiler has added FP8 metrics support for AMD Instinct MI300 series accelerators. For more information, see [Profile mode](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/latest/how-to/profile/mode.html#profiling).
 
-### rocSOLVER performance enhancement
-
-rocSOLVER has been enhanced with improved performance for eigensolvers and singular value decomposition (SVD).
-
-### ROCm installation instruction update
-
-[Draft] ROCm installation instruction is updated to provide detailed instruction based on the operating system distribution and deprecate the use of the AMDGPU installer for ROCm installation. For more information, see [ROCm on Linux detailed installation overview](https://rocm.docs.amd.com/projects/install-on-linux-internal/en/develop/install/detailed-install.html).
-
-### ROCm Offline Installer Creator updates
-
-[Placeholder for ROCm Offline Installer Creator 6.4.2 updates]. See [ROCm Offline Installer Creator](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-offline-installer.html) for more information.
-
-### ROCm Runfile Installer updates
-
-[Placeholder for ROCm Runfile Installer 6.4.2 updates]For more information, see [ROCm Runfile Installer](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-runfile-installer.html).
-
 ### ROCm documentation updates
 
 ROCm documentation continues to be updated to provide clearer and more comprehensive guidance for a wider variety of user needs and use cases.
@@ -598,4 +582,4 @@ There are a number of upcoming changes planned for HIP runtime API in an upcomin
 that are not backward compatible with prior releases. Most of these changes increase 
 alignment between HIP and CUDA APIs or behavior. Some of the upcoming changes are to 
 clean up header files, remove namespace collision, and have a clear separation between 
-`hipRTC` and HIP runtime.
+`hipRTC` and HIP runtime. For more information, see [HIP 7.0 Is Coming: What You Need to Know to Stay Ahead](https://rocm.blogs.amd.com/ecosystems-and-partners/transition-to-hip-7.0:-guidance-on-upcoming-compatibility-changes/README.html).

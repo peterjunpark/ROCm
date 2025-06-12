@@ -23,7 +23,7 @@ compatibility and system requirements.
 .. container:: format-big-table
 
   .. csv-table::
-      :header: "ROCm Version", "6.4.2", "6.4.0", "6.3.0"
+      :header: "ROCm Version", "6.4.2", "6.4.1", "6.3.0"
       :stub-columns: 1
 
       :ref:`Operating systems & kernels <OS-kernel-versions>`,Ubuntu 24.04.2,Ubuntu 24.04.2,Ubuntu 24.04.2
