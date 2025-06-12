@@ -4,6 +4,106 @@ This page is a historical overview of changes made to ROCm components. This
 consolidated changelog documents key modifications and improvements across
 different versions of the ROCm software stack and its components.
 
+## ROCm 6.4.2
+
+See the [ROCm 6.4.2 release notes](https://rocm-stg.amd.com/en/latest/about/release-notes.html)
+for a complete overview of this release.
+
+### **HIP** (6.4.2)
+
+#### Added
+
+* Support for the pointer attribute `HIP_POINTER_ATTRIBUTE_CONTEXT`.
+
+#### Optimized
+
+* Improved implementation in `hipEventSynchronize`, HIP runtime now makes internal callbacks non-blocking to gain performance.
+
+#### Resolved issues
+
+* Issue of dependency on `libgcc-s1` during rocm-dev install on Debian Buster. HIP runtime removed this Debian package dependency and uses `libgcc1` instead for this distros.
+* Building issue for `COMGR` dynamic load on Fedora and other Distros. HIP runtime now doesn't link against `libamd_comgr.so`.
+* Failure in the API `hipStreamDestroy`, when stream type is `hipStreamLegacy`. The API now returns error code `hipErrorInvalidResourceHandle` on this condition.
+* Kernel launch errors, such as `shared object initialization failed`, `invalid device function` or `kernel execution failure`. HIP runtime now loads `COMGR` properly considering the file with its name and mapped image.
+* Memory access fault in some applications. HIP runtime fixed offset accumulation in memory address.
+
+### **hipBLASLt** (0.12.1)
+
+#### Added
+
+* Support for gfx1151.
+
+### **RCCL** (2.22.3)
+
+#### Added
+
+* Added support for the LL128 protocol on gfx942.
+
+### **ROCm Compute Profiler** (3.2.0)
+
+#### Added
+
+* 8-bit floating point (FP8) metrics support for AMD Instinct MI300 GPUs.
+* Additional data types for roofline: FP8, FP16, BF16, FP32, FP64, I8, I32, I64 (dependent on the GPU architecture).
+* Data type selection option ``--roofline-data-type / -R`` for roofline profiling. The default data type is FP32.
+
+#### Changed
+
+* Change dependency from `rocm-smi` to `amd-smi`.
+
+#### Resolved issues
+
+* Fixed a crash related to Agent ID caused by the new format of the `rocprofv3` output CSV file.
+
+### **ROCm Systems Profiler** (1.0.2)
+
+#### Optimized
+
+* Improved readability of the OpenMP target offload traces by showing on a single Perfetto track.
+
+#### Resolved issues
+
+* Fixed the file path to the script that merges Perfetto files from multi-process MPI runs. The script has also been renamed from `merge-multiprocess-output.sh` to `rocprof-sys-merge-output.sh`.
+
+### **ROCm Validation Suite** (1.1.0)
+
+#### Added
+
+* NPS2/DPX and NPS4/CPX partition modes support for AMD Instinct MI300X.
+
+### **rocPRIM** (3.4.1)
+
+#### Upcoming Changes
+
+* Changes to the template parameters of warp and block algorithms will be made in an upcoming release.
+* Due to an upcoming compiler change, the following symbols related to warp size have been marked as deprecated and will be removed in an upcoming major release:
+    * `rocprim::device_warp_size()`. This has been replaced by `rocprim::arch::wavefront::min_size()` and `rocprim::arch::wavefront::max_size()` for compile-time constants. Use these when allocating global or shared memory. For run-time constants, use `rocprim::arch::wavefront::size()`.
+  * `rocprim::warp_size()`
+  * `ROCPRIM_WAVEFRONT_SIZE`
+
+### **rocSHMEM** (2.0.1)
+
+#### Resolved Issues
+
+* Resolved incorrect output for `rocshmem_ctx_my_pe` and `rocshmem_ctx_n_pes`.
+* Resolved multi-team errors by providing team specific buffers in `rocshmem_ctx_wg_team_sync`.
+* Resolved missing implementation of `rocshmem_g` for IPC conduit.
+
+### **rocSOLVER** (3.28.2)
+
+#### Added
+
+* Hybrid computation support for existing routines, such as STERF.
+* SVD for general matrices based on Cuppen's Divide and Conquer algorithm:
+    - GESDD (with batched and strided\_batched versions)
+
+#### Optimized
+
+* Reduced the device memory requirements for STEDC, SYEVD/HEEVD, and SYGVD/HEGVD.
+* Improved the performance of STEDC and divide and conquer Eigensolvers.
+* Improved the performance of SYTRD, the initial step of the Eigensolvers that start with the tridiagonalization of the input matrix.
+
+
 ## ROCm 6.4.1
 
 See the [ROCm 6.4.1 release notes](https://rocm.docs.amd.com/en/docs-6.4.1/about/release-notes.html)
