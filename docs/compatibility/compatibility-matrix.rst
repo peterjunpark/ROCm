@@ -94,7 +94,7 @@ compatibility and system requirements.
       :doc:`hipSPARSE <hipsparse:index>`,3.2.0,3.2.0,3.1.2
       :doc:`hipSPARSELt <hipsparselt:index>`,0.2.3,0.2.3,0.2.2
       :doc:`rocALUTION <rocalution:index>`,3.2.3,3.2.3,3.2.1
-      :doc:`rocBLAS <rocblas:index>`,4.4.0,4.4.0,4.3.0
+      :doc:`rocBLAS <rocblas:index>`,4.4.1,4.4.0,4.3.0
       :doc:`rocFFT <rocfft:index>`,1.0.32,1.0.32,1.0.31
       :doc:`rocRAND <rocrand:index>`,3.3.0,3.3.0,3.2.0
       :doc:`rocSOLVER <rocsolver:index>`,3.28.2,3.28.0,3.27.0
@@ -114,7 +114,7 @@ compatibility and system requirements.
       `ROCT-Thunk-Interface <https://github.com/ROCm/ROCT-Thunk-Interface>`_,N/A [#ROCT-rocr]_,N/A [#ROCT-rocr]_,N/A [#ROCT-rocr]_
       ,,,
       SYSTEM MGMT TOOLS,.. _tools-support-compatibility-matrix:,,
-      :doc:`AMD SMI <amdsmi:index>`,25.4.2,25.4.2,24.7.1
+      :doc:`AMD SMI <amdsmi:index>`,25.5.1,25.4.2,24.7.1
       :doc:`ROCm Data Center Tool <rdc:index>`,0.3.0,0.3.0,0.3.0
       :doc:`rocminfo <rocminfo:index>`,1.0.0,1.0.0,1.0.0
       :doc:`ROCm SMI <rocm_smi_lib:index>`,7.5.0,7.5.0,7.4.0
@@ -122,7 +122,7 @@ compatibility and system requirements.
       ,,,
       PERFORMANCE TOOLS,,,
       :doc:`ROCm Bandwidth Test <rocm_bandwidth_test:index>`,1.4.0,1.4.0,1.4.0
-      :doc:`ROCm Compute Profiler <rocprofiler-compute:index>`,3.2.0,3.1.0,3.0.0
+      :doc:`ROCm Compute Profiler <rocprofiler-compute:index>`,3.1.1,3.1.0,3.0.0
       :doc:`ROCm Systems Profiler <rocprofiler-systems:index>`,1.0.2,1.0.1,0.1.0
       :doc:`ROCProfiler <rocprofiler:index>`,2.0.60402,2.0.60401,2.0.60300
       :doc:`ROCprofiler-SDK <rocprofiler-sdk:index>`,0.6.0,0.6.0,0.5.0

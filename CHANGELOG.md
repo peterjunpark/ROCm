@@ -9,6 +9,32 @@ different versions of the ROCm software stack and its components.
 See the [ROCm 6.4.2 release notes](https://rocm-stg.amd.com/en/latest/about/release-notes.html)
 for a complete overview of this release.
 
+### **AMD SMI** (25.5.1)
+
+### Added
+
+- Compute Unit Occupancy information per process.
+
+- Support for getting the GPU Board voltage.
+
+- New firmware PLDM_BUNDLE. `amd-smi firmware` can now show the PLDM Bundle on supported systems.
+
+- `amd-smi ras --afid --cper-file <file_path>` to decode CPER records.
+
+### Changed
+
+- Padded `asic_serial` in `amdsmi_get_asic_info` with 0s.
+
+- Renamed field `COMPUTE_PARTITION` to `ACCELERATOR_PARTITION` in CLI call `amd-smi --partition`.
+
+### Resolved issues
+
+- Corrected VRAM memory calculation in `amdsmi_get_gpu_process_list`. Previously, the VRAM memory usage reported by `amdsmi_get_gpu_process_list` was inaccurate and was calculated using KB instead of KiB.
+
+```{note}
+See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/rocm-rel-6.4/CHANGELOG.md) for details, examples, and in-depth descriptions.
+```
+
 ### **HIP** (6.4.2)
 
 #### Added
@@ -24,14 +50,14 @@ for a complete overview of this release.
 * Issue of dependency on `libgcc-s1` during rocm-dev install on Debian Buster. HIP runtime removed this Debian package dependency and uses `libgcc1` instead for this distros.
 * Building issue for `COMGR` dynamic load on Fedora and other Distros. HIP runtime now doesn't link against `libamd_comgr.so`.
 * Failure in the API `hipStreamDestroy`, when stream type is `hipStreamLegacy`. The API now returns error code `hipErrorInvalidResourceHandle` on this condition.
-* Kernel launch errors, such as `shared object initialization failed`, `invalid device function` or `kernel execution failure`. HIP runtime now loads `COMGR` properly considering the file with its name and mapped image.
+* Kernel launch errors, such as `shared object initialization failed`, `invalid device function`, or `kernel execution failure`. HIP runtime now loads `COMGR` properly considering the file with its name and mapped image.
 * Memory access fault in some applications. HIP runtime fixed offset accumulation in memory address.
 
 ### **hipBLASLt** (0.12.1)
 
 #### Added
 
-* Support for gfx1151.
+* Support for gfx1151 on Linux, complementing the previous support in the HIP SDK for Windows.
 
 ### **RCCL** (2.22.3)
 
@@ -39,7 +65,13 @@ for a complete overview of this release.
 
 * Added support for the LL128 protocol on gfx942.
 
-### **ROCm Compute Profiler** (3.2.0)
+### **rocBLAS** (4.4.1)
+
+#### Resolved issues
+
+* rocBLAS might have failed to produce correct results for cherk/zherk on gfx90a/gfx942 with problem sizes k > 500 due to the imaginary portion on the C matrix diagonal not being zeros. rocBLAS now zeros the imaginary portion.
+
+### **ROCm Compute Profiler** (3.1.1)
 
 #### Added
 
@@ -49,7 +81,7 @@ for a complete overview of this release.
 
 #### Changed
 
-* Change dependency from `rocm-smi` to `amd-smi`.
+* Changed dependency from `rocm-smi` to `amd-smi`.
 
 #### Resolved issues
 
@@ -102,7 +134,6 @@ for a complete overview of this release.
 * Reduced the device memory requirements for STEDC, SYEVD/HEEVD, and SYGVD/HEGVD.
 * Improved the performance of STEDC and divide and conquer Eigensolvers.
 * Improved the performance of SYTRD, the initial step of the Eigensolvers that start with the tridiagonalization of the input matrix.
-
 
 ## ROCm 6.4.1
 

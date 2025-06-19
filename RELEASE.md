@@ -38,17 +38,33 @@ documentation to verify compatibility and system requirements.
 The following are notable new features and improvements in ROCm 6.4.2. For changes to individual components, see
 [Detailed component changes](#detailed-component-changes).
 
-### ROCm Compute Profiler supports new data types in roofline plots
+### ROCm Compute Profiler enhancements
 
-The ``roofline-datatype`` option in ROCm Compute Profiler now supports FP8, FP16, BF16, FP32, FP64, I8, I32, and I64 data types. This is dependent on the GPU architecture. For more information, see [Roofline options](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/amd-staging/how-to/profile/mode.html#roofline-options).
+[ROCm Compute Profiler](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/latest/index.html) includes the following changes:
 
-### ROCm Compute Profiler now uses AMD SMI
+* The ``--roofline-data-type`` option now supports FP8, FP16, BF16, FP32, FP64, I8, I32, and I64 data types. This is dependent on the GPU architecture. For more information, see [Roofline options](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/amd-staging/how-to/profile/mode.html#roofline-options).
 
-ROCm Compute Profiler now uses [AMD SMI](https://rocm.docs.amd.com/projects/amdsmi/en/latest/index.html) instead of [ROCm SMI](https://rocm.docs.amd.com/projects/rocm_smi_lib/en/latest/index.html). The AMD System Management Interface Library (AMD SMI) is a successor to ROCm SMI. It is a unified system management interface tool that provides a user-space interface for applications to monitor and control GPU applications and gives users the ability to query information about drivers and GPUs on the system. For more information, see [ROCm/amdsmi](https://github.com/ROCm/amdsmi) and the [AMD SMI documentation](https://rocm.docs.amd.com/projects/amdsmi/en/latest/index.html).
+* ROCm Compute Profiler now uses [AMD SMI](https://rocm.docs.amd.com/projects/amdsmi/en/latest/index.html) instead of [ROCm SMI](https://rocm.docs.amd.com/projects/rocm_smi_lib/en/latest/index.html). The AMD System Management Interface Library (AMD SMI) is a successor to ROCm SMI. It is a unified system management interface tool that provides a user-space interface for applications to monitor and control GPU applications and gives users the ability to query information about drivers and GPUs on the system. For more information, see [https://github.com/ROCm/amdsmi](https://github.com/ROCm/amdsmi) and the [AMD SMI documentation](https://rocm.docs.amd.com/projects/amdsmi/en/latest/index.html).
 
-### ROCm Compute Profiler adds FP8 metrics support
+* ROCm Compute Profiler has added FP8 metrics support for AMD Instinct MI300 series accelerators. For more information, see [Profile mode](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/latest/how-to/profile/mode.html#profiling).
 
-ROCm Compute Profiler has added FP8 metrics support for AMD Instinct MI300 series accelerators. For more information, see [Profile mode](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/latest/how-to/profile/mode.html#profiling).
+### rocSOLVER enhancements
+
+rocSOLVER has improved the performance of eigensolvers and singular value decomposition (SVD). For more information, see [rocSOLVER documentation](https://rocm.docs.amd.com/projects/rocSOLVER/en/latest/index.html).
+
+### ROCm Offline Installer Creator updates
+
+The ROCm Offline Installer Creator 6.4.2 includes the following features and improvements:
+ 
+* Additional package options for the Offline Installer Creator, including `amd-smi`, `rocdecode`, `rocjpeg`, and `rdc`.
+* ROCm meta packages are now used for selecting ROCm components and use cases.
+* Improved separation of kernel/driver and ROCm prerequisite packages to reduce the size of ROCm-only or driver-only offline installers.
+ 
+In addition, the option to build an offline installer based on ROCm version 5.7.3 has been removed. To build an offline installer for ROCm 5.7.3, use the Offline Installer Creator from version 6.4.1 or earlier. See [ROCm Offline Installer Creator](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-offline-installer.html) for more information.
+
+### ROCm Runfile Installer updates
+
+The ROCm Runfile Installer 6.4.2 adds support for Oracle 8.10 and 9.6 using the RHEL 8 or 9 `.run` files and for Debian 12 using the Ubuntu 22.04 `.run` file. It also fixes permission settings issues during ROCm and AMDGPU driver installation. For more information, see [ROCm Runfile Installer](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-runfile-installer.html).
 
 ### ROCm documentation updates
 
@@ -58,11 +74,11 @@ ROCm documentation continues to be updated to provide clearer and more comprehen
 
 * Documentation for the new [ROCprof Compute Viewer](https://rocm.docs.amd.com/projects/rocprof-compute-viewer/en/amd-mainline/) was released in May 2025. This tool is used to visualize and analyze GPU thread trace data collected using [rocprofv3](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/latest/index.html). Note that [ROCprof Compute Viewer](https://rocm.docs.amd.com/projects/rocprof-compute-viewer/en/amd-mainline/) is in an early access state. Running production workloads is not recommended.
 
+* The AMDGPU installer documentation has been removed to encourage the use of the package manager for ROCm installation. While the package manager is the recommended method, you can still install ROCm using the AMDGPU installer by following the [legacy process](https://rocm.docs.amd.com/projects/install-on-linux/en/docs-6.4.1/install/install-methods/amdgpu-installer-index.html). For more information, see [Installation via native package manager](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/install-methods/package-manager-index.html).
+
 ## Operating system and hardware support changes
 
-ROCm 6.4.2 marks the end of support (EoS) for RHEL 9.5.
-
-Hardware support remains unchanged in this release.
+ROCm 6.4.2 marks the end of support (EoS) for RHEL 9.5. Hardware support remains unchanged in this release.
 
 See the [Compatibility
 matrix](../../docs/compatibility/compatibility-matrix.rst)
@@ -202,7 +218,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocBLAS/en/docs-6.4.1/index.html">rocBLAS</a></td>
-                <td>4.4.0</td>
+                <td>4.4.0&nbsp;&Rightarrow;&nbsp;<a href="#rocblas-4-4-1">4.4.1</td></td>
                 <td><a href="https://github.com/ROCm/rocBLAS"><i class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
@@ -265,7 +281,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
                 <th rowspan="7">Tools</th>
                 <th rowspan="7">System management</th>
                 <td><a href="https://rocm.docs.amd.com/projects/amdsmi/en/docs-6.4.1/index.html">AMD SMI</a></td>
-                <td>25.4.2</td>
+                <td>25.4.2&nbsp;&Rightarrow;&nbsp;<a href="#amd-smi-25-5-1">25.5.1</a></td>
                 <td><a href="https://github.com/ROCm/amdsmi"><i class="fab fa-github fa-lg"></i></a></td>
             </tr>
             <tr>
@@ -301,7 +317,7 @@ Click {fab}`github` to go to the component's source code on GitHub.
             </tr>
             <tr>
                 <td><a href="https://rocm.docs.amd.com/projects/rocprofiler-compute/en/docs-6.4.1/index.html">ROCm Compute Profiler</a></td>
-                <td>3.1.0&nbsp;&Rightarrow;&nbsp;<a href="#rocm-compute-profiler-3-2-0">3.2.0</td>
+                <td>3.1.0&nbsp;&Rightarrow;&nbsp;<a href="#rocm-compute-profiler-3-1-1">3.1.1</td>
                 <td><a href="https://github.com/ROCm/rocprofiler-compute"><i
                             class="fab fa-github fa-lg"></i></a></td>
             </tr>
@@ -405,6 +421,32 @@ The following sections describe key changes to ROCm components.
 For a historical overview of ROCm component updates, see the {doc}`ROCm consolidated changelog </release/changelog>`.
 ```
 
+### **AMD SMI** (25.5.1)
+
+### Added
+
+- Compute Unit Occupancy information per process.
+
+- Support for getting the GPU Board voltage.
+
+- New firmware PLDM_BUNDLE. `amd-smi firmware` can now show the PLDM Bundle on supported systems.
+
+- `amd-smi ras --afid --cper-file <file_path>` to decode CPER records.
+
+### Changed
+
+- Padded `asic_serial` in `amdsmi_get_asic_info` with 0s.
+
+- Renamed field `COMPUTE_PARTITION` to `ACCELERATOR_PARTITION` in CLI call `amd-smi --partition`.
+
+### Resolved issues
+
+- Corrected VRAM memory calculation in `amdsmi_get_gpu_process_list`. Previously, the VRAM memory usage reported by `amdsmi_get_gpu_process_list` was inaccurate and was calculated using KB instead of KiB.
+
+```{note}
+See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/rocm-rel-6.4/CHANGELOG.md) for details, examples, and in-depth descriptions.
+```
+
 ### **HIP** (6.4.2)
 
 #### Added
@@ -420,14 +462,14 @@ For a historical overview of ROCm component updates, see the {doc}`ROCm consolid
 * Issue of dependency on `libgcc-s1` during rocm-dev install on Debian Buster. HIP runtime removed this Debian package dependency and uses `libgcc1` instead for this distros.
 * Building issue for `COMGR` dynamic load on Fedora and other Distros. HIP runtime now doesn't link against `libamd_comgr.so`.
 * Failure in the API `hipStreamDestroy`, when stream type is `hipStreamLegacy`. The API now returns error code `hipErrorInvalidResourceHandle` on this condition.
-* Kernel launch errors, such as `shared object initialization failed`, `invalid device function` or `kernel execution failure`. HIP runtime now loads `COMGR` properly considering the file with its name and mapped image.
+* Kernel launch errors, such as `shared object initialization failed`, `invalid device function`, or `kernel execution failure`. HIP runtime now loads `COMGR` properly considering the file with its name and mapped image.
 * Memory access fault in some applications. HIP runtime fixed offset accumulation in memory address.
 
 ### **hipBLASLt** (0.12.1)
 
 #### Added
 
-* Support for gfx1151.
+* Support for gfx1151 on Linux, complementing the previous support in the HIP SDK for Windows.
 
 ### **RCCL** (2.22.3)
 
@@ -435,7 +477,13 @@ For a historical overview of ROCm component updates, see the {doc}`ROCm consolid
 
 * Added support for the LL128 protocol on gfx942.
 
-### **ROCm Compute Profiler** (3.2.0)
+### **rocBLAS** (4.4.1)
+
+#### Resolved issues
+
+* rocBLAS might have failed to produce correct results for cherk/zherk on gfx90a/gfx942 with problem sizes k > 500 due to the imaginary portion on the C matrix diagonal not being zeros. rocBLAS now zeros the imaginary portion.
+
+### **ROCm Compute Profiler** (3.1.1)
 
 #### Added
 
@@ -445,7 +493,7 @@ For a historical overview of ROCm component updates, see the {doc}`ROCm consolid
 
 #### Changed
 
-* Change dependency from `rocm-smi` to `amd-smi`.
+* Changed dependency from `rocm-smi` to `amd-smi`.
 
 #### Resolved issues
 
@@ -516,6 +564,10 @@ An issue where CPER entries were not streamed continuously as intended when usin
 ## ROCm upcoming changes
 
 The following changes to the ROCm software stack are anticipated for future releases.
+
+### AMD SMI migration to AMDGPU driver repository
+
+In a future release, [AMD SMI](https://github.com/ROCm/amdsmi) will be relocated from the ROCm repository to a new AMDTools repository to better align with its system-level functionality. `amd-smi-lib` will no longer be included in the `rocm-developer-tools` meta-package included with your standard ROCm installation. Instead, it will be packaged with the AMDGPU driver installation along side a new meta package.
 
 ### ROCm SMI deprecation
 
