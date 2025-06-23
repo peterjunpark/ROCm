@@ -46,7 +46,7 @@ The following are notable new features and improvements in ROCm 6.4.2. For chang
 
 * ROCm Compute Profiler now uses [AMD SMI](https://rocm.docs.amd.com/projects/amdsmi/en/latest/index.html) instead of [ROCm SMI](https://rocm.docs.amd.com/projects/rocm_smi_lib/en/latest/index.html). The AMD System Management Interface Library (AMD SMI) is a successor to ROCm SMI. It is a unified system management interface tool that provides a user-space interface for applications to monitor and control GPU applications and gives users the ability to query information about drivers and GPUs on the system. For more information, see [https://github.com/ROCm/amdsmi](https://github.com/ROCm/amdsmi) and the [AMD SMI documentation](https://rocm.docs.amd.com/projects/amdsmi/en/latest/index.html).
 
-* ROCm Compute Profiler has added FP8 metrics support for AMD Instinct MI300 series accelerators. For more information, see [Profile mode](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/latest/how-to/profile/mode.html#profiling).
+* ROCm Compute Profiler has added FP8 metrics support for AMD Instinct MI300 series accelerators.
 
 ### rocSOLVER enhancements
 
@@ -56,6 +56,7 @@ rocSOLVER has improved the performance of eigensolvers and singular value decomp
 
 The ROCm Offline Installer Creator 6.4.2 includes the following features and improvements:
  
+* Added support for Oracle Linux 8.10 and 9.6.
 * Additional package options for the Offline Installer Creator, including `amd-smi`, `rocdecode`, `rocjpeg`, and `rdc`.
 * ROCm meta packages are now used for selecting ROCm components and use cases.
 * Improved separation of kernel/driver and ROCm prerequisite packages to reduce the size of ROCm-only or driver-only offline installers.
@@ -64,15 +65,22 @@ In addition, the option to build an offline installer based on ROCm version 5.7.
 
 ### ROCm Runfile Installer updates
 
-The ROCm Runfile Installer 6.4.2 adds support for Oracle 8.10 and 9.6 using the RHEL 8 or 9 `.run` files and for Debian 12 using the Ubuntu 22.04 `.run` file. It also fixes permission settings issues during ROCm and AMDGPU driver installation. For more information, see [ROCm Runfile Installer](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-runfile-installer.html).
+The ROCm Runfile Installer 6.4.2 adds support for Oracle Linux 8.10 and 9.6 using the RHEL 8 or 9 `.run` files and for Debian 12 using the Ubuntu 22.04 `.run` file. It also fixes permission settings issues during ROCm and AMDGPU driver installation. For more information, see [ROCm Runfile Installer](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-runfile-installer.html).
 
 ### ROCm documentation updates
 
 ROCm documentation continues to be updated to provide clearer and more comprehensive guidance for a wider variety of user needs and use cases.
 
-* [Tutorials for AI developers](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/) have been expanded with four new tutorials. These tutorials are Jupyter notebook-based, easy-to-follow documents. They are ideal for AI developers who want to learn about specific topics, including inference, fine-tuning, training, and GPU development and optimization. For more information about the changes, see [Changelog for the AI Developer Hub](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/changelog.html).
+* [Tutorials for AI developers](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/) have been expanded with the following four new tutorials:
+    * Inference tutorial: [AI agent with MCPs using vLLM and PydanticAI](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/notebooks/inference/build_airbnb_agent_mcp.html)
+    * GPU development and optimization tutorials:
+        * [Kernel development and optimization with Triton](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/notebooks/gpu_dev_optimize/triton_kernel_dev.html)
+        * [Profiling Llama-4 inference with vLLM](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/notebooks/gpu_dev_optimize/llama4_profiling_vllm.html)
+        * [FP8 quantization with AMD Quark for vLLM](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/notebooks/gpu_dev_optimize/fp8_quantization_quark_vllm.html)
+    
+    For more information about the changes, see [Changelog for the AI Developer Hub](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/changelog.html).
 
-* Documentation for the new [ROCprof Compute Viewer](https://rocm.docs.amd.com/projects/rocprof-compute-viewer/en/amd-mainline/) was released in May 2025. This tool is used to visualize and analyze GPU thread trace data collected using [rocprofv3](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/latest/index.html). Note that [ROCprof Compute Viewer](https://rocm.docs.amd.com/projects/rocprof-compute-viewer/en/amd-mainline/) is in an early access state. Running production workloads is not recommended.
+* Documentation for the new [ROCprof Compute Viewer](https://rocm.docs.amd.com/projects/rocprof-compute-viewer/en/amd-mainline/) was added in May 2025. This tool is used to visualize and analyze GPU thread trace data collected using [rocprofv3](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/latest/index.html). Note that [ROCprof Compute Viewer](https://rocm.docs.amd.com/projects/rocprof-compute-viewer/en/amd-mainline/) is in an early access state. Running production workloads is not recommended.
 
 * The AMDGPU installer documentation has been removed to encourage the use of the package manager for ROCm installation. While the package manager is the recommended method, you can still install ROCm using the AMDGPU installer by following the [legacy process](https://rocm.docs.amd.com/projects/install-on-linux/en/docs-6.4.1/install/install-methods/amdgpu-installer-index.html). For more information, see [Installation via native package manager](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/install-methods/package-manager-index.html).
 
@@ -518,7 +526,7 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 ### **rocPRIM** (3.4.1)
 
-#### Upcoming Changes
+#### Upcoming changes
 
 * Changes to the template parameters of warp and block algorithms will be made in an upcoming release.
 * Due to an upcoming compiler change, the following symbols related to warp size have been marked as deprecated and will be removed in an upcoming major release:
@@ -530,9 +538,9 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 #### Resolved Issues
 
-* Resolved incorrect output for `rocshmem_ctx_my_pe` and `rocshmem_ctx_n_pes`.
-* Resolved multi-team errors by providing team specific buffers in `rocshmem_ctx_wg_team_sync`.
-* Resolved missing implementation of `rocshmem_g` for IPC conduit.
+* Incorrect output for `rocshmem_ctx_my_pe` and `rocshmem_ctx_n_pes`.
+* Multi-team errors by providing team specific buffers in `rocshmem_ctx_wg_team_sync`.
+* Missing implementation of `rocshmem_g` for IPC conduit.
 
 ### **rocSOLVER** (3.28.2)
 
@@ -562,13 +570,17 @@ individual components, review the [Detailed component changes](#detailed-compone
 
 An issue where CPER entries were not streamed continuously as intended when using the `--follow` flag with `amd-smi ras --cper` has been resolved. See [issue #4768](https://github.com/ROCm/ROCm/issues/4768) on GitHub.
 
+### Instinct MI300X reports incorrect raw GPU timestamps
+
+An issue where the command processor firmware reported incorrect raw GPU timestamps on MI300X accelerators has been resolved. See [GitHub issue #4079](https://github.com/ROCm/ROCm/issues/4079).
+
 ## ROCm upcoming changes
 
 The following changes to the ROCm software stack are anticipated for future releases.
 
 ### AMD SMI migration to AMDGPU driver repository
 
-In a future release, [AMD SMI](https://github.com/ROCm/amdsmi) will be relocated from the ROCm repository to a new AMDTools repository to better align with its system-level functionality. `amd-smi-lib` will no longer be included in the `rocm-developer-tools` meta-package included with your standard ROCm installation. Instead, it will be packaged with the AMDGPU driver installation along side a new meta package.
+In a future release, [AMD SMI](https://github.com/ROCm/amdsmi) will be relocated from the ROCm organization repository to a new AMDTools repository to better align with its system-level functionality. `amd-smi-lib` will no longer be included in the `rocm-developer-tools` meta-package included with your standard ROCm installation. Instead, it will be packaged with the AMDGPU driver installation.
 
 ### ROCm SMI deprecation
 
