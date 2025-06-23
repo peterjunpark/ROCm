@@ -431,7 +431,7 @@ For a historical overview of ROCm component updates, see the {doc}`ROCm consolid
 
 ### **AMD SMI** (25.5.1)
 
-### Added
+#### Added
 
 - Compute Unit Occupancy information per process.
 
@@ -441,13 +441,13 @@ For a historical overview of ROCm component updates, see the {doc}`ROCm consolid
 
 - `amd-smi ras --afid --cper-file <file_path>` to decode CPER records.
 
-### Changed
+#### Changed
 
 - Padded `asic_serial` in `amdsmi_get_asic_info` with 0s.
 
 - Renamed field `COMPUTE_PARTITION` to `ACCELERATOR_PARTITION` in CLI call `amd-smi --partition`.
 
-### Resolved issues
+#### Resolved issues
 
 - Corrected VRAM memory calculation in `amdsmi_get_gpu_process_list`. Previously, the VRAM memory usage reported by `amdsmi_get_gpu_process_list` was inaccurate and was calculated using KB instead of KiB.
 
@@ -536,7 +536,7 @@ See the full [AMD SMI changelog](https://github.com/ROCm/amdsmi/blob/release/roc
 
 ### **rocSHMEM** (2.0.1)
 
-#### Resolved Issues
+#### Resolved issues
 
 * Incorrect output for `rocshmem_ctx_my_pe` and `rocshmem_ctx_n_pes`.
 * Multi-team errors by providing team specific buffers in `rocshmem_ctx_wg_team_sync`.
