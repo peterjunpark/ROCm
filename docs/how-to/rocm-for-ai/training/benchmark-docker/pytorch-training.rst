@@ -48,7 +48,7 @@ The following models are pre-optimized for performance on the AMD Instinct MI325
 
       <div id="vllm-benchmark-ud-params-picker" class="container-fluid">
         <div class="row">
-          <div class="col-2 me-2 model-param-head">Workload</div>
+          <div class="col-2 me-2 model-param-head">Model group</div>
           <div class="row col-10">
    {% for model_group in model_groups %}
             <div class="col-6 model-param" data-param-k="model-group" data-param-v="{{ model_group.tag }}" tabindex="0">{{ model_group.group }}</div>
@@ -313,13 +313,13 @@ The following models are pre-optimized for performance on the AMD Instinct MI325
 
    {% for model_group in model_groups %}
       {% for model in model_group.models %}
-         {% if model_group.tag == "pre-training" and model.mad_tag in ["pyt_train_llama-3.1-8b", "pyt_train_llama-3.1-70b", "pyt_train_flux"] %}
+         {% if "pretrain" in model.training_modes and model.mad_tag in ["pyt_train_llama-3.1-8b", "pyt_train_llama-3.1-70b", "pyt_train_flux"] %}
 
          .. container:: model-doc {{ model.mad_tag }}
 
             .. rubric:: Pretraining
 
-            To start the pre-training benchmark, use the following command with the
+            To start the pretraining benchmark, use the following command with the
             appropriate options. See the following list of options and their descriptions.
 
             .. code-block:: shell
@@ -360,7 +360,7 @@ The following models are pre-optimized for performance on the AMD Instinct MI325
             {% endif %}
          {% endif %}
 
-         {% if model_group.tag == "fine-tuning" %}
+         {% if "finetune_fw" in model.training_modes or "finetune_lora" in model.training_modes or "HF_finetune_lora" in model.training_modes %}
          .. container:: model-doc {{ model.mad_tag }}
 
             .. rubric:: Fine-tuning
@@ -410,15 +410,13 @@ The following models are pre-optimized for performance on the AMD Instinct MI325
             {% for method in model.training_modes %}
                * ``{{ method }}``
             {% endfor %}
-            {% if model.training_modes|length < 4 %}
 
                The upstream `torchtune <https://github.com/pytorch/torchtune>`_ repository
                does not currently provide YAML configuration files for other combinations of
-               model to fine-tuning method
+               model to fine-tuning method.
                However, you can still configure your own YAML files to enable support for
                fine-tuning methods not listed here by following existing patterns in the
                ``/workspace/torchtune/recipes/configs`` directory.
-            {% endif %}
          {% endif %}
       {% endfor %}
    {% endfor %}
