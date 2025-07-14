@@ -10,29 +10,8 @@ unified_docker:
     hipblaslt_version: 0.15.0-8c6919d
     triton_version: 3.3.0
 model_groups:
-  - group: Pre-training
-    tag: pre-training
-    models:
-    - model: Llama 3.1 8B
-      mad_tag: pyt_train_llama-3.1-8b
-      model_repo: Llama-3.1-8B
-      url: https://huggingface.co/meta-llama/Llama-3.1-8B
-      precision: BF16
-      training_modes: [pretrain]
-    - model: Llama 3.1 70B
-      mad_tag: pyt_train_llama-3.1-70b
-      model_repo: Llama-3.1-70B
-      url: https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct
-      precision: BF16
-      training_modes: [pretrain]
-    - model: FLUX.1-dev
-      mad_tag: pyt_train_flux
-      model_repo: Flux
-      url: https://huggingface.co/black-forest-labs/FLUX.1-dev
-      precision: BF16
-      training_modes: [pretrain]
-  - group: Fine-tuning
-    tag: fine-tuning
+  - group: Meta Llama
+    tag: llama
     models:
     - model: Llama 4 Scout 17B-16E
       mad_tag: pyt_train_llama-4-scout-17b-16e
@@ -75,13 +54,13 @@ model_groups:
       model_repo: Llama-3.1-8B
       url: https://huggingface.co/meta-llama/Llama-3.1-8B
       precision: BF16
-      training_modes: [finetune_fw, finetune_lora]
+      training_modes: [pretrain, finetune_fw, finetune_lora]
     - model: Llama 3.1 70B
       mad_tag: pyt_train_llama-3.1-70b
       model_repo: Llama-3.1-70B
-      url: https://huggingface.co/meta-llama/Llama-3.1-70B
+      url: https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct
       precision: BF16
-      training_modes: [finetune_fw, finetune_lora, finetune_qlora]
+      training_modes: [pretrain, finetunbe_fw, finetune_lora, finetune_qlora]
     - model: Llama 3.1 405B
       mad_tag: pyt_train_llama-3.1-405b
       model_repo: Llama-3.1-405B
@@ -118,3 +97,21 @@ model_groups:
       url: https://github.com/meta-llama/llama-models/tree/main/models/llama2
       precision: BF16
       training_modes: [finetune_lora, finetune_qlora, HF_finetune_lora]
+  - group: FLUX
+    tag: flux
+    models:
+    - model: FLUX.1-dev
+      mad_tag: pyt_train_flux
+      model_repo: Flux
+      url: https://huggingface.co/black-forest-labs/FLUX.1-dev
+      precision: BF16
+      training_modes: [pretrain]
+  - group: NCF
+    tag: ncf
+    models:
+    - model: NCF
+      mad_tag: pyt_train_ncf
+      model_repo: 
+      url: https://github.com/ROCm/DeepLearningExamples
+      precision: FP32
+      training_modes: []
