@@ -106,12 +106,12 @@ model_groups:
       url: https://huggingface.co/black-forest-labs/FLUX.1-dev
       precision: BF16
       training_modes: [pretrain]
-  - group: NCF
-    tag: ncf
+  - group: Stable Diffusion
+    tag: stable-diffusion
     models:
-    - model: NCF
-      mad_tag: pyt_train_ncf
+    - model: Stable Diffusion XL
+      mad_tag: pyt_huggingface_stable_diffusion_xl_2k_lora_finetuning
       model_repo: 
-      url: https://github.com/ROCm/DeepLearningExamples
-      precision: FP32
-      training_modes: []
+      url: https://github.com/huggingface/diffusers
+      precision: FP16
+      training_modes: [HF_finetune_lora]
