@@ -63,7 +63,7 @@ The following models are pre-optimized for performance on the AMD Instinct MI325
       {% set models = model_group.models %}
       {% for model in models %}
          {% if models|length % 3 == 0 %}
-            <div class="col-4 model-param" data-param-k="model" data-param-v="{{ model.mad_tag }}" data-param-group="{{ model_group.tag }}" tabindex="0">{{ model.model }}</div>
+            <div class="col-3 model-param" data-param-k="model" data-param-v="{{ model.mad_tag }}" data-param-group="{{ model_group.tag }}" tabindex="0">{{ model.model }}</div>
          {% else %}
             <div class="col-6 model-param" data-param-k="model" data-param-v="{{ model.mad_tag }}" data-param-group="{{ model_group.tag }}" tabindex="0">{{ model.model }}</div>
          {% endif %}
