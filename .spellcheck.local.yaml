@@ -1,7 +1,7 @@
 matrix:
 - name: Markdown
   sources:
-  - ['tools/autotag/templates/**/*.md', '!tools/autotag/templates/**/5*.md', '!tools/autotag/templates/**/6.0*.md', '!tools/autotag/templates/**/6.1*.md']
+  - ['tools/autotag/templates/**/*.md', '!tools/autotag/templates/**/5*.md', '!tools/autotag/templates/**/6.0*.md', '!tools/autotag/templates/**/6.1*.md', '!docs/**/previous-versions/**']
 - name: reST
   sources:
   - []
