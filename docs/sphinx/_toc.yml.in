@@ -6,27 +6,135 @@ defaults:
 root: index.rst
 subtrees:
   - entries:
-      - file: about/release-notes.md
-        title: Release notes
+      - url: https://rocm.docs.amd.com/en/7.10.0-preview/
+        title: ROCm documentation
       - file: compatibility/compatibility-matrix.rst
         title: Compatibility matrix
-  - caption: Install
+  # - caption: Install
+  #   entries:
+  #     - file: install/rocm.rst
+  #       title: Install ROCm
+  #       entries:
+  #         # Dummy entries to point to install doc sections
+  #         - file: install/redirect/_prerequisites.rst
+  #           title: Prerequisites
+  #         - file: install/redirect/_install.rst
+  #           title: Installation
+  #         - file: install/redirect/_post-install.rst
+  #           title: Post-installation
+  #     - file: install/redirect/_uninstall.rst
+  #       title: Uninstall ROCm
+  #     - file: install/build-from-source.rst
+  #       title: Build from source
+  - caption: Deep learning frameworks
     entries:
-      - file: install/rocm.rst
-        title: Install ROCm
+      - file: pytorch/index.rst
+        title: PyTorch
         entries:
-          # Dummy entries to point to install doc sections
-          - file: install/redirect/_prerequisites.rst
-            title: Prerequisites
-          - file: install/redirect/_install.rst
-            title: Installation
-          - file: install/redirect/_post-install.rst
-            title: Post-installation
-      - file: install/redirect/_uninstall.rst
-        title: Uninstall ROCm
-      - file: install/build-from-source.rst
-        title: Build from source
-  - caption: ROCm for AI
+          - file: pytorch/release.rst
+            title: Release notes
+          - file: pytorch/support.rst
+            title: Support overview
+          - file: pytorch/install.rst
+            title: Install
+      - file: tensorflow/index.rst
+        title: TensorFlow
+        entries:
+          - file: tensorflow/release.rst
+            title: Release notes
+          - file: tensorflow/support.rst
+            title: Support overview
+          - file: tensorflow/install.rst
+            title: Install
+      - file: jax/index.rst
+        title: JAX
+        entries:
+          - file: jax/release.rst
+            title: Release notes
+          - file: jax/support.rst
+            title: Support overview
+          - file: jax/install.rst
+            title: Install
+      - file: dgl/index.rst
+        title: DGL
+        entries:
+          - file: dgl/release.rst
+            title: Release notes
+          - file: dgl/support.rst
+            title: Support overview
+          - file: dgl/install.rst
+            title: Install
+      - file: flashinfer/index.rst
+        title: FlashInfer
+        entries:
+          - file: flashinfer/release.rst
+            title: Release notes
+          - file: flashinfer/support.rst
+            title: Support overview
+          - file: flashinfer/install.rst
+            title: Install
+      - file: llama-cpp/index.rst
+        title: llama.cpp
+        entries:
+          - file: llama-cpp/release.rst
+            title: Release notes
+          - file: llama-cpp/support.rst
+            title: Support overview
+          - file: llama-cpp/install.rst
+            title: Install
+      - file: megablocks/index.rst
+        title: Megablocks
+        entries:
+          - file: megablocks/release.rst
+            title: Release notes
+          - file: megablocks/support.rst
+            title: Support overview
+          - file: megablocks/install.rst
+            title: Install
+      - file: ray/index.rst
+        title: Ray
+        entries:
+          - file: ray/release.rst
+            title: Release notes
+          - file: ray/support.rst
+            title: Support overview
+          - file: ray/install.rst
+            title: Install
+      - file: stanford-megatron-lm/index.rst
+        title: Stanford Megatron-LM
+        entries:
+          - file: stanford-megatron-lm/release.rst
+            title: Release notes
+          - file: stanford-megatron-lm/support.rst
+            title: Support overview
+          - file: stanford-megatron-lm/install.rst
+            title: Install
+      - file: verl/index.rst
+        title: verl
+        entries:
+          - file: verl/release.rst
+            title: Release notes
+          - file: verl/support.rst
+            title: Support overview
+          - file: verl/install.rst
+            title: Install
+  - caption: Training
+    entries:
+      - file: training/primus.rst
+        title: Primus
+      - file: training/maxtext.rst
+        title: JAX MaxText
+  - caption: Inference
+    entries:
+      - file: inference/vllm.rst
+        title: vLLM inference
+      - file: inference/pyt-inference.rst
+        title: PyTorch inference
+      - file: inference/xdit.rst
+        title: xDiT diffusion inference
+      - file: inference/sglang.rst
+        title: SGLang distributed inference with Mooncake
+  - caption: Tutorials
     entries:
       - file: rocm-for-ai/pytorch-comfyui.rst
-        title: Install PyTorch and ComfyUI
+        title: Image generation using ComfyUI

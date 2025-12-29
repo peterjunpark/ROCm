@@ -146,7 +146,7 @@ html_theme = "rocm_docs_theme"
 html_theme_options = {
     "announcement": f"This is ROCm {ROCM_VERSION} technology preview release documentation. For the latest production stream release, refer to <a id='rocm-banner' href='https://rocm.docs.amd.com/en/latest/'>ROCm documentation</a>.",
     "flavor": "generic",
-    "header_title": f"ROCm™ {ROCM_VERSION} Preview",
+    "header_title": f"ROCm™ AI Ecosystem",
     "header_link": f"https://rocm.docs.amd.com/en/{ROCM_VERSION}-preview/index.html",
     "version_list_link": f"https://rocm.docs.amd.com/en/{ROCM_VERSION}-preview/release/versions.html",
     "nav_secondary_items": {
@@ -164,7 +164,7 @@ html_theme_options = {
         "rocm-for-ai/pytorch-comfyui": ["selector-toc2"],
     },
 }
-html_title = f"AMD ROCm {ROCM_VERSION} preview"
+html_title = f"AMD ROCm AI Ecosystem"
 
 numfig = False
 rst_prolog = f"""
@@ -198,5 +198,5 @@ if os.environ.get("READTHEDOCS", "") == "True":
     html_context["READTHEDOCS"] = True
 
 # temporary settings to speed up docs build for faster iteration
-# external_projects_remote_repository = ""
-# external_toc_exclude_missing = True
+external_projects_remote_repository = ""
+external_toc_exclude_missing = True
