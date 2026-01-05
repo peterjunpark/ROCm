@@ -6,10 +6,6 @@
 Install JAX
 ***********
 
-`JAX <https://docs.jax.dev/en/latest/notebooks/thinking_in_jax.html>`__ is a library
-for array-oriented numerical computation (similar to NumPy), with automatic differentiation
-and just-in-time (JIT) compilation to enable high-performance machine learning research.
-
 This topic covers setup instructions and the necessary files to build, test, and run
 JAX with ROCm support in a Docker environment. To learn more about JAX on ROCm,
 including its use cases, recommendations, as well as hardware and software compatibility,

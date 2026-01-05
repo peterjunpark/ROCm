@@ -129,17 +129,18 @@ extensions = [
     # "sphinxcontrib.datatemplates",
     # "sphinx_reredirects",
     # "sphinx_sitemap",
-    # "version-ref",
-    # "csv-to-list-table",
+    "version-ref",
+    "csv-to-list-table",
+    "sphinx_substitution_extensions",
 ]
 templates_path = ["extension/rocm_docs_custom/templates"]
 
 html_static_path = ["sphinx/static"]
 html_js_files = ["setup-toc-install-headings.js"]
 
-# compatibility_matrix_file = str(
-#     DOCS_DIR / "compatibility/compatibility-matrix-historical-6.0.csv"
-# )
+compatibility_matrix_file = str(
+    DOCS_DIR / "compatibility/compatibility-matrix-historical-6.0.csv"
+)
 
 external_projects_current_project = "rocm"
 html_theme = "rocm_docs_theme"

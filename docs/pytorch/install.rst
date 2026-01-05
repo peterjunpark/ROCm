@@ -6,13 +6,9 @@
 Install PyTorch
 ***************
 
-`PyTorch <https://pytorch.org/>`__ is an open-source tensor library designed for deep learning. 
-PyTorch on ROCm provides mixed-precision and large-scale training using AMD `MIOpen <https://github.com/ROCm/MIOpen>`_ 
-and `RCCL <https://github.com/ROCm/rccl>`_ libraries.
-
-This topic covers setup instructions and the necessary files to build, test, and run 
-PyTorch with ROCm support in a Docker environment. To learn more about PyTorch on ROCm, 
-including its use cases, recommendations, as well as hardware and software compatibility, 
+This topic covers setup instructions and the necessary files to build, test, and run
+PyTorch with ROCm support in a Docker environment. To learn more about PyTorch on ROCm,
+including its use cases, recommendations, as well as hardware and software compatibility,
 see :doc:`rocm:compatibility/ml-compatibility/pytorch-compatibility`.
 
 Install PyTorch
