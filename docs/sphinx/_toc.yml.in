@@ -37,15 +37,6 @@ subtrees:
             title: Support overview
           - file: pytorch/install.rst
             title: Install
-      - file: tensorflow/index.rst
-        title: TensorFlow
-        entries:
-          - file: tensorflow/release.rst
-            title: Release notes
-          - file: tensorflow/support.rst
-            title: Support overview
-          - file: tensorflow/install.rst
-            title: Install
       - file: jax/index.rst
         title: JAX
         entries:
@@ -55,69 +46,78 @@ subtrees:
             title: Support overview
           - file: jax/install.rst
             title: Install
-      - file: dgl/index.rst
-        title: DGL
-        entries:
-          - file: dgl/release.rst
-            title: Release notes
-          - file: dgl/support.rst
-            title: Support overview
-          - file: dgl/install.rst
-            title: Install
-      - file: flashinfer/index.rst
-        title: FlashInfer
-        entries:
-          - file: flashinfer/release.rst
-            title: Release notes
-          - file: flashinfer/support.rst
-            title: Support overview
-          - file: flashinfer/install.rst
-            title: Install
-      - file: llama-cpp/index.rst
-        title: llama.cpp
-        entries:
-          - file: llama-cpp/release.rst
-            title: Release notes
-          - file: llama-cpp/support.rst
-            title: Support overview
-          - file: llama-cpp/install.rst
-            title: Install
-      - file: megablocks/index.rst
-        title: Megablocks
-        entries:
-          - file: megablocks/release.rst
-            title: Release notes
-          - file: megablocks/support.rst
-            title: Support overview
-          - file: megablocks/install.rst
-            title: Install
-      - file: ray/index.rst
-        title: Ray
-        entries:
-          - file: ray/release.rst
-            title: Release notes
-          - file: ray/support.rst
-            title: Support overview
-          - file: ray/install.rst
-            title: Install
-      - file: stanford-megatron-lm/index.rst
-        title: Stanford Megatron-LM
-        entries:
-          - file: stanford-megatron-lm/release.rst
-            title: Release notes
-          - file: stanford-megatron-lm/support.rst
-            title: Support overview
-          - file: stanford-megatron-lm/install.rst
-            title: Install
-      - file: verl/index.rst
-        title: verl
-        entries:
-          - file: verl/release.rst
-            title: Release notes
-          - file: verl/support.rst
-            title: Support overview
-          - file: verl/install.rst
-            title: Install
+      # - file: tensorflow/index.rst
+      #   title: TensorFlow
+      #   entries:
+      #     - file: tensorflow/release.rst
+      #       title: Release notes
+      #     - file: tensorflow/support.rst
+      #       title: Support overview
+      #     - file: tensorflow/install.rst
+      #       title: Install
+      # - file: dgl/index.rst
+      #   title: DGL
+      #   entries:
+      #     - file: dgl/release.rst
+      #       title: Release notes
+      #     - file: dgl/support.rst
+      #       title: Support overview
+      #     - file: dgl/install.rst
+      #       title: Install
+      # - file: flashinfer/index.rst
+      #   title: FlashInfer
+      #   entries:
+      #     - file: flashinfer/release.rst
+      #       title: Release notes
+      #     - file: flashinfer/support.rst
+      #       title: Support overview
+      #     - file: flashinfer/install.rst
+      #       title: Install
+      # - file: llama-cpp/index.rst
+      #   title: llama.cpp
+      #   entries:
+      #     - file: llama-cpp/release.rst
+      #       title: Release notes
+      #     - file: llama-cpp/support.rst
+      #       title: Support overview
+      #     - file: llama-cpp/install.rst
+      #       title: Install
+      # - file: megablocks/index.rst
+      #   title: Megablocks
+      #   entries:
+      #     - file: megablocks/release.rst
+      #       title: Release notes
+      #     - file: megablocks/support.rst
+      #       title: Support overview
+      #     - file: megablocks/install.rst
+      #       title: Install
+      # - file: ray/index.rst
+      #   title: Ray
+      #   entries:
+      #     - file: ray/release.rst
+      #       title: Release notes
+      #     - file: ray/support.rst
+      #       title: Support overview
+      #     - file: ray/install.rst
+      #       title: Install
+      # - file: stanford-megatron-lm/index.rst
+      #   title: Stanford Megatron-LM
+      #   entries:
+      #     - file: stanford-megatron-lm/release.rst
+      #       title: Release notes
+      #     - file: stanford-megatron-lm/support.rst
+      #       title: Support overview
+      #     - file: stanford-megatron-lm/install.rst
+      #       title: Install
+      # - file: verl/index.rst
+      #   title: verl
+      #   entries:
+      #     - file: verl/release.rst
+      #       title: Release notes
+      #     - file: verl/support.rst
+      #       title: Support overview
+      #     - file: verl/install.rst
+      #       title: Install
   - caption: Training
     entries:
       - file: training/primus.rst
@@ -134,7 +134,11 @@ subtrees:
         title: xDiT diffusion inference
       - file: inference/sglang.rst
         title: SGLang distributed inference with Mooncake
-  - caption: Tutorials
+  - caption: How to
     entries:
       - file: rocm-for-ai/pytorch-comfyui.rst
         title: Image generation using ComfyUI
+  - caption: Tutorials
+    entries:
+      - url: https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/index.html
+        title: Tutorials for AI developers
