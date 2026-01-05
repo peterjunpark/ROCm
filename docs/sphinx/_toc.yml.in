@@ -33,9 +33,8 @@ subtrees:
         entries:
           - file: pytorch/release/latest.rst
             title: Release notes
-            entries:
-            - file: pytorch/support.rst
-              title: Support overview
+          - file: pytorch/support.rst
+            title: Support overview
           - file: pytorch/install.rst
             title: Install
       - file: jax/index.rst
@@ -43,9 +42,8 @@ subtrees:
         entries:
           - file: jax/release/latest.rst
             title: Release notes
-            entries:
-            - file: jax/support.rst
-              title: Support overview
+          - file: jax/support.rst
+            title: Support overview
           - file: jax/install.rst
             title: Install
       # - file: tensorflow/index.rst
