@@ -31,7 +31,7 @@ subtrees:
       - file: pytorch/index.rst
         title: PyTorch
         entries:
-          - file: pytorch/release.rst
+          - file: pytorch/release/latest.rst
             title: Release notes
           - file: pytorch/support.rst
             title: Support overview
@@ -40,7 +40,7 @@ subtrees:
       - file: jax/index.rst
         title: JAX
         entries:
-          - file: jax/release.rst
+          - file: jax/release/latest.rst
             title: Release notes
           - file: jax/support.rst
             title: Support overview
