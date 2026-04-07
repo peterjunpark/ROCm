@@ -9,8 +9,8 @@ import shutil
 import sys
 from pathlib import Path
 
-ROCM_VERSION = "7.12.0"
-GA_DATE = "2026-03-26"
+ROCM_VERSION = "7.13.0"
+GA_DATE = "2026-05-06"
 
 DOCS_DIR = Path(__file__).parent.resolve()
 ROOT_DIR = DOCS_DIR.parent
@@ -195,5 +195,3 @@ suppress_warnings = ["autosectionlabel.*"]
 # }
 if os.environ.get("READTHEDOCS", "") == "True":
     html_context["READTHEDOCS"] = True
-
-external_projects_remote_repository = ""
