@@ -311,7 +311,24 @@ in ROCm |ROCM_VERSION|, see the :doc:`Release notes </about/release-notes>`.
 
 .. _rocm-uninstall:
 
-.. include:: ./includes/uninstall.rst
+Uninstalling
+============
+
+.. selected:: i=pkgman
+
+   .. include:: ./includes/400_uninstall_pkgman.rst
+
+.. selected:: i=pip
+
+   .. include:: ./includes/410_uninstall_pip.rst
+
+.. selected:: i=tar
+
+   .. include:: ./includes/420_uninstall_tarball.rst
+
+.. selected:: i=runfile
+
+   .. include:: ./includes/430_uninstall_runfile.rst
 
 |
 |
