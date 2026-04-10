@@ -287,13 +287,16 @@ in ROCm |ROCM_VERSION|, see the :doc:`Release notes </about/release-notes>`.
    post-installation configuration, and offers an interactive command-line GUI for
    guided setup.
 
+Prerequisites
+=============
+
 .. _rocm-prerequisites:
 
 .. include:: ./includes/prerequisites.rst
 
 ----
 
-.. include:: ./includes/runfile-quick-start-config-options.rst
+.. include:: ./includes/150_config-options_runfile.rst
 
 ----
 
@@ -320,15 +323,15 @@ Uninstalling
 
 .. selected:: i=pip
 
-   .. include:: ./includes/410_uninstall_pip.rst
+   .. include:: ./includes/400_uninstall_pip.rst
 
 .. selected:: i=tar
 
-   .. include:: ./includes/420_uninstall_tarball.rst
+   .. include:: ./includes/400_uninstall_tarball.rst
 
 .. selected:: i=runfile
 
-   .. include:: ./includes/430_uninstall_runfile.rst
+   .. include:: ./includes/400_uninstall_runfile.rst
 
 |
 |

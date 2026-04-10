@@ -26,6 +26,31 @@
 
 .. ================================================================ GPU / APU ==
 
+.. selector:: gfx architecture
+   :key: gfx
+
+   .. selector-option:: gfx950
+
+   .. selector-option:: gfx942
+
+   .. selector-option:: gfx90a
+
+   .. selector-option:: gfx908
+
+   .. selector-option:: gfx950
+
+   .. selector-option:: gfx1200
+
+   .. selector-option:: gfx1201
+
+   .. selector-option:: gfx1100
+
+   .. selector-option:: gfx1101
+
+   .. selector-option:: gfx1150
+
+   .. selector-option:: gfx1151
+
 .. selector:: Instinct GPU
    :key: gpu
    :show-when: fam=instinct
