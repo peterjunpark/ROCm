@@ -24,8 +24,10 @@ subtrees:
             title: Post-installation
       - file: install/redirect/_uninstall.rst
         title: Uninstall ROCm
+      - file: install/rocm-packages.rst
+        title: ROCm packages
       - file: install/build-from-source.rst
-        title: Build from source
+        title: Build ROCm from source
   - caption: Deep learning frameworks
     entries:
       - file: rocm-for-ai/pytorch.rst
