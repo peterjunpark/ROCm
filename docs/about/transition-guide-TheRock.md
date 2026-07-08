@@ -1,6 +1,6 @@
 # Transition guide from legacy ROCm release stream
 
-[ROCm Core SDK 7.13.0](https://rocm.docs.amd.com/en/7.13.0-preview/index.html#rocm-core-sdk) marks a step change from the ROCm legacy release stream. It is a preview release built on our new build system, TheRock.
+[ROCm Core SDK 7.14.0](https://rocm.docs.amd.com/en/7.14.0-preview/index.html#rocm-core-sdk) marks a step change from the ROCm legacy release stream. It is a preview release built on our new build system, TheRock.
 
 ## Major changes
 
@@ -37,7 +37,7 @@
 
 ## Paths and linking
 
-ROCm Core SDK 7.13.0 maintains ABI and API compatibility with the ROCm 7.2
+ROCm Core SDK 7.14.0 maintains ABI and API compatibility with the ROCm 7.2
 legacy releases, so recompilation is not required. For installations using your
 Linux distribution's package manager, the `amdrocm` meta package configures
 `update-alternatives` and provides backward-compatible symlinks for
@@ -52,11 +52,11 @@ stream. For example, hipBLAS and rocBLAS are now combined into one package,
 `amdrocm-blas`. The table below lists new packages, their contents, and the
 corresponding legacy packages.
 
-> **Note:** ASAN packages are not available in 7.13.0 and are planned for a future release.
+> **Note:** ASAN packages are not available in 7.14.0 and are planned for a future release.
 
-(linux-packages-available-in-rocm-7-13-0)=
+(linux-packages-available-in-rocm-7-14-0)=
 
-### Linux packages available in ROCm 7.13.0
+### Linux packages available in ROCm 7.14.0
 
 <table class="rocm-docs-table table">
   <thead>
@@ -187,14 +187,14 @@ corresponding legacy packages.
 
 Packages are offered in the following variants:
 
-- **For all supported GPUs** -- works across all GPUs supported by ROCm (for example, `apt install amdrocm-core-sdk7.13`).
-- **For a specific GPU architecture** -- smaller install size, but requires you to know the GPU installed in your system (for example, `apt install amdrocm-core-sdk7.13-gfx110x`).
+- **For all supported GPUs** -- works across all GPUs supported by ROCm (for example, `apt install amdrocm-core-sdk7.14`).
+- **For a specific GPU architecture** -- smaller install size, but requires you to know the GPU installed in your system (for example, `apt install amdrocm-core-sdk7.14-gfx110x`).
 
 Installing all GPU architectures is not required. You can install packages for a specific architecture, multiple architectures side by side, or all supported GPU architectures.
 
 When redistributing software built on the ROCm Core SDK (for example, via containers), we recommend the all GPU package variant for broad hardware support. If disk footprint is a concern, you can use a single GPU architecture package variant instead.
 
-### Architecture-specific packages available in ROCm 7.13.0
+### Architecture-specific packages available in ROCm 7.14.0
 
 <table class="rocm-docs-table table">
   <thead>

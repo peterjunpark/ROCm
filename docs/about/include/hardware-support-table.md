@@ -145,13 +145,13 @@
       </td>
       <td rowspan="3">
         <a href="https://www.amd.com/en/technologies/rdna.html#tabs-1fabb91c39-item-330ee548f0-tab" target="_blank">RDNA
-          4</p>
+          4</a>
       </td>
     </tr>
     <tr>
       <td rowspan="2" class="stub">
         <a href="https://www.amd.com/en/products/graphics/desktops/radeon.html#tabs-ff9c5c3863-item-37fb38a236-tab"
-          target="_blank">AMD Radeon RX 9000 Series</p>
+          target="_blank">AMD Radeon RX 9000 Series</a>
       </td>
       <td>
         <p><a href="https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html"
@@ -198,7 +198,7 @@
       </td>
       <td rowspan="6">
         <a href="https://www.amd.com/en/technologies/rdna.html#tabs-1fabb91c39-item-05915f6044-tab" target="_blank">RDNA
-          3</p>
+          3</a>
       </td>
     </tr>
     <tr>
@@ -273,7 +273,7 @@
       </td>
       <td rowspan="2">
         <a href="https://www.amd.com/en/technologies/rdna.html#tabs-1fabb91c39-item-9ed969eddf-tab" target="_blank">RDNA
-          2</p>
+          2</a>
       </td>
     </tr>
     <tr>
