@@ -130,6 +130,8 @@ subtrees:
             entries:
                 - url: https://rocm.docs.amd.com/projects/ROCmValidationSuite/en/docs-1.4.21/index.html
                   title: ROCm Validation Suite (RVS)
+                - url: https://rocm.docs.amd.com/projects/TransferBench/en/latest/
+                  title: TransferBench
     - caption: Deep learning frameworks
       entries:
           - file: frameworks/pytorch/install.rst
