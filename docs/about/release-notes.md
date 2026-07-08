@@ -15,7 +15,7 @@ ROCm {{ ROCM_VERSION }} follows the [versioning discontinuity that began with th
 
 ## Release highlights
 
-This release focuses on AI inference, distributed workloads, and profiling across AMD Instinct™, Radeon™, and Ryzen™ AI platforms. Highlights include inference-ready vLLM images and packages, ROCprofiler-SDK adoption across AI profiling workflows, expanded system telemetry and validation coverage, and updates to math, sparse, communication, and storage libraries.
+This release focuses on AI inference, distributed workloads, and profiling across AMD Instinct™, Radeon™, and Ryzen™ AI platforms. Highlights include inference-ready vLLM images and packages, ROCprofiler-SDK adoption across AI profiling workflows, expanded system telemetry and validation coverage, and updates to math, sparse, and communication libraries.
 
 ### Platform and hardware support
 
@@ -27,9 +27,11 @@ AMD GPU and APU support remain unchanged from the previous [ROCm 7.13.0 preview]
 
 For the complete list of supported AMD hardware, see [AMD hardware support](#amd-hardware-support).
 
-#### Expanded Ubuntu support
+#### Expanded operating system support
 
-Ubuntu support remains unchanged from the previous [ROCm 7.13.0 preview](https://rocm.docs.amd.com/en/7.13.0-preview/about/release-notes.html#expanded-ubuntu-support) release.
+ROCm 7.14.0 adds support for RHEL 10.2 and RHEL 9.8 on Instinct and Radeon devices. RHEL 10.2 replaces RHEL 10.1 as the validated RHEL 10 release; RHEL 9.8 replaces RHEL 9.7 as the validated RHEL 9 release.
+
+SLES 15 SP7, SLES 16, and Debian 13 are now supported on AMD Instinct MI350P.
 
 For the full list of supported Linux distributions, see [Operating system support](#operating-system-support).
 
@@ -69,17 +71,17 @@ This release improves ROCm developer workflows with new HIP APIs, expanded profi
 
 The following are notable enhancements to HIP:
 
-* **HIP green context support**: HIP now supports green contexts for GPU compute resource partitioning and lightweight execution context management within a single device, providing parity with CUDA Green Contexts. You can query and split device resources, create green contexts on resource subsets, and create streams and events scoped to those contexts. For details, see {doc}`Execution contexts <hip:how-to/hip_runtime_api/execution_context>`.
+* **HIP execution context support**: HIP now supports Execution Context APIs, enabling GPU compute resource partitioning and lightweight execution-context management on a single device. With feature parity to CUDA Green Contexts, these APIs allow you to query and partition device resources (primarily CU count for hip runtime), create execution contexts on resource subsets, and create streams and events scoped to those contexts. For more information, see {doc}`Execution Contexts <hip:how-to/hip_runtime_api/execution_context>`.
 
-* **HIP API additions for CUDA parity**: 
+* **HIP API additions for CUDA parity**:
 
-    * Batch memory management: New batch asynchronous memory management APIs let applications discard (`hipMemDiscardBatchAsync`), prefetch (`hipMemPrefetchBatchAsync`), or combine both operations (`hipMemDiscardAndPrefetchBatchAsync`) across multiple memory ranges in a single call, reducing API call overhead. Both HIP runtime and HIP driver variants are available.
-    
-    * Library management: New library management APIs return the device pointer and size of a device global (`hipLibraryGetGlobal`) and the host pointer and size of a managed variable (`hipLibraryGetManaged`) defined in a `hipLibrary_t`, improving parity with CUDA library APIs.
+  * Batch memory management: New batch asynchronous memory management APIs let applications discard (`hipMemDiscardBatchAsync`), prefetch (`hipMemPrefetchBatchAsync`), or combine both operations (`hipMemDiscardAndPrefetchBatchAsync`) across multiple memory ranges in a single call, reducing API call overhead. Both HIP runtime and HIP driver variants are available.
 
-* **Faster HIP graph replay for asynchronous memory allocations**: HIP graph replay now reduces overhead for graphs that interleave asynchronous memory allocations with compute. Allocation nodes no longer block during replay — physical memory is reused across nodes instead of being mapped and unmapped on each launch, eliminating the gaps between kernels this pattern previously caused. For background on HIP graphs, see {doc}`HIP graphs <hip:how-to/hip_runtime_api/hipgraph>`.
+  * Library management: New library management APIs return the device pointer and size of a device global (`hipLibraryGetGlobal`) and the host pointer and size of a managed variable (`hipLibraryGetManaged`) defined in a `hipLibrary_t`, improving parity with CUDA library APIs.
 
-For more information, see the [HIP section](#hip-14) in the ROCm component changelogs.
+* **Faster HIP graph replay for asynchronous memory allocations**: HIP graph replay now reduces overhead for graphs that interleave asynchronous memory allocations with compute. Allocation nodes no longer block during replay — physical memory is reused across nodes instead of being mapped and unmapped on each launch, eliminating the gaps between kernels this pattern previously caused. For background on HIP graphs, see {doc}`Graph Management <hip:reference/hip_runtime_api/modules/graph_management>`.
+
+For more information, see the [HIP section](#hip-714) in the ROCm component changelogs.
 
 #### ROCprofiler-SDK feature highlights
 
@@ -348,6 +350,42 @@ The following sections describe key changes to ROCm Core SDK components.
 ## ROCm known issues
 
 ROCm known issues are noted on {fab}`github` [GitHub](https://github.com/ROCm/ROCm/labels/Verified%20Issue). These issues will be fixed in a future ROCm release. For known issues related to individual components, review the [ROCm component changelogs](#rocm-component-changelogs).
+
+### PyTorch might display a warning when libnuma is not installed
+
+PyTorch might display a warning when importing on Linux if the system libnuma package is not installed on some Radeon graphics products, such as Radeon AI PRO R9600D. As a workaround, install the system libnuma package or configure the library path to use the ROCm-bundled NUMA libraries.
+
+## ROCm resolved issues
+
+The following notable issues have been fixed in ROCm 7.14.0.
+
+### ROCm Compute Profiler failed when profiling bash scripts or commands
+
+Previously, running a bash script or command as a target for ROCm Compute Profiler failed because bash overwrote the required environment variables.
+
+### LLVM-based compilers failed when compiling half-precision vector operations
+
+Previously, LLVM-based compilers failed, returning the `Failed to find subregs!` error message in `SIInstrInfo::copyPhysReg`, when compiling half-precision vector operations with optimization enabled at levels `-O1` to `-O3`.
+
+### hipBLAS test suites returned non-zero exit codes on Windows
+
+Previously, when using hipBLAS on Windows, the test suites returned non-zero exit codes even when all mathematical correctness tests passed, blocking automated testing workflows.
+
+### Illegal memory address error when using placement new with device function returns
+
+Previously, HIP kernels that used placement new to construct objects in `hipMalloc` device memory crashed with a `hipErrorIllegalAddress` error when a `__device__` function return value was passed as the constructor argument for non-trivially-copyable types.
+
+### GPU kernels failed to launch in ASAN builds with large thread counts
+
+Previously, when building GPU libraries with ASAN enabled, kernels configured with large thread counts failed to launch with an `HSA_STATUS_ERROR_INVALID_ISA` error.
+
+### ASAN broke multi-architecture HIP binary builds
+
+Previously, HIP applications built with ASAN enabled and targeting multiple GPU architectures failed to launch with `RuntimeError: .hipFatBinSegment size N is not a multiple of wrapper size (24)` and `RuntimeError: Unexpected magic 0x00000000 at wrapper i` error messages.
+
+### ROCm Systems Profiler overwrote ROCPD output after process re-attachment
+
+Previously, when using `rocprof-sys-attach` to re-attach to a previously profiled process, the ROCPD output database files (`.db`) were written to the initial session's output directory instead of a new timestamped directory.
 
 ## ROCm upcoming changes
 
