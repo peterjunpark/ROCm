@@ -1,6 +1,6 @@
 # ROCm Core SDK {{ ROCM_VERSION }} release notes
 
-ROCm Core SDK {{ ROCM_VERSION }} transitions ROCm to the [TheRock](https://github.com/rocm/therock) build and release system, introducing a modular architecture that improves flexibility, maintainability, and community use case alignment:
+ROCm Core SDK {{ ROCM_VERSION }} transitions ROCm to the [TheRock](https://github.com/ROCm/TheRock) build and release system, introducing a modular architecture that improves flexibility, maintainability, and community use case alignment:
 
 * **Leaner core** — The Core SDK focuses on essential runtime and development components.
 * **Use case-specific expansions** — Optional domain-specific SDKs for AI, data science, and HPC.
