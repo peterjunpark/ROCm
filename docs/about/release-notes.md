@@ -71,7 +71,7 @@ This release improves ROCm developer workflows with new HIP APIs, expanded profi
 
 The following are notable enhancements to HIP:
 
-* **HIP execution context support**: HIP now supports Execution Context APIs, enabling GPU compute resource partitioning and lightweight execution-context management on a single device. With feature parity to CUDA Green Contexts, these APIs allow you to query and partition device resources (primarily CU count for hip runtime), create execution contexts on resource subsets, and create streams and events scoped to those contexts. For more information, see {doc}`Execution Contexts <hip:how-to/hip_runtime_api/execution_context>`.
+* **HIP execution context support**: HIP now supports Execution Context APIs, enabling GPU compute resource partitioning and lightweight execution-context management on a single device. With feature parity to CUDA Green Contexts, these APIs allow you to query and partition device resources (primarily CU count for HIP runtime), create execution contexts on resource subsets, and create streams and events scoped to those contexts. For more information, see [Execution Contexts](https://rocm.docs.amd.com/projects/HIP/en/develop/how-to/hip_runtime_api/execution_context.html).
 
 * **HIP API additions for CUDA parity**:
 
@@ -79,7 +79,7 @@ The following are notable enhancements to HIP:
 
   * Library management: New library management APIs return the device pointer and size of a device global (`hipLibraryGetGlobal`) and the host pointer and size of a managed variable (`hipLibraryGetManaged`) defined in a `hipLibrary_t`, improving parity with CUDA library APIs.
 
-* **Faster HIP graph replay for asynchronous memory allocations**: HIP graph replay now reduces overhead for graphs that interleave asynchronous memory allocations with compute. Allocation nodes no longer block during replay — physical memory is reused across nodes instead of being mapped and unmapped on each launch, eliminating the gaps between kernels this pattern previously caused. For background on HIP graphs, see {doc}`Graph Management <hip:reference/hip_runtime_api/modules/graph_management>`.
+* **Faster HIP graph replay for asynchronous memory allocations**: HIP graph replay now reduces overhead for graphs that interleave asynchronous memory allocations with compute. Allocation nodes no longer block during replay — physical memory is reused across nodes instead of being mapped and unmapped on each launch, eliminating the gaps between kernels this pattern previously caused. For background on HIP graphs, see [Graph Management](https://rocm.docs.amd.com/projects/HIP/en/develop/reference/hip_runtime_api/modules/graph_management.html).
 
 For more information, see the [HIP section](#hip-714) in the ROCm component changelogs.
 
@@ -105,11 +105,11 @@ SPM is a beta capability under active development and may affect system stabilit
 
 `rocprofiler-sdk` and `rocprofv3` include support for profiling selected ROCTx regions, allowing users to focus profiling on specific application phases instead of collecting data for the entire workload. By inserting `roctxProfilerPause` and `roctxProfilerResume` markers in application code and using the `--selected-regions` option, only the GPU activity within the marked regions is captured. This helps reduce profiling noise and output size while making it easier to isolate performance behavior in targeted code paths — particularly useful for long-running workloads where full-execution traces are impractical.
 
-Counter collection for selected regions is available in ROCm 7.14.0. For details on `--selected-regions`, including usage with RCCL collectives and ROCTx markers, see {doc}`Using ROCprofiler-SDK ROCTx <rocprofiler-sdk:how-to/using-rocprofiler-sdk-roctx>`.
+Counter collection for selected regions is available in ROCm 7.14.0. For details on `--selected-regions`, including usage with RCCL collectives and ROCTx markers, see [Using ROCprofiler-SDK ROCTx](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/how-to/using-rocprofiler-sdk-roctx.html).
 
 ##### Improved attach and re-attach profiling workflows
 
-`rocprofiler-sdk` and `rocprofv3` improve attach-based profiling workflows, allowing the profiler to connect to already-running GPU applications without requiring a restart. This supports production-style and long-running workloads where starting the application under the profiler is not always practical. Overall reliability and stability are also improved. Repeated attach and re-attach sessions now generate separate output files, making it easier to manage results from iterative profiling sessions. For details, see {doc}`Dynamic process attachment using rocprofv3 <rocprofiler-sdk:how-to/using-rocprofv3-process-attachment>`.
+`rocprofiler-sdk` and `rocprofv3` improve attach-based profiling workflows, allowing the profiler to connect to already-running GPU applications without requiring a restart. This supports production-style and long-running workloads where starting the application under the profiler is not always practical. Overall reliability and stability are also improved. Repeated attach and re-attach sessions now generate separate output files, making it easier to manage results from iterative profiling sessions. For details, see [Dynamic process attachment using rocprofv3](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/how-to/using-rocprofv3-process-attachment.html).
 
 ##### Reduced profiling overhead for counter collection
 
@@ -135,51 +135,51 @@ ROCprof Compute Viewer (RCV) 0.2.0 adds the ability to open raw `.att`/`.out` th
 
 The following are notable enhancements to the ROCm Compute Profiler (rocprofiler-compute):
 
-* **PyTorch operator statistics (experimental)**: The PyTorch tracing (`--torch-trace`) now includes a per-operator statistics summary table, making it easier to spot hot operators and per-dispatch variance. The trace now also captures backward-pass and nested operators that were previously missed or misattributed. For details, see {doc}`Torch operator mapping <rocprofiler-compute:how-to/profile/mode>`.
+* **PyTorch operator statistics (experimental)**: The PyTorch tracing (`--torch-trace`) now includes a per-operator statistics summary table, making it easier to spot hot operators and per-dispatch variance. The trace now also captures backward-pass and nested operators that were previously missed or misattributed. For details, see [Torch operator mapping](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/develop/how-to/profile/mode.html).
 
-* **pip installation support**: ROCm Compute Profiler is now available as a pip-installable Python package. A new `rocm-profiler` wheel on the ROCm Python package index lets you install ROCm Compute Profiler into a custom Python environment without building ROCm from source. The wheel package installs both ROCm Compute Profiler and ROCm Systems Profiler binaries. For installation instructions, see {doc}`Install ROCm Compute Profiler <rocprofiler-compute:install/core-install>`.
+* **pip installation support**: ROCm Compute Profiler is now available as a pip-installable Python package. A new `rocm-profiler` wheel on the ROCm Python package index lets you install ROCm Compute Profiler into a custom Python environment without building ROCm from source. The wheel package installs both ROCm Compute Profiler and ROCm Systems Profiler binaries. For installation instructions, see [Install ROCm Compute Profiler](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/develop/install/core-install.html).
 
 #### ROCm Systems Profiler feature highlights
 
 The following are notable enhancements to ROCm Systems Profiler:
 
-* **GPU hardware counter sampling**: ROCm Systems Profiler now supports periodic sampling of Performance Metric Counters (PMCs). This lets you collect performance metrics at regular time intervals without serializing kernel dispatches, enabling profiling with significantly reduced overhead. For details, see the GPU metrics section in {doc}`Configuring runtime options <rocprofiler-systems:how-to/configuring-runtime-options>`.
+* **GPU hardware counter sampling**: ROCm Systems Profiler now supports periodic sampling of Performance Metric Counters (PMCs). This lets you collect performance metrics at regular time intervals without serializing kernel dispatches, enabling profiling with significantly reduced overhead. For details, see the GPU metrics section in [Configuring runtime options](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/develop/how-to/configuring-runtime-options.html).
 
-* **Unified memory profiling**: ROCm Systems Profiler now adds unified memory profiling with statistics on page migrations and page faults through a dedicated report section. The report displays aggregated transfer counts, sizes, and timing to help you identify performance bottlenecks caused by host-device memory migrations and page faults. Page table events are collected through ROCprofiler-SDK using the Kernel Fusion Driver (KFD) events API, replacing the previous page-migration API, with page migration and page fault events exposed directly in the profiler output. For details, see {doc}`Unified memory profiling <rocprofiler-systems:how-to/unified-memory-profiling>`.
+* **Unified memory profiling**: ROCm Systems Profiler now adds unified memory profiling with statistics on page migrations and page faults through a dedicated report section. The report displays aggregated transfer counts, sizes, and timing to help you identify performance bottlenecks caused by host-device memory migrations and page faults. Page table events are collected through ROCprofiler-SDK using the Kernel Fusion Driver (KFD) events API, replacing the previous page-migration API, with page migration and page fault events exposed directly in the profiler output. For details, see [Unified memory profiling](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/develop/how-to/unified-memory-profiling.html).
 
 * **SDMA engine activity profiling**: ROCm Systems Profiler can now collect SDMA engine activity through AMD SMI, reporting per-process DMA usage to expose data-movement bottlenecks across GPU interconnects in multi-GPU workloads. This metric is opt-in and requires AMDGPU driver version 6.19.14 or later.
 
-* **Selective MPI rank profiling**: In MPI jobs, you can now restrict profile and trace output to a chosen subset of ranks, while unselected ranks run undisturbed. This cuts data volume and speeds up post-run analysis, and works across MPI implementations such as MPICH and Open MPI, including heterogeneous and multi-node environments. For details, see the rank filtering section in {doc}`Communication runtime profiling <rocprofiler-systems:how-to/communication-runtime-profiling>`.
+* **Selective MPI rank profiling**: In MPI jobs, you can now restrict profile and trace output to a chosen subset of ranks, while unselected ranks run undisturbed. This cuts data volume and speeds up post-run analysis, and works across MPI implementations such as MPICH and Open MPI, including heterogeneous and multi-node environments. For details, see the rank filtering section in [Communication runtime profiling](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/develop/how-to/communication-runtime-profiling.html).
 
-* **MPI rank console log control**: You can now limit console output to a specified subset of ranks while profiling and tracing continue on every rank. This reduces console log noise in large multi-rank runs without sacrificing collection coverage. Existing behavior is preserved when no rank-selection option is set. For details, see the rank filtering section in {doc}`Communication runtime profiling <rocprofiler-systems:how-to/communication-runtime-profiling>`.
+* **MPI rank console log control**: You can now limit console output to a specified subset of ranks while profiling and tracing continue on every rank. This reduces console log noise in large multi-rank runs without sacrificing collection coverage. Existing behavior is preserved when no rank-selection option is set. For details, see the rank filtering section in [Communication runtime profiling](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/develop/how-to/communication-runtime-profiling.html).
 
 * **Selective ROCTx region profiling**: When your application is instrumented with ROCTx region push and pop APIs, you can now include or exclude specific named regions to scope collection to the code paths you're investigating.
 
-* **pip installation support**: ROCm Systems Profiler is now available as a pip-installable Python package, letting you install and use the profiler in custom Python environments without rebuilding from source. The package supports multiple Python versions and provides the same functionality as traditional distributions, reducing setup time and complexity. For installation instructions, see {doc}`Install ROCm Systems Profiler <rocprofiler-systems:install/install>`.
+* **pip installation support**: ROCm Systems Profiler is now available as a pip-installable Python package, letting you install and use the profiler in custom Python environments without rebuilding from source. The package supports multiple Python versions and provides the same functionality as traditional distributions, reducing setup time and complexity. For installation instructions, see [Install ROCm Systems Profiler](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/develop/install/install.html).
 
 #### AMD SMI feature highlights
 
 The following are notable enhancements to AMD SMI:
 
-* **Per-partition GPU metrics**: AMD SMI now reports temperature, clock, and usage at the partition level through the new `amd-smi metric --partition` flag, giving partition-level observability where previously only socket-level metrics were available. For CLI usage, see {doc}`AMD SMI CLI tool <amdsmi:how-to/amdsmi-cli-tool>`; for partitioning concepts, see {doc}`GPU partitioning <amdsmi:conceptual/partition>`.
+* **Per-partition GPU metrics**: AMD SMI now reports temperature, clock, and usage at the partition level through the new `amd-smi metric --partition` flag, giving partition-level observability where previously only socket-level metrics were available. For CLI usage, see [AMD SMI CLI tool](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-cli-tool.html); for partitioning concepts, see [GPU partitioning](https://rocm.docs.amd.com/projects/amdsmi/en/develop/conceptual/partition.html).
 
-* **Compute partition memory allocation mode**: AMD SMI now controls memory allocation behavior at the compute partition level through the new `amd-smi set --compute-partition-mem-alloc-mode` command. The current mode is visible in `amd-smi static --partition` output, and new C and Python APIs expose the same controls programmatically. For CLI usage, see {doc}`AMD SMI CLI tool <amdsmi:how-to/amdsmi-cli-tool>`.
+* **Compute partition memory allocation mode**: AMD SMI now controls memory allocation behavior at the compute partition level through the new `amd-smi set --compute-partition-mem-alloc-mode` command. The current mode is visible in `amd-smi static --partition` output, and new C and Python APIs expose the same controls programmatically. For CLI usage, see [AMD SMI CLI tool](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-cli-tool.html).
 
 * **APU CLI metrics**: AMD SMI now surfaces APU-specific data through the existing `amd-smi metric` flags when APU metrics are available. `amd-smi monitor` adds temperature and clock fallbacks when standard discrete GPU sensors report N/A.
 
-* **APU VRAM carve-out and GTT tuning**: AMD SMI now tunes APU memory from the command line, consolidating the get and set controls previously handled by the standalone `amd-ttm` tool and adding VRAM carve-out configuration. Carve-out and GTT changes take effect after the next reboot, and AMD SMI rebuilds the initramfs automatically so the new configuration is applied at boot. For details, see the memory tuning section in {doc}`AMD SMI CLI tool <amdsmi:how-to/amdsmi-cli-tool>`.
+* **APU VRAM carve-out and GTT tuning**: AMD SMI now tunes APU memory from the command line, consolidating the get and set controls previously handled by the standalone `amd-ttm` tool and adding VRAM carve-out configuration. Carve-out and GTT changes take effect after the next reboot, and AMD SMI rebuilds the initramfs automatically so the new configuration is applied at boot. For details, see the memory tuning section in [AMD SMI CLI tool](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-cli-tool.html).
 
-* **PID-grouped process listing**: AMD SMI now groups multi-GPU process output by PID with `amd-smi process --sort-by-pid` and `amd-smi monitor --sort-by-pid`, merging each process's per-GPU usage into a single row. A new C and Python API, `amdsmi_get_gpu_process_list_by_pid()`, exposes the same data programmatically. For CLI usage, see {doc}`AMD SMI CLI tool <amdsmi:how-to/amdsmi-cli-tool>`.
+* **PID-grouped process listing**: AMD SMI now groups multi-GPU process output by PID with `amd-smi process --sort-by-pid` and `amd-smi monitor --sort-by-pid`, merging each process's per-GPU usage into a single row. A new C and Python API, `amdsmi_get_gpu_process_list_by_pid()`, exposes the same data programmatically. For CLI usage, see [AMD SMI CLI tool](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-cli-tool.html).
 
-* **Fabric clock (FCLK) capping on MI300A**: You can now cap the maximum fabric clock (FCLK) on AMD Instinct MI300A APUs to steer power, using the new `fclk` clock type for `amd-smi set --clk-limit`. Only a maximum limit is supported. For CLI usage, see {doc}`AMD SMI CLI tool <amdsmi:how-to/amdsmi-cli-tool>`.
+* **Fabric clock (FCLK) capping on MI300A**: You can now cap the maximum fabric clock (FCLK) on AMD Instinct MI300A APUs to steer power, using the new `fclk` clock type for `amd-smi set --clk-limit`. Only a maximum limit is supported. For CLI usage, see [AMD SMI CLI tool](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-cli-tool.html).
 
-* **Go bindings for CPU telemetry**: AMD SMI now exposes ESMI CPU functionality through its Go bindings, so Go applications can query CPU telemetry in-process without invoking external binaries or embedding C or Python runtimes. This simplifies integrating AMD CPU observability into Go-based control planes. For details, see {doc}`AMD SMI Go interface <amdsmi:how-to/amdsmi-go-lib>`.
+* **Go bindings for CPU telemetry**: AMD SMI now exposes ESMI CPU functionality through its Go bindings, so Go applications can query CPU telemetry in-process without invoking external binaries or embedding C or Python runtimes. This simplifies integrating AMD CPU observability into Go-based control planes. For details, see [AMD SMI Go interface](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-go-lib.html).
 
 For more information, see the [AMD SMI section](#amd-smi-2650) in the ROCm component changelogs.
 
 #### RDC expands telemetry coverage for DME parity
 
-ROCm Data Center (RDC) adds 59 telemetry fields, bringing its metric coverage near parity with the Device Metrics Exporter (DME). New fields cover energy, temperature, clocks, memory, PCIe, engine activity, ECC, and health and throttle metrics. Some metrics require recent driver and hardware support. For the available field groups and how to monitor them, see {doc}`Using RDC features <rdc:how-to/using_RDC_features>`.
+ROCm Data Center (RDC) adds 59 telemetry fields, bringing its metric coverage near parity with the Device Metrics Exporter (DME). New fields cover energy, temperature, clocks, memory, PCIe, engine activity, ECC, and health and throttle metrics. Some metrics require recent driver and hardware support. For the available field groups and how to monitor them, see [Using RDC features](https://rocm.docs.amd.com/projects/rdc/en/develop/how-to/using_RDC_features.html).
 
 For more information, see the [RDC section](#rdc-131) in the ROCm component changelogs.
 
@@ -283,7 +283,38 @@ The following table is a general overview of supported OSes. Actual support migh
 
 ROCm 7.14.0 introduces several improvements to the Runfile Installer:
 
-[Placeholder]
+### Multi-architecture GPU support
+
+The installer provides multi-architecture support, allowing you to install ROCm components for one or more GPU architectures. This is particularly useful for heterogeneous GPU environments or when deploying across multiple systems with different GPU types.
+
+* Install single or multiple GPU architectures in one installation
+* Auto-detect GPU and install matching architecture
+* Query available and installed architectures
+* Selectively uninstall specific architectures while keeping others
+
+### Flexible component selection
+
+Choose exactly which ROCm components to install, reducing installation time and disk space requirements:
+
+* **core**: Essential runtime libraries and tools (default)
+* **core-dev**: Development headers and files
+* **dev-tools**: Debugging and profiling utilities
+* **core-sdk**: Comprehensive SDK with libraries and development tools
+* **opencl**: OpenCL runtime support
+
+### Graphics support
+
+Optional graphics support for Mesa/OpenGL workloads is now available. When enabled, the installer includes the `amdgpu-lib` package for graphics capabilities.
+
+### Build and manifest information
+
+* Display TheRock build information including commit hash, GitHub run ID, and build date
+* View complete manifest of all components and their versions included in the installer
+* Query components by specific GPU architecture
+
+### Universal installer
+
+A single installer file now supports all Linux distributions, eliminating the need to download distribution-specific builds.
 
 (release-supported-fw)=
 

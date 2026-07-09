@@ -612,6 +612,23 @@
   finalization, emits a warning, and omits any still-open trace regions from the
   generated trace output.
 
+### **rocPRIM** (4.5.0)
+
+### Added
+
+* `generate_resource_spec.cpp` to the test directory and built as a new target by CMake. It generates the resource spec file required by CTest when running tests in parallel.
+* Support for the gfx1250 architecture.
+
+* A parallel `device_topk`, which finds the largest/smallest K elements from an input array of keys.
+
+### Changed
+
+* Updated the documentation on how to run rocPrim tests on multiple GPUs in parallel.
+
+### Removed
+
+* Removed the `GenerateResourceSpec.cmake` script - it is replaced by the added `generate_resource_spec.cpp` code above.
+
 ### **ROCprofiler-SDK** (1.3.2)
 
 #### Added
@@ -646,13 +663,38 @@
 
 #### Added
 
-- Support added for the gfx1250 architecture.
+- Support for the gfx1250 architecture.
+
+### **rocSHMEM** (3.5.0)
+
+### Added
+* New APIs:
+   * `rocshmem_align`
+   * `rocshmem_calloc`
+   * `rocshmem_buffer_unregister_all`
+   * `rocshmem_buffer_register/unregister` for GDA backend
+   * `rocshmem_reduce_on_stream`
+   * `rocshmem_team_split_2D`
+* Tile-granular RMA operations for the IPC backend.
+* Host-initiated RMA operations in the IPC backend for the non-MPI bootstrapping path.
+* Team creation using non-contiguous parent teams in the IPC backend.
+* Python bindings of memory-management APIs.
+* Python bindings coverage for team APIs.
+* Support for GPU initiated operations using the SDMA engines.
+* ASAN build support.
+
+### Changed
+* Changed default `ROCSHMEM_DEBUG_LEVEL` from `WARN` to `ERROR`
+* Performance optimizations:
+   * Separated put/get memcpy primitives to apply correct cache coherence semantics and fences
+   * Use constmem for backend variables and provider muxing
+   * Updated O(1) IPC availability check using pattern detection
 
 ### **rocSOLVER** (3.35.0)
 
 #### Added
 
-- Support added for the gfx1250 architecture.
+- Support for the gfx1250 architecture.
 
 #### Optimized
 
@@ -668,11 +710,22 @@
 
 #### Added
 
-- Added the `rocsparse_spildlt0` routine for incomplete LDL' factorization with zero fill-in (ILDLT(0)) for symmetric (real) or Hermitian (complex) sparse matrices in CSR format, with strided batched computations enabled.
+- `rocsparse_spildlt0` routine for incomplete LDL' factorization with zero fill-in (ILDLT(0)) for symmetric (real) or Hermitian (complex) sparse matrices in CSR format, with strided batched computations enabled.
 
 #### Upcoming changes
 
-- Deprecated the `rocsparse_indextype_u16` index type. It is no longer supported and will be removed in a future release. Users should use `rocsparse_indextype_i32` or `rocsparse_indextype_i64` going forward.
+- Deprecated the `rocsparse_indextype_u16` index type. It is no longer supported and will be removed in a future release. You should use `rocsparse_indextype_i32` or `rocsparse_indextype_i64` going forward.
+
+### **rocThrust** (4.5.0)
+
+#### Added
+
+* Support for the gfx1250 architecture.
+* For hipstdpar algorithms running on GPUs that support xnack, and __HIPSTDPAR_INTERPOSE_ALLOC__ or __HIPSTDPAR_INTERPOSE_ALLOC_V1__ are not enabled, emit a runtime warning once if xnack is off.
+
+### Upcoming changes
+
+* CCCL 2.8.x compatibility is deprecated. hipCUB and rocThrust will be brought forward to CCCL 3.0.x compatibility in an upcoming version.
 
 ### **rocWMMA** (2.2.1)
 
