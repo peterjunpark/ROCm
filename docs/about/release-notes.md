@@ -199,7 +199,7 @@ hipFile is now included in the ROCm Core SDK, providing GPUDirect Storage capabi
 
 hipFile also adds direct GPU-to-storage I/O for files with alignment requirements finer than 4 KB. It reads each file's reported memory and offset alignment requirements (using `statx`) and takes the direct path whenever the I/O meets those requirements, avoiding the extra host-side copy. This delivers higher throughput, lower latency, and more fine-grained support for very small I/O operations.
 
-hipFile is supported on Linux with AMD Instinct GPUs. See [rocm-examples](https://github.com/ROCm/rocm-examples/tree/amd-staging/Systems) and the [hipFile documentation](https://rocm.docs.amd.com/projects/hipFile/en/latest/) to get started.
+hipFile is supported on Linux with AMD Instinct GPUs. See [rocm-examples](https://github.com/ROCm/rocm-examples/tree/release/therock-7.14/Systems/hipFile) and the [hipFile documentation](https://rocm.docs.amd.com/projects/hipFile/en/latest/) to get started.
 
 #### Per-matrix bias support in hipBLASLt batched GEMM
 
