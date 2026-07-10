@@ -1,10 +1,10 @@
 # ROCm Core SDK {{ ROCM_VERSION }} release notes
 
-ROCm Core SDK {{ ROCM_VERSION }} transitions ROCm to the [TheRock](https://github.com/ROCm/TheRock) build and release system, introducing a modular architecture that improves flexibility, maintainability, and community use case alignment:
+ROCm Core SDK {{ ROCM_VERSION }} transitions ROCm to [TheRock](https://github.com/ROCm/TheRock), a build and release system that introduces a modular architecture to improve flexibility, maintainability, and alignment with community use cases:
 
-* **Leaner core** — The Core SDK focuses on essential runtime and development components.
-* **Use case-specific expansions** — Optional domain-specific SDKs for AI, data science, and HPC.
-* **Modular installation** — Install only the components required for your workflow.
+* **Leaner core**: The Core SDK focuses on essential runtime and development components.
+* **Use case-specific expansions**: Optional domain-specific SDKs for AI, data science, and HPC.
+* **Modular installation**: Install only the components required for your workflow.
 
 This approach streamlines installation, reduces footprint, and accelerates innovation through independently released packages. To learn more, see the [transition guide](/about/transition-guide-TheRock).
 
@@ -31,7 +31,7 @@ For the complete list of supported AMD hardware, see [AMD hardware support](#amd
 
 ROCm 7.14.0 adds support for RHEL 10.2 and RHEL 9.8 on AMD Instinct and Radeon GPUs. RHEL 10.2 replaces RHEL 10.1 as the validated RHEL 10 release; RHEL 9.8 replaces RHEL 9.7 as the validated RHEL 9 release.
 
-SLES 15 SP7, SLES 16, and Debian 13 are now supported on AMD Instinct MI350P.
+SUSE Linux Enterprise Server (SLES) 15 SP7, SLES 16, and Debian 13 are now supported on AMD Instinct MI350P.
 
 For the full list of supported Linux distributions, see [Operating system support](#operating-system-support).
 
@@ -39,11 +39,11 @@ For the full list of supported Linux distributions, see [Operating system suppor
 
 GPU virtualization configurations supported on AMD Instinct GPUs remain unchanged from the previous [ROCm 7.13.0 preview](https://rocm.docs.amd.com/en/7.13.0-preview/about/release-notes.html#expanded-gpu-virtualization-support-for-instinct-gpus) release.
 
-Supported SR-IOV configurations require the [GIM Driver 9.0.0K](https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K). For details, see [GPU virtualization support](#gpu-virtualization-support).
+Supported Single Root I/O Virtualization (SR-IOV) configurations require the [AMD GPU Virtualization Driver (GIM) 9.0.0K](https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K). For details, see [GPU virtualization support](#gpu-virtualization-support).
 
 #### Expanded Instinct GPU partitioning support
 
-GPU partitioning configurations in bare metal deployments remains unchanged from the previous [ROCm 7.13.0 preview](https://rocm.docs.amd.com/en/7.13.0-preview/about/release-notes.html#expanded-instinct-gpu-partitioning-support) release.
+GPU partitioning configurations in bare metal deployments remain unchanged from the previous [ROCm 7.13.0 preview](https://rocm.docs.amd.com/en/7.13.0-preview/about/release-notes.html#expanded-instinct-gpu-partitioning-support) release.
 
 For details, see [GPU partitioning support](#gpu-partitioning-support).
 
@@ -54,8 +54,8 @@ This release enables support for the following frameworks:
 * PyTorch 2.12.0
 * JAX 0.10.0
 * vLLM 0.23.0
-* SGLang 0.5.13, and
-* Tensorflow 2.21
+* SGLang 0.5.13
+* TensorFlow 2.21
 
 The updated framework support replaces the previous PyTorch 2.9.1, JAX 0.8.2, vLLM 0.19.1, and SGLang 0.5.9 support.
 
@@ -63,13 +63,13 @@ For details, see [AI ecosystem support](#ai-ecosystem-support).
 
 ### Developer tools, profiling, and validation
 
-This release improves ROCm developer workflows with new HIP APIs, expanded profiling and tracing capabilities, and additional telemetry coverage.
+This release improves ROCm developer workflows with new HIP APIs, expanded profiling and tracing capabilities, and broader telemetry coverage.
 
 #### HIP feature highlights
 
 The following are notable enhancements to HIP:
 
-* **HIP execution context support**: HIP now supports Execution Context APIs, enabling GPU compute resource partitioning and lightweight execution-context management on a single device. With feature parity to CUDA Green Contexts, these APIs allow you to query and partition device resources (primarily CU count for HIP runtime), create execution contexts on resource subsets, and create streams and events scoped to those contexts. For more information, see [Execution Contexts](https://rocm.docs.amd.com/projects/HIP/en/develop/how-to/hip_runtime_api/execution_context.html).
+* **HIP execution context support**: HIP now supports Execution Context APIs, enabling GPU compute resource partitioning and lightweight execution-context management on a single device. Similar to CUDA Green Contexts, these APIs allow you to query and partition device resources (primarily CU count for HIP runtime), create execution contexts on resource subsets, and create streams and events scoped to those contexts. For more information, see [Execution Contexts](https://rocmdocs.amd.com/projects/HIP/en/develop/how-to/hip_runtime_api.html).
 
 * **HIP API additions for CUDA parity**:
 
@@ -77,7 +77,7 @@ The following are notable enhancements to HIP:
 
   * Library management: New library management APIs return the device pointer and size of a device global (`hipLibraryGetGlobal`) and the host pointer and size of a managed variable (`hipLibraryGetManaged`) defined in a `hipLibrary_t`, improving parity with CUDA library APIs.
 
-* **Faster HIP graph replay for asynchronous memory allocations**: HIP graph replay now reduces overhead for graphs that interleave asynchronous memory allocations with compute. Allocation nodes no longer block during replay — physical memory is reused across nodes instead of being mapped and unmapped on each launch, eliminating the gaps between kernels this pattern previously caused. For background on HIP graphs, see [Graph Management](https://rocm.docs.amd.com/projects/HIP/en/develop/reference/hip_runtime_api/modules/graph_management.html).
+* **Faster HIP graph replay for asynchronous memory allocations**: HIP graph replay now reduces overhead for graphs that interleave asynchronous memory allocations with compute. Allocation nodes no longer block during replay. Physical memory is reused across nodes instead of being mapped and unmapped on each launch, eliminating the gaps between kernels this pattern previously caused. For background on HIP graphs, see [Graph Management](https://rocm.docs.amd.com/projects/HIP/en/develop/reference/hip_runtime_api/modules/graph_management.html).
 
 For more information, see the [HIP section](#hip-7-14) in the ROCm component changelogs.
 
@@ -91,19 +91,17 @@ Starting with PyTorch 2.12, `rocprofiler-sdk` is used as the ROCm profiling back
 
 ##### ROCprofiler-SDK beta support for Streaming Performance Monitors
 
-`rocprofiler-sdk` and `rocprofv3` add beta support for Streaming Performance Monitors (SPM), enabling selected hardware counters to be sampled over time while workloads execute. Unlike traditional counter collection, which captures a single aggregated value per kernel dispatch, SPM provides time-resolved hardware counter data. This is useful for analyzing long-running workloads, training jobs, and production-style applications where temporal behavior matters as much as aggregate metrics. ROCpd support is planned for a future release.
+`rocprofiler-sdk` and `rocprofv3` add beta support for Streaming Performance Monitors (SPM), enabling selected hardware counters to be sampled over time while workloads execute. Unlike traditional counter collection, which captures a single aggregated value per kernel dispatch, SPM provides time-resolved hardware counter data. This is useful for analyzing long-running workloads and training jobs where temporal behavior matters as much as aggregate metrics. ROCpd support is planned for a future release.
 
-In ROCm 7.14.0, SPM support is available through the `rocprofiler-sdk` API and `rocprofv3` JSON output using the `--spm-beta-enabled` option. Supported hardware: AMD Instinct MI300, MI325, MI350, and MI355 GPUs.
+In ROCm 7.14.0, SPM support is available through the `rocprofiler-sdk` API and `rocprofv3`. To enable SPM in `rocprofv3`, use the `--spm-beta-enabled` flag or set the `ROCPROFILER_SPM_BETA_ENABLED` environment variable. For API-based usage, set `ROCPROFILER_SPM_BETA_ENABLED`. Supported hardware: AMD Instinct MI300X, MI325X, MI350X, and MI355X GPUs.
 
 :::{warning}
-SPM is a beta capability under active development and may affect system stability, including unexpected reboots. By enabling SPM via the `ROCPROFILER_SPM_BETA_ENABLED` environment variable, you accept these risks.
+SPM is a beta capability under active development and may affect system stability, including unexpected reboots. Do not use in production environments. See [ROCm known issues](#rocm-known-issues) for current limitations.
 :::
-
-If an SPM session is terminated abruptly (for example, with `Ctrl+C`), KFD-side SPM resources might not be released cleanly. When this happens, the KFD-side SPM resources can remain in a stale state, which might cause subsequent SPM profiling sessions to hang or fail to start with the error `Unable to acquire KFD thread: 4096`. To recover, terminate any lingering sessions manually if it is still running. If the error persists, a system reboot is currently required to restore the GPU to a usable state for SPM profiling. This issue is under active investigation for a fix.
 
 ##### Selective ROCTx region profiling with counter collection
 
-`rocprofiler-sdk` and `rocprofv3` include support for profiling selected ROCTx regions, allowing users to focus profiling on specific application phases instead of collecting data for the entire workload. By inserting `roctxProfilerPause` and `roctxProfilerResume` markers in application code and using the `--selected-regions` option, only the GPU activity within the marked regions is captured. This helps reduce profiling noise and output size while making it easier to isolate performance behavior in targeted code paths — particularly useful for long-running workloads where full-execution traces are impractical.
+`rocprofiler-sdk` and `rocprofv3` include support for profiling selected ROCTx regions, allowing users to focus profiling on specific application phases instead of collecting data for the entire workload. By inserting `roctxProfilerPause` and `roctxProfilerResume` markers in application code and using the `--selected-regions` option, only the GPU activity within the marked regions is captured. This helps reduce profiling noise and output size while making it easier to isolate performance behavior in targeted code paths. This is particularly useful for long-running workloads where full-execution traces are impractical.
 
 Counter collection for selected regions is available in ROCm 7.14.0. For details on `--selected-regions`, including usage with RCCL collectives and ROCTx markers, see [Using ROCprofiler-SDK ROCTx](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/how-to/using-rocprofiler-sdk-roctx.html).
 
@@ -115,7 +113,7 @@ Counter collection for selected regions is available in ROCm 7.14.0. For details
 
 `rocprofiler-sdk` reduces profiling overhead in ROCm 7.14.0, including customer-driven improvements for `rocprofv3` and SDK-based profiling paths. These changes make profiling more practical for performance-sensitive workflows and produce more representative trace data.
 
-##### rocprof-trace-decoder decoupled from the rocprofiler-sdk API
+##### rocprof-trace-decoder decoupled from the ROCprofiler-SDK API
 
 `rocprof-trace-decoder` now has an independent public API, separate from the core `rocprofiler-sdk` API. The SQTT decoding API has moved into `rocprof-trace-decoder`; use the decoder's public API directly rather than `rocprofiler-sdk` for SQTT decoding. Previously, `rocprof-trace-decoder` was an internal plugin within `rocprofiler-sdk`, tightly coupling the two. The independent API can be versioned separately, allowing tools such as `rocpd` to consume the decoder without depending on the full SDK runtime. The `rocprofv3` end-user experience is unchanged.
 
@@ -125,11 +123,13 @@ This release includes a range of quality and stability improvements across `rocp
 
 ##### Queue interposition as a lighter alternative to queue interception
 
-`rocprofiler-sdk` introduces a new queue interposition mechanism that virtualizes HSA queue write-pointer operations without modifying the ROCR-Runtime or requiring full queue interception. For workloads that do not use dispatch counter collection, dispatch thread trace, or PC sampling, `rocprofiler-sdk` now defaults to this lighter interposition path, which reduces profiling overhead and improves overall stability. The legacy queue interception path remains in use when any of those features are active. The default behavior can be controlled via the `ROCPROFILER_QUEUE_INTERPOSITION` environment variable.
+`rocprofiler-sdk` introduces queue interposition, a mechanism that virtualizes HSA queue write-pointer operations without modifying the ROCR-Runtime or requiring full queue interception. For workloads that do not use dispatch counter collection, dispatch thread trace, or PC sampling, `rocprofiler-sdk` now defaults to this lighter interposition path, which reduces profiling overhead and improves overall stability. The legacy queue interception path remains in use when any of those features are active. The default behavior can be controlled via the `ROCPROFILER_QUEUE_INTERPOSITION` environment variable.
 
 ##### ROCprof Compute Viewer 0.2.0 release
 
-ROCprof Compute Viewer (RCV) 0.2.0 adds the ability to open raw `.att`/`.out` thread trace directories directly without a JSON conversion step, and introduces a new Flamegraph view with per-CU/SIMD source and ISA stack rollups replacing the previous Explorer view. This release also adds hidden latency analysis for gfx10+/Navi thread traces, SQTT instrumentation marker visualization, and a heuristic GPU Utilization derived counter, alongside fixes for scaling issues, Global View misalignments, and real-time alignment for both JSON and raw `.att` inputs. Installers are available for Windows (`.exe`) and macOS ARM64 (`.sh`), with GitHub Actions CI and release workflows now in place.
+ROCprof Compute Viewer (RCV) 0.2.0 adds the ability to open raw `.att` and `.out` thread trace directories directly without a JSON conversion step, and introduces a Flamegraph view with per-CU and SIMD source and ISA stack rollups replacing the previous Explorer view. This release also adds hidden latency analysis for gfx10+ and Navi thread traces, SQTT instrumentation marker visualization, and a heuristic GPU Utilization derived counter, alongside fixes for scaling issues, Global View misalignments, and real-time alignment for both JSON and raw `.att` inputs. Installers are available for Windows (`.exe`) and macOS ARM64 (`.sh`), with GitHub Actions CI and release workflows now in place.
+
+For more information, see the [ROCprofiler-SDK section](#rocprofiler-sdk-1-3-2) in the ROCm component changelogs.
 
 #### ROCm Compute Profiler feature highlights
 
@@ -139,6 +139,8 @@ The following are notable enhancements to the ROCm Compute Profiler (rocprofiler
 
 * **pip installation support**: ROCm Compute Profiler is now available as a pip-installable Python package. A new `rocm-profiler` wheel on the ROCm Python package index lets you install ROCm Compute Profiler into a custom Python environment without building ROCm from source. The wheel package installs both ROCm Compute Profiler and ROCm Systems Profiler binaries. For installation instructions, see [Install ROCm Compute Profiler](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/develop/install/core-install.html).
 
+For more information, see the [ROCm Compute Profiler section](#rocm-compute-profiler-3-7-0) in the ROCm component changelogs.
+
 #### ROCm Systems Profiler feature highlights
 
 The following are notable enhancements to ROCm Systems Profiler:
@@ -147,7 +149,7 @@ The following are notable enhancements to ROCm Systems Profiler:
 
 * **Unified memory profiling**: ROCm Systems Profiler now adds unified memory profiling with statistics on page migrations and page faults through a dedicated report section. The report displays aggregated transfer counts, sizes, and timing to help you identify performance bottlenecks caused by host-device memory migrations and page faults. Page table events are collected through ROCprofiler-SDK using the Kernel Fusion Driver (KFD) events API, replacing the previous page-migration API, with page migration and page fault events exposed directly in the profiler output. For details, see [Unified memory profiling](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/develop/how-to/unified-memory-profiling.html).
 
-* **SDMA engine activity profiling**: ROCm Systems Profiler can now collect SDMA engine activity through AMD SMI, reporting per-process DMA usage to expose data-movement bottlenecks across GPU interconnects in multi-GPU workloads. This metric is opt-in and requires AMDGPU driver version 6.19.14 or later.
+* **SDMA engine activity profiling**: ROCm Systems Profiler can now collect System Direct Memory Access (SDMA) engine activity through AMD SMI, reporting per-process DMA usage to expose data-movement bottlenecks across GPU interconnects in multi-GPU workloads. This metric is opt-in and requires AMDGPU driver version 6.19.14 or later.
 
 * **Selective MPI rank profiling**: In MPI jobs, you can now restrict profile and trace output to a chosen subset of ranks, while unselected ranks run undisturbed. This cuts data volume and speeds up post-run analysis, and works across MPI implementations such as MPICH and Open MPI, including heterogeneous and multi-node environments. For details, see the rank filtering section in [Communication runtime profiling](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/develop/how-to/communication-runtime-profiling.html).
 
@@ -157,49 +159,51 @@ The following are notable enhancements to ROCm Systems Profiler:
 
 * **pip installation support**: ROCm Systems Profiler is now available as a pip-installable Python package, letting you install and use the profiler in custom Python environments without rebuilding from source. The package supports multiple Python versions and provides the same functionality as traditional distributions, reducing setup time and complexity. For installation instructions, see [Install ROCm Systems Profiler](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/develop/install/install.html).
 
+For more information, see the [ROCm Systems Profiler section](#rocm-systems-profiler-1-7-0) in the ROCm component changelogs.
+
 #### AMD SMI feature highlights
 
 The following are notable enhancements to AMD SMI:
 
 * **Per-partition GPU metrics**: AMD SMI now reports temperature, clock, and usage at the partition level through the new `amd-smi metric --partition` flag, giving partition-level observability where previously only socket-level metrics were available. For CLI usage, see [AMD SMI CLI tool](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-cli-tool.html); for partitioning concepts, see [GPU partitioning](https://rocm.docs.amd.com/projects/amdsmi/en/develop/conceptual/partition.html).
 
-* **Compute partition memory allocation mode**: AMD SMI now controls memory allocation behavior at the compute partition level through the new `amd-smi set --compute-partition-mem-alloc-mode` command. The current mode is visible in `amd-smi static --partition` output, and new C and Python APIs expose the same controls programmatically. For CLI usage, see [AMD SMI CLI tool](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-cli-tool.html).
+* **Compute partition memory allocation mode**: AMD SMI now controls memory allocation behavior at the compute partition level through the new `amd-smi set --compute-partition-mem-alloc-mode` command. The current mode is visible in `amd-smi static --partition` output, and new C and Python APIs expose the same controls programmatically.
 
 * **APU CLI metrics**: AMD SMI now surfaces APU-specific data through the existing `amd-smi metric` flags when APU metrics are available. `amd-smi monitor` adds temperature and clock fallbacks when standard discrete GPU sensors report N/A.
 
 * **APU VRAM carve-out and GTT tuning**: AMD SMI now tunes APU memory from the command line, consolidating the get and set controls previously handled by the standalone `amd-ttm` tool and adding VRAM carve-out configuration. Carve-out and GTT changes take effect after the next reboot, and AMD SMI rebuilds the initramfs automatically so the new configuration is applied at boot. For details, see the memory tuning section in [AMD SMI CLI tool](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-cli-tool.html).
 
-* **PID-grouped process listing**: AMD SMI now groups multi-GPU process output by PID with `amd-smi process --sort-by-pid` and `amd-smi monitor --sort-by-pid`, merging each process's per-GPU usage into a single row. A new C and Python API, `amdsmi_get_gpu_process_list_by_pid()`, exposes the same data programmatically. For CLI usage, see [AMD SMI CLI tool](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-cli-tool.html).
+* **PID-grouped process listing**: AMD SMI now groups multi-GPU process output by PID with `amd-smi process --sort-by-pid` and `amd-smi monitor --sort-by-pid`, merging each process's per-GPU usage into a single row. A new C and Python API, `amdsmi_get_gpu_process_list_by_pid()`, exposes the same data programmatically.
 
-* **Fabric clock (FCLK) capping on MI300A**: You can now cap the maximum fabric clock (FCLK) on AMD Instinct MI300A APUs to steer power, using the new `fclk` clock type for `amd-smi set --clk-limit`. Only a maximum limit is supported. For CLI usage, see [AMD SMI CLI tool](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-cli-tool.html).
+* **Fabric clock (FCLK) capping on MI300A**: You can now cap the maximum fabric clock (FCLK) on AMD Instinct MI300A APUs to steer power, using the new `fclk` clock type for `amd-smi set --clk-limit`. Only a maximum limit is supported.
 
-* **Go bindings for CPU telemetry**: AMD SMI now exposes ESMI CPU functionality through its Go bindings, so Go applications can query CPU telemetry in-process without invoking external binaries or embedding C or Python runtimes. This simplifies integrating AMD CPU observability into Go-based control planes. For details, see [AMD SMI Go interface](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-go-lib.html).
+* **Go bindings for CPU telemetry**: AMD SMI now exposes EPYC System Management Interface (ESMI) CPU functionality through its Go bindings, so Go applications can query CPU telemetry in-process without invoking external binaries or embedding C or Python runtimes. This simplifies integrating AMD CPU observability into Go-based control planes. For details, see [AMD SMI Go interface](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-go-lib.html).
 
 For more information, see the [AMD SMI section](#amd-smi-26-5-0) in the ROCm component changelogs.
 
 #### RDC expands telemetry coverage for DME parity
 
-ROCm Data Center (RDC) adds 59 telemetry fields, bringing its metric coverage near parity with the Device Metrics Exporter (DME). New fields cover energy, temperature, clocks, memory, PCIe, engine activity, ECC, and health and throttle metrics. Some metrics require recent driver and hardware support. For the available field groups and how to monitor them, see [Using RDC features](https://rocm.docs.amd.com/projects/rdc/en/develop/how-to/using_RDC_features.html).
+ROCm Data Center (RDC) adds 59 telemetry fields, bringing its metric coverage near parity with the Device Metrics Exporter (DME). New fields cover energy, temperature, clocks, memory, PCIe, engine activity, error correction code (ECC), and health and throttle metrics. Some metrics require recent driver and hardware support. For the available field groups and how to monitor them, see [Using RDC features](https://rocm.docs.amd.com/projects/rdc/en/develop/how-to/using_RDC_features.html).
 
 For more information, see the [RDC section](#rdc-1-3-1) in the ROCm component changelogs.
 
 #### ROCm Bandwidth Test (RBT) reaches end-of-life
 
-ROCm Bandwidth Test (RBT) is deprecated and reaches end-of-life with TheRock-based ROCm 7.14.0 release. The active development has ceased with no further feature enhancement or fixes planned. To access the equivalent and expanded functionality you are strongly recommended to transition to [TransferBench](https://rocm.docs.amd.com/projects/TransferBench/en/latest/) and [ROCm Validation Suite (RVS)](https://rocm.docs.amd.com/projects/ROCmValidationSuite/en/latest/).
+ROCm Bandwidth Test (RBT) is deprecated and reaches end-of-life with the TheRock-based ROCm 7.14.0 release. Active development has ceased, and no further feature enhancements or fixes are planned. For equivalent and expanded functionality, transition to [TransferBench](https://rocm.docs.amd.com/projects/TransferBench/en/latest/) and the [ROCm Validation Suite (RVS)](https://rocm.docs.amd.com/projects/ROCmValidationSuite/en/latest/).
 
-For more details refer to the [ROCm Bandwidth Test](https://rocm.docs.amd.com/projects/rocm_bandwidth_test/en/latest/) documentation.
+For more details, refer to the [ROCm Bandwidth Test](https://rocm.docs.amd.com/projects/rocm_bandwidth_test/en/latest/) documentation.
 
 ### Libraries
 
-This release updates ROCm math, sparse compute, communication, and storage libraries with new routines, expanded data type support, and performance improvements.
+This release updates ROCm math, sparse compute, communication, and storage libraries with additional routines, expanded data type support, and performance improvements.
 
 #### hipFile GPUDirect Storage support
 
 hipFile is now included in the ROCm Core SDK, providing GPUDirect Storage capabilities on AMD GPUs as part of AMD Infinity Storage and enabling direct data transfers between storage and GPU memory. hipFile enables storage-intensive workloads to bypass host-side copies, reducing latency and command overhead for high-throughput GPU I/O.
 
-hipFile also adds direct GPU-to-storage I/O for files with alignment requirements finer than 4 KB. It reads each file's reported memory and offset alignment requirements (using `statx`) and takes the direct path whenever the I/O meets those requirements, avoiding the extra host-side copy. This delivers higher throughput, lower latency, and more fine-grained support for very small I/O operations.
+hipFile also adds direct GPU-to-storage I/O for files with alignment requirements finer than 4 KB. It reads each file's reported memory and offset alignment requirements (using `statx`) and takes the direct path whenever the I/O meets those requirements, avoiding the extra host-side copy. This improves throughput and latency and adds finer-grained support for very small I/O operations.
 
-hipFile is supported on Linux with AMD Instinct GPUs. See [rocm-examples](https://github.com/ROCm/rocm-examples/tree/release/therock-7.14/Systems/hipFile) and the [hipFile documentation](https://rocm.docs.amd.com/projects/hipFile/en/latest/) to get started.
+hipFile is supported on Linux with AMD Instinct GPUs. See the [ROCm hipFile examples](https://github.com/ROCm/rocm-examples/tree/release/therock-7.14/Systems/hipFile) and the [hipFile documentation](https://rocm.docs.amd.com/projects/hipFile/en/latest/) to get started.
 
 #### Per-matrix bias support in hipBLASLt batched GEMM
 
@@ -230,7 +234,7 @@ The following are notable enhancements to hipSPARSE:
 
 * **BSR format support in hipSPARSE generic routines**: hipSPARSE adds Block Sparse Row (BSR) format support to its generic sparse compute routines: `hipsparseSpMM` (sparse matrix-matrix multiplication) and `hipsparseSpMV` (sparse matrix-vector multiplication). Two new descriptor functions, `hipsparseCreateBsr` and `hipsparseCreateConstBsr`, let you construct BSR-format sparse matrices for use with the generic API. This brings hipSPARSE to parity with the equivalent NVIDIA cuSPARSE routines, where BSR was previously available only through the rocSPARSE API.
 
-* **Legacy SpGEAM routines deprecated**: The legacy hipSPARSE `csrgeam` routines — `hipsparseXcsrgeamNnz`, `hipsparseScsrgeam`, `hipsparseDcsrgeam`, `hipsparseCcsrgeam`, and `hipsparseZcsrgeam` — are deprecated and will be removed in a future release. Use the `csrgeam2` routines instead: `hipsparseScsrgeam2_bufferSizeExt`, `hipsparseDcsrgeam2_bufferSizeExt`, `hipsparseCcsrgeam2_bufferSizeExt`, `hipsparseZcsrgeam2_bufferSizeExt`, `hipsparseXcsrgeam2Nnz`, `hipsparseScsrgeam2`, `hipsparseDcsrgeam2`, `hipsparseCcsrgeam2`, and `hipsparseZcsrgeam2`.
+* **Legacy SpGEAM routines deprecated**: The legacy hipSPARSE `csrgeam` routines (`hipsparseXcsrgeamNnz`, `hipsparseScsrgeam`, `hipsparseDcsrgeam`, `hipsparseCcsrgeam`, and `hipsparseZcsrgeam`) are deprecated and will be removed in a future release. Use the `csrgeam2` routines instead: `hipsparseScsrgeam2_bufferSizeExt`, `hipsparseDcsrgeam2_bufferSizeExt`, `hipsparseCcsrgeam2_bufferSizeExt`, `hipsparseZcsrgeam2_bufferSizeExt`, `hipsparseXcsrgeam2Nnz`, `hipsparseScsrgeam2`, `hipsparseDcsrgeam2`, `hipsparseCcsrgeam2`, and `hipsparseZcsrgeam2`.
 
 #### rocSPARSE feature highlights
 
@@ -244,11 +248,13 @@ The following are notable enhancements to rocSPARSE:
 
 The following are notable enhancements to RCCL:
 
-* **Hierarchical AllGather**: RCCL adds a hierarchical AllGather algorithm that improves scale-out performance for large multi-node jobs by separating inter-node from intra-node communication, relieving the concurrency pressure that constrains the existing ring and direct algorithms across many GPUs. On AMD Instinct MI350 accelerators, hierarchical AllGather is enabled by default starting at 8 nodes. To disable it, set `RCCL_HIERARCHICAL_ALLGATHER=0`.
+* **Hierarchical AllGather**: RCCL adds a hierarchical AllGather algorithm for large multi-node jobs by separating inter-node from intra-node communication, relieving the concurrency pressure that constrains the existing ring and direct algorithms across many GPUs. On AMD Instinct MI350X GPUs, hierarchical AllGather is enabled by default starting at 8 nodes. To disable it, set `RCCL_HIERARCHICAL_ALLGATHER=0`.
 
-* **Direct reduce-scatter**: RCCL adds a direct reduce-scatter algorithm that lowers latency for small-to-medium message sizes on AMD Instinct MI350 Series GPUs, as an alternative to the existing ring-based implementation. RCCL selects it automatically for multi-node reduce-scatter operations within a configurable message-size threshold.
+* **Direct reduce-scatter**: RCCL adds a direct reduce-scatter algorithm for small-to-medium message sizes on AMD Instinct MI350X GPUs, as an alternative to the existing ring-based implementation. RCCL selects it automatically for multi-node reduce-scatter operations within a configurable message-size threshold.
 
 * **Copy Engine collectives (Preview)**: RCCL now offloads collective data movement to the GPU copy engine on AMD Instinct MI355X GPUs through new Copy Engine collectives. This frees compute units during communication-bound collectives, so compute and communication can overlap. RCCL uses a batched copy path when available, falls back to multi-stream or single-stream transfers otherwise, and preserves correct behavior during HIP graph capture.
+
+For more information, see the [RCCL section](#rccl-2-30-4) in the ROCm component changelogs.
 
 (release-supported-hw)=
 
@@ -272,7 +278,7 @@ If your GPU is not listed, it might be community-enabled through TheRock nightly
 ROCm supports the following Linux distributions and Microsoft Windows versions. If you're running ROCm on Linux, ensure your system is using a supported kernel version.
 
 :::{important}
-The following table is a general overview of supported OSes. Actual support might vary by AMD GPU or APU. Use the {doc}`Compatibility matrix </compatibility/compatibility-matrix>` to verify support for your specific setup before installation.
+The following table is a general overview of supported operating systems. Actual support might vary by AMD GPU or APU. Use the {doc}`Compatibility matrix </compatibility/compatibility-matrix>` to verify support for your specific setup before installation.
 :::
 
 ```{include} ./include/os-support-table.md
@@ -304,7 +310,7 @@ Choose exactly which ROCm components to install, reducing installation time and 
 
 ### Graphics support
 
-Optional graphics support for Mesa/OpenGL workloads is now available. When enabled, the installer includes the `amdgpu-lib` package for graphics capabilities.
+Optional graphics support for Mesa and OpenGL workloads is now available. When enabled, the installer includes the `amdgpu-lib` package for graphics capabilities.
 
 ### Build and manifest information
 
@@ -320,7 +326,7 @@ A single installer file now supports all Linux distributions, eliminating the ne
 
 ## Kernel driver and firmware bundle support
 
-ROCm requires a coordinated stack of compatible firmware, driver, and user space components. Maintaining version alignment between these layers ensures correct GPU operation and performance, especially for AMD data center products. While AMD publishes the AMD GPU driver and ROCm user space components, your server OEM (original equipment manufacturer) or infrastructure provider distributes the firmware packages. AMD supplies those firmware images (PLDM bundles), which the OEM integrates and distributes.
+ROCm requires a coordinated stack of compatible firmware, driver, and user-space components. Maintaining version alignment between these layers ensures correct GPU operation and performance, especially for AMD data center products. While AMD publishes the AMD GPU driver and ROCm user space components, your server OEM (original equipment manufacturer) or infrastructure provider distributes the firmware packages. AMD supplies those firmware images (platform level data model (PLDM) bundles), which the OEM integrates and distributes.
 
 ```{include} ./include/driver-firmware-support-table.md
 :parser: myst
@@ -392,7 +398,11 @@ PyTorch might display a warning when importing on Linux if the system libnuma pa
 
 ### ROCProfiler SPM sessions can remain in a stale state after abrupt termination 
 
-If a Streaming Performance Monitors (SPM) session is terminated abruptly (for example, with `Ctrl+C`), KFD-side SPM resources might not be released cleanly. When this happens, the KFD-side SPM resources can remain in a stale state, which might cause subsequent SPM profiling sessions to hang or fail to start with the error `Unable to acquire KFD thread: 4096`. To recover, terminate any lingering sessions manually if it is still running. If the error persists, a system reboot is currently required to restore the GPU to a usable state for SPM profiling. This issue is under active investigation for a fix.
+If a Streaming Performance Monitors (SPM) session is terminated abruptly (for example, with `Ctrl+C`), KFD-side SPM resources might not be released cleanly. When this happens, the KFD-side SPM resources can remain in a stale state, which might cause subsequent SPM profiling sessions to hang or fail to start with the error `Unable to acquire KFD thread: 4096`. To recover, if the profiling process is still running, terminate it manually. If the error persists, a system reboot is currently required to restore the GPU to a usable state for SPM profiling. This issue is under active investigation for a fix.
+
+### rocALUTION and hipTensor are not available in the HPC tarball
+
+rocALUTION and hipTensor can be installed using the `amdrocm-hpc` meta-package. However, there is no dedicated HPC tarball for tarball-based installations. These libraries are included in the standard ROCm tarball.
 
 ## ROCm resolved issues
 
@@ -412,13 +422,13 @@ Previously, when using hipBLAS on Windows, the test suites returned non-zero exi
 
 ### Illegal memory address error when using placement new with device function returns
 
-Previously, HIP kernels that used placement new to construct objects in `hipMalloc` device memory crashed with a `hipErrorIllegalAddress` error when a `__device__` function return value was passed as the constructor argument for non-trivially-copyable types.
+Previously, HIP kernels that used placement new to construct objects in `hipMalloc`-allocated device memory crashed with a `hipErrorIllegalAddress` error when a `__device__` function return value was passed as the constructor argument for non-trivially-copyable types.
 
 ### GPU kernels failed to launch in ASAN builds with large thread counts
 
 Previously, when building GPU libraries with ASAN enabled, kernels configured with large thread counts failed to launch with an `HSA_STATUS_ERROR_INVALID_ISA` error.
 
-### ASAN broke multi-architecture HIP binary builds
+### ASAN prevented multi-architecture HIP binary builds from launching
 
 Previously, HIP applications built with ASAN enabled and targeting multiple GPU architectures failed to launch with `RuntimeError: .hipFatBinSegment size N is not a multiple of wrapper size (24)` and `RuntimeError: Unexpected magic 0x00000000 at wrapper i` error messages.
 
@@ -426,12 +436,24 @@ Previously, HIP applications built with ASAN enabled and targeting multiple GPU 
 
 Previously, when using `rocprof-sys-attach` to re-attach to a previously profiled process, the ROCPD output database files (`.db`) were written to the initial session's output directory instead of a new timestamped directory.
 
+### hipCUB DeviceMerge large-size stress test failed with out-of-memory error on gfx1150
+
+Previously, on gfx1150 APUs, the hipCUB DeviceMerge large-size stress test (`MergeLargeSizeIterators`) failed with an out-of-memory error when running ROCm 7.12.0. Standard DeviceMerge test cases were not affected.
+
+### HIP kernel launch limit caused failures for some models
+
+Previously, with PyTorch 2.10, some models hit the HIP kernel launch limit of 2³² kernel launches within a single process, causing HIP kernel launch errors. One known affected model was `black-forest-labs/flux`.
+
+### Non-deterministic GPU memory faults when passing large data structures on MI300X
+
+Previously, applications running on AMD Instinct MI300X GPUs that passed large, complex data structures between device functions using scratch memory encountered non-deterministic GPU memory access faults and became unresponsive when compiler optimizations minimized the number of copy operations.
+
 ## ROCm upcoming changes
 
 Future releases will add support for:
 
 * Additional ROCm Core SDK components
 
-* Domain-specific expansion toolkits (data science, life science, finance, simulation, and other HPC domains)
+* Domain-specific expansion toolkits (data science, life sciences, finance, simulation, and other HPC domains)
 
 * More AMD hardware support

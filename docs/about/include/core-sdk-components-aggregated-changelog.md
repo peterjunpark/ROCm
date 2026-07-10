@@ -9,7 +9,7 @@
 - Exposed APU metrics through the CLI and Python interface.  
   - `amd-smi metric` now surfaces APU-specific data under `--usage`, `--power`, `--clock`, `--temperature`, `--fan`, `--voltage`, and `--throttle` when APU metrics are available.
   - `amd-smi monitor` provides APU temperature and clock fallbacks when standard dGPU sensors report N/A.
-  - On APU systems the `--pcie`, `--ecc-blocks`, `--voltage-curve`, `--overdrive`, `--xgmi-err`, and `--energy` sections are not applicable and are omitted.
+  - On APU systems, the `--pcie`, `--ecc-blocks`, `--voltage-curve`, `--overdrive`, `--xgmi-err`, and `--energy` sections are not applicable and are omitted.
 
 - `--partition` flag to `amd-smi metric` for partition-scoped metrics.  
   - The `-X`/`--partition` flag switches the temperature, clock, and usage categories to partition-level data sources; throttle metrics are already partition-aware.
@@ -84,7 +84,7 @@
 ##### Resolved Issues
 
 - Fixed `amd-smi set --power-cap` rejecting the minimum allowed value.  
-  - The lower bound is now inclusive, so setting the power cap to the exact minimum of the reported range (e.g. `210` when the range is 210-300W) succeeds instead of failing validation, matching the inclusive range shown in the error message.
+  - The lower bound is now inclusive, so setting the power cap to the exact minimum of the reported range (for example, `210` when the range is 210-300W) succeeds instead of failing validation, matching the inclusive range shown in the error message.
 
 - Corrected invalid AMD SMI status-code names in exception messages and documentation.  
   - Some `AmdSmiLibraryException` messages and API documentation entries were misspelled; they now use the correct `AMDSMI_STATUS_*` names.
@@ -120,7 +120,7 @@
   - The CPER AFID API was implemented but missing from `py-interface/__init__.py`, making it unavailable to Python callers using `from amdsmi import ...`.
 
 - Python unittest scripts now append a GTest-style summary after test output.  
-  - All `*_test.py` and `unit_tests.py` scripts print a colored `[PASSED]`/`[SKIPPED]`/`[FAILED]` block after the standard unittest output. Colors are automatically suppressed when output is not a TTY (e.g. file redirection, CI log capture).
+  - All `*_test.py` and `unit_tests.py` scripts print a colored `[PASSED]`/`[SKIPPED]`/`[FAILED]` block after the standard unittest output. Colors are automatically suppressed when output is not a TTY (for example, file redirection, CI log capture).
 
 - Corrected the documented unit of `amdsmi_frequencies_t::frequency`.  
   - The struct comment claimed frequencies were in MHz, but `amdsmi_get_clk_freq()` returns them in Hz. The comment now reads "List of frequencies in Hz".
@@ -165,7 +165,7 @@
     - `hipDrvMemDiscardBatchAsync` driver API variant of `hipMemDiscardBatchAsync`, using `hipDeviceptr_t` pointers. Mirrors `cuMemDiscardBatchAsync`.
     - `hipMemDiscardAndPrefetchBatchAsync` combines discard and prefetch in a single call, enabling the runtime to optimize data movement. Mirrors `cudaMemDiscardAndPrefetchBatchAsync`.
     - `hipDrvMemDiscardAndPrefetchBatchAsync` driver API variant of `hipMemDiscardAndPrefetchBatchAsync`, using `hipDeviceptr_t` pointers. Mirrors `cuMemDiscardAndPrefetchBatchAsync`.
-- Introduced an exported no-op function `__hipOnError(void *err_info)`, invoked from `HIP_UPDATE_ERROR_STATE` when an API returns a non-success status, enabling debuggers to set breakpoints on a stable symbol. The symbol is exported on ELF (Executable and Linkable Format) platforms via a version script and on Windows via amdhip.def. The `err_info` parameter is a pointer to a struct containing the error code, name, and descriptive string.
+- Introduced an exported no-op function `__hipOnError(void *err_info)`, invoked from `HIP_UPDATE_ERROR_STATE` when an API returns a non-success status, enabling debuggers to set breakpoints on a stable symbol. The symbol is exported on ELF (Executable and Linkable Format) platforms via a version script and on Windows via `amdhip.def`. The `err_info` parameter is a pointer to a struct containing the error code, name, and descriptive string.
 
 ##### Optimized
 
@@ -174,7 +174,7 @@
 
 ##### Resolved issues
 
-- Resolved an issue where graph allocations that escape their originating graph (i.e., allocation nodes without a corresponding free node) failed to remain valid after the graph and its executable
+- Resolved an issue where graph allocations that escape their originating graph (that is, allocation nodes without a corresponding free node) failed to remain valid after the graph and its executable
   instance were destroyed. Allocations created via stream capture were not properly tracked and were incorrectly classified as reusable, leading to premature unmapping during `hipGraphExecDestroy` and resulting in memory faults on subsequent access.
 - Resolved an issue where an error propagated from the `hipModuleGetFunction` API, causing behavior inconsistent with the corresponding CUDA API. The HIP runtime now suppresses this propagated error to align with expected behavior.
 - Resolved an issue where a stream entering an invalid state during capture could not recover, even after calling `hipStreamEndCapture`. The stream failed to return to a clean (None) state,
@@ -216,7 +216,7 @@
 
 ##### Added
 
-- Introduced a new API: `hipBLASLt-ext::isSolutionSupported()`. This API is used by the new hipBLASLt integration from rocBLAS to check if a given solution is supported for a certain GPU and problem type.
+- Introduced a new API: `hipBLASLt-ext::isSolutionSupported()`. This API is used by the new hipBLASLt integration from rocBLAS to check if a given solution is supported for a specific GPU and problem type.
 
 #### **hipCUB** (4.5.0)
 
@@ -250,7 +250,7 @@
 
 ##### Added
 
-- `hipsparseCreateBsr` and `hipsparseCreateConstBsr` in order to enable BSR format support in generic routines.
+- `hipsparseCreateBsr` and `hipsparseCreateConstBsr` to enable BSR format support in generic routines.
 - BSR format support to `hipsparseSpMV` and `hipsparseSpMM`.
 
 ##### Resolved issues
@@ -277,7 +277,7 @@
 
 ##### Resolved Issues
 
-- [RNN] Fixed RNN workspace tensor descriptor integer overflow
+- [RNN] Fixed RNN workspace tensor descriptor integer overflow.
 - [Conv] Enabled grouped Composable Kernel (CK) xdlops fwd, bwd, and wrw convolution (2D and 3D) for tensors whose strides exceed the int32 range.
 - [Conv] Fixed `miopenStatusInternalError` thrown by Find on depthwise NHWC grouped convolutions under `MIOPEN_FIND_MODE=NORMAL`.
 
@@ -389,15 +389,15 @@
 
 ##### Resolved issues
 
-- Incorrect results on gfx12 in `trsv`, `asum`, and `nrm2` with large `batch_count` exceeding 65536.
-- `gemm` with very large `K` or inner product leading dimension for which element byte offset overflowed `int32`.
-- `install.sh/rmake.py` builds when `CMAKE_GENERATOR=Ninja` is set.
+- Fixed incorrect results on gfx12 in `trsv`, `asum`, and `nrm2` with large `batch_count` exceeding 65536.
+- Fixed `gemm` with very large `K` or inner product leading dimension for which element byte offset overflowed `int32`.
+- Fixed `install.sh/rmake.py` builds when `CMAKE_GENERATOR=Ninja` is set.
 
 #### **rocFFT** (1.0.38)
 
 ##### Added
 
-- Generalized multi-device computations for transforms such that each of the length dimension is fully covered either in all the input field's bricks or in all the output field's bricks, regardless of the type and placement of the transform. Specifically for real transforms, the innermost length dimension must be fully covered in all the input (resp. output) field's bricks for real forward (resp. inverse) transforms.
+- Generalized multi-device computations for transforms such that each length dimension is fully covered either in all the input field's bricks or in all the output field's bricks, regardless of the type and placement of the transform. Specifically for real transforms, the innermost length dimension must be fully covered in all the input (respectively, output) field's bricks for real forward (respectively, inverse) transforms.
 - Support for the gfx1250 architecture.
 
 ##### Optimized
@@ -411,17 +411,17 @@
 
 ##### Resolved issues
 
-- Fixed possible incorrect results for multi-dimensional real transforms with small lengths (e.g., smaller than 128) along the two fastest-varying dimensions.
+- Fixed possible incorrect results for multi-dimensional real transforms with small lengths (for example, smaller than 128) along the two fastest-varying dimensions.
 
 #### **ROCgdb** (16.3)
 
 ##### Added
 
-- Dumping core of AMD GPU programs with the "gcore" command is now
+- Dumping core of AMD GPU programs with the `gcore` command is now
   significantly faster, particularly for kernels that use small
   amounts of VRAM.
-- New "catch hiperr" command that stops the inferior when a HIP API
-  call returns an error.  The convenience variable `$_hiperr` holds
+- New `catch hiperr` command that stops the inferior when a HIP API
+  call returns an error. The convenience variable `$_hiperr` holds
   the error code at the catchpoint.
 
 #### **rocJPEG** (1.6.0)
@@ -434,7 +434,7 @@
 
 ##### Added
 
-- ``--bench-only`` profile mode option to run the roofline microbenchmark standalone (without profiling an application or collecting performance counters). No application run is required. Useful for regenerating ``roofline.csv`` in an existing workload directory or running the microbenchmark on systems where only HIP is available but ROCprofiler-SDK is not.
+- `--bench-only` profile mode option to run the roofline microbenchmark standalone (without profiling an application or collecting performance counters). No application run is required. Useful for regenerating `roofline.csv` in an existing workload directory or running the microbenchmark on systems where only HIP is available but ROCprofiler-SDK is not.
 
 - LDS arithmetic intensity as a roofline plot point and analysis database field.
 
@@ -444,14 +444,14 @@
 
 - Roofline benchmarking support for gfx1150 and gfx1152 hardware.
 
-- Operator statistics and per-operator summary table in the analysis output of torch operators profiling. Added the following statistics for every torch operator and its children:
+- Operator statistics and per-operator summary table in the analysis output of torch operator profiling. Added the following statistics for every torch operator and its children:
   - Number of invocations.
   - Number of kernel dispatches.
   - Min/Max/Mean and Total duration of kernel dispatches.
 
 ##### Changed
 
-- Moved `--gui` and `--tui` analyze options to experimental status. These features now require the `--experimental` flag to be enabled (e.g., `rocprof-compute analyze --experimental --gui`).
+- Moved `--gui` and `--tui` analyze options to experimental status. These features now require the `--experimental` flag to be enabled (for example, `rocprof-compute analyze --experimental --gui`).
 
 - `--output-format csv` in analyze mode now uses the database analysis workflow and produces one CSV per analysis view. Requires `--format-rocprof-output rocpd` and no longer prints the report to the terminal (matching `db` format).
 
@@ -459,9 +459,9 @@
 
 - `--torch-trace` now captures backward-pass and nested operators that were previously missed or misattributed. The first run builds and caches a helper under `~/.cache/rocprofiler-compute/`, so it takes longer than later runs.
 
-- Profile workload output folder name for Strix Halo series (gfx1151) changed from `strix_halo` to `rdna35_halo`
+- Profile workload output folder name for Strix Halo series (gfx1151) changed from `strix_halo` to `rdna35_halo`.
 
-- Unified accumulator handling across profile and analyze so each `_ACCUM`-suffixed counter is preserved instead of collapsing to `SQ_ACCUM_PREV_HIRES`
+- Unified accumulator handling across profile and analyze so each `_ACCUM`-suffixed counter is preserved instead of collapsing to `SQ_ACCUM_PREV_HIRES`.
 
 - Reworded the N/A metric-evaluation warning to "divide-by-zero or empty counter data" (the prior "missing counter data" message could only fire for non-missing causes).
 
@@ -475,7 +475,7 @@
 
 ##### Removed
 
-- ``--path`` and ``--subpath`` options have been removed from profile mode. Use ``--output-directory`` instead.
+- `--path` and `--subpath` options have been removed from profile mode. Use `--output-directory` instead.
 
 - Removed redundant `if (X != 0) else None` divide-by-zero guards from metric equations across all analysis YAML configurations. Division by zero is already handled by the metric evaluation engine, which returns `"N/A"` for `inf` and `NaN` results.
 
@@ -509,7 +509,7 @@
 
 - On gfx1151, `$max_mclk` is not automatically populated in sysinfo, so the related bandwidth metrics may be incorrect. Use `amd-smi` to obtain the maximum memory clock and provide it via `--specs-correction`.
 
-- In analyze mode, `--nodes` is not suitable for multi-rank analysis. Use `--path` with the rank-specific path (such as, `--path workload/1`) instead of `--path workload --nodes 1`.
+- In analyze mode, `--nodes` is not suitable for multi-rank analysis. Use `--path` with the rank-specific path (for example, `--path workload/1`) instead of `--path workload --nodes 1`.
 
 #### **ROCm Systems Profiler** (1.7.0)
 
@@ -572,7 +572,7 @@
   requires GCC ≥ 10.
 - The `trace-openmp` configuration preset no longer includes `HSA_API`,
   by default.
-- `rocprof-sys-sample` - Aligned flags with `rocprof-sys-run`. Renamed `--freq`,
+- `rocprof-sys-sample` — Aligned flags with `rocprof-sys-run`. Renamed `--freq`,
   `--cputime` and `--realtime` to `--sampling-freq`, `--sampling-cputime` and
   `--sampling-realtime`, respectively. Old flags are still handled as a part of
   backward compatibility.
@@ -586,25 +586,25 @@
 
 ##### Resolved issues
 
-- ElfUtils build on GCC 15.
-- Output directory of `rocpd` files when re-attaching to the same process
+- Fixed an issue affecting the ElfUtils build on GCC 15.
+- Fixed an issue where the output directory of `rocpd` files was not unique when re-attaching to the same process
   with `rocprof-sys-attach`. Now, each session will have a unique output folder.
-- CPU related counters (like CPU frequency) missing from `rocpd` output.
-- The handling of "group-by-queue" option in the Perfetto generator.
-- Visualization of GPU counters, which made it look like there was activity
+- Fixed an issue where CPU-related counters (like CPU frequency) were missing from `rocpd` output.
+- Fixed an issue where the "group-by-queue" option was not handled correctly in the Perfetto generator.
+- Fixed an issue where the visualization of GPU counters made it look like there was activity
   between kernel dispatches.
-- Hang due to mismatched versions of `binutils` between system and bundled
+- Fixed a hang due to mismatched versions of `binutils` between system and bundled
   versions. Ensure that the vendored version of `binutils`'s symbols are hidden.
-- ASAN build on TheRock.
-- Issue that could cause certain events to appear in trace, when they should
+- Fixed the ASAN build on TheRock.
+- Fixed an issue that could cause certain events to appear in trace, when they should
   have been excluded due to roctx region filtering.
-- CMake issue that caused the wrong version of `elfutils` to be linked when
+- Fixed a CMake issue that caused the wrong version of `elfutils` to be linked when
   building for TheRock. The system version of `elfutils` was used, rather than
   the vendored version causing package install failures.
-- Documentation and internal config handling that referenced the non-existent
+- Fixed documentation and internal config handling that referenced the non-existent
   `ROCPROFSYS_USE_TRACE`. The Perfetto tracing backend is controlled by
   `ROCPROFSYS_TRACE`; setting `ROCPROFSYS_USE_TRACE` had no effect.
-- A pre-main `rocprof-sys-run` `SIGSEGV` in `rocprofiler_configure()` when
+- Fixed a pre-main `rocprof-sys-run` `SIGSEGV` in `rocprofiler_configure()` when
   profiling OpenMPI GPU-aware MPI workloads.
 
 ##### Known issues
@@ -646,7 +646,7 @@
 - SPM counter collection support in `rocprofv3` (beta):
   - `--spm <counter>` flag to specify counters for SPM collection.
   - `--spm-sample-interval` and `--spm-sample-interval-unit` parameters to configure sampling rate.
-  - `--spm-beta-enabled` flag to opt in to the beta SPM feature.
+  - `--spm-beta-enabled` flag or the `ROCPROFILER_SPM_BETA_ENABLED` environment variable to opt in to the beta SPM feature via `rocprofv3`. For API-based usage, set `ROCPROFILER_SPM_BETA_ENABLED`.
   - `--spm-config` option in `rocprofv3-avail` to list available SPM configurations.
 - JSON and rocpd output format support for SPM.
 
@@ -687,7 +687,7 @@
 
 ##### Changed
 
-- Changed default `ROCSHMEM_DEBUG_LEVEL` from `WARN` to `ERROR`
+- Changed default `ROCSHMEM_DEBUG_LEVEL` from `WARN` to `ERROR`.
 - Performance optimizations:
   - Separated put/get memcpy primitives to apply correct cache coherence semantics and fences.
   - Use constmem for backend variables and provider muxing.
@@ -717,7 +717,7 @@
 
 ##### Upcoming changes
 
-- Deprecated the `rocsparse_indextype_u16` index type. It is no longer supported and will be removed in a future release. You should use `rocsparse_indextype_i32` or `rocsparse_indextype_i64` going forward.
+- Deprecated the `rocsparse_indextype_u16` index type. It is no longer supported and will be removed in a future release. Use `rocsparse_indextype_i32` or `rocsparse_indextype_i64` instead.
 
 #### **rocThrust** (4.5.0)
 
@@ -747,7 +747,7 @@
 ##### Changed
 
 - All RPP tensor API functions are now unified with a single function signature.
-- Updated all test suite calls to use unified API with backend parameter.
+- Updated all test suite calls to use the unified API with the backend parameter.
 - Enhanced layout validation for image augmentations within unified API.
-- Test suite dependency on TurboJPEG removed. Updated to use .rgb files as input.
-- OpenCV and pandas are changed to an optional dependency for the test suite.
+- Removed the test suite dependency on TurboJPEG. Tests now use `.rgb` files as input.
+- OpenCV and pandas are now optional dependencies for the test suite.
