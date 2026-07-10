@@ -91,11 +91,11 @@
       .. matrix-cell::
          :show-cond: gpu=mi355x gpu=mi350x gpu=mi300x gpu=mi300a gpu=mi250x gpu=mi250 gpu=mi210 gpu=mi100
 
-         RHEL 10.1 (kernel: 6.12.0-124)
+         RHEL 10.2 (kernel: 6.17)
 
          RHEL 10.0 (kernel: 6.12.0-55)
 
-         RHEL 9.7 (kernel: 5.14.0-611)
+         RHEL 9.8 (kernel: 6.17)
 
          RHEL 9.6 (kernel: 5.14.0-570)
 
@@ -111,11 +111,11 @@
       .. matrix-cell::
          :show-cond: gpu=mi325x
 
-         RHEL 10.1 (kernel: 6.12.0-124)
+         RHEL 10.2 (kernel: 6.17)
 
          RHEL 10.0 (kernel: 6.12.0-55)
 
-         RHEL 9.7 (kernel: 5.14.0-611)
+         RHEL 9.8 (kernel: 6.17)
 
          RHEL 9.6 (kernel: 5.14.0-570)
 
@@ -195,6 +195,8 @@
 
       .. matrix-cell::
 
+         `31.40.0 <https://instinct.docs.amd.com/projects/amdgpu-docs/en/docs-30.30.3/documentation/release-notes.html>`__
+
          `31.30.0 <https://instinct.docs.amd.com/projects/amdgpu-docs/en/31.30.0-preview/documentation/release-notes.html>`__
 
          `31.20.0 <https://instinct.docs.amd.com/projects/amdgpu-docs/en/31.20.0-preview/documentation/release-notes.html>`__
@@ -225,19 +227,24 @@
          :header:
 
       .. matrix-cell::
-         :show-cond: gpu=mi355x gpu=mi350x gpu=mi300x
+         :show-cond: gpu=mi355x gpu=mi350x
 
          01.26.00.02
 
       .. matrix-cell::
          :show-cond: gpu=mi350p
 
-         IFWI 00185129
+         IFWI 00189938
 
       .. matrix-cell::
          :show-cond: gpu=mi325x
 
-         01.25.04.02
+         01.25.06.08
+
+      .. matrix-cell::
+         :show-cond: gpu=mi300x
+
+         01.25.06.05
 
       .. matrix-cell::
          :show-cond: gpu=mi300a
@@ -245,12 +252,7 @@
          BKC 26.1
 
       .. matrix-cell::
-         :show-cond: gpu=mi250x
-
-         IFWI 75 (or later)
-
-      .. matrix-cell::
-         :show-cond: gpu=mi250 gpu=mi210
+         :show-cond: gpu=mi250x gpu=mi250 gpu=mi210
 
          Maintenance update (MU) 5 with IFWI 75 (or later)
 

@@ -69,10 +69,10 @@
         <p>Red Hat Enterprise Linux (RHEL)</p>
       </th>
       <td>
-        <p>10.1</p>
+        <p>10.2</p>
       </td>
       <td>
-        <p>6.12.0-124</p>
+        <p>6.17</p>
       </td>
     </tr>
     <tr>
@@ -85,10 +85,10 @@
     </tr>
     <tr>
       <td>
-        <p>9.7</p>
+        <p>9.8</p>
       </td>
       <td>
-        <p>5.14.0-611</p>
+        <p>6.17</p>
       </td>
     </tr>
     <tr>
@@ -227,18 +227,18 @@
         <p>Red Hat Enterprise Linux (RHEL)</p>
       </th>
       <td>
-        <p>10.1</p>
+        <p>10.2</p>
       </td>
       <td>
-        <p>6.12.0-124</p>
+        <p>6.17</p>
       </td>
     </tr>
     <tr>
       <td>
-        <p>9.7</p>
+        <p>9.8</p>
       </td>
       <td>
-        <p>5.14.0-611</p>
+        <p>6.17</p>
       </td>
     </tr>
     <tr>

@@ -29,6 +29,10 @@
         <p>
           <strong>AMD GPU Driver (amdgpu)</strong><br>
           <a
+            href="https://instinct.docs.amd.com/projects/amdgpu-docs/en/latest/documentation/release-notes.html"
+            target="_blank"
+          >31.40.0</a><br>
+          <a
             href="https://instinct.docs.amd.com/projects/amdgpu-docs/en/31.30.0-preview/documentation/release-notes.html"
             target="_blank"
           >31.30.0</a><br>
@@ -89,7 +93,7 @@
         <p>Instinct MI350P</p>
       </td>
       <td style="vertical-align: middle">
-        <p>IFWI 00185129</p>
+        <p>IFWI 00189938</p>
       </td>
     </tr>
     <tr>
@@ -97,7 +101,7 @@
         <p>Instinct MI325X</p>
       </td>
       <td style="vertical-align: middle">
-        <p>PLDM bundle 01.25.04.02</p>
+        <p>PLDM bundle 01.25.06.08</p>
       </td>
     </tr>
     <tr>
@@ -105,7 +109,7 @@
         <p>Instinct MI300X</p>
       </td>
       <td>
-        <p>PLDM bundle 01.26.00.02</p>
+        <p>PLDM bundle 01.26.06.05</p>
       </td>
     </tr>
     <tr>
@@ -120,16 +124,13 @@
       <td>
         <p>Instinct MI250X</p>
       </td>
-      <td>
-        <p>IFWI 75 (or later)</p>
+      <td rowspan="3">
+        <p>Maintenance update (MU) 5 with IFWI 75 (or later)</p>
       </td>
     </tr>
     <tr>
       <td>
         <p>Instinct MI250</p>
-      </td>
-      <td rowspan="2">
-        <p>Maintenance update (MU) 5 with IFWI 75 (or later)</p>
       </td>
     </tr>
     <tr>
@@ -169,6 +170,10 @@
       <td style="vertical-align: middle">
         <p>
           <strong>AMD GPU Driver (amdgpu)</strong><br>
+          <a
+            href="https://instinct.docs.amd.com/projects/amdgpu-docs/en/latest/documentation/release-notes.html"
+            target="_blank"
+          >31.40.0</a><br>
           <a
             href="https://instinct.docs.amd.com/projects/amdgpu-docs/en/31.30.0-preview/documentation/release-notes.html"
             target="_blank"

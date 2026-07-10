@@ -29,7 +29,7 @@ For the complete list of supported AMD hardware, see [AMD hardware support](#amd
 
 #### Expanded operating system support
 
-ROCm 7.14.0 adds support for RHEL 10.2 and RHEL 9.8 on Instinct and Radeon devices. RHEL 10.2 replaces RHEL 10.1 as the validated RHEL 10 release; RHEL 9.8 replaces RHEL 9.7 as the validated RHEL 9 release.
+ROCm 7.14.0 adds support for RHEL 10.2 and RHEL 9.8 on AMD Instinct and Radeon GPUs. RHEL 10.2 replaces RHEL 10.1 as the validated RHEL 10 release; RHEL 9.8 replaces RHEL 9.7 as the validated RHEL 9 release.
 
 SLES 15 SP7, SLES 16, and Debian 13 are now supported on AMD Instinct MI350P.
 
@@ -49,19 +49,17 @@ For details, see [GPU partitioning support](#gpu-partitioning-support).
 
 ### AI inference and frameworks
 
-This release adds inference-ready vLLM Docker images and pip packages.
+This release enables support for the following frameworks:
 
-#### vLLM 0.2x.0 Docker images and pip packages
+* PyTorch 2.12.0
+* JAX 0.10.0
+* vLLM 0.23.0
+* SGLang 0.5.13, and
+* Tensorflow 2.21
 
-With ROCm 7.14.0, Docker images for running vLLM inference workloads are available. Images include vLLM 0.2x.0, PyTorch 2.11, and Python 3.14 on Ubuntu 24.04.
+The updated framework support replaces the previous PyTorch 2.9.1, JAX 0.8.2, vLLM 0.19.1, and SGLang 0.5.9 support.
 
-Architecture-specific images are available for:
-
-* AMD Instinct GPUs: gfx942 (MI325X, MI300X, MI300A) and gfx950 (MI355X, MI350X, MI350P)
-* AMD Radeon GPUs: gfx1100, gfx1101, gfx1102, gfx1200, gfx1201
-* AMD Ryzen AI APUs: gfx1150, gfx1151, gfx1152
-
-See [](../ai-inference/vllm) to get started.
+For details, see [AI ecosystem support](#ai-ecosystem-support).
 
 ### Developer tools, profiling, and validation
 
@@ -81,7 +79,7 @@ The following are notable enhancements to HIP:
 
 * **Faster HIP graph replay for asynchronous memory allocations**: HIP graph replay now reduces overhead for graphs that interleave asynchronous memory allocations with compute. Allocation nodes no longer block during replay — physical memory is reused across nodes instead of being mapped and unmapped on each launch, eliminating the gaps between kernels this pattern previously caused. For background on HIP graphs, see [Graph Management](https://rocm.docs.amd.com/projects/HIP/en/develop/reference/hip_runtime_api/modules/graph_management.html).
 
-For more information, see the [HIP section](#hip-714) in the ROCm component changelogs.
+For more information, see the [HIP section](#hip-7-14) in the ROCm component changelogs.
 
 #### ROCprofiler-SDK feature highlights
 
@@ -175,13 +173,13 @@ The following are notable enhancements to AMD SMI:
 
 * **Go bindings for CPU telemetry**: AMD SMI now exposes ESMI CPU functionality through its Go bindings, so Go applications can query CPU telemetry in-process without invoking external binaries or embedding C or Python runtimes. This simplifies integrating AMD CPU observability into Go-based control planes. For details, see [AMD SMI Go interface](https://rocm.docs.amd.com/projects/amdsmi/en/develop/how-to/amdsmi-go-lib.html).
 
-For more information, see the [AMD SMI section](#amd-smi-2650) in the ROCm component changelogs.
+For more information, see the [AMD SMI section](#amd-smi-26-5-0) in the ROCm component changelogs.
 
 #### RDC expands telemetry coverage for DME parity
 
 ROCm Data Center (RDC) adds 59 telemetry fields, bringing its metric coverage near parity with the Device Metrics Exporter (DME). New fields cover energy, temperature, clocks, memory, PCIe, engine activity, ECC, and health and throttle metrics. Some metrics require recent driver and hardware support. For the available field groups and how to monitor them, see [Using RDC features](https://rocm.docs.amd.com/projects/rdc/en/develop/how-to/using_RDC_features.html).
 
-For more information, see the [RDC section](#rdc-131) in the ROCm component changelogs.
+For more information, see the [RDC section](#rdc-1-3-1) in the ROCm component changelogs.
 
 #### ROCm Bandwidth Test (RBT) reaches end-of-life
 
@@ -216,13 +214,13 @@ rocBLAS and hipBLAS now support per-batch scalar coefficients for Level 2 batche
 
 S, D, C, and Z precision variants are available for all routines.
 
-For more information, see the [rocBLAS section](#rocblas-550) and [hipBLAS section](#hipblas-350) in the ROCm component changelogs.
+For more information, see the [rocBLAS section](#rocblas-5-5-0) and [hipBLAS section](#hipblas-3-5-0) in the ROCm component changelogs.
 
-#### Per-batch alpha for `axpy_batched` and `axpy_strided_batched`
+#### Per-batch alpha for axpy_batched and axpy_strided_batched
 
 rocBLAS adds per-batch alpha support for `axpy_batched`, `axpy_strided_batched`, and their `_ex` variants via `rocblas_set_batch_alpha_stride` in device pointer mode.
 
-For more information, see the [rocBLAS section](#rocblas-550) in the ROCm component changelogs.
+For more information, see the [rocBLAS section](#rocblas-5-5-0) in the ROCm component changelogs.
 
 #### hipSPARSE feature highlights
 
@@ -351,6 +349,10 @@ See the [AMD GPU partitioning](https://instinct.docs.amd.com/projects/amdgpu-doc
 ## AI ecosystem support
 
 ROCm 7.14.0 provides optimized support for popular deep learning frameworks and AI inference engines. The following table lists supported frameworks and libraries, their compatible operating systems, and validated versions.
+
+:::{important}
+The following table is a general overview of supported frameworks and AI inference engines. Actual support might vary by AMD GPU or APU. Use the {doc}`Compatibility matrix </compatibility/compatibility-matrix>` to verify support for your specific setup.
+:::
 
 ```{include} ./include/ai-ecosystem-support-table.html
 :parser: myst
