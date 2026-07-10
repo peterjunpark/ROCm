@@ -167,6 +167,11 @@
     - `hipDrvMemDiscardAndPrefetchBatchAsync` driver API variant of `hipMemDiscardAndPrefetchBatchAsync`, using `hipDeviceptr_t` pointers. Mirrors `cuMemDiscardAndPrefetchBatchAsync`.
 - Introduced an exported no-op function `__hipOnError(void *err_info)`, invoked from `HIP_UPDATE_ERROR_STATE` when an API returns a non-success status, enabling debuggers to set breakpoints on a stable symbol. The symbol is exported on ELF (Executable and Linkable Format) platforms via a version script and on Windows via amdhip.def. The `err_info` parameter is a pointer to a struct containing the error code, name, and descriptive string.
 
+##### Optimized
+
+- Enhanced HIP graph replay performance for asynchronous memory allocations. HIP graph replay now reduces overhead for graphs that interleave asynchronous memory allocations with compute. Allocation nodes no longer block during replay — physical memory is reused across nodes instead of being mapped and unmapped on each launch, eliminating the gaps between kernels this pattern previously caused.
+- Enhanced debug information for illegal memory access errors. In multi-node and multi-GPU environments, it can be difficult to identify the source of a fault. The HIP runtime now includes the hostname, GPU index, and kernel name in GPU fault error messages, improving issue identification and debugging.
+
 ##### Resolved issues
 
 - Resolved an issue where graph allocations that escape their originating graph (i.e., allocation nodes without a corresponding free node) failed to remain valid after the graph and its executable
@@ -187,10 +192,9 @@
 - Fixed a deadlock caused by `hipMemMap` and `hipMemUnmap` operations on the null stream that could lead to hangs. The HIP runtime now implements proper synchronization to all devices with access to a mapped pointer before unmapping it.
 - Resolved an issue where streams created within an execution context remained usable after the context was destroyed, which did not align with CUDA behavior. The HIP runtime now flags such streams as detached when their execution context is destroyed and returns `hipErrorStreamDetached` if they are subsequently used.
 
-##### Optimized
+##### Known issues
 
-- Enhanced debug information for illegal memory access errors. In multi-node and multi-GPU environments, it can be difficult to identify the source of a fault.
-  The HIP runtime now includes the hostname, GPU index, and kernel name in GPU fault error messages, improving issue identification and debugging.
+- Kernels using `cooperative_groups::reduce()` with block dimensions whose .y or .z component is different from 1 may produce incorrect results or fail to launch.
 
 #### **hipBLAS** (3.5.0)
 

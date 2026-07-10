@@ -99,6 +99,8 @@ In ROCm 7.14.0, SPM support is available through the `rocprofiler-sdk` API and `
 SPM is a beta capability under active development and may affect system stability, including unexpected reboots. By enabling SPM via the `ROCPROFILER_SPM_BETA_ENABLED` environment variable, you accept these risks.
 :::
 
+If an SPM session is terminated abruptly (for example, with `Ctrl+C`), KFD-side SPM resources might not be released cleanly. When this happens, the KFD-side SPM resources can remain in a stale state, which might cause subsequent SPM profiling sessions to hang or fail to start with the error `Unable to acquire KFD thread: 4096`. To recover, terminate any lingering sessions manually if it is still running. If the error persists, a system reboot is currently required to restore the GPU to a usable state for SPM profiling. This issue is under active investigation for a fix.
+
 ##### Selective ROCTx region profiling with counter collection
 
 `rocprofiler-sdk` and `rocprofv3` include support for profiling selected ROCTx regions, allowing users to focus profiling on specific application phases instead of collecting data for the entire workload. By inserting `roctxProfilerPause` and `roctxProfilerResume` markers in application code and using the `--selected-regions` option, only the GPU activity within the marked regions is captured. This helps reduce profiling noise and output size while making it easier to isolate performance behavior in targeted code paths — particularly useful for long-running workloads where full-execution traces are impractical.
@@ -387,6 +389,10 @@ ROCm known issues are noted on {fab}`github` [GitHub](https://github.com/ROCm/RO
 ### PyTorch might display a warning when libnuma is not installed
 
 PyTorch might display a warning when importing on Linux if the system libnuma package is not installed on some Radeon graphics products, such as Radeon AI PRO R9600D. As a workaround, install the system libnuma package or configure the library path to use the ROCm-bundled NUMA libraries.
+
+### ROCProfiler SPM sessions can remain in a stale state after abrupt termination 
+
+If a Streaming Performance Monitors (SPM) session is terminated abruptly (for example, with `Ctrl+C`), KFD-side SPM resources might not be released cleanly. When this happens, the KFD-side SPM resources can remain in a stale state, which might cause subsequent SPM profiling sessions to hang or fail to start with the error `Unable to acquire KFD thread: 4096`. To recover, terminate any lingering sessions manually if it is still running. If the error persists, a system reboot is currently required to restore the GPU to a usable state for SPM profiling. This issue is under active investigation for a fix.
 
 ## ROCm resolved issues
 
