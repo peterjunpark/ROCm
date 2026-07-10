@@ -141,18 +141,15 @@ html_css_files = ["legacy/vllm-benchmark.css"]
 external_projects_current_project = "rocm"
 html_theme = "rocm_docs_theme"
 html_theme_options = {
-    "flavor": "generic",
-    "header_title": f"ROCm™ {ROCM_VERSION}",
-    "header_link": f"https://rocm.docs.amd.com/en/7.13.0-preview/index.html",
-    "version_list_link": f"https://rocm.docs.amd.com/en/7.13.0-preview/release/versions.html",
-    "nav_secondary_items": {
-        "GitHub": "https://github.com/ROCm/ROCm",
-        "Community": "https://github.com/ROCm/ROCm/discussions",
-        "Blogs": "https://rocm.blogs.amd.com/",
-        "System and Infra Docs": "https://instinct.docs.amd.com/",
-        "Support": "https://github.com/ROCm/ROCm/issues/new/choose",
-    },
+    "flavor": "rocm",
     "link_main_doc": False,
+    "repository_url": "https://github.com/ROCm/ROCm",
+    "use_repository_button": True,
+    "use_issues_button": True,
+    # "secondary_sidebar_items": {
+        # "training/Primus**": ["framework-version-toc2"],
+        # "**": ["framework-version-toc2"],
+    # },
 }
 html_title = f"AMD ROCm {ROCM_VERSION}"
 

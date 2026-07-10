@@ -8,13 +8,15 @@
 defaults:
     numbered: False
     maxdepth: 6
-root: index.rst
+root: index.md
 subtrees:
     - entries:
           - file: about/release-notes.md
             title: Release notes
           - file: about/transition-guide-TheRock.md
             title: Transition guide
+          - file: about/what-is-rocm.rst
+            title: What is ROCm?
           - file: compatibility/compatibility-matrix.rst
             title: Compatibility matrix
     - caption: Install
@@ -132,39 +134,19 @@ subtrees:
                   title: ROCm Validation Suite (RVS)
                 - url: https://rocm.docs.amd.com/projects/TransferBench/en/latest/
                   title: TransferBench
-    - caption: Deep learning frameworks
-      entries:
-          - file: frameworks/pytorch/install.rst
-            title: Install PyTorch
-          - file: frameworks/jax/install.rst
-            title: Install JAX
-    - caption: AI inference
-      entries:
-          - file: ai-inference/vllm.rst
-            title: vLLM inference and serving
-          - file: ai-inference/comfyui.rst
-            title: ComfyUI image generation
-          - file: ai-inference/xdit.rst
-            title: xDiT diffusion inference
-          - file: ai-inference/conceptual/index.rst
-            title: Inference optimization
+          - file: ai-ecosystem.md
+            title: AI ecosystem
             entries:
-                - file: ai-inference/conceptual/llm-inference-frameworks.rst
-                  title: LLM inference frameworks
-                - file: ai-inference/conceptual/hugging-face-models.rst
-                  title: Hugging Face models
-                - file: ai-inference/conceptual/model-quantization.rst
-                  title: Model quantization techniques
-                - file: ai-inference/conceptual/model-acceleration-libs.rst
-                  title: Model acceleration libraries
-                - file: ai-inference/conceptual/optimize-with-composable-kernel.md
-                  title: Optimize with Composable Kernel
-                - file: ai-inference/conceptual/optimize-triton-kernels.rst
-                  title: Optimize Triton kernels
-                - file: ai-inference/conceptual/workload-optimization.rst
-                  title: Workload optimization
-                - file: ai-inference/conceptual/vllm-v1-optimization.rst
-                  title: vLLM V1 performance optimization
+                - url: https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/frameworks/pytorch/install.html
+                  title: PyTorch
+                - url: https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/frameworks/jax/install.html
+                  title: JAX
+                - url: https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/inference/vllm.html
+                  title: vLLM
+                - url: https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/inference/sglang.html
+                  title: SGLang
+                - url: https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/inference/ATOM/docs/index.html
+                  title: ATOM
     - caption: Tutorials
       entries:
           - url: https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/

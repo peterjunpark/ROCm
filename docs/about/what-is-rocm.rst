@@ -28,26 +28,6 @@ performance and system utilities, and optimized math and compute libraries. The
 wider ROCm ecosystem includes ROCm‑enabled HPC applications and deep learning
 frameworks such as PyTorch.
 
-**Some key features:**
-
-* **Open source** -- Transparent development driven by community feedback
-* **Cross‑platform** -- Supports Linux and Windows environments
-* **Comprehensive** -- End‑to‑end toolchain from compilers to libraries
-* **Performance‑focused** -- Tuned for AMD Instinct™, AMD Radeon™, and AMD Ryzen™ devices
-
-.. raw:: html
-   :file: data/landing-page/rocm-ontology.html
-
-ROCm supports AMD GPU architectures spanning data center, workstation, and APU
-product lines. TheRock enables a unified ROCm user‑space experience across
-devices.
-
-* **AMD Instinct GPUs** -- Purpose‑built for large‑scale compute, AI training, and HPC workloads.
-
-* **AMD Radeon GPUs and AMD Ryzen AI APUs** -- Designed for workstations, desktop computing, and edge AI applications.
-
-See :ref:`release-supported-hw` for the complete list of supported hardware.
-
 ROCm Core SDK
 -------------
 
@@ -56,7 +36,7 @@ ecosystem — runtimes, compilers, math libraries, and system utilities for GPGP
 computing. See :doc:`/components/core` for more information.
 
 .. raw:: html
-   :file: data/landing-page/rocm-sdk-arch.html
+   :file: ../data/landing-page/rocm-sdk-arch.html
 
 ROCm Extra components are supplementary tools for benchmarking, validating, and managing ROCm
 deployments. These tools are not required for GPU application development but are useful
