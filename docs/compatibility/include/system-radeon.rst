@@ -147,4 +147,14 @@
 
       .. matrix-cell::
 
-         `26.5.1 <https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-5-1.html>`__
+         `26.6.4 <https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-4.html>`__
+
+   .. matrix-row::
+      :show-cond: os=windows
+
+      .. matrix-cell:: Supported Windows OEM Driver version
+         :header:
+
+      .. matrix-cell::
+
+         26.10.28

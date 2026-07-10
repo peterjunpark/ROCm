@@ -228,9 +228,14 @@
         <p>
           <strong>AMD Software: Adrenalin Edition</strong>
           <a
-            href="https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-5-1.html"
+            href="https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-4.html"
             target="_blank"
-          >26.5.1</a>
+          >26.6.4</a>
+        </p>
+        <p>
+          <strong>Windows OEM Driver</strong><br>
+          26.10.28
+        </p>
       </td>
     </tr>
   </tbody>
@@ -261,9 +266,13 @@
         <p>
           <strong>AMD Software: Adrenalin Edition</strong>
           <a
-            href="https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-5-1.html"
+            href="https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-4.html"
             target="_blank"
-          >26.5.1</a>
+          >26.6.4</a>
+        </p>
+        <p>
+          <strong>Windows OEM Driver</strong><br>
+          26.10.28
         </p>
       </td>
     </tr>
