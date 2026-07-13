@@ -201,9 +201,9 @@ For more details, refer to the [ROCm Bandwidth Test](https://rocm.docs.amd.com/p
 
 This release updates ROCm math, sparse compute, and communication libraries with additional routines, expanded data type support, and performance improvements. It also adds the hipFile storage library.
 
-#### hipFile GPUDirect Storage support
+#### hipFile direct storage I/O support
 
-hipFile is now included in the ROCm Core SDK, providing GPUDirect Storage capabilities on AMD GPUs as part of AMD Infinity Storage and enabling direct data transfers between storage and GPU memory. hipFile enables storage-intensive workloads to bypass host-side copies, reducing latency and command overhead for high-throughput GPU I/O.
+hipFile is now included in the ROCm Core SDK, enabling direct data transfers between storage and GPU memory as part of AMD Infinity Storage. hipFile enables storage-intensive workloads to bypass host-side copies, reducing latency and command overhead for high-throughput GPU I/O.
 
 hipFile also adds direct GPU-to-storage I/O for files with alignment requirements finer than 4 KB. It reads each file's reported memory and offset alignment requirements (using `statx`) and takes the direct path whenever the I/O meets those requirements, avoiding the extra host-side copy. This improves throughput and latency and adds finer-grained support for very small I/O operations.
 
