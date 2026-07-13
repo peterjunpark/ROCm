@@ -68,7 +68,7 @@
 
 .. selected:: os=wsl
 
-   Installing ROCm in a Windows Subsystem for Linux (WSL) environment requires
+   Installing ROCm in a Windows Subsystem for Linux (WSL2) environment requires
    building the AMD ROCDXG library from source. See
    `<https://github.com/ROCm/librocdxg>`__ for more information.
 

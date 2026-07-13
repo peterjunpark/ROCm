@@ -117,34 +117,34 @@ Prerequisites
 .. selected:: os=wsl
 
    .. selected:: ubuntu-ver=26.04
-      :heading: Install WSL 2 and Ubuntu 26.04
+      :heading: Install WSL2 and Ubuntu 26.04
       :heading-level: 3
 
-      Install WSL 2 and Ubuntu 26.04 on your Windows system. See `How to install Linux on Windows
-      with WSL (Microsoft Learn)
+      Install WSL2 and Ubuntu 26.04 on your Windows system. See `How to install Linux on Windows
+      with WSL2 (Microsoft Learn)
       <https://learn.microsoft.com/en-us/windows/wsl/install>`__ for instructions.
 
-      Complete the following instructions in your WSL environment.
+      Complete the following instructions in your WSL2 environment.
 
    .. selected:: ubuntu-ver=24.04
-      :heading: Install WSL 2 and Ubuntu 24.04
+      :heading: Install WSL2 and Ubuntu 24.04
       :heading-level: 3
 
-      Install WSL 2 and Ubuntu 24.04 on your Windows system. See `How to install Linux on Windows
-      with WSL (Microsoft Learn)
+      Install WSL2 and Ubuntu 24.04 on your Windows system. See `How to install Linux on Windows
+      with WSL2 (Microsoft Learn)
       <https://learn.microsoft.com/en-us/windows/wsl/install>`__ for instructions.
 
-      Complete the following instructions in your WSL environment.
+      Complete the following instructions in your WSL2 environment.
 
    .. selected:: ubuntu-ver=22.04
-      :heading: Install WSL 2 and Ubuntu 22.04
+      :heading: Install WSL2 and Ubuntu 22.04
       :heading-level: 3
 
-      Install WSL 2 and Ubuntu 22.04 on your Windows system. See `How to install Linux on Windows
-      with WSL (Microsoft Learn)
+      Install WSL2 and Ubuntu 22.04 on your Windows system. See `How to install Linux on Windows
+      with WSL2 (Microsoft Learn)
       <https://learn.microsoft.com/en-us/windows/wsl/install>`__ for instructions.
 
-      Complete the following instructions in your WSL environment.
+      Complete the following instructions in your WSL2 environment.
 
 .. =============================================================== OEM KERNEL ==
 
@@ -484,7 +484,7 @@ Prerequisites
 
       .. selected:: os=wsl
 
-         To build the ROCDXG library for WSL, you'll need GCC 11.4 or later and
+         To build the ROCDXG library for WSL2, you'll need GCC 11.4 or later and
          CMake 3.15 or later.
 
          .. code-block:: bash

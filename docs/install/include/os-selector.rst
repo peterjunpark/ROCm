@@ -176,7 +176,7 @@
                :value: windows
                :width: 3
 
-            .. selector-option:: WSL
+            .. selector-option:: WSL2
                :value: wsl i=pkgman
                :width: 3
 
@@ -214,7 +214,7 @@
             :value: windows
             :width: 3
 
-         .. selector-option:: WSL
+         .. selector-option:: WSL2
             :value: wsl i=pkgman
             :width: 3
 
@@ -267,7 +267,7 @@
                :value: windows
                :width: 3
 
-            .. selector-option:: WSL
+            .. selector-option:: WSL2
                :value: wsl i=pkgman
                :width: 3
 
@@ -315,7 +315,7 @@
             :value: windows
             :width: 4
 
-         .. selector-option:: WSL
+         .. selector-option:: WSL2
             :value: wsl i=pkgman
             :width: 4
 
