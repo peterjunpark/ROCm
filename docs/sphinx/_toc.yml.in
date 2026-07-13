@@ -127,6 +127,15 @@ subtrees:
                         title: ROCm Data Center Tool (RDC)
                       - url: ${project:rocminfo}
                         title: rocminfo
+          - file: components/hpc-sdk/index.rst
+            title: ROCm HPC-SDK
+            entries:
+                - file: components/hpc-sdk/install.rst
+                  title: Install HPC-SDK
+                - url: https://rocm.docs.amd.com/projects/hipTensor/en/latest/
+                  title: hipTensor
+                - url: https://rocm.docs.amd.com/projects/rocALUTION/en/latest/
+                  title: rocALUTION
           - file: components/extras.rst
             title: ROCm Extras
             entries:
