@@ -1,5 +1,5 @@
 <div align="center">
-<img src="docs/data/amd-rocm-logo.png" width="200px" alt="ROCm logo">
+<img src="docs/images/amd-rocm-logo.png" width="200px" alt="ROCm logo">
 
 <h3 align="center">
 Open-source stack designed for GPU computation
