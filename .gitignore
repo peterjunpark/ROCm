@@ -5,15 +5,14 @@ __pycache__
 
 # documentation artifacts
 _build/
+_data
 _images/
-__pycache__/
 _static/
 _templates/
 _toc.yml
 docBin/
 _doxygen/
 _readthedocs/
-__pycache__/
 
 # avoid duplicating contributing.md due to conf.py
 docs/contribute/index.md
