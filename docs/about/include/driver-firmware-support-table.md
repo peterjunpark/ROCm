@@ -10,7 +10,7 @@
         <p>AMD device</p>
       </th>
       <th class="head">
-        <p>Firmware</p>
+        <p>PLDM Bundle (Firmware)</p>
       </th>
       <th class="head">
         <p>Linux driver</p>
@@ -93,7 +93,7 @@
         <p>Instinct MI350P</p>
       </td>
       <td style="vertical-align: middle">
-        <p>IFWI 00189938</p>
+        <p>IFWI PRD1008B</p>
       </td>
     </tr>
     <tr>
@@ -101,7 +101,7 @@
         <p>Instinct MI325X</p>
       </td>
       <td style="vertical-align: middle">
-        <p>PLDM bundle 01.25.06.08</p>
+        <p>PLDM bundle 01.25.08.08</p>
       </td>
     </tr>
     <tr>
@@ -109,7 +109,7 @@
         <p>Instinct MI300X</p>
       </td>
       <td>
-        <p>PLDM bundle 01.26.06.05</p>
+        <p>PLDM bundle 01.25.06.05</p>
       </td>
     </tr>
     <tr>
