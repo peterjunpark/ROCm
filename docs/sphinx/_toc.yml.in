@@ -68,14 +68,14 @@ subtrees:
                         title: rocBLAS
                       - url: ${project:rocfft}
                         title: rocFFT
+                      - url: ${project:rocprim}
+                        title: rocPRIM
                       - url: ${project:rocrand}
                         title: rocRAND
                       - url: ${project:rocsolver}
                         title: rocSOLVER
                       - url: ${project:rocsparse}
                         title: rocSPARSE
-                      - url: ${project:rocprim}
-                        title: rocPRIM
                       - url: ${project:rocthrust}
                         title: rocThrust
                       - url: ${project:rocwmma}
@@ -151,21 +151,21 @@ subtrees:
           - file: ai-ecosystem.md
             title: AI ecosystem
             entries:
-                - url: https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/frameworks/pytorch/install.html
+                - url: https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/frameworks/pytorch/install.html
                   title: PyTorch
-                - url: https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/frameworks/jax/install.html
+                - url: https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/frameworks/jax/install.html
                   title: JAX
-                - url: https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/inference/vllm.html
+                - url: https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/vllm.html
                   title: vLLM
-                - url: https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/inference/sglang.html
+                - url: https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/sglang.html
                   title: SGLang
-                - url: https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/inference/ATOM/docs/index.html
+                - url: https://rocm.docs.amd.com/projects/atom
                   title: ATOM
     - caption: Tutorials
       entries:
           - url: https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/
             title: AI Developer Hub
-          - url: https://github.com/ROCm/rocm-examples/tree/release/therock-7.13
+          - url: https://github.com/ROCm/rocm-examples/tree/release/therock-7.14
             title: ROCm examples
     - caption: Reference
       entries:
