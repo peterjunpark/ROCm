@@ -19,6 +19,6 @@ for verifying hardware health, measuring system performance, and managing GPU fl
   and AMD GPU hardware. Includes tests for GPU functionality, memory, power behavior, and
   peer-to-peer communication, helping diagnose installation issues and hardware faults.
 
-* :doc:`TransferBench <transferbench:index>` -- A utility for benchmarking simultaneous memory transfers between user-specified devices (CPUs, GPUs, and NICs).
+.. * :doc:`TransferBench <transferbench:index>` -- A utility for benchmarking simultaneous memory transfers between user-specified devices (CPUs, GPUs, and NICs).
 
 * More coming soon.
