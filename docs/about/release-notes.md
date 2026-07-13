@@ -97,7 +97,7 @@ In ROCm 7.14.0, SPM support is available through the `rocprofiler-sdk` API and `
 
 Supported hardware: AMD Instinct MI300X, MI325X, MI350X, and MI355X GPUs.
 
-For more information, see the [SPM API reference guide](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/api-reference/spm.html) and the [SPM usage guide for `rocprofv3`](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/how-to/using-spm.html).
+For more information, see the [SPM API reference guide](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/api-reference/spm.html) and the [SPM usage guide](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/how-to/using-spm.html) for `rocprofv3`.
 
 :::{warning}
 SPM is a beta capability under active development and may affect system stability, including unexpected reboots. Do not use in production environments. See [ROCm known issues](#rocm-known-issues) for current limitations.
