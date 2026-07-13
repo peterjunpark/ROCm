@@ -81,11 +81,11 @@
 
       .. matrix-cell::
 
-         26.04 (GA kernel: 7.0)
+         Ubuntu 26.04 (GA kernel: 7.0)
 
-         24.04.4 (GA kernel: 6.8)
+         Ubuntu 24.04.4 (GA kernel: 6.8)
 
-         22.04.5 (GA kernel: 5.15)
+         Ubuntu 22.04.5 (GA kernel: 5.15)
 
    .. matrix-row::
       :show-cond: os=rhel
@@ -95,9 +95,9 @@
 
       .. matrix-cell::
 
-         10.1 (kernel: 6.12.0-124)
+         RHEL 10.2 (kernel: 6.17)
 
-         9.7 (kernel: 5.14.0-611)
+         RHEL 9.8 (kernel: 6.17)
 
    .. matrix-row::
       :show-cond: os=windows
@@ -114,6 +114,8 @@
          :header:
 
       .. matrix-cell::
+
+         `31.40.0 <https://instinct.docs.amd.com/projects/amdgpu-docs/en/docs-30.30.3/documentation/release-notes.html>`__
 
          `31.30.0 <https://instinct.docs.amd.com/projects/amdgpu-docs/en/31.30.0-preview/documentation/release-notes.html>`__
 

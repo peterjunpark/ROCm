@@ -106,6 +106,10 @@
       .. matrix-cell::
          :show-cond: gpu=mi350p
 
+         RHEL 10.2 (kernel: 6.17)
+
+         RHEL 9.8 (kernel: 6.17)
+
          RHEL 9.6 (kernel: 5.14.0-570)
 
       .. matrix-cell::
@@ -133,6 +137,9 @@
          Debian 13 (kernel: 6.12)
 
          Debian 12 (kernel: 6.1.0)
+
+      .. matrix-cell:: Debian 13 (kernel: 6.12)
+         :show-cond: gpu=mi350p
 
       .. matrix-cell:: Debian 12 (kernel: 6.1.0)
          :show-cond: gpu=mi300a gpu=mi250x gpu=mi250
@@ -177,7 +184,7 @@
          :header:
 
       .. matrix-cell::
-         :show-cond: gpu=mi355x gpu=mi350x gpu=mi325x gpu=mi300x gpu=mi300a gpu=mi250x gpu=mi250 gpu=mi210
+         :show-cond: gpu=mi355x gpu=mi350x gpu=mi350p gpu=mi325x gpu=mi300x gpu=mi300a gpu=mi250x gpu=mi250 gpu=mi210
 
          SLES 16.0 (kernel: 6.12)
 
