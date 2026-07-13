@@ -69,7 +69,7 @@ This release improves ROCm developer workflows with new HIP APIs, expanded profi
 
 The following are notable enhancements to HIP:
 
-* **HIP execution context support**: HIP now supports Execution Context APIs, enabling GPU compute resource partitioning and lightweight execution-context management on a single device. Similar to CUDA Green Contexts, these APIs allow you to query and partition device resources (primarily CU count for HIP runtime), create execution contexts on resource subsets, and create streams and events scoped to those contexts. For more information, see [Execution Contexts](https://rocmdocs.amd.com/projects/HIP/en/develop/how-to/hip_runtime_api.html).
+* **HIP execution context support**: HIP now supports Execution Context APIs, enabling GPU compute resource partitioning and lightweight execution-context management on a single device. These APIs allow you to query and partition device resources (primarily CU count for HIP runtime), create execution contexts on resource subsets, and create streams and events scoped to those contexts. For more information, see [Execution Contexts](https://rocmdocs.amd.com/projects/HIP/en/develop/how-to/hip_runtime_api.html).
 
 * **HIP API additions for CUDA parity**:
 
