@@ -113,6 +113,9 @@ documentation.
       - Manage logging, debugging, offline tuning, and stream-K configuration
         for hipBLASLt.
 
+    * - :doc:`hipFile <hipfile:reference\hipFile-environment-variables>`
+      - Control compatibility modes, supported file systems, and statistics collection.
+
     * - :doc:`hipSPARSELt <hipsparselt:reference/env-variables>`
       - Control logging, debugging and performance monitoring of hipSPARSELt.
 

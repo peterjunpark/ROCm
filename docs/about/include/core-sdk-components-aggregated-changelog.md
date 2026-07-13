@@ -2,7 +2,7 @@
 
 ##### Added
 
-- NIC processor discovery and information API surface.  
+- Added NIC processor discovery and information API surface.  
   - New C APIs: `amdsmi_get_nic_processor_handles()`, `amdsmi_get_nic_device_bdf()`, `amdsmi_get_nic_fw_info()`, `amdsmi_get_nic_port_statistics()`, and `amdsmi_get_nic_vendor_statistics()`.
   - `amdsmi_get_nic_processor_handles()` enumerates NIC processors by socket; the BDF, firmware, and port/vendor statistics getters are reserved and currently return `AMDSMI_STATUS_NOT_YET_IMPLEMENTED`.
 
@@ -11,29 +11,29 @@
   - `amd-smi monitor` provides APU temperature and clock fallbacks when standard dGPU sensors report N/A.
   - On APU systems, the `--pcie`, `--ecc-blocks`, `--voltage-curve`, `--overdrive`, `--xgmi-err`, and `--energy` sections are not applicable and are omitted.
 
-- `--partition` flag to `amd-smi metric` for partition-scoped metrics.  
+- Added the `--partition` flag to `amd-smi metric` for partition-scoped metrics.  
   - The `-X`/`--partition` flag switches the temperature, clock, and usage categories to partition-level data sources; throttle metrics are already partition-aware.
   - Reuses the existing temperature/clock/usage section schema and adds partition-only AID/XCP/MID entries within it; socket-only fields with no partition equivalent report `N/A`.
   - When `--partition` is set with `--temperature`: adds MID and per-XCP/XCD temperatures.
   - When `--partition` is set with `--clock`: sources GFX/VCLK/DCLK/SOCCLK from partition metrics and adds per-AID and per-XCP clock entries with their limits.
   - When `--partition` is set with `--usage`: reports per-XCP GFX/JPEG/VCN activity.
 
-- `--folder` support to `amd-smi ras --afid`.  
+- Added `--folder` support to `amd-smi ras --afid`.  
   - `amd-smi ras --afid --folder <DIR>` decodes every `*.cper` in a directory and prints a `file_name | list of afids` table (or a JSON array under `--json`).
   - Records with no AFIDs show `-`; files that cannot be parsed show `decode failed`.
 
 - Wrapped ESMI functions in `amdsmi_go_shim`.  
   - Go callers can now access ESMI CPU functionality through the existing `amdsmi_go_shim` interface.
 
-- GPU partitioning conceptual guide and usage examples.  
+- Added a GPU partitioning conceptual guide and usage examples.  
   - New guide at `docs/conceptual/partition.md` covering accelerator partition modes (SPX/DPX/TPX/QPX/CPX), memory partition modes (NPS1/NPS2/NPS4/NPS8), API generations, device enumeration after partition, and BDF encoding.
   - New C++ example: `example/amd_smi_partition_example.cc`.
   - New Python example: `example/amd_smi_partition_example.py`.
 
-- New alias for `amd-smi set -C/--compute-partition` as `amd-smi set --accelerator-partition`.  
+- Added an alias for `amd-smi set -C/--compute-partition` as `amd-smi set --accelerator-partition`.  
   - Compute and accelerator partitions are fundamentally the same, so users can now use `--accelerator-partition` to set the compute/accelerator partition.
 
-- Input validation for CPU `set` commands.  
+- Added input validation for CPU `set` commands.  
   - Out-of-range values are now rejected with a clear error showing the valid range:
     - `--cpu-xgmi-link-width` (0-1)
     - `--cpu-gmi3-link-width` (0-2)
@@ -41,17 +41,17 @@
     - `--cpu-disable-apb` (0-3)
   - `--cpu-pwr-limit` values above the socket maximum are now reduced to the maximum and applied, with a warning.
 
-- Compute partition memory allocation mode API.  
+- Added a compute partition memory allocation mode API.  
   - New `amd-smi static --partition` output includes `COMPUTE_PARTITION_MEM_ALLOC_MODE` field.
   - New `amd-smi set --compute-partition-mem-alloc-mode [CAPPING|ALL]` to control memory allocation mode (requires sudo).
   - New APIs: `amdsmi_get_gpu_compute_partition_mem_alloc_mode()`, `amdsmi_set_gpu_compute_partition_mem_alloc_mode()`.
   - New enum: `amdsmi_compute_partition_mem_alloc_mode_t` (`AMDSMI_COMPUTE_PARTITION_MEM_ALLOC_CAPPING`, `AMDSMI_COMPUTE_PARTITION_MEM_ALLOC_ALL`).
   - Reads/writes sysfs: `/sys/class/drm/cardN/device/compute_partition_mem_alloc_mode`.
 
-- `AMDSMI_LINK_TYPE_NUMA` and `AMDSMI_LINK_TYPE_XNUMA` to `amdsmi_link_type_t`.  
+- Added `AMDSMI_LINK_TYPE_NUMA` and `AMDSMI_LINK_TYPE_XNUMA` to `amdsmi_link_type_t`.  
   - Represent NIC-to-GPU links that cross different PCIe switches on the same CPU (NUMA) or across CPUs (XNUMA).
 
-- PID-grouped process listing across GPUs.  
+- Added PID-grouped process listing across GPUs.  
   - `amd-smi process --sort-by-pid` and `amd-smi monitor --sort-by-pid` group output by PID, merging each PID's per-GPU usage into one row.
   - New C and Python API `amdsmi_get_gpu_process_list_by_pid()`.
 
@@ -76,7 +76,7 @@
 
 ##### Optimized
 
-- Python test runner behavior:  
+- Improved Python test runner behavior:  
   - Added `-l`/`--list` flag to list all available tests and exit without running them.
   - Added shadow detection: if `amdsmi` loads from a path other than the resolved expected path (`AMDSMI_PATH`, `ROCM_HOME`, `ROCM_PATH`, or `/opt/rocm` default), tests exit early with a clear error message and remediation steps.
   - Non-root invocations now exit with code 1 immediately with a clear message instead of failing mid-test.
@@ -140,27 +140,27 @@
 
 ##### Added
 
-- New HIP APIs
-  - Execution Context Management: Support for the following APIs for parity with corresponding CUDA APIs.
-    - `hipDeviceGetDevResource` returns the device resource of a given type for a device
-    - `hipDevSmResourceSplitByCount` splits SM resources into groups with at least a minimum SM count
-    - `hipDevSmResourceSplit` splits SM resources into groups with configurable per-group parameters
-    - `hipDevResourceGenerateDesc` generates a resource descriptor from one or more device resources
-    - `hipGreenCtxCreate` creates a green context from a resource descriptor
-    - `hipExecutionCtxDestroy` destroys an execution context
-    - `hipDeviceGetExecutionCtx` returns the default execution context for a device
-    - `hipExecutionCtxStreamCreate` creates a stream on an execution context with specified flags and priority
-    - `hipExecutionCtxGetDevResource` returns the device resource of a given type for an execution context
-    - `hipExecutionCtxGetDevice` returns the device associated with an execution context
-    - `hipExecutionCtxGetId` returns a unique identifier for an execution context
-    - `hipStreamGetDevResource` returns the device resource of a given type for a stream
-    - `hipExecutionCtxRecordEvent` records an event on an execution context
-    - `hipExecutionCtxSynchronize` blocks until all work on an execution context has completed
-    - `hipExecutionCtxWaitEvent` makes an execution context wait on an event
-  - Module Management: Support for the following APIs for parity with corresponding CUDA APIs.
+- New HIP APIs:
+  - Execution Context Management: Support for the following APIs for parity with corresponding CUDA APIs:
+    - `hipDeviceGetDevResource` returns the device resource of a given type for a device.
+    - `hipDevSmResourceSplitByCount` splits SM resources into groups with at least a minimum SM count.
+    - `hipDevSmResourceSplit` splits SM resources into groups with configurable per-group parameters.
+    - `hipDevResourceGenerateDesc` generates a resource descriptor from one or more device resources.
+    - `hipGreenCtxCreate` creates a green context from a resource descriptor.
+    - `hipExecutionCtxDestroy` destroys an execution context.
+    - `hipDeviceGetExecutionCtx` returns the default execution context for a device.
+    - `hipExecutionCtxStreamCreate` creates a stream on an execution context with specified flags and priority.
+    - `hipExecutionCtxGetDevResource` returns the device resource of a given type for an execution context.
+    - `hipExecutionCtxGetDevice` returns the device associated with an execution context.
+    - `hipExecutionCtxGetId` returns a unique identifier for an execution context.
+    - `hipStreamGetDevResource` returns the device resource of a given type for a stream.
+    - `hipExecutionCtxRecordEvent` records an event on an execution context.
+    - `hipExecutionCtxSynchronize` blocks until all work on an execution context has completed.
+    - `hipExecutionCtxWaitEvent` makes an execution context wait on an event.
+  - Module Management: Support for the following APIs for parity with corresponding CUDA APIs:
     - `hipLibraryGetGlobal` returns the device pointer and size of a `__device__` global defined in a `hipLibrary_t`. Mirrors `cudaLibraryGetGlobal` / `cuLibraryGetGlobal`.
     - `hipLibraryGetManaged` returns the host pointer and size of a `__managed__` variable defined in a `hipLibrary_t`. Mirrors `cudaLibraryGetManaged` / `cuLibraryGetManaged`.
-  - Memory Management: Support for the following APIs for parity with corresponding CUDA APIs.
+  - Memory Management: Support for the following APIs for parity with corresponding CUDA APIs:
     - `hipMemDiscardBatchAsync` discards a batch of memory ranges asynchronously, allowing the runtime to reclaim resources. Mirrors `cudaMemDiscardBatchAsync`.
     - `hipDrvMemDiscardBatchAsync` driver API variant of `hipMemDiscardBatchAsync`, using `hipDeviceptr_t` pointers. Mirrors `cuMemDiscardBatchAsync`.
     - `hipMemDiscardAndPrefetchBatchAsync` combines discard and prefetch in a single call, enabling the runtime to optimize data movement. Mirrors `cudaMemDiscardAndPrefetchBatchAsync`.
@@ -222,7 +222,7 @@
 
 ##### Added
 
-- Support for the gfx1250 architecture.
+- Added support for the gfx1250 architecture.
 
 ##### Upcoming changes
 
@@ -232,13 +232,13 @@
 
 ##### Added
 
-- Support for the gfx1250 architecture.
+- Added support for the gfx1250 architecture.
 
 #### **hipRAND** (3.4.0)
 
 ##### Added
 
-- Support for the gfx1250 architecture.
+- Added support for the gfx1250 architecture.
 
 #### **hipSOLVER** (3.5.0)
 
@@ -285,23 +285,23 @@
 
 ##### Added
 
-- Compatibility with NCCL 2.30.4.
-- Compatibility with NCCL 2.29.7.
-- Compatibility with NCCL 2.28.9.
-- Proxytrace profiler plugin and core proxy-diagnostics hooks (`RCCL_PROXYTRACE`).
-- `ncclBarrierSession` LSA validation for barrier sessions.
-- Symmetric-memory ReduceScatter kernel (`RailA2A_LsaLD`) on gfx942/gfx950.
-- Bias (accumulation) AllReduce on gfx1250 (MI450).
+- Added compatibility with NCCL 2.30.4.
+- Added compatibility with NCCL 2.29.7.
+- Added compatibility with NCCL 2.28.9.
+- Added Proxytrace profiler plugin and core proxy-diagnostics hooks (`RCCL_PROXYTRACE`).
+- Added `ncclBarrierSession` LSA validation for barrier sessions.
+- Added symmetric-memory ReduceScatter kernel (`RailA2A_LsaLD`) on gfx942/gfx950.
+- Added bias (accumulation) AllReduce on gfx1250 (MI450).
 - Optimized scale-up ReduceScatter, AllGather, and AllToAll kernels.
-- ROCprofiler-SDK coverage for `ncclCommGrow` and `ncclCommGetUniqueId`.
-- P2P batching auto-enabled for gfx950 in combination with non-AINIC NICs.
+- Added ROCprofiler-SDK coverage for `ncclCommGrow` and `ncclCommGetUniqueId`.
+- Auto-enabled P2P batching for gfx950 in combination with non-AINIC NICs.
 - Display HIP/ROCm runtime versions in `NCCL_DEBUG` output.
 - Detect ROCm version via core symlink for multi-architecture installs.
 - Skip DDA IPC initialization for directMode and MNNVL topologies.
 - Load versioned `libamd_smi` SONAME instead of an unversioned symlink.
-- Pythonic API bindings under `bindings/nccl4py/` (RCCL fork of NVIDIA `nccl4py` v0.2.0). Provides Python access to RCCL collectives via Cython bindings, an on-disk `cuda.core` HIP shim for ROCm hosts without `cuda-bindings` / `cuda-core`, and RCCL-only collective wrappers (`ncclAllReduceWithBias`, `ncclAllToAllv`).
-- RCCL examples to the repository.
-- `RCCL host API` pull-in from NCCL 2.30.
+- Added Pythonic API bindings under `bindings/nccl4py/` (RCCL fork of NVIDIA `nccl4py` v0.2.0). Provides Python access to RCCL collectives via Cython bindings, an on-disk `cuda.core` HIP shim for ROCm hosts without `cuda-bindings` / `cuda-core`, and RCCL-only collective wrappers (`ncclAllReduceWithBias`, `ncclAllToAllv`).
+- Added RCCL examples to the repository.
+- Added `RCCL host API` pull-in from NCCL 2.30.
 
 ##### Changed
 
@@ -310,14 +310,14 @@
 - Swapped legacy `net_ib` with the `net_ib` implementation from NCCL 2.29.
 - Skip per-warp channel LDS copy when `warpComm` is disabled.
 - Hardened proxy RPC setup against malformed peer input.
-- The bootstrap AllGather now uses the bidirectional ring (N/2 steps) by default on the socket OOB path. `NCCL_BOOTSTRAP_BIDIR_ALLGATHER` now defaults to `1`; set it to `0` to fall back to the unidirectional ring. The net OOB path (`NCCL_OOB_NET_ENABLE`) and its bidirectional variant (`NCCL_BOOTSTRAP_BIDIR_NET`) remain off by default.
+- Changed the bootstrap AllGather to use the bidirectional ring (N/2 steps) by default on the socket OOB path. `NCCL_BOOTSTRAP_BIDIR_ALLGATHER` now defaults to `1`; set it to `0` to fall back to the unidirectional ring. The net OOB path (`NCCL_OOB_NET_ENABLE`) and its bidirectional variant (`NCCL_BOOTSTRAP_BIDIR_NET`) remain off by default.
 - `NCCL_PXN_C2C` is kept default-off (`0`); upstream NCCL defaults it to `1` since 2.28. The C2C PXN routing path is currently not applicable on AMD hardware.
 
 ##### Removed
 
-- NPKit profiling support (build option ``ENABLE_NPKIT``, headers, device and proxy instrumentation, install script flag ``--npkit-enable``, and related documentation and tooling). Use the profiler plugin API for profiling instead.
-- Kernel COLLTRACE support, including the `COLLTRACE` build option, device-side collective trace buffers, debug kernel variants, and related install/CI wiring. The host latency profiler is unchanged.
-- Legacy `ENABLE_PROFILING` device profiling support and the `PROFILE` build option. Use the profiler plugin API instead.
+- Removed NPKit profiling support (build option ``ENABLE_NPKIT``, headers, device and proxy instrumentation, install script flag ``--npkit-enable``, and related documentation and tooling). Use the profiler plugin API for profiling instead.
+- Removed Kernel COLLTRACE support, including the `COLLTRACE` build option, device-side collective trace buffers, debug kernel variants, and related install/CI wiring. The host latency profiler is unchanged.
+- Removed legacy `ENABLE_PROFILING` device profiling support and the `PROFILE` build option. Use the profiler plugin API instead.
 
 ##### Optimized
 
@@ -326,19 +326,19 @@
 
 ##### Resolved issues
 
-- `ncclCommGrow` channel-count divergence causing incorrect collective routing.
-- `ncclCommGrow` hang when growing to an 8-rank single-node communicator.
-- Symmetric LDS under-reservation in legacy (non-device-linker) builds.
-- LL128 protocol correctness for gfx1250 (MI450).
-- XGMI topology mapping for multi-system (NPS) nodes.
-- gfx950 collective hang caused by a tuner race condition.
-- `net_ib_cast`: gate CTS offload path on per-connection state.
-- `net_ib`: avoid flagging a non-fatal Isend CTS no-match as a fatal error.
-- Acquire-tail polling for gfx950 P2P host staging.
-- LDS overflow in device-linker builds.
-- Symmetric memory correctness issues.
-- `ncclCommFree` to free symmetric window objects automatically (NCCL 2.29.7 defect).
-- DDA IPC initialization skip on architectures that do not run DDA.
+- Fixed `ncclCommGrow` channel-count divergence causing incorrect collective routing.
+- Fixed a `ncclCommGrow` hang when growing to an 8-rank single-node communicator.
+- Fixed symmetric LDS under-reservation in legacy (non-device-linker) builds.
+- Fixed LL128 protocol correctness for gfx1250 (MI450).
+- Fixed XGMI topology mapping for multi-system (NPS) nodes.
+- Fixed a gfx950 collective hang caused by a tuner race condition.
+- Fixed `net_ib_cast`: gate CTS offload path on per-connection state.
+- Fixed `net_ib`: avoid flagging a non-fatal Isend CTS no-match as a fatal error.
+- Fixed acquire-tail polling for gfx950 P2P host staging.
+- Fixed LDS overflow in device-linker builds.
+- Fixed symmetric memory correctness issues.
+- Fixed `ncclCommFree` to free symmetric window objects automatically (NCCL 2.29.7 defect).
+- Fixed DDA IPC initialization skip on architectures that do not run DDA.
 - Static build (`BUILD_SHARED_LIBS=OFF`) failing with `install(EXPORT "rccl-targets" ...)` error when `fmt` is fetched via `FetchContent`. The `fmt-header-only` target is now scoped to the build interface and excluded from RCCL's exported usage requirements.
 - Proxy channel staging buffers ignoring the new GDR mode selection on HIP < 7.12 builds. The legacy `#else` branch in `sendProxyConnect` / `recvProxyConnect` now honors `resources->useDmaBuf`, so peermem-equipped hosts on older HIP no longer fall through to `hsa_amd_portable_export_dmabuf` when peermem was selected in `*ProxySetup`. Workaround for affected RCCL builds: `NCCL_DMABUF_ENABLE=0`.
 - RCCL initialization failing (`Failed to find ROCm runtime library`) on runtime-only ROCm trees that ship no unversioned `libhsa-runtime64.so` developer symlink (e.g. TheRock multi-arch pip-wheel `/opt/rocm-less` deployments). RCCL no longer `dlopen`s the HSA runtime by name; instead it directly links `hsa-runtime64::hsa-runtime64` (already a hard transitive dependency via the HIP runtime) and binds `hsa_init`, `hsa_system_get_info`, `hsa_status_string`, and `hsa_amd_portable_export_dmabuf` to those symbols. The linker records `DT_NEEDED libhsa-runtime64.so.1` and resolves it through librccl's existing RPATH, removing the SONAME version-string fragility and load-scope (`RTLD_LOCAL`) issues. The `RCCL_ROCR_PATH` override is no longer needed and has been removed.
@@ -351,7 +351,7 @@
 
 ##### Added
 
-- 59 new telemetry fields to close the gap with Device Metrics Exporter (DME).
+- Added 59 new telemetry fields to close the gap with Device Metrics Exporter (DME).
   - Energy: `RDC_FI_GPU_ENERGY` — total energy consumed via `amdsmi_get_energy_count()`.
   - Temperature: `RDC_FI_GPU_JUNCTION_TEMP` — dedicated junction/hotspot temperature field.
   - Clock ranges: `RDC_FI_GPU_CLOCK_MIN`, `RDC_FI_GPU_CLOCK_MAX` — min/max GPU clock frequencies. Additional clock types: `RDC_FI_SOC_CLOCK`, `RDC_FI_VCLK0`, `RDC_FI_DCLK0`.
@@ -361,7 +361,7 @@
   - ECC deferred errors: 19 per-block deferred error fields (`RDC_FI_ECC_*_DE`) plus `RDC_FI_ECC_DEFERRED_TOTAL`, reading `deferred_count` from `amdsmi_error_count_t`.
   - Violation/throttle metrics: 19 new `RDC_HEALTH_*` fields covering accumulated counts and percentages for processor hot, PPT power, socket/VR/HBM thermal, gfx clock host limits, and low utilization violations via `amdsmi_get_violation_status()`. Driver 1.8 XCP/XCC fields return NOT_SUPPORTED on older platforms.
 
-- Automated DME-RDC metric sync check.
+- Added an automated DME-RDC metric sync check.
   - New script `tools/dme_rdc_metric_sync_check.py` parses DME's protobuf metric definitions and compares against RDC field enums via a curated mapping file (`tools/dme_rdc_metric_mapping.json`).
   - New GitHub Action (`.github/workflows/rdc-dme-sync-check.yml`) runs weekly and on PRs touching metric definitions. Automatically creates GitHub issues when DME adds metrics not yet tracked in RDC.
 
@@ -376,7 +376,7 @@
 
 ##### Resolved Issues
 
-- The `Failed to insert module: N3amd3rdc10RdcRVSLibE` error no longer occurs.
+- Fixed the `Failed to insert module: N3amd3rdc10RdcRVSLibE` error.
 
 #### **rocBLAS** (5.5.0)
 
@@ -398,7 +398,7 @@
 ##### Added
 
 - Generalized multi-device computations for transforms such that each length dimension is fully covered either in all the input field's bricks or in all the output field's bricks, regardless of the type and placement of the transform. Specifically for real transforms, the innermost length dimension must be fully covered in all the input (respectively, output) field's bricks for real forward (respectively, inverse) transforms.
-- Support for the gfx1250 architecture.
+- Added support for the gfx1250 architecture.
 
 ##### Optimized
 
@@ -417,10 +417,9 @@
 
 ##### Added
 
-- Dumping core of AMD GPU programs with the `gcore` command is now
-  significantly faster, particularly for kernels that use small
-  amounts of VRAM.
-- New `catch hiperr` command that stops the inferior when a HIP API
+- Improved core dumping speed for AMD GPU programs with the `gcore` command,
+  particularly for kernels that use small amounts of VRAM.
+- Added a new `catch hiperr` command that stops the inferior when a HIP API
   call returns an error. The convenience variable `$_hiperr` holds
   the error code at the catchpoint.
 
@@ -428,23 +427,23 @@
 
 ##### Added
 
-- Logging mechanism for core APIs that can be controlled by setting the `ROCJPEG_LOG_LEVEL` environment variable.
+- Added a logging mechanism for core APIs that can be controlled by setting the `ROCJPEG_LOG_LEVEL` environment variable.
 
 #### **ROCm Compute Profiler** (3.7.0)
 
 ##### Added
 
-- `--bench-only` profile mode option to run the roofline microbenchmark standalone (without profiling an application or collecting performance counters). No application run is required. Useful for regenerating `roofline.csv` in an existing workload directory or running the microbenchmark on systems where only HIP is available but ROCprofiler-SDK is not.
+- Added `--bench-only` profile mode option to run the roofline microbenchmark standalone (without profiling an application or collecting performance counters). No application run is required. Useful for regenerating `roofline.csv` in an existing workload directory or running the microbenchmark on systems where only HIP is available but ROCprofiler-SDK is not.
 
-- LDS arithmetic intensity as a roofline plot point and analysis database field.
+- Added LDS arithmetic intensity as a roofline plot point and analysis database field.
 
-- Backward compatibility for live attach mode to work with older ROCm 7.x.x releases.
+- Added backward compatibility for live attach mode to work with older ROCm 7.x.x releases.
 
-- Support for GPU metrics on gfx1150 and gfx1152 hardware.
+- Added support for GPU metrics on gfx1150 and gfx1152 hardware.
 
-- Roofline benchmarking support for gfx1150 and gfx1152 hardware.
+- Added roofline benchmarking support for gfx1150 and gfx1152 hardware.
 
-- Operator statistics and per-operator summary table in the analysis output of torch operator profiling. Added the following statistics for every torch operator and its children:
+- Added operator statistics and per-operator summary table in the analysis output of torch operator profiling, including the following statistics for every torch operator and its children:
   - Number of invocations.
   - Number of kernel dispatches.
   - Min/Max/Mean and Total duration of kernel dispatches.
@@ -618,9 +617,9 @@
 
 ##### Added
 
-- `generate_resource_spec.cpp` to the test directory and built as a new target by CMake. It generates the resource spec file required by CTest when running tests in parallel.
-- Support for the gfx1250 architecture.
-- A parallel `device_topk`, which finds the largest/smallest K elements from an input array of keys.
+- Added `generate_resource_spec.cpp` to the test directory, built as a new target by CMake. It generates the resource spec file required by CTest when running tests in parallel.
+- Added support for the gfx1250 architecture.
+- Added a parallel `device_topk`, which finds the largest/smallest K elements from an input array of keys.
 
 ##### Changed
 
@@ -636,25 +635,25 @@
 
 **API:**
 
-- Streaming Performance Monitor (SPM) counter collection support (beta):
+- Added Streaming Performance Monitor (SPM) counter collection support (beta):
   - New experimental API in `rocprofiler-sdk/experimental/spm.h`.
   - GPU-timestamped counter values alongside kernel dispatch information.
-- `spm_support` along with reserved padding to `rocprofiler_counter_info_v1_t`.
+- Added `spm_support` along with reserved padding to `rocprofiler_counter_info_v1_t`.
 
 **rocprofv3 (CLI):**
 
-- SPM counter collection support in `rocprofv3` (beta):
+- Added SPM counter collection support in `rocprofv3` (beta):
   - `--spm <counter>` flag to specify counters for SPM collection.
   - `--spm-sample-interval` and `--spm-sample-interval-unit` parameters to configure sampling rate.
   - `--spm-beta-enabled` flag or the `ROCPROFILER_SPM_BETA_ENABLED` environment variable to opt in to the beta SPM feature via `rocprofv3`. For API-based usage, set `ROCPROFILER_SPM_BETA_ENABLED`.
   - `--spm-config` option in `rocprofv3-avail` to list available SPM configurations.
-- JSON and rocpd output format support for SPM.
+- Added JSON and rocpd output format support for SPM.
 
 **Documentation:**
 
-- [SPM API reference guide](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/api-reference/spm.html).
-- [SPM usage guide for `rocprofv3`](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/how-to/using-spm.html).
-- `--spm-config` documentation to `rocprofv3-avail` usage guide.
+- Added [SPM API reference guide](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/api-reference/spm.html).
+- Added [SPM usage guide for `rocprofv3`](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/how-to/using-spm.html).
+- Added `--spm-config` documentation to `rocprofv3-avail` usage guide.
 
 ##### Changed
 
@@ -664,26 +663,26 @@
 
 ##### Added
 
-- Support for the gfx1250 architecture.
+- Added support for the gfx1250 architecture.
 
 #### **rocSHMEM** (3.5.0)
 
 ##### Added
 
-- New APIs:
+- Added new APIs:
   - `rocshmem_align`
   - `rocshmem_calloc`
   - `rocshmem_buffer_unregister_all`
   - `rocshmem_buffer_register/unregister` for GDA backend
   - `rocshmem_reduce_on_stream`
   - `rocshmem_team_split_2D`
-- Tile-granular RMA operations for the IPC backend.
-- Host-initiated RMA operations in the IPC backend for the non-MPI bootstrapping path.
-- Team creation using non-contiguous parent teams in the IPC backend.
-- Python bindings of memory-management APIs.
-- Python bindings coverage for team APIs.
-- Support for GPU initiated operations using the SDMA engines.
-- ASAN build support.
+- Added tile-granular RMA operations for the IPC backend.
+- Added host-initiated RMA operations in the IPC backend for the non-MPI bootstrapping path.
+- Added team creation using non-contiguous parent teams in the IPC backend.
+- Added Python bindings for memory-management APIs.
+- Added Python bindings coverage for team APIs.
+- Added support for GPU-initiated operations using the SDMA engines.
+- Added ASAN build support.
 
 ##### Changed
 
@@ -697,7 +696,7 @@
 
 ##### Added
 
-- Support for the gfx1250 architecture.
+- Added support for the gfx1250 architecture.
 
 ##### Optimized
 
@@ -713,7 +712,7 @@
 
 ##### Added
 
-- `rocsparse_spildlt0` routine for incomplete LDL' factorization with zero fill-in (ILDLT(0)) for symmetric (real) or Hermitian (complex) sparse matrices in CSR format, with strided batched computations enabled.
+- Added `rocsparse_spildlt0` routine for incomplete LDL' factorization with zero fill-in (ILDLT(0)) for symmetric (real) or Hermitian (complex) sparse matrices in CSR format, with strided batched computations enabled.
 
 ##### Upcoming changes
 
@@ -723,8 +722,8 @@
 
 ##### Added
 
-- Support for the gfx1250 architecture.
-- For hipstdpar algorithms running on GPUs that support xnack, and `__HIPSTDPAR_INTERPOSE_ALLOC__` or `__HIPSTDPAR_INTERPOSE_ALLOC_V1__` are not enabled, emit a runtime warning once if xnack is off.
+- Added support for the gfx1250 architecture.
+- Added a one-time runtime warning for hipstdpar algorithms running on GPUs that support xnack when `__HIPSTDPAR_INTERPOSE_ALLOC__` or `__HIPSTDPAR_INTERPOSE_ALLOC_V1__` are not enabled and xnack is off.
 
 ##### Upcoming changes
 
@@ -734,20 +733,20 @@
 
 ##### Added
 
-- Support for the gfx1250 architecture.
+- Added support for the gfx1250 architecture.
 
 #### **RPP** (3.1.2)
 
 ##### Added
 
-- Single-image processing support for 8 kernels (Brightness, Blend, Box Filter, Crop, Flip, Gaussian Filter, Median Filter, Resize Nearest Neighbor) to match performance with OpenCV.
-- Runtime backend selection parameter (`RppBackend executionBackend`) for all RPP tensor API functions.
-- Backend tracking in `rppHandle_t` to store backend type (HOST or HIP).
+- Added single-image processing support for 8 kernels (Brightness, Blend, Box Filter, Crop, Flip, Gaussian Filter, Median Filter, Resize Nearest Neighbor) to match performance with OpenCV.
+- Added a runtime backend selection parameter (`RppBackend executionBackend`) for all RPP tensor API functions.
+- Added backend tracking in `rppHandle_t` to store backend type (HOST or HIP).
 
 ##### Changed
 
-- All RPP tensor API functions are now unified with a single function signature.
+- Unified all RPP tensor API functions with a single function signature.
 - Updated all test suite calls to use the unified API with the backend parameter.
 - Enhanced layout validation for image augmentations within unified API.
 - Removed the test suite dependency on TurboJPEG. Tests now use `.rgb` files as input.
-- OpenCV and pandas are now optional dependencies for the test suite.
+- Made OpenCV and pandas optional dependencies for the test suite.

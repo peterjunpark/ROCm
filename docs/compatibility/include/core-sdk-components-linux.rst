@@ -159,6 +159,14 @@
 
    .. matrix-row::
 
+      .. matrix-cell:: Storage libraries
+
+      .. matrix-cell::
+
+         `hipFile 0.3.0 <https://github.com/ROCm/rocm-systems/tree/therock-7.14/projects/hipFile>`__
+
+   .. matrix-row::
+
       .. matrix-cell:: Runtimes and compilers
          :rowspan: 5
          :show-cond: fam=instinct fam=radeon

@@ -73,9 +73,9 @@ The following are notable enhancements to HIP:
 
 * **HIP API additions for CUDA parity**:
 
-  * Batch memory management: New batch asynchronous memory management APIs let applications discard (`hipMemDiscardBatchAsync`), prefetch (`hipMemPrefetchBatchAsync`), or combine both operations (`hipMemDiscardAndPrefetchBatchAsync`) across multiple memory ranges in a single call, reducing API call overhead. Both HIP runtime and HIP driver variants are available.
+  * **Batch memory management:** New batch asynchronous memory management APIs let applications discard (`hipMemDiscardBatchAsync`), prefetch (`hipMemPrefetchBatchAsync`), or combine both operations (`hipMemDiscardAndPrefetchBatchAsync`) across multiple memory ranges in a single call, reducing API call overhead. Both HIP runtime and HIP driver variants are available.
 
-  * Library management: New library management APIs return the device pointer and size of a device global (`hipLibraryGetGlobal`) and the host pointer and size of a managed variable (`hipLibraryGetManaged`) defined in a `hipLibrary_t`, improving parity with CUDA library APIs.
+  * **Library management:** New library management APIs return the device pointer and size of a device global (`hipLibraryGetGlobal`) and the host pointer and size of a managed variable (`hipLibraryGetManaged`) defined in a `hipLibrary_t`, improving parity with CUDA library APIs.
 
 * **Faster HIP graph replay for asynchronous memory allocations**: HIP graph replay now reduces overhead for graphs that interleave asynchronous memory allocations with compute. Allocation nodes no longer block during replay. Physical memory is reused across nodes instead of being mapped and unmapped on each launch, eliminating the gaps between kernels this pattern previously caused. For background on HIP graphs, see [Graph Management](https://rocm.docs.amd.com/projects/HIP/en/develop/reference/hip_runtime_api/modules/graph_management.html).
 
@@ -93,7 +93,11 @@ Starting with PyTorch 2.12, `rocprofiler-sdk` is used as the ROCm profiling back
 
 `rocprofiler-sdk` and `rocprofv3` add beta support for Streaming Performance Monitors (SPM), enabling selected hardware counters to be sampled over time while workloads execute. Unlike traditional counter collection, which captures a single aggregated value per kernel dispatch, SPM provides time-resolved hardware counter data. This is useful for analyzing long-running workloads and training jobs where temporal behavior matters as much as aggregate metrics. ROCpd support is planned for a future release.
 
-In ROCm 7.14.0, SPM support is available through the `rocprofiler-sdk` API and `rocprofv3`. To enable SPM in `rocprofv3`, use the `--spm-beta-enabled` flag or set the `ROCPROFILER_SPM_BETA_ENABLED` environment variable. For API-based usage, set `ROCPROFILER_SPM_BETA_ENABLED`. Supported hardware: AMD Instinct MI300X, MI325X, MI350X, and MI355X GPUs.
+In ROCm 7.14.0, SPM support is available through the `rocprofiler-sdk` API and `rocprofv3`. To enable SPM in `rocprofv3`, use the `--spm-beta-enabled` flag or set the `ROCPROFILER_SPM_BETA_ENABLED` environment variable. For API-based usage, set `ROCPROFILER_SPM_BETA_ENABLED`.
+
+Supported hardware: AMD Instinct MI300X, MI325X, MI350X, and MI355X GPUs.
+
+For more information, see the [SPM API reference guide](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/api-reference/spm.html) and the [SPM usage guide for `rocprofv3`](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/develop/how-to/using-spm.html).
 
 :::{warning}
 SPM is a beta capability under active development and may affect system stability, including unexpected reboots. Do not use in production environments. See [ROCm known issues](#rocm-known-issues) for current limitations.
@@ -153,7 +157,7 @@ The following are notable enhancements to ROCm Systems Profiler:
 
 * **Selective MPI rank profiling**: In MPI jobs, you can now restrict profile and trace output to a chosen subset of ranks, while unselected ranks run undisturbed. This cuts data volume and speeds up post-run analysis, and works across MPI implementations such as MPICH and Open MPI, including heterogeneous and multi-node environments. For details, see the rank filtering section in [Communication runtime profiling](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/develop/how-to/communication-runtime-profiling.html).
 
-* **MPI rank console log control**: You can now limit console output to a specified subset of ranks while profiling and tracing continue on every rank. This reduces console log noise in large multi-rank runs without sacrificing collection coverage. Existing behavior is preserved when no rank-selection option is set. For details, see the rank filtering section in [Communication runtime profiling](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/develop/how-to/communication-runtime-profiling.html).
+* **MPI rank console log control**: You can now limit console output to a specified subset of ranks while profiling and tracing continue on every rank. This reduces console log noise in large multi-rank runs without sacrificing collection coverage. Existing behavior is preserved when no rank-selection option is set.
 
 * **Selective ROCTx region profiling**: When your application is instrumented with ROCTx region push and pop APIs, you can now include or exclude specific named regions to scope collection to the code paths you're investigating.
 
@@ -195,7 +199,7 @@ For more details, refer to the [ROCm Bandwidth Test](https://rocm.docs.amd.com/p
 
 ### Libraries
 
-This release updates ROCm math, sparse compute, communication, and storage libraries with additional routines, expanded data type support, and performance improvements.
+This release updates ROCm math, sparse compute, and communication libraries with additional routines, expanded data type support, and performance improvements. It also adds the hipFile storage library.
 
 #### hipFile GPUDirect Storage support
 
@@ -293,10 +297,10 @@ ROCm 7.14.0 introduces several improvements to the Runfile Installer:
 
 The installer provides multi-architecture support, allowing you to install ROCm components for one or more GPU architectures. This is particularly useful for heterogeneous GPU environments or when deploying across multiple systems with different GPU types.
 
-* Install single or multiple GPU architectures in one installation
-* Auto-detect GPU and install matching architecture
-* Query available and installed architectures
-* Selectively uninstall specific architectures while keeping others
+* Install single or multiple GPU architectures in one installation.
+* Auto-detect GPU and install matching architecture.
+* Query available and installed architectures.
+* Selectively uninstall specific architectures while keeping others.
 
 ### Flexible component selection
 

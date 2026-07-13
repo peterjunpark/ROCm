@@ -94,6 +94,11 @@ subtrees:
                         title: rocDecode
                       - url: ${project:rocjpeg}
                         title: rocJPEG
+                - file: components/storage-libs.rst
+                  title: Storage libraries
+                  entries:
+                      - url: ${project:hipfile}
+                        title: hipFile
                 - file: components/runtimes-and-compilers.rst
                   title: Runtime and compilers
                   entries:
