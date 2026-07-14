@@ -220,7 +220,7 @@
 
          .. selector-option:: AMD Ryzen AI 7 445 (gfx1153)
             :value: ai-7-445 gfx=gfx1153
-      
+
          .. selector-option:: AMD Ryzen AI 5 340 (gfx1152)
             :value: ai-5-340 gfx=gfx1152
 
