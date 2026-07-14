@@ -35,15 +35,6 @@
    .. matrix-row::
       :show-cond: os=ubuntu os=debian os=rhel os=oracle-linux os=rocky-linux os=sles
 
-      .. matrix-cell:: Tensorflow
-
-      .. matrix-cell:: 2.21, 2.20, 2.19.1
-
-      .. matrix-cell:: 3.12
-
-   .. matrix-row::
-      :show-cond: os=ubuntu os=debian os=rhel os=oracle-linux os=rocky-linux os=sles
-
       .. matrix-cell:: vLLM
          :show-cond: gfx=gfx950 gfx=gfx942 gfx=gfx1201 gfx=gfx1200 gfx=gfx1100 gfx=gfx1101 gfx=gfx1102 gfx=gfx1152 gfx=gfx1151 gfx=gfx1150
 
