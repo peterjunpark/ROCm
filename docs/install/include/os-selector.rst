@@ -34,12 +34,21 @@
 
          .. selector-option:: Ubuntu
             :value: ubuntu
-            :width: 50%
+            :width: 25%
+
+         .. selector-option:: Debian
+            :value: debian
+            :width: 25%
 
          .. selector-option:: RHEL
             :value: rhel
-            :width: 50%
+            :width: 25%
             :toc-label: Red Hat Enterprise Linux
+
+         .. selector-option:: SLES
+            :value: sles
+            :width: 25%
+            :toc-label: SUSE Linux Enterprise Server
 
       .. selector:: Linux distribution
          :key: os

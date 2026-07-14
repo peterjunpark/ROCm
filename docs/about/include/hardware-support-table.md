@@ -318,6 +318,29 @@
   <tbody>
     <tr>
       <td class="stub">
+        <a href="https://www.amd.com/en/products/processors/workstations/mobile.html#tabs-7f0c432fb2-item-296e08633e-tab"
+          target="_blank">AMD Ryzen AI Max PRO<br>400 Series</a>
+      </td>
+      <td>
+        <p><a
+            href="https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-max-pro-400-series/amd-ryzen-ai-max-plus-pro-495.html"
+            target="_blank">Ryzen AI Max+ PRO 495</a> (Radeon 8065S)</p>
+        <p><a
+            href="https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-max-pro-400-series/amd-ryzen-ai-max-pro-490.html"
+            target="_blank">Ryzen AI Max PRO 490</a> (Radeon 8050S)</p>
+        <p><a
+            href="https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-max-pro-400-series/amd-ryzen-ai-max-pro-485.html"
+            target="_blank">Ryzen AI Max PRO 485</a> (Radeon 8050S)</p>
+      </td>
+      <td>
+        <p>gfx1151</p>
+      </td>
+      <td rowspan="13">
+        <p>RDNA 3.5</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="stub">
         <a href="https://www.amd.com/en/products/processors/workstations/mobile.html#tabs-7f0c432fb2-item-5116ab7a74-tab"
           target="_blank">AMD Ryzen AI Max PRO<br>300 Series</a>
       </td>
@@ -337,9 +360,6 @@
       </td>
       <td>
         <p>gfx1151</p>
-      </td>
-      <td rowspan="10">
-        <p>RDNA 3.5</p>
       </td>
     </tr>
     <tr>
@@ -367,10 +387,19 @@
       </td>
     </tr>
     <tr>
-      <td rowspan="2" class="stub">
+      <td rowspan="3" class="stub">
         <a href="https://www.amd.com/en/products/processors/laptop/ryzen-for-business.html#tabs-0d174caf43-item-87690677fc-tab"
           target="_blank">AMD Ryzen AI PRO<br>400 Series</a>
       </td>
+      <td>
+        <p><a href="https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-400-series/amd-ryzen-ai-5-pro-435.html"
+            target="_blank">Ryzen AI 5 PRO 435</a> (Radeon 840M)</p>
+      </td>
+      <td>
+        <p>gfx1153</p>
+      </td>
+    </tr>
+    <tr>
       <td>
         <p><a href="https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-400-series/amd-ryzen-ai-9-hx-pro-475.html"
             target="_blank">Ryzen AI 9 HX PRO 475</a> (Radeon 890M)</p>
@@ -395,10 +424,23 @@
       </td>
     </tr>
     <tr>
-      <td rowspan="2" class="stub">
+      <td rowspan="3" class="stub">
         <a href="https://www.amd.com/en/products/processors/consumer/ryzen-ai.html#tabs-f556098628-item-808b56dca3-tab"
           target="_blank">AMD Ryzen AI<br>400 Series</a>
       </td>
+      <td>
+        <p><a href="https://www.amd.com/en/products/processors/laptop/ryzen/ai-400-series/amd-ryzen-ai-5-435.html"
+            target="_blank">Ryzen AI 5 435</a> (Radeon 840M)</p>
+        <p><a href="https://www.amd.com/en/products/processors/laptop/ryzen/ai-400-series/amd-ryzen-ai-5-430.html"
+            target="_blank">Ryzen AI 5 430</a> (Radeon 840M)</p>
+        <p><a href="https://www.amd.com/en/products/processors/laptop/ryzen/ai-400-series/amd-ryzen-ai-7-445.html"
+            target="_blank">Ryzen AI 7 445</a> (Radeon 840M)</p>
+      </td>
+      <td>
+        <p>gfx1153</p>
+      </td>
+    </tr>
+    <tr>
       <td>
         <p><a href="https://www.amd.com/en/products/processors/laptop/ryzen/ai-400-series/amd-ryzen-ai-9-hx-475.html"
             target="_blank">Ryzen AI 9 HX 475</a> (Radeon 890M)</p>

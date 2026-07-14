@@ -126,7 +126,7 @@ information.
         <p>1</p>
       </td>
       <td>
-        <p>SPX</p>
+        <p>SPX (Default)</p>
       </td>
       <td>
         <p>NPS1</p>

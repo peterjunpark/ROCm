@@ -25,8 +25,11 @@ This release expands GPU, operating system, virtualization, and partitioning sup
 
 ROCm 7.14.0 adds support for the following AMD APUs:
 
+* [AMD Ryzen AI MAX+ PRO 495 (gfx1151)](https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-max-pro-400-series/amd-ryzen-ai-max-plus-pro-495.html)
+* [AMD Ryzen AI MAX PRO 490 (gfx1151)](https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-max-pro-400-series/amd-ryzen-ai-max-pro-490.html)
 * [AMD Ryzen AI MAX PRO 485 (gfx1151)](https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-max-pro-400-series/amd-ryzen-ai-max-pro-485.html)
 * [AMD Ryzen AI 5 435 (gfx1153)](https://www.amd.com/en/products/processors/laptop/ryzen/ai-400-series/amd-ryzen-ai-5-435.html)
+* [AMD Ryzen AI 5 430 (gfx1153)](https://www.amd.com/en/products/processors/laptop/ryzen/ai-400-series/amd-ryzen-ai-5-430.html)
 * [AMD Ryzen AI 5 PRO 435 (gfx1153)](https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-400-series/amd-ryzen-ai-5-pro-435.html)
 * [AMD Ryzen AI 7 445 (gfx1153)](https://www.amd.com/en/products/processors/laptop/ryzen/ai-400-series/amd-ryzen-ai-7-445.html)
 
