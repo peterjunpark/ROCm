@@ -64,3 +64,27 @@
 
       .. matrix-cell:: 3.14
          :show-cond: gfx=gfx950 gfx=gfx942 gfx=gfx1201 gfx=gfx1200 gfx=gfx1100 gfx=gfx1101 gfx=gfx1102 gfx=gfx1152 gfx=gfx1151 gfx=gfx1150
+
+   .. matrix-row::
+      :show-cond: os=ubuntu os=debian os=rhel os=oracle-linux os=rocky-linux os=sles
+
+      .. matrix-cell:: MIGraphX
+         :show-cond: gfx=gfx950 gfx=gfx942
+
+      .. matrix-cell:: 2.16
+         :show-cond: gfx=gfx950 gfx=gfx942
+
+      .. matrix-cell:: 3.12
+         :show-cond: gfx=gfx950 gfx=gfx942
+
+   .. matrix-row::
+      :show-cond: os=ubuntu os=debian os=rhel os=oracle-linux os=rocky-linux os=sles
+
+      .. matrix-cell:: ONNX Runtime
+         :show-cond: gfx=gfx950 gfx=gfx942
+
+      .. matrix-cell:: 1.23.2
+         :show-cond: gfx=gfx950 gfx=gfx942
+
+      .. matrix-cell:: 3.12
+         :show-cond: gfx=gfx950 gfx=gfx942
