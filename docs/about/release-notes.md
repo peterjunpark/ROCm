@@ -47,7 +47,7 @@ For the full list of supported Linux distributions, see [Operating system suppor
 
 GPU virtualization configurations supported on AMD Instinct GPUs remain unchanged from the previous [ROCm 7.13.0 preview](https://rocm.docs.amd.com/en/7.13.0-preview/about/release-notes.html#expanded-gpu-virtualization-support-for-instinct-gpus) release.
 
-Supported Single Root I/O Virtualization (SR-IOV) configurations require the [AMD GPU Virtualization Driver (GIM) 9.1.0.K](https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K). For details, see [GPU virtualization support](#gpu-virtualization-support).
+Supported Single Root I/O Virtualization (SR-IOV) configurations require the [AMD GPU Virtualization Driver (GIM) 9.1.0.K](https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K). For details, see [GPU virtualization support](#gpu-virtualization-support).
 
 #### Expanded Instinct GPU partitioning support
 
@@ -354,7 +354,7 @@ ROCm requires a coordinated stack of compatible firmware, driver, and user-space
 
 AMD Instinct data center GPUs support virtualization in the following configurations. Supported SR-IOV configurations require the AMD GPU Virtualization Driver (GIM) 9.1.0.K — see the [AMD Instinct Virtualization Driver documentation](https://instinct.docs.amd.com/projects/virt-drv/en/mainline-9.0.0.k/) for more information.
 
-```{include} ./include/virtualization-support-table.html
+```{include} ./include/virtualization-support-table.md
 :parser: myst
 ```
 

@@ -1,3 +1,7 @@
+::::{tab-set}
+:::{tab-item} Instinct
+:sync: instinct
+
 <table class="rocm-docs-table table">
   <colgroup style="width: 14%;">
     <colgroup style="width: 14%;">
@@ -53,7 +57,7 @@
         <p>SR-IOV</p>
       </td>
       <td rowspan="3" style="vertical-align: middle">
-        <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K" target="_blank">GIM 9.1.0.K
+        <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K" target="_blank">GIM 9.1.0.K
         </a>
       </td>
       <td style="vertical-align: middle">
@@ -109,7 +113,7 @@
       <p>SR-IOV</p>
     </td>
     <td rowspan="2" style="vertical-align: middle">
-      <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K" target="_blank">GIM 9.1.0.K
+      <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K" target="_blank">GIM 9.1.0.K
       </a>
     </td>
     <td style="vertical-align: middle">
@@ -130,7 +134,7 @@
       <p>SR-IOV</p>
     </td>
     <td style="vertical-align: middle">
-      <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K" target="_blank">GIM 9.1.0.K
+      <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K" target="_blank">GIM 9.1.0.K
       </a>
     </td>
     <td style="vertical-align: middle">
@@ -165,7 +169,7 @@
       <p>SR-IOV</p>
     </td>
     <td rowspan="2" style="vertical-align: middle">
-      <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K" target="_blank">GIM 9.1.0.K
+      <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K" target="_blank">GIM 9.1.0.K
       </a>
     </td>
     <td style="vertical-align: middle">
@@ -208,7 +212,7 @@
       <p>SR-IOV</p>
     </td>
     <td rowspan="2" style="vertical-align: middle">
-      <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K" target="_blank">GIM 9.1.0.K
+      <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K" target="_blank">GIM 9.1.0.K
       </a>
     </td>
     <td style="vertical-align: middle">
@@ -222,3 +226,80 @@
   </tr>
   </tbody>
 </table>
+:::
+
+:::{tab-item} Radeon
+:sync: radeon
+
+<table class="rocm-docs-table table">
+  <colgroup style="width: 14%;">
+    <colgroup style="width: 14%;">
+      <colgroup style="width: 17%;">
+        <colgroup style="width: 17%;">
+          <colgroup style="width: 19%;">
+            <colgroup style="width: 19%;">
+            <thead>
+          <tr>
+            <th class="head">
+              <p>AMD GPU</p>
+            </th>
+            <th class="head">
+              <p>Hypervisor</p>
+            </th>
+            <th class="head">
+              <p>Virtualization technology</p>
+            </th>
+            <th class="head">
+              <a>Virtualization driver</a>
+            </th>
+            <th class="head">
+              <p>Host OS</p>
+            </th>
+            <th class="head">
+              <p>Guest OS</p>
+            </th>
+          </tr>
+          </thead>
+        <tbody>
+        <tr>
+          <td style="vertical-align: middle">
+            <p>Radeon AI PRO R9700</p>
+          </td>
+          <td rowspan="2" style="vertical-align: middle">
+            <p>KVM</p>
+          </td>
+          <td style="vertical-align: middle">
+            <p>Passthrough</p>
+          </td>
+          <td style="vertical-align: middle">
+            <p style="text-align: center">—</p>
+          </td>
+          <td style="vertical-align: middle">
+            <p>Ubuntu 24.04</p>
+          </td>
+          <td style="vertical-align: middle">
+            <p>Ubuntu 24.04</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: middle">
+            <p>Radeon PRO V710</p>
+          </td>
+          <td style="vertical-align: middle">
+            <p>SR-IOV</p>
+          </td>
+          <td style="vertical-align: middle">
+          <a href="https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K" target="_blank">GIM 9.1.0.K
+          </a>
+          </td>
+          <td style="vertical-align: middle">
+            <p>Ubuntu 24.04</p>
+          </td>
+          <td style="vertical-align: middle">
+            <p>Ubuntu 24.04</p>
+          </td>
+        </tr>
+        </tbody>
+</table>
+:::
+::::

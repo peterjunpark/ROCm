@@ -47,7 +47,7 @@
          .. matrix-cell::
             :rowspan: 3
 
-            `GIM 9.1.0.K <https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K>`__
+            `GIM 9.1.0.K <https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K>`__
 
          .. matrix-cell:: Ubuntu 24.04
             :rowspan: 3
@@ -100,7 +100,7 @@
          .. matrix-cell::
             :rowspan: 2
 
-            `GIM 9.1.0.K <https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K>`__
+            `GIM 9.1.0.K <https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K>`__
 
          .. matrix-cell:: Ubuntu 24.04
             :rowspan: 2
@@ -121,7 +121,7 @@
 
          .. matrix-cell::
 
-            `GIM 9.1.0.K <https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K>`__
+            `GIM 9.1.0.K <https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K>`__
 
          .. matrix-cell:: Ubuntu 22.04
 
@@ -150,7 +150,7 @@
          .. matrix-cell::
             :rowspan: 2
 
-            `GIM 9.1.0.K <https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K>`__
+            `GIM 9.1.0.K <https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K>`__
 
          .. matrix-cell:: Ubuntu 24.04
 
@@ -187,7 +187,7 @@
          .. matrix-cell::
             :rowspan: 2
 
-            `GIM 9.1.0.K <https://github.com/amd/MxGPU-Virtualization/releases/tag/9.0.0.K>`__
+            `GIM 9.1.0.K <https://github.com/amd/MxGPU-Virtualization/releases/tag/9.1.0.K>`__
 
          .. matrix-cell:: Ubuntu 22.04
 

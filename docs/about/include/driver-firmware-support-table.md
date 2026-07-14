@@ -23,7 +23,9 @@
         <p>Instinct MI355X</p>
       </td>
       <td rowspan="2" style="vertical-align: middle">
-        <p>PLDM bundle 01.26.00.02</p>
+        <p>01.26.01.03 (or later)
+        <a class="footnote-reference brackets" href="#firmware-support-footnotes" role="doc-noteref"><span class="fn-bracket">[</span>*<span class="fn-bracket">]</span></a><br>
+        01.26.00.02</p>
       </td>
       <td rowspan="10" style="vertical-align: middle">
         <p>
@@ -93,7 +95,10 @@
         <p>Instinct MI350P</p>
       </td>
       <td style="vertical-align: middle">
-        <p>IFWI PRD1008B</p>
+        <p>BKC11.0 (IFWI PRD1008B) or later
+        <a class="footnote-reference brackets" href="#firmware-support-footnotes" role="doc-noteref"><span class="fn-bracket">[</span>*<span class="fn-bracket">]</span></a><br>
+        IFWI 00189938
+        </p>
       </td>
     </tr>
     <tr>
@@ -101,7 +106,10 @@
         <p>Instinct MI325X</p>
       </td>
       <td style="vertical-align: middle">
-        <p>PLDM bundle 01.25.08.08</p>
+        <p>01.26.01.02 (or later)
+        <a class="footnote-reference brackets" href="#firmware-support-footnotes" role="doc-noteref"><span class="fn-bracket">[</span>*<span class="fn-bracket">]</span></a><br>
+        01.25.06.08
+        </p>
       </td>
     </tr>
     <tr>
@@ -109,7 +117,10 @@
         <p>Instinct MI300X</p>
       </td>
       <td>
-        <p>PLDM bundle 01.25.06.05</p>
+        <p>01.26.00.04 (or later)
+        <a class="footnote-reference brackets" href="#firmware-support-footnotes" role="doc-noteref"><span class="fn-bracket">[</span>*<span class="fn-bracket">]</span></a><br>
+        01.25.06.05
+        </p>
       </td>
     </tr>
     <tr>
@@ -117,14 +128,17 @@
         <p>Instinct MI300A</p>
       </td>
       <td>
-        <p>BKC 26.1</p>
+        <p>BKC 27 (or later)
+        <a class="footnote-reference brackets" href="#firmware-support-footnotes" role="doc-noteref"><span class="fn-bracket">[</span>*<span class="fn-bracket">]</span></a><br>
+        BKC 26.1
+        </p>
       </td>
     </tr>
     <tr>
       <td>
         <p>Instinct MI250X</p>
       </td>
-      <td rowspan="3">
+      <td rowspan="3" style="vertical-align: middle">
         <p>Maintenance update (MU) 5 with IFWI 75 (or later)</p>
       </td>
     </tr>
@@ -148,6 +162,11 @@
     </tr>
   </tbody>
 </table>
+
+<aside class="footnote brackets" id="firmware-support-footnotes" role="doc-footnote">
+<span id="#fn1" class="label"><span class="fn-bracket">[</span><a href="#id1" role="doc-backlink">*</a><span class="fn-bracket">]</span></span>
+<p>New PLDM bundle (Firmware) planned to release in a few weeks</p>
+</aside>
 :::
 
 :::{tab-item} Radeon

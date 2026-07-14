@@ -19,10 +19,10 @@ The ROCm for HPC applications and containers run on a standard ROCm installation
 Install ROCm on a supported Linux distribution before running any of the HPC
 applications under the HPC application catalog.
 
-* :ref:`Install ROCm on Linux <rocm-install-selector>`
+* :doc:`/install/rocm`
 
 * See the
-  `Compatibility matrix </compatibility/compatibility-matrix>`_
+  :ref:`Compatibility matrix <compat-matrix>`
   for details on supported hardware and operating systems.
 
 The HPC application containers are published through
@@ -313,7 +313,7 @@ software, and driver requirements. For instructions, see :ref:`Install AMD ROCm 
 selector panel on that page to view instructions appropriate for your system
 environment.
 
-HPC-SDK includes `hipTensor <https://rocm.docs.amd.com/projects/hipTensor/en/latest/>`_ and `rocALUTION <https://rocm.docs.amd.com/projects/rocALUTION/en/latest/>`_ packaged as part of the installation.
+HPC-SDK includes `hipTensor <https://github.com/ROCm/rocm-libraries/tree/develop/projects/hiptensor>`_ and `rocALUTION <https://github.com/ROCm/rocm-libraries/tree/develop/projects/rocalution>`_ packaged as part of the installation.
 
 Install HPC-SDK
 ---------------

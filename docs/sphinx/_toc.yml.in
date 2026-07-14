@@ -137,17 +137,13 @@ subtrees:
             entries:
                 - file: components/hpc-sdk/install.rst
                   title: Install HPC-SDK
-                - url: https://rocm.docs.amd.com/projects/hipTensor/en/latest/
-                  title: hipTensor
-                - url: https://rocm.docs.amd.com/projects/rocALUTION/en/latest/
-                  title: rocALUTION
           - file: components/extras.rst
             title: ROCm Extras
             entries:
                 - url: https://rocm.docs.amd.com/projects/ROCmValidationSuite/en/docs-1.4.21/index.html
                   title: ROCm Validation Suite (RVS)
-                # - url: https://rocm.docs.amd.com/projects/TransferBench/en/latest/
-                #   title: TransferBench
+                - url: https://rocm.docs.amd.com/projects/TransferBench/en/latest/
+                  title: TransferBench
           - file: ai-ecosystem.md
             title: AI ecosystem
             entries:
