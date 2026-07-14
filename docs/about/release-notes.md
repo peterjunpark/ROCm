@@ -420,7 +420,7 @@ Lower-than-expected performance might be observed in some Large Language Model (
 
 ROCm 7.14 introduces initial SGLang support for AMD Radeon GPUs. Radeon GPU users should disable AITER and unset `SGLANG_ROCM_FUSED_DECODE_MLA`, as both are enabled by default in the SGLang Docker image and may cause some workloads to fail. Additionally, some models may not function correctly on Radeon GPUs, including certain Mixture-of-Experts (MoE) models (such as GPT-OSS-20B and MiniMax-M2.7) and Qwen3-ASR models. Users experiencing these issues are recommended to monitor the latest upstream SGLang versions for fixes.
 
-### ROCProfiler SPM sessions can remain in a stale state after abrupt termination 
+### ROCProfiler SPM sessions can remain in a stale state after abrupt termination
 
 If a Streaming Performance Monitors (SPM) session is terminated abruptly (for example, with `Ctrl+C`), KFD-side SPM resources might not be released cleanly. When this happens, the KFD-side SPM resources can remain in a stale state, which might cause subsequent SPM profiling sessions to hang or fail to start with the error `Unable to acquire KFD thread: 4096`. To recover, if the profiling process is still running, terminate it manually. If the error persists, a system reboot is currently required to restore the GPU to a usable state for SPM profiling. This issue is under active investigation for a fix.
 
@@ -499,3 +499,79 @@ Future releases will add support for:
 * Domain-specific expansion toolkits (data science, life sciences, finance, simulation, and other HPC domains)
 
 * More AMD hardware support
+
+(amd-smi-deprecations)=
+### AMD SMI deprecations
+
+The AMD SMI library will deprecate the following APIs. Certain APIs will be
+deprecated with or without a replacement; see the following tables for details.
+We suggest updating your code to use the replacement identifiers before the
+targeted removal releases.
+
+#### Planned removal in the next release
+
+The following APIs, defines, enums, and struct fields are deprecated and
+scheduled for removal in the next major release.
+
+##### APIs
+
+| Deprecated | Replacement |
+|---|---|
+| `amdsmi_get_cpusocket_handles()` | No replacement; functionality removed |
+| `amdsmi_get_gpu_vram_vendor()` | `amdsmi_get_gpu_vram_info()` |
+| `rsmi_dev_amdgpu_driver_reload()` | No replacement; functionality removed |
+| `amdsmi_get_xgmi_plpd()` | Python: use the `policy` attribute instead of `plpds` |
+
+##### Defines and enums
+
+| Deprecated | Replacement |
+|---|---|
+| `MAX_NUMBER_OF_AFIDS_PER_RECORD` | `AMDSMI_MAX_NUMBER_OF_AFIDS_PER_RECORD` |
+| `MAX_SVI3_RAIL_INDEX` | `AMDSMI_MAX_SVI3_RAIL_INDEX` |
+| `MAX_SVI3_RAIL_SELECTION` | `AMDSMI_MAX_SVI3_RAIL_SELECTION` |
+| `POWER_EFFICIENCY_MODE_4` | `AMDSMI_POWER_EFFICIENCY_MODE_4` |
+| `POWER_EFFICIENCY_MODE_5` | `AMDSMI_POWER_EFFICIENCY_MODE_5` |
+| `CENTRIGRADE_TO_MILLI_CENTIGRADE` | No replacement; constant removed |
+| `_AMDSMI_MAX_STRING_LENGTH` | No replacement; private symbol, do not use |
+| `_AMDSMI_STRING_LENGTH` | No replacement; private symbol, do not use |
+
+##### `amdsmi_gpu_metrics_t` field type widening
+
+The following fields in `amdsmi_gpu_metrics_t` will change from `uint32_t` to `uint64_t` to support next generation AMD Instinct counter ranges:
+
+* `gfx_activity_acc`
+* `mem_activity_acc`
+* `pcie_nak_sent_count_acc`
+* `pcie_nak_rcvd_count_acc`
+* `pcie_lc_perf_other_end_recovery`
+
+Recompile any code that reads these fields. Any assignments into fixed-width 32-bit variables must be updated to use 64-bit types.
+
+#### Planned removal after the next release
+
+The following APIs, types, and enums are deprecated and will be removed sometime **after** the next major release.
+
+##### APIs
+
+| Deprecated | Replacement |
+|---|---|
+| `amdsmi_get_gpu_compute_partition_mem_alloc_mode()` | `amdsmi_get_gpu_accelerator_partition_mem_alloc_mode()` |
+| `amdsmi_set_gpu_compute_partition_mem_alloc_mode()` | `amdsmi_set_gpu_accelerator_partition_mem_alloc_mode()` |
+| `amdsmi_get_gpu_compute_partition()` | `amdsmi_get_gpu_accelerator_partition_profile()` |
+| `amdsmi_set_gpu_compute_partition()` | `amdsmi_set_gpu_accelerator_partition_profile()` |
+| `amdsmi_set_gpu_memory_partition()` | `amdsmi_set_gpu_memory_partition_mode()` |
+
+##### Types
+
+* `amdsmi_compute_partition_type_t`
+* `amdsmi_compute_partition_mem_alloc_mode_t`
+
+##### Enums
+
+| Deprecated | Replacement |
+|---|---|
+| `CLK_LIMIT_MIN` | `AMDSMI_CLK_LIMIT_MIN` |
+| `CLK_LIMIT_MAX` | `AMDSMI_CLK_LIMIT_MAX` |
+| `AGG_BW0` | `AMDSMI_AGG_BW0` |
+| `RD_BW0` | `AMDSMI_RD_BW0` |
+| `WR_BW0` | `AMDSMI_WR_BW0` |

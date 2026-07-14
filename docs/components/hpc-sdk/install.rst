@@ -306,7 +306,7 @@ OpenMPI, UCX, and Ubuntu.
       :value: tar
       :width: 6
 
----
+----
 
 Before installing the HPC-SDK, make sure your system meets the ROCm hardware,
 software, and driver requirements. For instructions, see :ref:`Install AMD ROCm <rocm-install-selector>`. Use the
