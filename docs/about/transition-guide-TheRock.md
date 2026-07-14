@@ -253,12 +253,11 @@ When redistributing software built on the ROCm Core SDK (for example, via contai
 ### Planned for future releases
 
 - ROCm Core SDK: RPP
-- ROCm-Extras: hipfort, rocALUTION, rocPyDecode, rocAL, MIVisionX
+- ROCm-Extras: hipfort, rocPyDecode, rocAL, MIVisionX
 
 ### Moved to ROCm-Extras
 
 - ROCm Validation Suite
-- ROCm Bandwidth Test
 - TransferBench
 - MIGraphX
 
@@ -269,6 +268,7 @@ When redistributing software built on the ROCm Core SDK (for example, via contai
 ### Removed
 
 - [ROCm SMI](https://rocm.docs.amd.com/en/latest/about/release-notes.html#rocm-smi-deprecation) (replaced by AMD SMI)
+- ROCm Bandwidth Test (deprecated; reached end-of-life with the TheRock-based ROCm 7.14.0 release — use TransferBench or RVS instead)
 
 ## Notable package relocations
 
@@ -320,12 +320,12 @@ When redistributing software built on the ROCm Core SDK (for example, via contai
     <tr>
       <td>Control and monitoring tools</td>
       <td>AMD SMI, ROCm Data Center Tool, rocminfo, hipinfo</td>
-      <td>ROCm SMI (removed), ROCm Validation Suite, ROCm Bandwidth Test</td>
+      <td>ROCm SMI (removed), ROCm Validation Suite, ROCm Bandwidth Test (removed)</td>
     </tr>
     <tr>
       <td style="vertical-align: middle"><strong>ROCm-Extras</strong></td>
       <td>—</td>
-      <td>ROCm Validation Suite, ROCm Bandwidth Test, TransferBench, MIGraphX</td>
+      <td>ROCm Validation Suite, TransferBench, MIGraphX</td>
       <td>—</td>
     </tr>
     <tr>
