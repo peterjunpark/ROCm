@@ -77,7 +77,7 @@ This release improves ROCm developer workflows with new HIP APIs, expanded profi
 
 The following are notable enhancements to HIP:
 
-* **HIP execution context support**: HIP now supports Execution Context APIs, enabling GPU compute resource partitioning and lightweight execution-context management on a single device. These APIs allow you to query and partition device resources (primarily CU count for HIP runtime), create execution contexts on resource subsets, and create streams and events scoped to those contexts. For more information, see [Execution Contexts](https://rocmdocs.amd.com/projects/HIP/en/develop/how-to/hip_runtime_api.html).
+* **HIP execution context support**: HIP now supports Execution Context APIs, enabling GPU compute resource partitioning and lightweight execution-context management on a single device. These APIs allow you to query and partition device resources (primarily CU count for HIP runtime), create execution contexts on resource subsets, and create streams and events scoped to those contexts. For more information, see [Execution Context Management](https://rocm.docs.amd.com/projects/HIP/en/develop/reference/hip_runtime_api/modules/execution_context_management.html).
 
 * **HIP API additions for CUDA parity**:
 
@@ -147,7 +147,11 @@ For more information, see the [ROCprofiler-SDK section](#rocprofiler-sdk-1-3-2) 
 
 The following are notable enhancements to the ROCm Compute Profiler (rocprofiler-compute):
 
-* **PyTorch operator statistics (experimental)**: The PyTorch tracing (`--torch-trace`) now includes a per-operator statistics summary table, making it easier to spot hot operators and per-dispatch variance. The trace now also captures backward-pass and nested operators that were previously missed or misattributed. For details, see [Torch operator mapping](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/develop/how-to/profile/mode.html).
+* **PyTorch operator statistics (experimental)**: The PyTorch tracing (`--torch-trace`) now includes a per-operator statistics summary table, making it easier to spot hot operators and per-dispatch variance. The trace now also captures backward-pass and nested operators that were previously missed or misattributed. For details, see [Torch operator mapping](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/develop/how-to/profile/mode.html#torch-trace).
+
+* **Faster analysis**: Analyze mode now processes profiling data more efficiently, reducing analysis time and memory usage on large workloads.
+
+* **Improved metric averaging accuracy**: Metric values across multiple kernel dispatches are now correctly weighted-averaged, eliminating errors that occurred when aggregating metrics with varying values across individual dispatches.
 
 * **pip installation support**: ROCm Compute Profiler is now available as a pip-installable Python package. A new `rocm-profiler` wheel on the ROCm Python package index lets you install ROCm Compute Profiler into a custom Python environment without building ROCm from source. The wheel package installs both ROCm Compute Profiler and ROCm Systems Profiler binaries. For installation instructions, see [Install ROCm Compute Profiler](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/develop/install/core-install.html).
 
@@ -408,13 +412,39 @@ ROCm known issues are noted on {fab}`github` [GitHub](https://github.com/ROCm/RO
 
 PyTorch might display a warning when importing on Linux if the system libnuma package is not installed on some Radeon graphics products, such as Radeon AI PRO R9600D. As a workaround, install the system libnuma package or configure the library path to use the ROCm-bundled NUMA libraries.
 
+### Lower than expected LLM inference performance on some Radeon GPUs
+
+Lower-than-expected performance might be observed in some Large Language Model (LLM) inference workloads on AMD Radeon GPUs. You are recommended to use a vLLM release earlier than v0.21.0 or upgrade to an upstream vLLM release later than v0.25.0, which includes a fix for this issue. On systems based on AMD Radeon RX 7900 Series Graphics, AMD Radeon RX 7800 XT Graphics, and AMD Ryzen AI MAX / MAX+ Series Processors, running PyTorch versions earlier than 2.14 may also improve performance in most workloads by setting the `TORCH_BLAS_PREFER_HIPBLASLT=1` environment variable.
+
+### Some SGLang workloads might not function correctly on Radeon GPUs
+
+ROCm 7.14 introduces initial SGLang support for AMD Radeon GPUs. Radeon GPU users should disable AITER and unset `SGLANG_ROCM_FUSED_DECODE_MLA`, as both are enabled by default in the SGLang Docker image and may cause some workloads to fail. Additionally, some models may not function correctly on Radeon GPUs, including certain Mixture-of-Experts (MoE) models (such as GPT-OSS-20B and MiniMax-M2.7) and Qwen3-ASR models. Users experiencing these issues are recommended to monitor the latest upstream SGLang versions for fixes.
+
 ### ROCProfiler SPM sessions can remain in a stale state after abrupt termination 
 
 If a Streaming Performance Monitors (SPM) session is terminated abruptly (for example, with `Ctrl+C`), KFD-side SPM resources might not be released cleanly. When this happens, the KFD-side SPM resources can remain in a stale state, which might cause subsequent SPM profiling sessions to hang or fail to start with the error `Unable to acquire KFD thread: 4096`. To recover, if the profiling process is still running, terminate it manually. If the error persists, a system reboot is currently required to restore the GPU to a usable state for SPM profiling. This issue is under active investigation for a fix.
 
-### rocALUTION and hipTensor are not available in the HPC tarball
+### rocprof-compute may report inflated Avg values with per_kernel normalization
 
-rocALUTION and hipTensor can be installed using the `amdrocm-hpc` meta-package. However, there is no dedicated HPC tarball for tarball-based installations. These libraries are included in the standard ROCm tarball.
+When using rocprof-compute with `per_kernel` normalization, the reported Avg value for certain normalized metrics may be incorrectly inflated and can exceed the corresponding Min and Max values. This issue affects analysis results only. As a workaround, use an alternative normalization unit (`-n`/`--normal-unit`) until a fix is available.
+
+### rocALUTION and hipTensor are not included in the HPC Expansion tarball
+
+The `amdrocm-hpc` meta-package installs rocALUTION and hipTensor, but there is no dedicated HPC Expansion tarball for tarball-based installations. The standard ROCm tarballs include both libraries.
+
+### RCCL might show degraded performance on multi-node configurations
+
+RCCL operations with message sizes in the 64 MB to 512 MB range might show suboptimal performance on multi-node configurations. This might severely impact production workloads. Llama 3 405B is a known affected workload; additional workloads might also be affected. As a workaround, disable the fault injection path in the RCCL CMake file:
+
+```cmake
+option(FAULT_INJECTION         "Enable fault injection"           OFF)
+```
+
+Alternatively, add the following CMake flag during compilation:
+
+```text
+-DFAULT_INJECTION=OFF
+```
 
 ## ROCm resolved issues
 
