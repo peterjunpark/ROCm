@@ -159,8 +159,8 @@ subtrees:
                   title: vLLM
                 - url: https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/sglang.html
                   title: SGLang
-                - url: https://rocm.docs.amd.com/projects/atom
-                  title: ATOM
+                # - url: https://rocm.docs.amd.com/projects/atom
+                #   title: ATOM
     - caption: Tutorials
       entries:
           - url: https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/

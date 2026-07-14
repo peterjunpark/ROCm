@@ -53,7 +53,6 @@ GPUs using popular ROCm-enabled frameworks.
 - Inference
   - [vLLM](https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/inference/vllm.html)
   - [SGLang](https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/inference/sglang.html)
-  - [ATOM](https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/inference/ATOM/docs/index.html)
 +++
 [Go to AI Ecosystem docs](https://advanced-micro-devices-rocm-internal--802.com.readthedocs.build/en/802/)
 :::
