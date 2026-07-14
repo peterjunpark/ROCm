@@ -1800,6 +1800,17 @@ Use the following instructions to install ROCm packages on your system.
 
          python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1152]"
 
+   .. selected:: gfx=gfx1153
+
+      Use pip to install the ROCm libraries and development tools for
+      your ``gfx1153`` Ryzen APU.
+
+      Run the following command:
+
+      .. code-block:: bash
+
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1153]"
+
       .. include:: include/pip-packages-table.rst
 
 .. ================================================================== TARBALL ==
@@ -1960,6 +1971,17 @@ Use the following instructions to install ROCm packages on your system.
             mkdir install
             tar -xf *.tar.gz -C install
 
+      .. selected:: gfx=gfx1153
+
+         Use the following commands to download and untar the ROCm tarball for
+         your ``gfx1153`` GPU.
+
+         .. code-block:: bash
+
+            wget https://repo.amd.com/rocm/tarball-multi-arch/therock-dist-linux-gfx1153-7.14.0.tar.gz
+            mkdir install
+            tar -xf *.tar.gz -C install
+
    .. selected:: os=windows
 
       Download the tarball and extract the contents to ``C:\TheRock\build``.
@@ -2041,6 +2063,17 @@ Use the following instructions to install ROCm packages on your system.
 
          - Download link: `therock-dist-windows-gfx1152-7.14.0.tar.gz
            <https://repo.amd.com/rocm/tarball/therock-dist-windows-gfx1152-7.14.0.tar.gz>`__
+
+      .. selected:: gfx=gfx1153
+
+         .. code-block:: bat
+
+            cd C:\TheRock
+            curl -o therock-dist-windows-gfx1153-7.14.0.tar.gz https://repo.amd.com/rocm/tarball/therock-dist-windows-gfx1153-7.14.0.tar.gz
+            tar -xzf therock-dist-windows-gfx1153-7.14.0.tar.gz -C build --strip-components=1
+
+         - Download link: `therock-dist-windows-gfx1153-7.14.0.tar.gz
+           <https://repo.amd.com/rocm/tarball/therock-dist-windows-gfx1153-7.14.0.tar.gz>`__
 
 .. ================================================================== RUNFILE ==
 
@@ -2132,6 +2165,12 @@ Use the following instructions to install ROCm packages on your system.
       .. code-block:: bash
 
          bash rocm-installer-7.14.0-3.run deps=install rocm gfx=gfx1152 gpu-access=user
+
+   .. selected:: gfx=gfx1153
+
+      .. code-block:: bash
+
+         bash rocm-installer-7.14.0-3.run deps=install rocm gfx=gfx1153 gpu-access=user
 
 .. selected:: i=runfile
    :heading: ROCm meta components
@@ -2312,6 +2351,12 @@ Use the following instructions to install ROCm packages on your system.
       .. code-block:: bash
 
          bash rocm-installer-7.14.0-3.run deps=install rocm gfx=gfx1152 compo=core,core-dev gpu-access=user
+
+   .. selected:: gfx=gfx1153
+
+      .. code-block:: bash
+
+         bash rocm-installer-7.14.0-3.run deps=install rocm gfx=gfx1153 compo=core,core-dev gpu-access=user
 
 .. selected:: os=wsl
    :heading: Build and install the AMD ROCDXG library
