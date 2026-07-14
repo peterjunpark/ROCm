@@ -842,6 +842,12 @@ Use the following instructions to install ROCm packages on your system.
 
             sudo apt install amdrocm7.14-gfx1152
 
+      .. selected:: gfx=gfx1153
+
+         .. code-block:: bash
+
+            sudo apt install amdrocm7.14-gfx1153
+
    .. selected:: os=rhel os=oracle-linux os=rocky-linux
 
       Use ``dnf`` to install the core ROCm packages. See :ref:`ROCm meta
@@ -937,6 +943,12 @@ Use the following instructions to install ROCm packages on your system.
          .. code-block:: bash
 
             sudo dnf install amdrocm7.14-gfx1152
+
+      .. selected:: gfx=gfx1153
+
+         .. code-block:: bash
+
+            sudo dnf install amdrocm7.14-gfx1153
 
    .. selected:: os=sles
 
@@ -1070,6 +1082,11 @@ Use the following instructions to install ROCm packages on your system.
             ``amdrocm7.14-gfx1152``
 
          .. matrix-cell::
+            :show-cond: gfx=gfx1153
+
+            ``amdrocm7.14-gfx1153``
+
+         .. matrix-cell::
             :show-cond: fam=all
 
             ``amdrocm7.14``
@@ -1142,6 +1159,10 @@ Use the following instructions to install ROCm packages on your system.
 
                ``amdrocm-core-dev7.14-gfx1152``
 
+            .. selected:: gfx=gfx1153
+
+               ``amdrocm-core-dev7.14-gfx1153``
+
             .. selected:: fam=all
 
                ``amdrocm-core-dev7.14``
@@ -1204,6 +1225,10 @@ Use the following instructions to install ROCm packages on your system.
             .. selected:: gfx=gfx1152
 
                ``amdrocm-core-devel7.14-gfx1152``
+
+            .. selected:: gfx=gfx1153
+
+               ``amdrocm-core-devel7.14-gfx1153``
 
             .. selected:: fam=all
 
@@ -1278,6 +1303,11 @@ Use the following instructions to install ROCm packages on your system.
             :show-cond: gfx=gfx1152
 
             ``amdrocm7.14-gfx1152`` plus compilers, CMake configurations, static library files, and headers.
+
+         .. matrix-cell::
+            :show-cond: gfx=gfx1153
+
+            ``amdrocm7.14-gfx1153`` plus compilers, CMake configurations, static library files, and headers.
 
          .. matrix-cell::
             :show-cond: fam=all
@@ -1380,6 +1410,11 @@ Use the following instructions to install ROCm packages on your system.
             :show-cond: gfx=gfx1152
 
             ``amdrocm-core-sdk7.14-gfx1152``
+
+         .. matrix-cell::
+            :show-cond: gfx=gfx1153
+
+            ``amdrocm-core-sdk7.14-gfx1153``
 
          .. matrix-cell::
             :show-cond: fam=all

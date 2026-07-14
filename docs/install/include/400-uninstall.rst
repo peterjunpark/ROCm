@@ -75,6 +75,12 @@ Uninstalling
 
                sudo apt autoremove amdrocm7.14-gfx1152
 
+         .. selected:: gfx=gfx1153
+
+            .. code-block:: bash
+
+               sudo apt autoremove amdrocm7.14-gfx1153
+
       .. selected:: os=rhel os=oracle-linux os=rocky-linux
 
          .. selected:: fam=all
@@ -142,6 +148,12 @@ Uninstalling
             .. code-block:: bash
 
                sudo dnf remove amdrocm7.14-gfx1152
+
+         .. selected:: gfx=gfx1153
+
+            .. code-block:: bash
+
+               sudo dnf remove amdrocm7.14-gfx1153
 
       .. selected:: os=sles
 

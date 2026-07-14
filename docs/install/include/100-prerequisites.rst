@@ -158,7 +158,7 @@ Prerequisites
             :heading: Install the OEM kernel
             :heading-level: 3
 
-            Ryzen APUs (gfx1150, gfx1151, gfx1152, and gfx1103) require the OEM
+            Ryzen APUs (gfx1150, gfx1151, gfx1152, gfx1153, and gfx1103) require the OEM
             kernel 6.14 for Ubuntu 24.04. Use the following command to install it
             using ``apt``.
 
