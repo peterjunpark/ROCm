@@ -127,6 +127,7 @@ as a comma-separated list (for example, ``rocm[libraries,devel]``).
          Required to run GPU workloads; installed alongside ``libraries``.
 
    .. matrix-row::
+      :show-cond: os=ubuntu os=debian os=rhel os=rocky-linux os=oracle-linux os=sles
 
       .. matrix-cell::
 
