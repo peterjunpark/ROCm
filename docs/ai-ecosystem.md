@@ -24,7 +24,6 @@ pip.
 Scale model training across multiple AMD GPUs using PyTorch distributed primitives
 (DDP, RPC, collective communication) for large models that exceed single-GPU memory.
 
-- [Primus](https://rocm.docs.amd.com/projects/primus)
 - [Scale model training](https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/training/scale-model-training.html)
 :::
 
@@ -34,7 +33,6 @@ Covers single-node and distributed multi-GPU deployments.
 
 - [vLLM](https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/vllm.html)
 - [SGLang](https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/sglang.html)
-- [ATOM](https://rocm.docs.amd.com/projects/atom)
 - [MIGraphX](https://rocm.docs.amd.com/projects/AMDMIGraphX)
 - [ONNX Runtime](https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/onnxruntime.html)
 - [xDiT](https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/xdit.html)
@@ -67,5 +65,4 @@ Hands-on guides and recipes for building AI applications on AMD hardware.
 - [AI Playbooks](https://developer.amd.com/playbooks)
 - [AI Developer Hub](https://rocm.docs.amd.com/projects/ai-developer-hub)
 :::
-
 ::::
