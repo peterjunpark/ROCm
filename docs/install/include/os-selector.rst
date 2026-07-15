@@ -314,7 +314,7 @@
 
       .. selector:: Operating system
          :key: os
-         :show-cond: gpu=max-plus-pro-495 gpu=max-pro-490 gpu=max-pro-485 gpu=max-pro-395 gpu=max-pro-390 gpu=max-pro-385 gpu=max-pro-380 gpu=max-395 gpu=max-392 gpu=max-388 gpu=max-390 gpu=max-385 gpu=ai-9-hx-pro-475 gpu=ai-9-hx-pro-470 gpu=ai-9-pro-465 gpu=ai-9-hx-475 gpu=ai-9-hx-470 gpu=ai-9-465 gpu=ai-7-pro-450 gpu=ai-5-pro-440 gpu=ai-7-450 gpu=9-hx-375 gpu=9-hx-370 gpu=9-365
+         :show-cond: gpu=max-plus-pro-495 gpu=max-pro-490 gpu=max-pro-485 gpu=ai-5-pro-435 gpu=ai-5-435 gpu=ai-5-430 gpu=ai-7-445 gpu=max-pro-395 gpu=max-pro-390 gpu=max-pro-385 gpu=max-pro-380 gpu=max-395 gpu=max-392 gpu=max-388 gpu=max-390 gpu=max-385 gpu=ai-9-hx-pro-475 gpu=ai-9-hx-pro-470 gpu=ai-9-pro-465 gpu=ai-9-hx-475 gpu=ai-9-hx-470 gpu=ai-9-465 gpu=ai-7-pro-450 gpu=ai-5-pro-440 gpu=ai-7-450 gpu=9-hx-375 gpu=9-hx-370 gpu=9-365
 
          .. selector-option:: Ubuntu
             :value: ubuntu

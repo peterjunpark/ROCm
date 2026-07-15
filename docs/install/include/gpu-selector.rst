@@ -170,6 +170,9 @@
          .. selector-option:: AMD Ryzen AI 5 PRO 440 (gfx1152)
             :value: ai-5-pro-440 gfx=gfx1152
 
+         .. selector-option:: AMD Ryzen AI 5 PRO 435 (gfx1153)
+            :value: ai-5-pro-435 gfx=gfx1153
+
          .. selector-option:: AMD Ryzen AI 9 HX 475 (gfx1150)
             :value: ai-9-hx-475 gfx=gfx1150
 
@@ -208,6 +211,15 @@
 
          .. selector-option:: AMD Ryzen AI 7 345 (gfx1152)
             :value: ai-7-345 gfx=gfx1152
+
+         .. selector-option:: AMD Ryzen AI 5 435 (gfx1153)
+            :value: ai-5-435 gfx=gfx1153
+
+         .. selector-option:: AMD Ryzen AI 5 430 (gfx1153)
+            :value: ai-5-430 gfx=gfx1153
+
+         .. selector-option:: AMD Ryzen AI 7 445 (gfx1153)
+            :value: ai-7-445 gfx=gfx1153
 
          .. selector-option:: AMD Ryzen AI 5 340 (gfx1152)
             :value: ai-5-340 gfx=gfx1152
