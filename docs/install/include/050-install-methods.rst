@@ -17,7 +17,7 @@
         - Platform
         - Best for
         - Install scope
-      * - Package manager
+      * - Package manager (apt/dnf/zypper)
         - - Linux
         - - Traditional Linux installation
           - OS managed

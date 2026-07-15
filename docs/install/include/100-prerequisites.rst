@@ -164,7 +164,7 @@ Prerequisites
 
             .. code-block:: bash
 
-               sudo apt update && sudo apt install linux-image-6.14.0-1018-oem
+               sudo apt update && sudo apt install linux-oem-24.04c
 
             Reboot your system after installing the OEM kernel.
 
@@ -181,7 +181,7 @@ Prerequisites
 
             .. code-block:: bash
 
-               sudo apt update && sudo apt install linux-image-6.14.0-1018-oem
+               sudo apt update && sudo apt install linux-oem-24.04c
 
             Reboot your system after installing the OEM kernel.
 
@@ -196,13 +196,13 @@ Prerequisites
 
    Run the following command to register your system:
 
-   .. selected:: rhel-ver=10.1 rhel-ver=10.0
+   .. selected:: rhel-ver=10.2 rhel-ver=10.0
 
       .. code-block:: bash
 
          subscription-manager register --username <username> --password <password>
 
-   .. selected:: rhel-ver=9.7 rhel-ver=9.6 rhel-ver=9.4 rhel-ver=8.10
+   .. selected:: rhel-ver=9.8 rhel-ver=9.6 rhel-ver=9.4 rhel-ver=8.10
 
       .. code-block:: bash
 
@@ -233,11 +233,11 @@ Prerequisites
 
    Run the following command to update your system:
 
-   .. selected:: rhel-ver=10.1
+   .. selected:: rhel-ver=10.2
 
       .. code-block:: bash
 
-         sudo dnf update --releasever=10.1 --exclude=\*release\*
+         sudo dnf update --releasever=10.2 --exclude=\*release\*
 
    .. selected:: rhel-ver=10.0
 
@@ -245,11 +245,11 @@ Prerequisites
 
          sudo dnf update --releasever=10.0 --exclude=\*release\*
 
-   .. selected:: rhel-ver=9.7
+   .. selected:: rhel-ver=9.8
 
       .. code-block:: bash
 
-         sudo dnf update --releasever=9.7 --exclude=\*release\*
+         sudo dnf update --releasever=9.8 --exclude=\*release\*
 
    .. selected:: rhel-ver=9.6
 
@@ -292,7 +292,7 @@ Prerequisites
       the default package repositories. Use the following command to add the
       necessary repositories.
 
-      .. selected:: rhel-ver=10.1 rhel-ver=10.0
+      .. selected:: rhel-ver=10.2 rhel-ver=10.0
 
          .. code-block:: bash
 
@@ -300,7 +300,7 @@ Prerequisites
             sudo rpm -ivh epel-release-latest-10.noarch.rpm
             sudo dnf config-manager --enable codeready-builder-for-rhel-10-x86_64-rpms
 
-      .. selected:: rhel-ver=9.7 rhel-ver=9.6 rhel-ver=9.4
+      .. selected:: rhel-ver=9.8 rhel-ver=9.6 rhel-ver=9.4
 
          .. code-block:: bash
 
@@ -347,7 +347,7 @@ Prerequisites
       the default package repositories. Use the following command to add the
       necessary repositories.
 
-      .. selected:: rhel-ver=10.1 rhel-ver=10.0
+      .. selected:: rhel-ver=10.2 rhel-ver=10.0
 
          .. code-block:: bash
 
@@ -355,7 +355,7 @@ Prerequisites
             sudo rpm -ivh epel-release-latest-10.noarch.rpm
             sudo dnf config-manager --enable codeready-builder-for-rhel-10-x86_64-rpms
 
-      .. selected:: rhel-ver=9.7 rhel-ver=9.6 rhel-ver=9.4
+      .. selected:: rhel-ver=9.8 rhel-ver=9.6 rhel-ver=9.4
 
          .. code-block:: bash
 
@@ -478,7 +478,7 @@ Prerequisites
 
                   .. code-block:: bash
 
-                     sudo apt update && sudo apt install linux-image-6.14.0-1018-oem
+                     sudo apt update && sudo apt install linux-oem-24.04c
 
                   Reboot your system after installing the OEM kernel.
 
@@ -569,7 +569,7 @@ Prerequisites
 
    .. selected:: os=rhel
 
-      .. selected:: rhel-ver=10.1 rhel-ver=10.0
+      .. selected:: rhel-ver=10.2 rhel-ver=10.0
          :heading: Install Python
          :heading-level: 3
 
@@ -580,7 +580,7 @@ Prerequisites
 
             sudo dnf install python3.12 python3.12-pip
 
-      .. selected:: rhel-ver=9.7 rhel-ver=9.6 rhel-ver=9.4 rhel-ver=9 rhel-ver=8.10
+      .. selected:: rhel-ver=9.8 rhel-ver=9.6 rhel-ver=9.4 rhel-ver=9 rhel-ver=8.10
          :heading: Install Python
          :heading-level: 3
 

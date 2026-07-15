@@ -58,19 +58,19 @@ Installation
 
       .. selected:: os=rhel
 
-         .. selected:: rhel-ver=10.1
+         .. selected:: rhel-ver=10.2
 
             .. code-block:: bash
 
-               wget https://repo.radeon.com/amdgpu-install/31.30/rhel/10.1/amdgpu-install-31.30.313000-1.el10.noarch.rpm
-               sudo dnf install ./amdgpu-install-31.30.313000-1.el10.noarch.rpm
+               wget https://repo.radeon.com/amdgpu-install/31.40/rhel/10.2/amdgpu-install-31.40.314000-1.el10.noarch.rpm
+               sudo dnf install ./amdgpu-install-31.40.314000-1.el10.noarch.rpm
 
-         .. selected:: rhel-ver=9.7
+         .. selected:: rhel-ver=9.8
 
             .. code-block:: bash
 
-               wget https://repo.radeon.com/amdgpu-install/31.30/rhel/9.7/amdgpu-install-31.30.313000-1.el9.noarch.rpm
-               sudo dnf install ./amdgpu-install-31.30.313000-1.el9.noarch.rpm
+               wget https://repo.radeon.com/amdgpu-install/31.40/rhel/9.8/amdgpu-install-31.40.314000-1.el9.noarch.rpm
+               sudo dnf install ./amdgpu-install-31.40.314000-1.el9.noarch.rpm
 
 .. ==================================================== INSTALL KERNEL DRIVER ==
 
@@ -423,7 +423,7 @@ Use the following instructions to install ROCm packages on your system.
       Register the ROCm repository with your system's package manager. This enables
       you to install and update ROCm packages using ``dnf``.
 
-      .. selected:: rhel-ver=10.1 rhel-ver=10.0
+      .. selected:: rhel-ver=10.2 rhel-ver=10.0
 
          .. selected:: fam=all
 
@@ -435,7 +435,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages-multi-arch/rhel10/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -451,13 +451,13 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages/rhel10/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
                sudo dnf clean all
 
-      .. selected:: rhel-ver=9.7 rhel-ver=9.6 rhel-ver=9.4
+      .. selected:: rhel-ver=9.8 rhel-ver=9.6 rhel-ver=9.4
 
          .. selected:: fam=all
 
@@ -469,7 +469,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages-multi-arch/rhel9/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -485,7 +485,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages/rhel9/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -503,7 +503,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages-multi-arch/rhel8/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -519,7 +519,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages/rhel8/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -542,7 +542,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages-multi-arch/rhel10/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -558,7 +558,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages/rhel10/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -576,7 +576,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages-multi-arch/rhel9/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -592,7 +592,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages/rhel9/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -610,7 +610,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages-multi-arch/rhel8/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -626,7 +626,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages/rhel8/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -686,7 +686,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages-multi-arch/sles16/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -702,7 +702,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages/sles16/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -720,7 +720,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages-multi-arch/sles15/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -736,7 +736,7 @@ Use the following instructions to install ROCm packages on your system.
                baseurl=https://repo.amd.com/rocm/packages/sles15/x86_64
                enabled=1
                gpgcheck=1
-               gpgkey=https://repo.amd.com/rocm/packages/gpg/rocm.gpg
+               gpgkey=https://repo.amd.com/rocm/packages-multi-arch/gpg/rocm.gpg
                priority=50
                EOF
 
@@ -1437,7 +1437,7 @@ Use the following instructions to install ROCm packages on your system.
 
          .. code-block:: bash
 
-            sudo amdgpu-install --usecase=rocm,graphics
+            sudo amdgpu-install --usecase=rocm,graphics --gfxversion=auto
 
       .. selected:: fam=ryzen
 
@@ -1449,6 +1449,15 @@ Use the following instructions to install ROCm packages on your system.
          .. code-block:: bash
 
             sudo amdgpu-install --usecase=rocm --no-dkms
+
+      .. selected:: fam=all
+
+         Run the ``amdgpu-install`` script with the following ``--usecase`` arguments
+         to install ROCm and graphics packages.
+
+         .. code-block:: bash
+
+            sudo amdgpu-install --usecase=rocm,graphics --gfxversion=all
 
       Reboot your system after installing.
 
@@ -1517,7 +1526,7 @@ Use the following instructions to install ROCm packages on your system.
 
    .. selected:: os=rhel
 
-      .. selected:: rhel-ver=10.1 rhel-ver=10.0
+      .. selected:: rhel-ver=10.2 rhel-ver=10.0
 
          For example, to create and activate a Python 3.12 virtual environment,
          run the following command:
@@ -1527,7 +1536,7 @@ Use the following instructions to install ROCm packages on your system.
             python3.12 -m venv .venv
             source .venv/bin/activate
 
-      .. selected:: rhel-ver=9.7 rhel-ver=9.6 rhel-ver=9.4 rhel-ver=8.10
+      .. selected:: rhel-ver=9.8 rhel-ver=9.6 rhel-ver=9.4 rhel-ver=8.10
 
          For example, to create and activate a Python 3.11 virtual environment,
          run the following command:
@@ -1623,7 +1632,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-all]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-all]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1636,7 +1645,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx950]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx950]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1649,7 +1658,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx942]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx942]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1661,7 +1670,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx90a]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx90a]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1673,7 +1682,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx908]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx908]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1686,7 +1695,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1201]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1201]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1699,7 +1708,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1200]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1200]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1711,7 +1720,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1100]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1100]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1723,7 +1732,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1101]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1101]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1735,7 +1744,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1102]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1102]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1747,7 +1756,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1103]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1103]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1759,7 +1768,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1030]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1030]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1772,7 +1781,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1151]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1151]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1785,7 +1794,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1150]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1150]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
@@ -1798,7 +1807,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1152]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1152]==7.14.0"
 
    .. selected:: gfx=gfx1153
 
@@ -1809,7 +1818,7 @@ Use the following instructions to install ROCm packages on your system.
 
       .. code-block:: bash
 
-         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,devel,device-gfx1153]"
+         python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ "rocm[libraries,device-gfx1153]==7.14.0"
 
       .. include:: include/pip-packages-table.rst
 
